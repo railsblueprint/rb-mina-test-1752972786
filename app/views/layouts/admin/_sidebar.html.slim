@@ -1,0 +1,229 @@
+aside#sidebar.sidebar
+  ul#sidebar-nav.sidebar-nav
+    li.nav-item
+      = active_link_to [:admin, :root], class: "nav-link nav-link-main", active: :exclusive do
+        i.bi.bi-grid
+        span
+          = t('admin.nav.dashboard')
+    - if can? :read, User
+      li.nav-item
+        = active_link_to [:admin, :users], class: "nav-link nav-link-main" do
+          i.bi.bi-people-fill
+          span
+            = t('admin.nav.users')
+    - if can? :read, Post
+      li.nav-item
+        = active_link_to [:admin, :posts], class: "nav-link nav-link-main" do
+          i.bi.bi-newspaper
+          span
+            | Blog
+    - if can? :read, Page
+      li.nav-item
+        = active_link_to [:admin, :pages], class: "nav-link nav-link-main" do
+          i.bi.bi-file
+          span
+            | Pages
+    li.nav-item
+      a.nav-link.nav-group.collapsed[data-bs-target="#configuration-nav" data-bs-toggle="collapse" href="#"]
+        i.bi.bi-gear
+        span
+          = t('admin.nav.configuration')
+        i.bi.bi-chevron-down.ms-auto
+      ul#configuration-nav class="nav-content collapse #{class_names(show: config?)}" data-bs-parent="#sidebar-nav"
+        - if current_user.superadmin?
+          li
+            = active_link_to [:admin, :settings] do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.settings')
+        li
+          = active_link_to [:admin, :mail_templates] do
+            i.bi.bi-circle
+            span
+              = t('admin.nav.mail_templates')
+    - if current_user.superadmin?
+      li.nav-item
+        a.nav-link.nav-group.collapsed[data-bs-target="#maintenance-nav" data-bs-toggle="collapse" href="#"]
+          i.bi.bi-wrench
+          span
+            = t('admin.nav.maintenance')
+          i.bi.bi-chevron-down.ms-auto
+        ul#maintenance-nav class="nav-content collapse #{class_names(show: maintenance?)}" data-bs-parent="#sidebar-nav"
+          li
+            = active_link_to [:admin, :pg_hero] do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.pg_hero')
+          li
+            = active_link_to [:admin, :good_job] do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.good_job')
+    - unless Setting.hide_demo_elements
+      li.nav-heading
+        = t('admin.nav.demos')
+      li.nav-item
+        a.nav-link.nav-group data-bs-target="#components-nav" data-bs-toggle="collapse" href="#" class=class_names(collapsed: !components?)
+          i.bi.bi-menu-button-wide
+          span
+            = t('admin.nav.components')
+          i.bi.bi-chevron-down.ms-auto
+        ul#components-nav class="nav-content collapse #{class_names(show: components?)}" data-bs-parent="#sidebar-nav"
+          li
+            = nav_link admin_demo_components_alert_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.alerts')
+          li
+            = nav_link admin_demo_components_accordion_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.accordion')
+          li
+            = nav_link admin_demo_components_badges_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.badges')
+          li
+            = nav_link admin_demo_components_breadcrumbs_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.breadcrumbs')
+          li
+            = nav_link admin_demo_components_buttons_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.buttons')
+          li
+            = nav_link admin_demo_components_cards_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.cards')
+          li
+            = nav_link admin_demo_components_carousel_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.carousel')
+          li
+            = nav_link admin_demo_components_list_group_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.list_group')
+          li
+            = nav_link admin_demo_components_modal_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.modal')
+          li
+            = nav_link admin_demo_components_tabs_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.tabs')
+          li
+            = nav_link admin_demo_components_pagination_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.pagination')
+          li
+            = nav_link admin_demo_components_progress_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.progress')
+          li
+            = nav_link admin_demo_components_spinners_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.spinners')
+          li
+            = nav_link admin_demo_components_tooltips_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.tooltips')
+      li.nav-item
+        a.nav-link.nav-group data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#" class=class_names(collapsed: !forms?)
+          i.bi.bi-journal-text
+          span
+            = t('admin.nav.demo.forms')
+          i.bi.bi-chevron-down.ms-auto
+        ul id="forms-nav" class="nav-content collapse #{class_names(show: forms?)}" data-bs-parent="#sidebar-nav"
+          li
+            = nav_link admin_demo_forms_elements_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.form_elements')
+          li
+            = nav_link admin_demo_forms_layouts_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.form_layouts')
+          li
+            = nav_link admin_demo_forms_editors_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.form_editors')
+          li
+            = nav_link admin_demo_forms_validation_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.form_validation')
+      li.nav-item
+        a.nav-link.nav-group data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#" class=class_names(collapsed: !tables?)
+          i.bi.bi-layout-text-window-reverse
+          span
+            = t('admin.nav.demo.tables')
+          i.bi.bi-chevron-down.ms-auto
+        ul id="tables-nav" class="nav-content collapse #{class_names(show: tables?)}" data-bs-parent="#sidebar-nav"
+          li
+            = nav_link admin_demo_tables_general_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.general_tables')
+          li
+            = nav_link admin_demo_tables_data_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.data_tables')
+      li.nav-item
+        a.nav-link.nav-group data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#" class=class_names(collapsed: !charts?)
+          i.bi.bi-bar-chart
+          span
+            = t('admin.nav.demo.charts')
+          i.bi.bi-chevron-down.ms-auto
+        ul id="charts-nav" class="nav-content collapse #{class_names(show: charts?)}" data-bs-parent="#sidebar-nav"
+          li
+            = nav_link admin_demo_charts_chartjs_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.chart_js')
+          li
+            = nav_link admin_demo_charts_apexcharts_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.apex_charts')
+          li
+            = nav_link admin_demo_charts_echarts_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.e_charts')
+      li.nav-item
+        a.nav-link.nav-group data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#"  class=class_names(collapsed: !icons?)
+          i.bi.bi-gem
+          span
+            = t('admin.nav.demo.icons')
+          i.bi.bi-chevron-down.ms-auto
+        ul id="icons-nav" class="nav-content collapse #{class_names(show: icons?)}" data-bs-parent="#sidebar-nav"
+          li
+            = active_link_to admin_demo_icons_bootstrap_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.bootstrap_icons')
+          li
+            = active_link_to admin_demo_icons_boxicons_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.boxicons')
+          li
+            = active_link_to admin_demo_icons_remix_path do
+              i.bi.bi-circle
+              span
+                = t('admin.nav.demo.remix_icons')

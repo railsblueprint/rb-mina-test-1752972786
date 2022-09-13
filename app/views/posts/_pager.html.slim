@@ -1,0 +1,9 @@
+#pager
+  .text-center
+    -if @pagy.next
+      = link_to "Next page >", posts_path(page: @pagy.next, q: params[:q]), class: "btn btn-outline-primary", data: {turbo_frame: "page_handler", controller: "autoclick"}
+      .spinner-grow.text-primary.d-none[role="status"]
+      .spinner-grow.text-primary.d-none[role="status"]
+      .spinner-grow.text-primary.d-none[role="status"]
+        span.visually-hidden
+          | Loading...

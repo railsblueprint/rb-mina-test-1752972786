@@ -1,0 +1,9 @@
+.card
+  .card-body.pt-3
+        = bootstrap_form_for([:admin, @resource], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
+          = f.text_field :title
+          = f.collection_select :user_id, User.all, :id, :full_name, {}, data: {controller: 'admin--user-select'}
+          = f.rich_text_area :body
+          = f.form_group
+            = f.submit
+

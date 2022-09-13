@@ -1,0 +1,7 @@
+h1
+  | New post
+.col-xxl-8.col-xl-10
+  = render "form", post: @post
+  br
+  div
+    = link_to "Back to posts", posts_path

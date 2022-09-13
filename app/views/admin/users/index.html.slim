@@ -1,0 +1,50 @@
+.row
+  .col-sm-3
+    = link_to [:new, :admin, :user], class: 'btn btn-primary' do
+  	  = fa 'plus'
+      '  Add user
+  .col-md-5.col-sm-6
+    = search_form [:role]
+.scrollable-x
+  table.table.table-striped
+    thead
+      tr
+        th
+        th Email
+        th Name
+        th Job
+        th Roles
+        th Registered
+        th
+      tr.filters
+        th
+        th
+        th
+        th
+        th = filter_by_role
+        th
+
+    tbody
+      - @resources.each do |user|
+        tr
+          td
+            - if can? :become, user
+              = button_to [:become, :admin, user], method: 'POST', target: "_blank", class: "btn btn-sm btn-warning", "data-bs-toggle": "tooltip", title: t('actions.login_as_user'), "data-confirm": t(".become_user_confirmation", user: user.full_name) do
+                i.bi.bi-arrow-up-right-square
+          td = link_to user.email, {action: :show, id: user}
+          td
+            = user.full_name
+          td
+            strong
+              = user.job
+            br
+            = user.company
+          td = user.roles.map(&:name).compact.join(", ")
+          td = user.created_at.strftime("%d-%m-%Y %H:%M")
+          td
+            .action-row.float-end
+              = edit_button(user)
+              = delete_button(user)
+
+= paginator @resources
+

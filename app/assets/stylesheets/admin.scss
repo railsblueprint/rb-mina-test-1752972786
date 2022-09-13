@@ -1,0 +1,45 @@
+@import 'bootstrap/scss/bootstrap';
+@import "blueadmin/all";
+@import "bootstrap-icons";
+@import 'remixicon';
+@import 'quill.snow';
+@import 'quill.bubble';
+@import "boxicons";
+@import "simple-datatables/dist/style";
+@import "actiontext";
+@import "select2/src/scss/core";
+@import "select2-bootstrap-5-theme/src/include-all";
+
+@import "avatars";
+
+
+.toast-container {
+  z-index: 10000;
+}
+
+.main {
+  margin-top: 60px;
+  min-height: calc(100vh - 122px);
+}
+
+th.boolean {
+  width: 100px;
+}
+
+.cm-editor{
+  background-color: white;
+  min-height: 20em;
+  max-height: 20em;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.action-row {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px 10px;
+  .card-link {
+    margin: 0;
+  }
+}

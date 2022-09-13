@@ -1,0 +1,16 @@
+.card
+  .card-body.pt-3
+    = bootstrap_form_for([:admin, @resource], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
+      = f.text_field :url, prepend: link_field_button(url_prefix: "/", local: true)
+      = f.text_field :title
+      = f.text_area :body, class: "tinymce", "data-controller": "editors--tinymce"
+      = f.text_field :seo_title
+      = f.text_field :seo_keywords
+      = f.text_field :seo_description
+      = f.form_group
+        = f.check_box :active
+        = f.check_box :show_in_sidebar
+      = f.text_field :icon
+      = f.form_group
+        = f.submit
+

@@ -1,0 +1,11 @@
+h5.card-title.text-center.pb-0.fs-4
+  = t('.login_to_your_account')
+p.text-center.small
+  = bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "row g-3 needs-validation" }) do |f|
+    = flash_bootstrap
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+    = f.password_field :password, autocomplete: "current-password"
+    - if devise_mapping.rememberable?
+      = f.check_box :remember_me, class: "form-check-input"
+    = f.submit t('.sign_in'), class: "btn btn-primary w-100"
+    = render "devise/shared/links"

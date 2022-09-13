@@ -1,0 +1,10 @@
+ru:
+  platform:
+    name: Rails Blueprint
+  locales:
+    en:
+      short: EN
+      full: English
+    ru:
+      short: RU
+      full: Russian

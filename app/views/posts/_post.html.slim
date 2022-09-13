@@ -1,0 +1,23 @@
+div data-controller="post" data-post-id-value=post.id id=dom_id(post)
+  .card.post id=dom_id(post)
+    .card-body
+      div id="#{dom_id(post)}_body"
+        .card-title = link_to post.title, post
+        .card-text
+          == post.body
+    .card-footer.d-flex.justify-content-between
+      div.pt-2
+        i.bi.bi-person
+        '
+        = link_to post.user.full_name, post.user
+        i.bi.bi-clock.ps-3
+        '
+        = post.created_at.strftime("%d %B, %Y %H:%M")
+      - if can? :update, post
+        .text-end
+          = link_to t('action.edit'), edit_post_path(post), class: "card-link btn btn-link"
+          = link_to  post, data: {"turbo-method": :delete}, class: "card-link btn btn-outline-danger" do
+            i.bi.bi-trash
+            '
+            = t('action.delete')
+

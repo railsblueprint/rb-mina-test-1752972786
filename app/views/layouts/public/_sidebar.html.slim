@@ -1,0 +1,28 @@
+aside#sidebar.sidebar
+  ul#sidebar-nav.sidebar-nav
+    li.nav-item
+      = active_link_to "/", class: "nav-link nav-link-main", active: :exclusive do
+        i.ri-home-fill
+        span
+          | Home
+    li.nav-item
+      = active_link_to :posts, class: "nav-link nav-link-main" do
+        i.bi.bi-newspaper
+        span
+          | Blog
+    li.nav-item
+      = active_link_to :contacts, class: "nav-link nav-link-main" do
+        i.bi.bi-envelope
+        span
+          | Contacts
+    li.nav-item
+      = active_link_to faq_path, class: "nav-link nav-link-main" do
+        i.bi.bi-question-circle
+        span
+          | F.A.Q
+    - Page.sidebar.each do |page|
+        li.nav-item
+          = active_link_to "/#{page.url}", class: "nav-link nav-link-main" do
+            i.bi class="bi-#{page.icon.presence || 'file'}"
+            span
+              = page.title

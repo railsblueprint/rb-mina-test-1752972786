@@ -1,0 +1,11 @@
+= component_controller do
+  .dropdown
+    button.btn.btn-outline-secondary.dropdown-toggle aria-expanded="false" data-bs-toggle="dropdown" type="button"
+      i.ri-earth-fill
+      '
+      = t("locales.#{@locale}.short")
+    ul.dropdown-menu
+      - @available_locales.each do |locale|
+        li
+          a.dropdown-item href="#" *{data: reflex_data_attributes("click->set")} data-locale=locale
+            = t("locales.#{locale}.full", default: locale)

@@ -1,0 +1,43 @@
+// @import "font_awesome5_webfont";
+@import "bootstrap/scss/bootstrap";
+// @import "bootstrap/dist/css/bootstrap";
+@import "actiontext";
+@import "blueadmin/all";
+@import "bootstrap-icons";
+@import 'remixicon';
+@import "boxicons";
+@import "avatars";
+
+.toast-container {
+  z-index: 10000;
+}
+
+.main {
+  margin-top: 60px;
+  min-height: calc(100vh - 122px);
+}
+
+
+.card.post {
+  .card-header {
+    border: none;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+}
+
+.contact_us.success {
+  margin-bottom: 70px;
+  h2 {
+    margin: 100px 0;
+  }
+}
+
+.devise {
+  .logo-128 img{
+    height: 120px;
+    margin-bottom: 1em;
+  }
+}

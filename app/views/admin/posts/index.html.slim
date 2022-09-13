@@ -1,0 +1,34 @@
+.row
+  .col-sm-3
+    = link_to url_for(action: :new), class: 'btn btn-primary' do
+      = t('.create_post')
+  .col-md-5.col-sm-6
+    = search_form [:user_id]
+
+.scrollable-x
+  table.table.table-striped
+    thead
+      tr
+        th = t(".title")
+        th = t(".author")
+        th = t(".created_at")
+        th
+      tr.filters
+        th
+        th = filter_by_user selected: @selected_user
+        th
+
+    tbody
+      - @resources.each do |resource|
+        tr
+          td = link_to resource.title, {action: :show, id: resource.id}
+          td
+            = resource.user&.full_name || "Unknown"
+          td = resource.created_at.strftime("%d-%m-%Y %H:%M")
+          td
+            .action-row.float-end
+              = edit_button(resource)
+              = delete_button(resource)
+
+= paginator @resources
+

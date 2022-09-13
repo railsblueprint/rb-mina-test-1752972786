@@ -1,0 +1,22 @@
+.card
+  .card-body
+    h1.card-title
+      i.bi class="bi-#{@resource.icon.presence || 'file'}"
+      '
+      = @resource.title
+      '  |
+      - if @resource.active
+        = link_to "/#{@resource.url}", "/#{@resource.url}", target: "_blank", class: "text-decoration-dashed"
+      - else
+        = @resource.url
+    .card-text
+      == @resource.body
+  .card-footer.d-flex.justify-content-between
+    div.pt-2
+    - if can? :update, @resource
+      .text-end
+        = link_to t('action.edit'), url_for({action: :edit, id: @resource.id}), class: "card-link btn btn-link"
+        = link_to  [:admin, @resource], data: {"turbo-method": :delete}, class: "card-link btn btn-outline-danger" do
+          i.bi.bi-trash
+          '
+          = t('action.delete')

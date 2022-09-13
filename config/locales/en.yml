@@ -1,0 +1,239 @@
+en:
+  platform:
+    name: Rails Blueprint
+    slogan: Shortcut to the rails world
+  devise:
+    sessions:
+      new:
+        login_to_your_account: "Login to your account"
+  admin:
+    demo:
+      forms:
+        editors:
+          page_title: Editors
+        elements:
+          page_title: Form elements
+        layouts:
+          page_title: Form layouts
+        validation:
+          page_title: Validation
+      charts:
+        chartjs:
+          page_title: Chart.JS
+        apexcharts:
+          page_title: ApexCharts
+        echarts:
+          page_title: ECharts
+      icons:
+        bootstrap:
+          page_title: Bootstrap icons
+        boxicons:
+          page_title: Boxicons
+        remix:
+          page_title: Remix icons
+      components:
+        alert:
+          page_title: Alert
+        accordion:
+          page_title: Accordion
+        badges:
+          page_title: Badges
+        breadcrumbs:
+          page_title: Breadcrumbs
+        buttons:
+          page_title: Buttons
+        cards:
+          page_title: Cards
+        carousel:
+          page_title: Carousel
+        list_group:
+          page_title: List group
+        modal:
+          page_title: Modals
+        tabs:
+          page_title: Tabs
+        pagination:
+          page_title: Pagination
+        progress:
+          page_title: Progress bars
+        spinners:
+          page_title: Spinners
+        tooltips:
+          page_title: Tooltips
+      tables:
+        general:
+          page_title: General tables
+        data:
+          page_title: Data tables
+    nav:
+      dashboard: "Dashboard"
+      configuration: "Configuration"
+      maintenance: "Maintenance"
+      settings: "Settings"
+      mail_templates: "Mail templates"
+      users: Users
+      demos: "Demos"
+      components: "Components"
+      pg_hero: "Pg Hero"
+      good_job: "Good Job"
+      demo:
+        alerts: "Alerts"
+        accordion: "Accordion"
+        badges: "Badges"
+        breadcrumbs: "Breadcrumbs"
+        buttons: "Buttons"
+        cards: "Cards"
+        carousel: "Carousel"
+        list_group: "List group"
+        modal: "Modal"
+        tabs: "Tabs"
+        pagination: "Pagination"
+        progress: "Progress"
+        spinners: "Spinners"
+        tooltips: "Tooltips"
+        forms: "Forms"
+        form_elements: "Form Elements"
+        form_layouts: "Form Layouts"
+        form_editors: "Form Editors"
+        form_validation: "Form Validation"
+        tables: "Tables"
+        general_tables: "General Tables"
+        data_tables: "Data Tables"
+        charts: "Charts"
+        chart_js: "Chart.js"
+        apex_charts: "ApexCharts"
+        e_charts: "ECharts"
+        icons: "Icons"
+        bootstrap_icons: "Bootstrap Icons"
+        remix_icons: "Remix Icons"
+        boxicons: "Boxicons"
+    settings:
+      page_title: "System settings"
+      index:
+        page_title: "System settings"
+        create_setting: "Create setting"
+      mass_update:
+        sucessfully_updated: "Sucessfully updated"
+    users:
+      page_title: "Users"
+      index:
+        become_user_confirmation: "Are you sure you want to login as '%{user}'? You will have to relogin to return to your account."
+      show:
+        posts_count:
+          one: "1 post"
+          other: "%{count} posts"
+    posts:
+      page_title: "Posts"
+      index:
+        create_post: "Create post"
+        title: Title
+        author: Author
+        created_at: Created at
+    mail_templates:
+      index:
+        page_title: "Mail templates"
+        you_have_unsaved_changes: "You have unsaved changes. Don't forget to run 'rake mail_templates:generate' to generate data migration"
+      new:
+        page_title: "New template"
+      edit:
+        page_title: "Edit template"
+    pages:
+      page_title: Pages
+      index:
+        create_page: "Create page"
+  activerecord:
+    attributes:
+      setting:
+        types:
+          set: Set
+          string: String
+          integer: Integer
+          boolean: Boolean
+          json: JSON
+  actions:
+    yes: "Yes"
+    edit: "Edit"
+    save: "Save"
+    create: "Create"
+    close: "Close"
+    new: "New"
+    cancel: "Cancel"
+    send_message: "Send Message"
+    please_confirm: "Please confirm"
+    login_as_user: "Login as user"
+    change_password: "Change password"
+    copy_to_clipboard: "Copy to clipboard"
+    open_link_in_new_tab: "Open link in new tab"
+  locales:
+    en:
+      short: EN
+      full: English
+    ru:
+      short: RU
+      full: Russian
+  messages:
+    successfully_created: "Successfully created"
+    successfully_deleted: "Successfully deleted"
+    successfully_updated: "Successfully updated"
+    delete_confirmation: "Are you sure you want to delete this %{resource}?"
+    copied_successfully: "Copied successfully"
+    failed_to_copy: "Failed to copy"
+    you_cannot_access_this_page: "You cannot access this page"
+    you_cannot_peform_this_action: "You cannot peform this action"
+  you_have_unsaved_changes: "You have unsaved changes. Don't forget to run 'rake settings:generate' to generate data migration"
+  action:
+    delete: "Delete"
+    edit: "Edit"
+  contacts:
+    form:
+      your_name: "Your name"
+      your_email: "Your email"
+      subject: "Subject"
+      message: "Message"
+    new:
+      contact_us: "Contact us"
+      address: "Address"
+      call_us: "Call Us"
+      email_us: "Email Us"
+      open_hours: "Open Hours"
+  company:
+    address_1: "A108 Adam Street,"
+    address_2: "New York, NY 535022"
+    phone_1: "+1 5589 55488 55"
+    phone_2: "+1 6678 254445 41"
+    email_1: "info@example.com"
+    email_2: "contact@example.com"
+    workdays: "Monday - Friday"
+    workhours: "9:00AM - 05:00PM"
+  search:
+    any: "-- Any --"
+  posts:
+    index:
+      page_title: Blog
+      search_results: "Search results for '%{q}'"
+      nothing_found: "Nothing found"
+  mail_templates:
+    names:
+      clean_html: "Empty plain html template"
+      clean: "Empty inky template"
+      mailer:  "Fixed-width inky template"
+  views:
+    pagination:
+      first: "&laquo;&nbsp;First"
+      last: "Last&nbsp;&raquo;"
+      previous: "&lsaquo;&nbsp;Prev"
+      next: "Next&nbsp;&rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      entry:
+        zero: "entries"
+        one: "entry"
+        other: "entries"
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Displaying <b>1</b> %{entry_name}"
+          other: "Displaying <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
