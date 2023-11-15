@@ -20,7 +20,7 @@ namespace :admin do
       get :lookup
     end
     member do
-      post :become
+      post :impersonate
     end
   end
 
@@ -39,8 +39,8 @@ namespace :admin do
     resources :settings, :notification_settings, concerns: :mass_updatable
   end
 
-  namespace :demo do
-
+  namespace :design_system do
+    get 'colors'
     get 'components/alert'
     get "components/accordion"
     get "components/badges"

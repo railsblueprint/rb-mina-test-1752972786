@@ -11,6 +11,10 @@ import "@rails/actiontext";
 // import "chartkick";
 // import "Chart.bundle";
 
+
+
+
+
 $(function() {
   var toastElList = [].slice.call(document.querySelectorAll('.toast'))
   var toastList = toastElList.map(function (toastEl) {

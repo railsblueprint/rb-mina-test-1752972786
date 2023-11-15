@@ -3,7 +3,7 @@ namespace :demo do
   task reset: :environment do
     if !ENV["DISABLE_DATABASE_ENVIRONMENT_CHECK"].present? && Rails.env.production?
       puts "You're trying to reset production database. If you are sure what you are doing, repeat it as"
-      puts "    DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=prroduction rails demo:reset"
+      puts "    DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=production rails demo:reset"
       next
     end
 

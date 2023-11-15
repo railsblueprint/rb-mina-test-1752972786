@@ -15,7 +15,7 @@ html
     = render "layouts/public/header"
     = render "layouts/public/sidebar"
     main#main.main
-      = render ToastrFlashComponent.new
-      = render "layouts/public/breadcrumb"
+      = component :toastr_flash
+      = component :breadcrumbs, _breadcrumbs
       = yield
     = render "layouts/public/footer"

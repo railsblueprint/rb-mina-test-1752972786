@@ -4,4 +4,11 @@ class MailTemplate < ApplicationRecord
 
     scope :unsaved, -> { unscoped.where.not(deleted_at: nil).or(MailTemplate.where(not_migrated: true)) }
   end
+
+  def self.available_layouts
+    Dir.entries("#{Rails.root}/app/views/layouts/mail").reject { |f|
+      f.start_with?(".")
+    }.map(&it.split(".").first)
+  end
+
 end

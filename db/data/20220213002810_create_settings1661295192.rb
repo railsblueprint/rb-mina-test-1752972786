@@ -64,7 +64,7 @@ class CreateSettings1661295192 < ActiveRecord::Migration[7.0]
       Setting.where("alias": "hide_demo_elements").update_all(
         type:        "boolean",
         set:         "admin",
-        description: "Hide demo elements",
+        description: "Hide design system",
       )
     else
       Setting.create(
@@ -72,7 +72,7 @@ class CreateSettings1661295192 < ActiveRecord::Migration[7.0]
         type:        "boolean",
         set:         "admin",
         value:       "0",
-        description: "Hide demo elements",
+        description: "Hide design system",
       )
     end
     if Setting.where("alias": "available_locales").any?

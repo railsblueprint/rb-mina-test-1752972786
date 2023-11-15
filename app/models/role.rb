@@ -11,13 +11,13 @@ class Role < ApplicationRecord
 
   scopify
 
-  begin
-    all.map do |record|
-      define_singleton_method(record.name.to_sym) do
-        record
-      end
+  ROLES = [:moderator, :admin, :superadmin]
+
+  ROLES.map do |role|
+    define_singleton_method(role) do
+      @roles ||= {}
+      @roles[role] ||= Role.find_by(name: role)
     end
-  rescue ActiveRecord::StatementInvalid
-    Rails.logger.warn "Warning: Roles table missing, not role accessors created "
   end
+
 end

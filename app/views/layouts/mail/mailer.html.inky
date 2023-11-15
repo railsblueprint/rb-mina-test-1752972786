@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width" />
 
-    <%= stylesheet_link_tag "mail/foundation_emails" %>
+    <%= stylesheet_link_tag "mail/foundation_emails"%>
   </head>
 
   <body>
@@ -15,13 +15,23 @@
             <container>
               <wrapper class="header">
                 <center>
-                  <img src="<%#= image_url('logo_big.png') %>">
+                  <row>
+                    <columns large="2">
+                      <img src="<%= image_url('logo-256.png') %>" height="40px">
+                    </columns>
+                    <columns large="10">
+                      <h1>Rails Blueprint</h1>
+                    </columns>
+                  </row>
                 </center>
               </wrapper>
               <img src="<%#= image_url('mail/fringe_yellow_top.png') %>">
               <spacer size="16"></spacer>
-              <%= yield %>
-
+              <row>
+                <columns large="12">
+                  <%= yield %>
+                </columns>
+              </row>
 
               <img src="<%#= image_url('mail/fringe_yellow_bottom.png') %>">
               <wrapper class="secondary">
@@ -30,15 +40,15 @@
 
                 <row>
                   <columns large="6">
-                    <button class="facebook expand" href="https://www.facebook.com/ADcrafting.ru/">Facebook</button>
+                    <button class="facebook expand" href="https://www.facebook.com/">Facebook</button>
                     <button class="twitter expand" href="http://tweeter.com">Twitter</button>
                     <button class="google expand" href="http://google.com">Google+</button>
                   </columns>
                   <columns large="6">
-                    <h5>Контакты:</h5>
-                    <p>Тел: +7 (495) 000-0000</p>
-                    <p>Email: <a href="mailto:info@adcrafting.ru">info@adcrafting.ru</a></p>
-                    <p><a href="http://adcrafting.ru">http://adcrafting.ru</a></p>
+                    <h5>Contact us:</h5>
+                    <p>Phone: +1 (555) 555-5555</p>
+                    <p>Email: <a href="mailto:info@railsblueprint.com">info@railsblueprint.com</a></p>
+                    <p><a href="http://railsblueprint.com">http://railsblueprint.com</a></p>
                   </columns>
                 </row>
                 <center>

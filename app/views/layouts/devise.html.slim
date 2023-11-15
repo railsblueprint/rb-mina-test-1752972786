@@ -13,18 +13,22 @@ html
     = hotwire_livereload_tags
     = action_cable_meta_tag
   body class=body_class class="devise"
-    main
+    main.main
       .container
-        section.section.register.min-vh-100.d-flex.flex-column.align-items-center.justify-content-center.py-4
+        section.section.register.d-flex.flex-column.align-items-center.justify-content-center.py-4
           .container
             .row.justify-content-center
               .col-lg-6.col-md-8.d-flex.flex-column.align-items-center.justify-content-center
                 a.logo-128.text-center.w-auto[href="/"]
                   = image_tag "logo-full-256.png"
                   br
-                  h5.d-none.d-lg-block
+                  h4.d-none.d-lg-block
                     = t("platform.name")
-                .card.mb-3
+                .card.mb-3.shadow-lg
                   .card-body
                     .pt-4.pb-2
                       = yield
+    div.credits
+      | Built with
+      a href="http://railsblueprint.com" target="_blank"
+        |  Rails Blueprint

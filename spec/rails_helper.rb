@@ -2,6 +2,9 @@
 require 'spec_helper'
 require_relative 'support/factory_bot'
 require_relative 'support/chrome'
+require "wisper/rspec/matchers"
+# require "wisper/rspec/stub_wisper_publisher"
+require "pundit/rspec"
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'

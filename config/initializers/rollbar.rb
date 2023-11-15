@@ -14,7 +14,7 @@ Rollbar.configure do |config|
     config.branch = deploy[1]
     config.code_version = deploy[3]&.gsub(")", "")
   else
-    if File.exists?(".git")
+    if File.exist?(".git")
       config.branch = `git branch --show-current`.strip
       config.code_version = `git rev-parse  HEAD`.strip
     end

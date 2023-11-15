@@ -1,22 +1,26 @@
-// @import "font_awesome5_webfont";
+@import 'variables';
 @import "bootstrap/scss/bootstrap";
-// @import "bootstrap/dist/css/bootstrap";
+
 @import "actiontext";
 @import "blueadmin/all";
 @import "bootstrap-icons";
 @import 'remixicon';
 @import "boxicons";
 @import "avatars";
+@import "blueadmin/layout";
+
+@import "frontend/contact";
+@import "frontend/devise";
+@import "frontend/faq";
+@import "frontend/profile";
+@import "frontend/static_pages";
+@import "frontend/spinner";
+
+@import "theme";
 
 .toast-container {
   z-index: 10000;
 }
-
-.main {
-  margin-top: 60px;
-  min-height: calc(100vh - 122px);
-}
-
 
 .card.post {
   .card-header {
@@ -28,16 +32,28 @@
   }
 }
 
-.contact_us.success {
-  margin-bottom: 70px;
-  h2 {
-    margin: 100px 0;
-  }
-}
 
-.devise {
+body.devise {
+  min-height: 100vh;
+
   .logo-128 img{
     height: 120px;
     margin-bottom: 1em;
   }
+  .main,.register {
+    min-height: calc(100vh - 4em)
+  }
+}
+
+
+.credits {
+  height: 4rem;
+  padding: 2rem 0;
+  color: #fff;
+  text-align: center;
+}
+.credits a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
 }

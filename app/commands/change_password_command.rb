@@ -1,8 +1,8 @@
 class ChangePasswordCommand < BaseCommand
-  attribute :user
-  attribute :currrent_password
-  attribute :password
-  attribute :password_confirmation
+  attribute :user, Types::Nominal(User)
+  attribute :currrent_password, Types::String
+  attribute :password, Types::String
+  attribute :password_confirmation, Types::String
 
   validates_presence_of :user, :password, :password_confirmation, :currrent_password
   validate :current_password_valid?

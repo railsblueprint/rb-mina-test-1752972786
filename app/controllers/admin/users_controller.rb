@@ -1,4 +1,9 @@
 class Admin::UsersController < Admin::CrudController
+
+  def actions_with_resource
+    super + [:impersonate]
+  end
+
   # rubocop:disable Metrics/AbcSize, Style/GuardClause
   def filter_resources
     @resources = @resources.with_role(params[:role]) if params[:role].present? && (params[:role][0] != "_")
@@ -20,32 +25,18 @@ class Admin::UsersController < Admin::CrudController
     }
   end
 
-  def model
-    User
-  end
 
   def scope
     super.includes(:roles)
   end
 
-  def title
+  def name_attribute
     :full_name
   end
 
-  def become
-    @user = User.find(params[:id])
-    bypass_sign_in @user
-    redirect_to "/"
-  end
-
-  private
-
-  def safe_params
-    params.require(:user).permit(
-      :role, :first_name, :last_name, :email, :about, :job, :company,
-      :address, :country,
-      :twitter_profile, :facebook_profile, :linkedin_profile, :instagram_profile,
-      :password, :password_confirmation, role_ids: []
-    )
+  def impersonate
+    session[:impersonator_id] = current_user.id
+    bypass_sign_in @resource
+    redirect_to "/", flash: {success: "You have successfully impersonated #{current_user.full_name}"}
   end
 end

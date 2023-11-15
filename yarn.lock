@@ -54,9 +54,9 @@
     formdata-polyfill "^3.0.20"
 
 "@webcomponents/template@^1.4.4":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@webcomponents/template/-/template-1.5.0.tgz#45c15735f1ea7ecdb2f2d9d35663ea1f169a1308"
-  integrity sha512-DPQgBAedzjsFD7rgv7b6OKmpHq5VTBUCLmYfDiov2FC2C79QGaz+4iNmlVAem5iSicvN8DWTwU1kZ48XYLtuqg==
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@webcomponents/template/-/template-1.5.1.tgz#c938df94d641cd0f2e849dd30f38c4b11e31ea81"
+  integrity sha512-3e8bx+bgRhyuRwFrDGu7CalILomo11ixuMzVGvpXSxL8lX+ijCIG6J3kS4O/7nElVuKE7vkuXB1xD+RICDNCCg==
 
 "@webcomponents/webcomponentsjs@^2.0.2":
   version "2.6.0"
@@ -92,6 +92,11 @@ bootstrap@^5.1.3:
   version "5.1.3"
   resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-5.1.3.tgz#ba081b0c130f810fa70900acbc1c6d3c28fa8f34"
   integrity sha512-fcQztozJ8jToQWXxVuEyXWW+dSo8AiXWKwiSSrKWsRB/Qt+Ewwza+JWoLKiTuQLaEPhdNAJ7+Dosc9DOIqNy7Q==
+
+bootstrap@^5.3.0:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.2.tgz#97226583f27aae93b2b28ab23f4c114757ff16ae"
+  integrity sha512-D32nmNWiQHo94BKHLmOrdjlL05q1c8oxbtBphQFb9Z5to6eGRDCm0QgeaZ4zFBHzfg2++rqa2JkqCcxDy0sH0g==
 
 boxicons@^2.1.1:
   version "2.1.1"
@@ -140,9 +145,9 @@ chart.js@^3.7.0:
     fsevents "~2.3.2"
 
 core-js@^3.4.0:
-  version "3.24.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.24.1.tgz#cf7724d41724154010a6576b7b57d94c5d66e64f"
-  integrity sha512-0QTBSYSUZ6Gq21utGzkfITDylE8jWC9Ne1D2MrhvlsZBI1x39OdDIVbzSqtgMndIy6BlHxBXpMGqzZmnztg2rg==
+  version "3.33.2"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.33.2.tgz#312bbf6996a3a517c04c99b9909cdd27138d1ceb"
+  integrity sha512-XeBzWI6QL3nJQiHmdzbAOiMYqjrb7hwU7A39Qhvd/POSa/t9E1AeZyEZx3fNvp/vtM8zXwhoL0FsiS0hD0pruQ==
 
 dayjs@^1.10.7:
   version "1.10.7"

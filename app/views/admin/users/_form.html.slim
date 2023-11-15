@@ -1,0 +1,42 @@
+.card
+  .card-body.pt-3
+    = tabs nav_class: "nav-tabs-bordered" do |tab|
+      - tab.add title: "Overview" do
+        .pt-3
+          = bootstrap_form_for([:admin, @command], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
+            = f.text_field :first_name
+            = f.text_field :last_name
+            = f.text_field :job
+            = f.text_field :company
+            = f.text_field :phone
+            = f.text_field :email
+            = f.text_field :country
+            = f.text_field :address
+            = f.text_area :about, rows: 4
+            /= f.form_group :is_locked
+                = f.check_box :is_locked
+
+            = f.form_group label: {text: "Roles"}
+              - Role.all.each do |r|
+                = f.check_box :role_ids, {label: r.name, :multiple => true, :checked => @resource.roles.include?(r), disabled: !policy(@resource).change_roles?}, r.id, ''
+            = f.form_group
+              = f.submit
+      - tab.add title: "Social" do
+        .pt-3
+          = bootstrap_form_for([:admin, @command], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
+            = f.text_field :twitter_profile, prepend: link_field_button
+            = f.text_field :facebook_profile, prepend: link_field_button
+            = f.text_field :instagram_profile, prepend: link_field_button
+            = f.text_field :linkedin_profile, prepend: link_field_button
+            = f.form_group
+              = f.submit
+      - if policy(@resource).change_password?
+        - tab.add title: "Password" do
+          .pt-3
+            = bootstrap_form_for([:admin, @command], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-4') do |f|
+              = f.password_field :password
+              = f.password_field :password_confirmation
+              = f.form_group
+                = f.submit t("actions.change_password")
+
+

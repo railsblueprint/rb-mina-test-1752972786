@@ -25,7 +25,8 @@
                     = n.description
                   .col-md-6
                     - if n.boolean?
-                      = fn.check_box_without_bootstrap :value, class: "form-check-input"
+                      .form-check.form-switch
+                        = fn.check_box_without_bootstrap :value, class: "form-check-input"
                     -elsif n.json?
                       = fn.text_area_without_bootstrap :value, class: "form-control"
                     -else

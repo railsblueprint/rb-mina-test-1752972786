@@ -77,4 +77,5 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: ENV.fetch("PORT", 5000) }
   config.web_console.whitelisted_ips = '0.0.0.0'
+  config.web_console.development_only = false
 end

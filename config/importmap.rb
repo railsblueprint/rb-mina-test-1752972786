@@ -8,7 +8,7 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "https://ga.jspm.io/npm:@hotwired/stimulus@3.1.0/dist/stimulus.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
-pin "@stimulus_reflex/polyfills", to: "polyfills/polyfills",  preload: true
+pin "@stimulus_reflex/polyfills", to: "@stimulus_reflex/polyfills",  preload: true
 pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.1/dist/jquery.js", preload: true
 pin "jquery.global", to: "jquery.global.js", preload: true
 pin "keyboard-pagination", to: "libs/jquery.keyboard-pagination.js"
@@ -48,3 +48,4 @@ pin "@lezer/javascript", to: "https://ga.jspm.io/npm:@lezer/javascript@1.0.2/dis
 pin "@lezer/lr", to: "https://ga.jspm.io/npm:@lezer/lr@1.2.3/dist/index.js"
 pin "cable_ready", to: "https://ga.jspm.io/npm:cable_ready@5.0.0-pre9/dist/cable_ready.min.js"
 pin "morphdom", to: "https://ga.jspm.io/npm:morphdom@2.6.1/dist/morphdom.js"
+pin "sortablejs", to: "https://ga.jspm.io/npm:sortablejs@1.15.0/modular/sortable.esm.js"

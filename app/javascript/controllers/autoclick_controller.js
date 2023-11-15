@@ -1,14 +1,16 @@
-import { Controller } from "@hotwired/stimulus"
-import { useIntersection } from 'stimulus-use'
+import {Controller} from "@hotwired/stimulus"
+import {useIntersection} from 'stimulus-use'
 
 export default class extends Controller {
+  static targets = ["button", "loader"]
+
   connect() {
     useIntersection(this)
   }
 
   appear(entry) {
-    $(this.element).siblings().removeClass('d-none');
-    $(this.element).addClass("d-none");
-    this.element.click();
+    $(this.loaderTarget).removeClass('d-none');
+    $(this.buttonTarget).addClass("d-none");
+    this.buttonTarget.click();
   }
 }

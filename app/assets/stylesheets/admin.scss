@@ -1,5 +1,9 @@
+@import 'variables';
+
 @import 'bootstrap/scss/bootstrap';
 @import "blueadmin/all";
+
+
 @import "bootstrap-icons";
 @import 'remixicon';
 @import 'quill.snow';
@@ -8,22 +12,25 @@
 @import "simple-datatables/dist/style";
 @import "actiontext";
 @import "select2/src/scss/core";
+//Next line fixes incompatyibility with bootstrap 5.2.3 and later
+$s2bs5-clear-icon: str-replace($btn-close-bg, #{$btn-close-color}, #{shade-color(red, 50%)}) !default;
 @import "select2-bootstrap-5-theme/src/include-all";
 
 @import "avatars";
 
+@import "admin/mail_templates";
+@import "admin/pages";
+@import "admin/posts";
+@import "admin/users";
+
+@import "frontend/profile";
+
+@import "theme";
+
+
 
 .toast-container {
   z-index: 10000;
-}
-
-.main {
-  margin-top: 60px;
-  min-height: calc(100vh - 122px);
-}
-
-th.boolean {
-  width: 100px;
 }
 
 .cm-editor{
@@ -33,13 +40,4 @@ th.boolean {
   border: 1px solid #ced4da;
   border-radius: .25rem;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-.action-row {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 10px 10px;
-  .card-link {
-    margin: 0;
-  }
 }

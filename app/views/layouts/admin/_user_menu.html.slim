@@ -1,0 +1,77 @@
+a.nav-link.nav-profile.d-flex.align-items-center.pe-0[href="#" data-bs-toggle="dropdown"]
+  .profile-image.icon.d-md-none
+    .rounded-circle.circle-border.m-auto alt=current_user.full_name class="color-#{current_user.avatar_color}"
+      span = current_user.initials
+  span.d-none.d-md-block.dropdown-toggle.ps-2
+    = current_user.short_name
+ul.dropdown-menu.dropdown-menu-end.dropdown-menu-arrow.profile
+  li.dropdown-header
+    .profile-image
+      .rounded-circle.circle-border.mb-3.m-auto alt=current_user.full_name class="color-#{current_user.avatar_color}"
+        span = current_user.initials
+    h6
+      = current_user.short_name
+    span
+      = current_user.job
+    div
+      - if session[:impersonator_id].present?
+        = link_to disavow_path, "data-turbo-method": "POST", class: "btn btn-sm btn-outline-danger" do
+          i.bi.bi-arrow-counterclockwise
+          span
+            | Disavow
+  li
+    hr.dropdown-divider
+  - if current_user.has_role?(:admin)
+    li
+      = link_to "/admin", class: "dropdown-item d-flex align-items-center" do
+        i.bi.bi-briefcase
+        span
+          | Admin
+    li
+      hr.dropdown-divider
+  = link_to profile_path, class: "dropdown-item d-flex align-items-center" do
+    i.bi.bi-person
+    span
+      | My Profile
+  li
+    hr.dropdown-divider
+  - if session[:impersonator_id].present?
+    = link_to disavow_path, "data-turbo-method": "POST", class: "dropdown-item d-flex align-items-center" do
+      i.bi.bi-arrow-counterclockwise
+      span
+        | Disavow
+    li
+      hr.dropdown-divider
+  li
+    = link_to faq_path, class: "dropdown-item d-flex align-items-center" do
+      i.bi.bi-question-circle
+      span
+        | Need Help?
+  li
+    hr.dropdown-divider
+  . data-controller="theme"
+    li
+      button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="light" data-action="theme#set"
+        = bi "sun-fill", class: "me-2 opacity-50 theme-icon"
+        |  Light
+        .flex-grow-1
+        = bi :check, class: "ms-auto d-none"
+    li
+      button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="dark" data-action="theme#set"
+        = bi "moon-stars-fill", class: "me-2 opacity-50 theme-icon"
+        | Dark
+        .flex-grow-1
+        = bi :check, class: "ms-auto d-none"
+    li
+      button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="auto" data-action="theme#set"
+        = bi "circle-half", class: "me-2 opacity-50 theme-icon"
+        | Auto
+        .flex-grow-1
+        = bi :check, class: "ms-auto d-none"
+  li
+    hr.dropdown-divider
+  li
+    = link_to destroy_user_session_path, class: "dropdown-item d-flex align-items-center", "data-turbo-method": "DELETE" do
+      i.bi.bi-box-arrow-right
+      span
+        | Sign Out

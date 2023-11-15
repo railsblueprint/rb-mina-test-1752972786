@@ -1,8 +1,8 @@
 class ContactUsCommand < BaseCommand
-  attribute :name
-  attribute :email
-  attribute :subject
-  attribute :message
+  attribute :name, Types::String
+  attribute :email, Types::String
+  attribute :subject, Types::String
+  attribute :message, Types::String
 
   validates_presence_of :name, :email, :subject, :message
 

@@ -13,9 +13,10 @@ div data-controller="post" data-post-id-value=post.id id=dom_id(post)
         i.bi.bi-clock.ps-3
         '
         = post.created_at.strftime("%d %B, %Y %H:%M")
-      - if can? :update, post
-        .text-end
+      .text-end
+        - if policy(post).edit?
           = link_to t('action.edit'), edit_post_path(post), class: "card-link btn btn-link"
+        - if policy(post).destoy?
           = link_to  post, data: {"turbo-method": :delete}, class: "card-link btn btn-outline-danger" do
             i.bi.bi-trash
             '

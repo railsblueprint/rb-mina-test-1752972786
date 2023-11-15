@@ -29,19 +29,17 @@ class User < ApplicationRecord
 
   # rubocop:disable Naming/PredicateName
   def has_role?(role, resource=nil)
-    rolify_has_role?(role, resource) || rolify_has_role?(:superadmin)
+    roles.any? { |r| r.name == role && r.resource == resource} ||
+      roles.any? { |r| r.name == "superadmin" }
   end
   # rubocop:enable Naming/PredicateName
 
-  begin
-    Role.all.map do |record|
-      define_method("#{record.name}?".to_sym) do
-        rolify_has_role?(record.name)
-      end
+  Role::ROLES.each do |role|
+    define_method("#{role}?".to_sym) do
+      has_role?(role)
     end
-  rescue ActiveRecord::StatementInvalid
-    Rails.logger.warn "Warning: Roles table missing, not role check methods created"
   end
+
 
   def to_liquid
     attributes.with_indifferent_access

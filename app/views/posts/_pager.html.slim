@@ -1,9 +1,5 @@
-#pager
-  .text-center
-    -if @pagy.next
-      = link_to "Next page >", posts_path(page: @pagy.next, q: params[:q]), class: "btn btn-outline-primary", data: {turbo_frame: "page_handler", controller: "autoclick"}
-      .spinner-grow.text-primary.d-none[role="status"]
-      .spinner-grow.text-primary.d-none[role="status"]
-      .spinner-grow.text-primary.d-none[role="status"]
-        span.visually-hidden
-          | Loading...
+-if @pagy.next
+  #pager.infinite-scroll-wrapper data-controller="autoclick"
+    .text-center.mt-3
+      = link_to "Next page >", url_for(page: @pagy.next, q: params[:q]), class: "btn btn-outline-primary", "data-turbo-frame": "page_handler", "data-autoclick-target": "button"
+      = component :infinite_loader, visible: true

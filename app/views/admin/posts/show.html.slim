@@ -6,16 +6,18 @@
       == @resource.body
   .card-footer.d-flex.justify-content-between
     div.pt-2
-      i.bi.bi-person
-      '
-      = link_to @resource.user.full_name, @resource.user
+      - if @resource.user
+        i.bi.bi-person
+        '
+        = link_to @resource.user&.full_name, [:admin, @resource.user]
       i.bi.bi-clock.ps-3
       '
       = @resource.created_at.strftime("%d %B, %Y %H:%M")
-    - if can? :update, @resource
     .text-end
-      = link_to t('action.edit'), url_for({action: :edit, id: @resource.id}), class: "card-link btn btn-link"
-      = link_to  @resource, data: {"turbo-method": :delete}, class: "card-link btn btn-outline-danger" do
-        i.bi.bi-trash
-        '
-        = t('action.delete')
+      - if policy(@resource).edit?
+        = link_to t('action.edit'), url_for({action: :edit, id: @resource.id}), class: "card-link btn btn-link"
+      - if policy(@resource).destroy?
+        = link_to  @resource, data: {"turbo-method": :delete}, class: "card-link btn btn-outline-danger" do
+          i.bi.bi-trash
+          '
+          = t('action.delete')

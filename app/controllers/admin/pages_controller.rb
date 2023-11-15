@@ -10,21 +10,11 @@ class Admin::PagesController < Admin::CrudController
     filter_boolean :show_in_sidebar
   end
 
-  def model
-    Page
-  end
-
-  def title
+  def name_attribute
     :title
   end
 
-  private
-
-  def safe_params
-    params.require(:page).permit(
-      :url, :title, :body,
-      :seo_title, :seo_description, :seo_keywords,
-      :show_in_sidebar, :active, :icon
-    )
+  def filters
+    [:active, :show_in_sidebar]
   end
 end

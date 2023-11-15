@@ -10,12 +10,12 @@ module FormsHelper
     notice:  "alert-info",
     success: "alert-success",
     error:   "alert-danger",
-    alert:   "alwer-warning"
+    alert:   "alert-warning"
   }.freeze
 
   def flash_bootstrap
     raw flash.map { |key, value|
-      "<div class='alert alert-dismissible #{FLASH_MAP[key]}'  role='alert'>
+      "<div class='alert alert-dismissible #{FLASH_MAP[key.to_sym]}'  role='alert'>
        #{value}
       <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='#{t('actions.close')}'></button>
       </div>"
@@ -30,8 +30,8 @@ module FormsHelper
   end
 
   # Bootstrap icon helper
-  def bi icon
-    raw "<i class='bi bi-#{icon}'></i>"
+  def bi icon, options = {}
+    raw "<i class='bi bi-#{icon} #{options[:class]}'></i>"
   end
 
   # Bootstrap icon helper - using svg format
@@ -95,40 +95,18 @@ module FormsHelper
     end
   end
 
-  def search_form fields=[]
-    hidden = fields.map { |field|
-      hidden_field_tag(field, params[field], id: nil)
-    }.join("\n")
-    raw <<~FORM
-      <form class="form" method="get">
-        <div class="input-group">
-          <div class="input-group-text">
-            <i class="i bi bi-search"></i>
-          </div>
-          #{hidden}
-          <input autocomplete="off" class="form-control" name="q" type="search" value="#{params[:q]}">
-          <input class="btn btn-outline-secondary" type="submit" value="Search">
-        </div>
-      </form>
-      #{data_filter(fields)}
-    FORM
-  end
-
-  def filter_by_supplier_id
-    select_tag :supplier_id,
-               options_for_select(
-                 [["Any", nil]] + Supplier.all.map { |r| [r.alias, r.id] },
-                 params[:supplier_id]
-               ),
-               class: "form-control form-control-sm"
-  end
-
   def filter_by name, options, settings={}
-    settings.reverse_merge!(class: "form-control form-control-sm select2")
+    controller = ["select2 admin--search-filter", settings.dig(:data, :controller)].compact.join(" ")
 
     select_tag name,
                options_for_select(options, params[name]),
-               settings
+               class: "form-control form-control-sm select2",
+               **settings,
+               data: {
+                 **settings.fetch(:data, {}),
+                 controller: controller,
+                 url: url_for(**request.query_parameters, name => nil, page: nil)
+               }
   end
 
   def filter_by_binary name, options=[["Any", nil], ["True", true], ["False", false], %w[Unknown nil]]
@@ -155,15 +133,6 @@ module FormsHelper
   def filter_by_role
     filter_by :role,
               [[I18n.t("search.any"), nil], * Role.all.map { |r| [r.name, r.name] }]
-  end
-
-  def filter_by_stock
-    filter_by :stock,
-              [["Any", nil], ["In stock", true], ["Out of stock", false], %w[Uknown nil]]
-  end
-
-  def filter_by_supplier_state
-    filter_by :state, [["Any", nil]] + Supplier.state_options
   end
 
   def filter_by_active
@@ -255,22 +224,81 @@ module FormsHelper
     end
   end
 
-  def delete_button(resource)
-    return unless can? :destroy, resource
+  def delete_button(resource, options={})
+    return unless policy(resource).destroy?
 
     link_to [:admin, resource],
             data:  { turbo_method: :delete,
-                     confirm:      "Are you sure you want to delete this #{resource.class.name}?" },
-            class: "btn btn-danger btn-sm card-link" do
-      "#{fa('trash')} Delete"
+                     controller: "confirmation", action: "confirmation#click",
+                     confirm:      "Are you sure you want to delete this #{resource.class.name}?"
+            },
+            class: "btn btn-outline-danger #{'btn-sm' if options[:small]}" do
+      "#{bi('trash')} Delete".html_safe
     end
   end
 
   def edit_button(resource, options={})
-    return unless can? :edit, resource
+    return unless policy(resource).edit?
 
-    link_to [:edit, :admin, resource], options.merge(class: "btn btn-primary btn-sm card-link") do
-      "#{fa('edit')} Edit"
+    link_to [:edit, :admin, resource],
+            class: "btn btn-outline-primary #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}",
+            "data-turbo-frame": "_top" do
+      "#{bi('pencil')} #{t("actions.edit")}".html_safe
+    end
+  end
+
+  def action_button(resource, action, options={})
+    return unless policy(resource).send(:"#{action}?")
+    css_class = options[:class] || "btn-outline-secondary"
+
+    link_to [action, :admin, resource],
+            class: "btn #{css_class} #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}",
+            "data-turbo-frame": "_top" do
+      "#{bi(options[:icon])} #{t("actions.#{action}")}".html_safe
+    end
+  end
+
+def impersonate_button(resource, options={})
+    return unless policy(resource).impersonate?
+
+    title = if options[:no_title]
+              nil
+            else
+              options[:title] || t("actions.impersonate")
+            end
+
+    button_to [:impersonate, :admin, resource],
+            method: 'POST',
+            target: "_blank",
+            form_class: "m-0 p-0",
+            class: "btn #{'btn-sm' if options[:small]} btn-warning",
+            "data-bs-toggle": "tooltip",
+            title: t('actions.login_as_user'),
+            "data-turbo-frame": "_top",
+            "data-confirm": t(".become_user_confirmation", user: resource.full_name) do
+
+      [bi('arrow-up-right-square'), title].compact.join(" ").html_safe
+    end
+  end
+
+  def create_button(resource, options={})
+    return unless policy(resource).create
+
+    link_to [:new, :admin, resource.to_s.underscore.to_sym],
+            class: "btn btn-primary #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}",
+            "data-turbo-frame": "_top" do
+      "#{bi('plus-lg')} #{t("actions.create")}".html_safe
+    end
+  end
+
+  def view_button(resource, options={})
+    return unless policy(resource).show?
+    return if options[:fallback_from].present? &&  policy(resource).send(:"#{options[:fallback_from]}?")
+
+    link_to [:admin, resource],
+            class: "btn btn-outline-primary #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}",
+            "data-turbo-frame": "_top" do
+      "#{bi('eye')} #{t("actions.details")}".html_safe
     end
   end
 

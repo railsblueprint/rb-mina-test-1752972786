@@ -1,5 +1,5 @@
 class Page < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :search, against: [:title, :url, :body]
 
   scope :active, -> { where(active: true) }

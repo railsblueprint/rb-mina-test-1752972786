@@ -1,0 +1,8 @@
+/<li class="item item-container">
+  <% @fields.each do |field| %>
+    <div class="attribute" data-name="<%= field %>"><%= resource.send(field) %></div>
+  <% end %>
+
+  <div class="actions">
+  </div>
+ </li>

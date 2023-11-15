@@ -1,9 +1,8 @@
 footer#footer.footer
   .copyright
+    ' Built with
     strong
-      span
-        = link_to t("platform.name"), "http://railsblueprint.com"
-    '  |
-    = t("platform.slogan")
-    a.back-to-top.d-flex.align-items-center.justify-content-center[href="#"]
+      a href="http://railsblueprint.com" target="_blank"
+        | Rails Blueprint
+    a.back-to-top data-controller="back-to-top" data-action="window@scroll->back-to-top#refresh back-to-top#click"
       i.bi.bi-arrow-up-short

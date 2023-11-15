@@ -4,6 +4,12 @@ FactoryBot.define do
     password { Faker::Internet.password }
     confirmed_at { Time.now }
 
+    trait :basic
+
+    trait :moderator do
+      roles { [create(:role, name: "moderator")] }
+    end
+
     trait :admin do
       roles { [create(:role, name: "admin")] }
     end

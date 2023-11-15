@@ -8,23 +8,23 @@ module AdminHelper
   end
 
   def components?
-    request.original_fullpath.start_with?("/admin/demo/components")
+    request.original_fullpath.start_with?("/admin/design_system/components")
   end
 
   def forms?
-    request.original_fullpath.start_with?("/admin/demo/forms")
+    request.original_fullpath.start_with?("/admin/design_system/forms")
   end
 
   def tables?
-    request.original_fullpath.start_with?("/admin/demo/tables")
+    request.original_fullpath.start_with?("/admin/design_system/tables")
   end
 
   def charts?
-    request.original_fullpath.start_with?("/admin/demo/charts")
+    request.original_fullpath.start_with?("/admin/design_system/charts")
   end
 
   def icons?
-    request.original_fullpath.start_with?("/admin/demo/icons")
+    request.original_fullpath.start_with?("/admin/design_system/icons")
   end
 
   def nav_link(link_path, &block)

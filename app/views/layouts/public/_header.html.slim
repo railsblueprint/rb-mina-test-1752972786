@@ -1,72 +1,32 @@
-header#header.header.fixed-top.d-flex.align-items-center
-  .d-flex.align-items-center.justify-content-between
-    = link_to "/", class: "logo d-flex align-items-center" do
-      = image_tag "logo_no_border.svg"
-      span.d-none.d-lg-block
-        = t("platform.name")
-    i.bi.bi-list.toggle-sidebar-btn[data-controller="admin--sidebar" data-action="click->admin--sidebar#toggle"]
-  .search-bar
-
-    form.search-form.d-flex.align-items-center action="/posts/" data-turbo-method="POST"
-      input[type="text" name="q" placeholder="Search" title="Enter search keyword"]
-      button[type="submit" title="Search"]
-        i.bi.bi-search
-  nav.header-nav.ms-auto
-    ul.d-flex.align-items-center
-      li.nav-item.d-block.d-lg-none
-        a.nav-link.nav-icon.search-bar-toggle[data-controller="admin--search-bar" data-action="click->admin--search-bar#toggle" href="javascript:void(0)"]
+nav.navbar.navbar-dark.navbar-expand-xl.fixed-top.header
+  .container-fluid
+    .d-flex.align-items-center.justify-content-center.logo-area
+      button.navbar-toggler.me-4 aria-label="Toggle navigation" data-controller="sidebar" data-action="click->sidebar#show"
+        span.navbar-toggler-icon
+      = link_to "/", class: "logo d-flex align-items-center justify-content-center" do
+        = inline_svg_tag "admin/logo_no_border_no_color.svg"
+        span
+          = t("platform.name")
+    .search-bar
+      form.search-form.d-flex.align-items-center action="/posts/" data-turbo-method="POST"
+        input[type="text" name="q" placeholder="Search" title="Enter search keyword"]
+        button[type="submit" title="Search"]
           i.bi.bi-search
-      - if can? :create, Post
-        li.nav-item
-          = link_to "New post", new_post_path, class: "btn btn-primary"
-      - if current_user.present?
-        li.nav-item.dropdown.pe-3
-          a.nav-link.nav-profile.d-flex.align-items-center.pe-0[href="#" data-bs-toggle="dropdown"]
-            .profile-image.icon.d-md-none
-              .rounded-circle.circle-border.m-auto alt=current_user.full_name class="color-#{current_user.avatar_color}"
-                span = current_user.initials
-            span.d-none.d-md-block.dropdown-toggle.ps-2
-              = current_user.short_name
-          ul.dropdown-menu.dropdown-menu-end.dropdown-menu-arrow.profile
-            li.dropdown-header
-              .profile-image
-                .rounded-circle.circle-border.mb-3.m-auto alt=current_user.full_name class="color-#{current_user.avatar_color}"
-                  span = current_user.initials
-              h6
-                = current_user.short_name
-              span
-                = current_user.job
-            li
-              hr.dropdown-divider
-            - if current_user.has_role?(:admin)
-              li
-                = link_to "/admin", class: "dropdown-item d-flex align-items-center" do
-                  i.bi.bi-briefcase
-                  span
-                    | Admin
-              li
-                hr.dropdown-divider
-            li
-              = link_to profile_path, class: "dropdown-item d-flex align-items-center" do
-                i.bi.bi-person
-                span
-                  | My Profile
-            li
-              hr.dropdown-divider
-            li
-              = link_to faq_path, class: "dropdown-item d-flex align-items-center" do
-                i.bi.bi-question-circle
-                span
-                  | Need Help?
-            li
-              hr.dropdown-divider
-            li
-              = link_to destroy_user_session_path, class: "dropdown-item d-flex align-items-center" do
-                i.bi.bi-box-arrow-right
-                span
-                  | Sign Out
 
-      - else
-        li.nav-item.d-block
-          = link_to new_user_session_path, class: "nav-link"  do
-            | Login
+    nav.header-nav.ms-auto
+      ul.d-flex.align-items-center
+        li.nav-item.d-block.d-lg-none
+          a.nav-link.nav-icon.search-bar-toggle[data-controller="admin--search-bar" data-action="click->admin--search-bar#toggle" href="javascript:void(0)"]
+            i.bi.bi-search
+        -if policy(Post).new?
+          li.nav-item
+            = link_to "New post", new_post_path, class: "btn btn-primary"
+        - if current_user.present?
+          = render partial: "layouts/admin/user_menu"
+        - else
+          li.nav-item.d-block.me-3
+            = link_to new_user_session_path, class: "btn btn-outline-primary"  do
+              | Login
+          li.nav-item.d-block
+            = link_to new_user_registration_path, class: "btn btn-primary"  do
+              | Sign up

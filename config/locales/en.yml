@@ -1,12 +1,21 @@
 en:
-  platform:
-    name: Rails Blueprint
-    slogan: Shortcut to the rails world
   devise:
     sessions:
       new:
         login_to_your_account: "Login to your account"
+  admin_filtered_search_component:
+    search_placeholder: Type for search
   admin:
+    common:
+      item_deleted_ok: "Successfully deleted"
+      'yes': "Sí"
+      'no': "No"
+      search_btn: "Search"
+    crud:
+      header:
+        search_placeholder: "Type for search"
+      search_field:
+        search_placeholder: "Type for search"
     demo:
       forms:
         editors:
@@ -69,6 +78,8 @@ en:
       dashboard: "Dashboard"
       configuration: "Configuration"
       maintenance: "Maintenance"
+      pages: "Pages"
+      posts: "Posts"
       settings: "Settings"
       mail_templates: "Mail templates"
       users: Users
@@ -107,6 +118,7 @@ en:
         bootstrap_icons: "Bootstrap Icons"
         remix_icons: "Remix Icons"
         boxicons: "Boxicons"
+      design_system: "Design system"
     settings:
       page_title: "System settings"
       index:
@@ -114,6 +126,13 @@ en:
         create_setting: "Create setting"
       mass_update:
         sucessfully_updated: "Sucessfully updated"
+    districts:
+      index:
+        page_title: "Districts"
+      name: Name
+      reference: "Reference"
+      subdomain: "Subdomain"
+      domain: "Domain"
     users:
       page_title: "Users"
       index:
@@ -122,6 +141,12 @@ en:
         posts_count:
           one: "1 post"
           other: "%{count} posts"
+      email: "E-mail"
+      name: "Name"
+      roles: "Roles"
+      registered: "Registered"
+      job: "Job"
+      company: "Company"
     posts:
       page_title: "Posts"
       index:
@@ -129,6 +154,9 @@ en:
         title: Title
         author: Author
         created_at: Created at
+      title: "Title"
+      author: "Author"
+      created_at: "Created at"
     mail_templates:
       index:
         page_title: "Mail templates"
@@ -137,10 +165,16 @@ en:
         page_title: "New template"
       edit:
         page_title: "Edit template"
+      alias: "Alias"
+      subject: "Subject"
     pages:
       page_title: Pages
       index:
         create_page: "Create page"
+      active: "Active"
+      sidebar: "Sidebar"
+      url: "Url"
+      title: "Title"
   activerecord:
     attributes:
       setting:
@@ -164,6 +198,7 @@ en:
     change_password: "Change password"
     copy_to_clipboard: "Copy to clipboard"
     open_link_in_new_tab: "Open link in new tab"
+    impersonate: "Impersonate"
   locales:
     en:
       short: EN

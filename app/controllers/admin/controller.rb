@@ -7,8 +7,7 @@ class Admin::Controller < ApplicationController
 
   before_action do
     @page_title = t(".page_title")
-    @page_crumbs = [["<span class='fa fa-home'></span>", [:home]]]
-    breadcrumb "<span class='fa fa-home'></span> Home", :root_path
+    breadcrumb "<i class='bi bi-house-fill'></i>Home", :root_path
     breadcrumb "Admin", :admin_root_path
   end
 
@@ -20,11 +19,4 @@ class Admin::Controller < ApplicationController
     flash[:error] = "You cannot access this page"
     redirect_to "/"
   end
-
-  # def check_permissions
-  #   return if can?(params[:action].to_sym, "#{params[:controller].tr('/', '_')}".to_sym)
-  #
-  #   flash[:error] = "You cannot access this page"
-  #   redirect_to "/admin"
-  # end
 end

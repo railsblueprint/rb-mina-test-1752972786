@@ -1,6 +1,9 @@
+@import "../variables";
+
+
 $body-font-family: Verdana, Helvetica, Arial, sans-serif;
-$body-background: #d3e8d4 !default;
-$anchor-color: rgb(103,178,154);
+$body-background: lighten($primary, 40%)!default;
+$anchor-color: $primary;
 $anchor-color-hover: darken($anchor-color, 10%) !default;
 $global-font-color: rgb(1,59,61);
 $button-background: #ffd600;
@@ -9,7 +12,10 @@ $button-color: #000000;
 @import "foundation-emails";
 
   .header {
-    background: #ffd600;
+    background: $primary;
+    h1 {
+      color: #fff;
+    }
   }
   .header .columns {
     padding-bottom: 0;
@@ -45,6 +51,11 @@ $button-color: #000000;
      color: white !important;
     }
   }
-  .wrapper.secondary {
-    background: #ffd600;
+
+
+  .wrapper.secondary{
+    background: $primary;
+    th, p, a {
+      color: $white;
+    }
   }

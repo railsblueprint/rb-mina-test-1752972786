@@ -17,6 +17,20 @@ module ApplicationHelper
     "controller-#{params[:controller].tr('/', '-')} action-#{params[:action]}"
   end
 
+  def component(name, *args, **kwargs, &block)
+    component = "#{name.to_s.camelize}Component".constantize
+    render(component.new(*args, **kwargs), &block)
+  end
+
+  def component_to_string(name, *args, **kwargs, &block)
+    component = "#{name.to_s.camelize}Component".constantize
+    render_to_string(component.new(*args, **kwargs), &block)
+  end
+
+  def render_turbo_flash
+    render turbo_stream: turbo_stream.replace("flash", component_to_string(:toastr_flash))
+  end
+
   def paginator collection
     raw <<~PAGINATOR
         <div class="paginator">

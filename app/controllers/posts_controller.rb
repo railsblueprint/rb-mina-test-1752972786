@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   before_action :turbo_frame_request_variant
-  authorize_resource
+  # authorize_resource
 
   def turbo_frame_request_variant
     request.variant = :turbo_frame if turbo_frame_request?
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    scope = Post.all.includes(:user)
+    scope = Post.all.includes(:user).with_all_rich_text
     scope = scope.search(params[:q]) if params[:q].present?
     scope = scope.order(created_at: :desc)
 

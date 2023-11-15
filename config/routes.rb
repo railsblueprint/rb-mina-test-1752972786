@@ -10,10 +10,12 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :users, only: [:show]
+
   get "/profile", to: "users#show", as: :profile
   get "/profile/edit", to: "users#edit", as: :edit_profile
   patch "/profile/edit", to: "users#update"
   post "/profile/password", to: "users#password", as: :update_password
+  post "/profile/disavow",  to: "users#disavow", as: :disavow
 
   get "/contacts", to: "contacts#new"
   post "/contacts", to: "contacts#create"

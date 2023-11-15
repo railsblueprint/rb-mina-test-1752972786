@@ -14,11 +14,9 @@ class Admin::MailTemplatesController < Admin::CrudController
     @resources = @resources.order(:alias)
   end
 
-  def model
-    MailTemplate
-  end
+  def no_show_action? = true
 
-  def title
+  def name_attribute
     :alias
   end
 

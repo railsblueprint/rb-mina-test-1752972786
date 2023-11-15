@@ -6,7 +6,7 @@ section.section.profile
           .profile-image
             .rounded-circle.circle-border.m-b-md alt=@resource.full_name class="color-#{@resource.avatar_color}"
               span = @resource.initials
-          h2
+          h2.text-center
             = @resource.full_name
           h3
             = @resource.job
@@ -31,13 +31,10 @@ section.section.profile
               = t(".posts_count", count: @resource.posts.count)
 
         .text-center.p-4
-          = edit_button(@resource)
-          - if can? :become, @resource
-            = button_to [:become, :admin, @resource], method: 'POST', target: "_blank", form_class: "d-inline-block card-link", class: "btn btn-sm btn-warning", "data-bs-toggle": "tooltip", title: t('actions.login_as_user'), "data-confirm": t(".become_user_confirmation", user: @resource.full_name) do
-              i.bi.bi-arrow-up-right-square
-              '
-              = t('actions.login_as_user')
-          = delete_button(@resource)
+          .actions.justify-content-center
+            = edit_button(@resource)
+            = impersonate_button(@resource)
+            = delete_button(@resource)
     .col-xl-8
       .card
         .card-body.pt-3

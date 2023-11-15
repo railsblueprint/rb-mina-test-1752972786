@@ -1,64 +1,258 @@
-class BaseCommand
+#####################################################
+# BaseCommand holds logic common to Command classes
+#
+# Command class is meant to be a class doing a single specific action,
+# most suitable example - CRUD-like operations on models.
+#
+# Command class must be named by actions it performs (CreateSubscription, DeleteOrder, SendNotification)
+# Command can have arguments, can do validations on arguments, can perform actions in background.
+#
+# Suggestion: if command will run in background, never pass objects as attributes,
+# only object ids and then load needed object.
+#
+# Simple example:
+#
+# class DeleteOrder < BaseCommand
+#   attribute :order_id, Types::Integer
+#
+#   def process
+#     Order.find(order_id).destroy
+#   end
+# end
+#
+# Usage:
+# Simple immediate call:
+# DeleteOrder.call(order_id: 123)
+#
+# Run in background:
+# DeleteOrder.call_later(order: 123)
+#
+# Run in background at specific time:
+# DeleteOrder.call_at({wait: 5.minutes}, {order_id: 123})
+#
+# Sample with validations:
+# class CreateOrder < BaseCommand
+#   attribute :user_id, Types::Integer
+#   attribute :name, Types::String
+#
+#   validates :name, :user, presence: true
+#   validate :name_format
+#
+#   def process
+#     Order.create(name: name, owner: user)
+#   end
+#
+#   memoize def user
+#     User.find_by(id: user_id)
+#   end
+#
+#   def authorized?
+#     user&.can?(:create_orders)
+#   end
+#
+#   def name_format
+#     return if name.blank?
+#     return if name =~ /^PREFIX.*/
+#
+#     errors.add(:name, :invalid_format)
+#   end
+# end
+#
+# By default BaseCommand permits to omit all attributes. Any mandatory attribute must be checked with validations
+# Though there is a possibility to run in a default way of Dry::Struct :
+# class StrictCommand < BaseCommand
+#   strict_attributes!
+#   attribute :user_id, Types::Integer
+#
+#   def process
+#   end
+# end
+#
+# StrictCommand.new() => raises Dry::Struct::Error
+#
+# Use in controller:
+# def create
+#   CreateOrder.call(user_id: current.user_id, name: params[:name]).do |command|
+#     command.on(:ok) do
+#       render :success
+#     end
+#     command.on(:unauthorized) do
+#       redirect_to :index, flash: {error: "You are not authorized"}
+#     end
+#     command.on(:invalid) do |errors|
+#       render :form
+#     end
+#   end
+# end
+#
+# Advanced usage in controller: use it for building form, and automatically fetch all permitted params:
+#
+# def new
+#   @command = CreaterOrder.new
+# end
+#
+# def create
+#   CreateOrder.call_for(params, user_id: current.user_id, name:).do |command|
+#     command.on(:ok) do
+#       render :success
+#     end
+#     command.on(:unauthorized) do
+#       redirect_to :index, flash: {error: "You are not authorized"}
+#     end
+#     command.on(:invalid) do |errors|
+#       @command = command
+#       render :new
+#     end
+#   end
+# end
+#
+# View:
+#   <%= form_for @command, url: create_order_url do |f| %>
+#     <%= f.text_field :name %>
+#     <%= f.submit %>
+#   <% end %>
+
+# When running in background validations checks are done twice:
+# 1. When call_later/call_at is called. If validations fail error is triggered immediately and no job is scheduled.
+# 2. When background job starts. If validations fail - job is cancelled.
+
+class BaseCommand < Dry::Struct
+  module Types
+    include Dry::Types(default: :params)
+  end
+
   class AbortCommand < StandardError
   end
 
   include Wisper::Publisher
-  include Virtus.model
+  include ActiveSupport::Tryable
 
-  extend  ActiveModel::Naming
+  extend ActiveModel::Naming
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  attribute :transactional, Boolean, default: true
+  class << self
+    attr_accessor :adapter_klass
+    attr_accessor :transactional
 
-  def self.skip_transaction!
-    attribute :transactional, Boolean, default: false
-  end
+    def self.skip_transaction!
+      # attribute :transactional, Types::Bool.default(false)
+    end
 
-  def self.delay_for(params, &block)
-    call_later(
-      params.require(name.underscore).permit(attribute_set.map(&:name)), &block
-    )
-  end
+    def adapter(klass = nil)
+      self.adapter_klass = klass if klass
+      self.adapter_klass
+    end
 
-  def self.call_for(params, &block)
-    call(
-      params.require(name.underscore).permit(attribute_set.map(&:name)), &block
-    )
-  end
+    def detect_adapter
+      adapter self.module_parent.name.singularize.safe_constantize
+    end
 
-  def self.call(*args)
-    new(*args).tap { |obj|
-      yield obj if block_given?
-    }.call
-  end
+    def transactional?
+      true
+    end
 
-  def self.call_later(*args)
-    new(*args).tap do |command|
-      yield command if block_given?
+    def strict_attributes_mode?
+      false
+    end
 
-      return command if command.preflight_nok?
+    def permit_all_params?
+      false
+    end
 
-      DelayedCommandJob.perform_later(self, *args)
+    def strict_attributes!
+      define_singleton_method(:"strict_attributes_mode?") { true }
+    end
 
-      command.broadcast_ok
+    def permit_all_params!
+      define_singleton_method(:"permit_all_params?") { true }
+    end
+
+    def skip_transaction!
+      define_singleton_method(:"transactional?") { false }
+    end
+
+    alias dry_struct_attribute attribute
+
+    def attribute(name, type, &block)
+      name = strict_attributes_mode? ? name : :"#{name}?"
+      type = type.optional if !strict_attributes_mode?
+
+      dry_struct_attribute(name, type, &block)
+    end
+
+    def call(*args)
+      new(*args).tap { |obj|
+        yield obj if block_given?
+      }.call
+    end
+
+    def call_later(*args)
+      new(*args).tap do |command|
+        yield command if block_given?
+
+        return command if command.preflight_nok?
+
+        DelayedCommandJob.perform_later(self, *args)
+
+        command.broadcast_ok
+      end
+    end
+
+    def call_at(delay, *args)
+      new(*args).tap do |command|
+        yield command if block_given?
+
+        return command if command.preflight_nok?
+
+        DelayedCommandJob.set(delay).perform_later(self, *args)
+
+        command.broadcast_ok
+      end
+    end
+
+    def call_for(params, additional_attributes = {}, &block)
+      self.call(attributes_from_params(params, additional_attributes), &block)
+    end
+
+    def attributes_from_params(params, additional_attributes = {})
+      if permit_all_params?
+        params.require(model_name.param_key)
+              .permit!
+              .to_h
+              .merge(additional_attributes)
+              .deep_symbolize_keys
+      else
+        params.require(model_name.param_key)
+              .permit(attribute_names)
+              .to_h
+              .merge(additional_attributes)
+              .deep_symbolize_keys
+      end
+    rescue ActionController::ParameterMissing
+      additional_attributes
+    end
+
+    # restore method overwritten by Dry::Struct and required by bootstrap_forms
+    def try(*args, &block)
+      ActiveSupport::Tryable.instance_method(:try).bind_call(self, *args, &block)
+    end
+
+    def model_name
+      ActiveModel::Name.new(adapter_klass || self)
     end
   end
 
-  def self.call_at(delay, *args)
-    new(*args).tap do |command|
-      yield command if block_given?
+  def adapter
+    self.class.adapter_klass
+  end
 
-      return command if command.preflight_nok?
-
-      DelayedCommandJob.set(delay).perform_later(self, *args)
-
-      command.broadcast_ok
-    end
+  def transactional?
+    self.class.transactional?
   end
 
   def call
-    if transactional
+    if transactional?
       ActiveRecord::Base.transaction do
         call_without_transaction
       end
@@ -72,14 +266,15 @@ class BaseCommand
   def call_without_transaction
     return if preflight_nok?
 
-    process
-    broadcast_ok
+    process.tap {
+      broadcast_ok
+    }
   end
 
   def preflight_nok?
     return broadcast_unauthorized unless authorized?
-    return broadcast_invalid      unless valid?
-    return broadcast_stale        if     stale?
+    return broadcast_invalid unless valid?
+    return broadcast_stale if stale?
 
     false
   end
