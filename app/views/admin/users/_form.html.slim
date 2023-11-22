@@ -3,7 +3,7 @@
     = tabs nav_class: "nav-tabs-bordered" do |tab|
       - tab.add title: "Overview" do
         .pt-3
-          = bootstrap_form_for([:admin, @command], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
+          = bootstrap_form_for(@command, url: {action: :update}, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
             = f.text_field :first_name
             = f.text_field :last_name
             = f.text_field :job
@@ -23,7 +23,7 @@
               = f.submit
       - tab.add title: "Social" do
         .pt-3
-          = bootstrap_form_for([:admin, @command], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
+          = bootstrap_form_for(@command, url: {action: :update}, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
             = f.text_field :twitter_profile, prepend: link_field_button
             = f.text_field :facebook_profile, prepend: link_field_button
             = f.text_field :instagram_profile, prepend: link_field_button
@@ -33,10 +33,10 @@
       - if policy(@resource).change_password?
         - tab.add title: "Password" do
           .pt-3
-            = bootstrap_form_for([:admin, @command], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-4') do |f|
+            = bootstrap_form_for(@command, url: {action: :update}, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-4') do |f|
               = f.password_field :password
               = f.password_field :password_confirmation
               = f.form_group
                 = f.submit t("actions.change_password")
-
+.filler
 

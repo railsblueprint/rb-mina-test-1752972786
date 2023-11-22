@@ -1,6 +1,9 @@
 require "rails_helper"
 
 describe BaseCommand do
+  class BadCommand < BaseCommand
+  end
+
   class SampleCommand < BaseCommand
     def process; end
   end
@@ -64,6 +67,12 @@ describe BaseCommand do
 
   context "class methods" do
     subject { command_class }
+
+    context "when process is not defined" do
+      it "raises exception" do
+        expect { BadCommand.call }.to raise_error("Interface not implemented")
+      end
+    end
 
     context "when requested to run now" do
       it "instanciates the command and invokes call" do
@@ -157,6 +166,10 @@ describe BaseCommand do
 
   context "instance methods" do
     subject { command_class.new }
+
+    it "returns false as persisited? by default" do
+      expect(subject.persisted?).to eq(false)
+    end
 
     context "when subclass of this command is #call'ed" do
       context "with valid parameters" do

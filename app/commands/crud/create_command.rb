@@ -10,6 +10,10 @@ module Crud
       @resource = adapter.create(attributes.without(:current_user))
     end
 
+    def authorized?
+      Pundit.policy!(current_user, adapter).create?
+    end
+
     def broadcast_ok
       broadcast :ok, @resource
     end

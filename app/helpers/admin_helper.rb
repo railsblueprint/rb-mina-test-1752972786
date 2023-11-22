@@ -27,11 +27,11 @@ module AdminHelper
     request.original_fullpath.start_with?("/admin/design_system/icons")
   end
 
-  def nav_link(link_path, &block)
-    link_to link_path, class: "nav-link #{class_names(active: current_page?(link_path))}", &block
+  def nav_link(link_path, &)
+    link_to(link_path, class: "nav-link #{class_names(active: current_page?(link_path))}", &)
   end
 
-  def nav_page_link(link_path, &block)
-    link_to link_path, class: "nav-link #{class_names(collapsed: !current_page?(link_path))}", &block
+  def nav_page_link(link_path, &)
+    link_to(link_path, class: "nav-link #{class_names(collapsed: !current_page?(link_path))}", &)
   end
 end

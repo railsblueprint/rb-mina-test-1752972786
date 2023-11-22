@@ -17,14 +17,14 @@ module ApplicationHelper
     "controller-#{params[:controller].tr('/', '-')} action-#{params[:action]}"
   end
 
-  def component(name, *args, **kwargs, &block)
+  def component(name, *, **, &)
     component = "#{name.to_s.camelize}Component".constantize
-    render(component.new(*args, **kwargs), &block)
+    render(component.new(*, **), &)
   end
 
-  def component_to_string(name, *args, **kwargs, &block)
+  def component_to_string(name, *, **, &)
     component = "#{name.to_s.camelize}Component".constantize
-    render_to_string(component.new(*args, **kwargs), &block)
+    render_to_string(component.new(*, **), &)
   end
 
   def render_turbo_flash

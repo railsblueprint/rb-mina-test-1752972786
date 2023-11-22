@@ -28,6 +28,24 @@ export default class extends Controller {
     const cssClass = (this.element.classList.contains('form-control-sm') ? "select2--small" : "") +
       (sortable ? " select2--sortable " : "");
 
+    const emptyText = this.element.dataset.empty;
+    const processResults = (data, params) => {
+      if (!emptyText || params._type == "query:append"){
+        return data;
+      }
+      return {
+        results: [{id: "", text: emptyText}, ...data.results],
+        pagination: data.pagination
+      };
+    };
+
+    const ajax =  this.element.dataset.source ? {
+      url: '/admin/users/lookup',
+          dataType: 'json',
+          processResults: processResults
+    } : null;
+
+
     function formatSortable (item) {
       if (!item.id || !sortable) {
         return item.text;
@@ -42,7 +60,8 @@ export default class extends Controller {
       containerCssClass: cssClass, // For Select2 v4.0
       selectionCssClass: cssClass, // For Select2 v4.1
       dropdownCssClass: cssClass,
-      templateSelection: formatSortable
+      templateSelection: formatSortable,
+      ajax: ajax
     })
 
     if( sortable) {

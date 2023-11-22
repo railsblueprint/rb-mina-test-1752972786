@@ -1,10 +1,7 @@
 module Posts
   module Attributes
     extend ActiveSupport::Concern
-
-    module Types
-      include Dry::Types(default: :params)
-    end
+    include Crud::Attributes
 
     included do
       attribute :title, Types::String

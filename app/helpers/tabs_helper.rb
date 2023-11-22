@@ -9,9 +9,9 @@ module TabsHelper
       @options = options
     end
 
-    def add(options={}, &block)
-      body = capture(&block)
-      @tabs << options.merge(body: body)
+    def add(options={}, &)
+      body = capture(&)
+      @tabs << options.merge(body:)
     end
 
     def titles

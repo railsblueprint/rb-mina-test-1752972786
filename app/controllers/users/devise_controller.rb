@@ -1,5 +1,4 @@
 class Users::DeviseController < ApplicationController
-  # rubocop:disable Style/GuardClause
   class Responder < ActionController::Responder
     def to_turbo_stream
       controller.render(options.merge(formats: :html))
@@ -13,8 +12,6 @@ class Users::DeviseController < ApplicationController
       end
     end
   end
-  # rubocop:enable Style/GuardClause
-
   self.responder = Responder
   respond_to :html, :turbo_stream
 end

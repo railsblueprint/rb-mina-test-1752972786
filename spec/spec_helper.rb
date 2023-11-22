@@ -17,9 +17,15 @@
 require 'wisper/rspec/matchers'
 require 'factory_bot_rails'
 require 'simplecov'
+require "shoulda-matchers"
 SimpleCov.start
 
 RSpec.configure do |config|
+  # config.infer_spec_type_from_file_location!
+  config.define_derived_metadata(file_path: "/spec/commands") do |metadata|
+    metadata[:type] ||= :command
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -44,6 +50,9 @@ RSpec.configure do |config|
   end
 
   config.include(Wisper::RSpec::BroadcastMatcher)
+
+  config.include Shoulda::Matchers::ActiveModel, type: :command
+  config.include Shoulda::Matchers::ActiveRecord, type: :command
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards

@@ -11,13 +11,12 @@ class Role < ApplicationRecord
 
   scopify
 
-  ROLES = [:moderator, :admin, :superadmin]
+  ROLES = [:moderator, :admin, :superadmin].freeze
 
   ROLES.map do |role|
     define_singleton_method(role) do
       @roles ||= {}
-      @roles[role] ||= Role.find_by(name: role)
+      @roles[role] ||= Role.find_or_create_by(name: role)
     end
   end
-
 end

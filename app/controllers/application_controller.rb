@@ -5,13 +5,12 @@ class ApplicationController < ActionController::Base
 
   before_action :enable_rollbar_link
 
-
   rescue_from Pundit::NotAuthorizedError do
     message = if request.get?
-        I18n.t("messages.you_cannot_access_this_page")
-      else
-        I18n.t("messages.you_cannot_peform_this_action")
-      end
+                I18n.t("messages.you_cannot_access_this_page")
+              else
+                I18n.t("messages.you_cannot_peform_this_action")
+              end
     redirect_to root_path, alert: message
   end
 

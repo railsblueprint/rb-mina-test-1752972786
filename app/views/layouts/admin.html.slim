@@ -14,8 +14,8 @@ html
   body class=body_class
     = render "layouts/admin/header"
     = render "layouts/admin/sidebar"
+    = component :toastr_flash
     main#main.main
-      = component :toastr_flash
       = component :breadcrumbs, _breadcrumbs
       = yield
     = render "layouts/admin/footer"

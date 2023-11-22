@@ -2,12 +2,13 @@ require_relative "boot"
 
 require "rails/all"
 require 'good_job/engine'
-require "rspec-rails"
 
 # Prevent problems with double loading between `development` and `test` environments
 if defined?(Rake.application) && Rake.application.top_level_tasks.grep(/^(default$|spec(:|$))/).any?
   ENV['RAILS_ENV'] ||= 'test'
 end
+
+require "rspec-rails" if Rails.env.development? || Rails.env.test?
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

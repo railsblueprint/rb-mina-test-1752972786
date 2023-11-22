@@ -7,15 +7,15 @@ FactoryBot.define do
     trait :basic
 
     trait :moderator do
-      roles { [create(:role, name: "moderator")] }
+      roles { [Role.moderator] }
     end
 
     trait :admin do
-      roles { [create(:role, name: "admin")] }
+      roles { [Role.admin] }
     end
 
     trait :superadmin do
-      roles { [create(:role, name: "superadmin")] }
+      roles { [Role.superadmin] }
     end
 
   end

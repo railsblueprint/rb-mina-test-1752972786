@@ -4,7 +4,8 @@ class BreadcrumbsComponent < ViewComponent::Base
 
   attr_accessor :_breadcrumbs
 
-  def initialize(_breadcrumbs)
-    @_breadcrumbs = _breadcrumbs
+  def initialize(breadcrumbs)
+    super
+    @_breadcrumbs = breadcrumbs
   end
 end

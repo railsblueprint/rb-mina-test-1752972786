@@ -22,7 +22,7 @@ export default class extends Controller {
       e.stopPropagation();
       modal.find('.modal-body').text($(target).attr('data-confirm'));
       modal.modal("show");
-      modal.find(".action-confirm").click((e) => {
+      modal.find(".action-confirm").off("click").click((e) => {
         target.attr("data-confirmed", "true");
         target[0].click();
         modal.modal("hide");
@@ -31,6 +31,5 @@ export default class extends Controller {
       target.removeAttr("data-confirmed");
       /* allow default behavior to happen */
     }
-
   }
 }

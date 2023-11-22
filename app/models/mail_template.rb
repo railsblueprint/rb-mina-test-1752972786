@@ -10,5 +10,4 @@ class MailTemplate < ApplicationRecord
       f.start_with?(".")
     }.map(&it.split(".").first)
   end
-
 end

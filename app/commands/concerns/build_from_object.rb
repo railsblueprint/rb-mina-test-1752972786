@@ -34,5 +34,4 @@ module BuildFromObject
         .reduce(&:merge) || {}
     end
   end
-  # rubocop:enable Metrics/BlockLength
 end

@@ -29,8 +29,8 @@ class User < ApplicationRecord
 
   # rubocop:disable Naming/PredicateName
   def has_role?(role, resource=nil)
-    roles.any? { |r| r.name == role && r.resource == resource} ||
-      roles.any? { |r| r.name == "superadmin" }
+    roles.any? { |r| r.name.to_sym == role.to_sym && r.resource == resource } ||
+      roles.any? { |r| r.name.to_sym == :superadmin }
   end
   # rubocop:enable Naming/PredicateName
 
@@ -40,14 +40,13 @@ class User < ApplicationRecord
     end
   end
 
-
   def to_liquid
     attributes.with_indifferent_access
               .slice(:id, :email, :unconfirmed_email, :first_name, :last_name, :job, :company)
               .merge({
                 "self_url"  => url_for([:profile,
-                                        { id: id }.merge(Rails.application.config.action_mailer.default_url_options)]),
-                "self_path" => url_for([:profile, { id: id, only_path: true }])
+                                        { id: }.merge(Rails.application.config.action_mailer.default_url_options)]),
+                "self_path" => url_for([:profile, { id:, only_path: true }])
               })
   end
 end

@@ -1,5 +1,4 @@
 class Admin::UsersController < Admin::CrudController
-
   def actions_with_resource
     super + [:impersonate]
   end
@@ -25,7 +24,6 @@ class Admin::UsersController < Admin::CrudController
     }
   end
 
-
   def scope
     super.includes(:roles)
   end
@@ -37,6 +35,6 @@ class Admin::UsersController < Admin::CrudController
   def impersonate
     session[:impersonator_id] = current_user.id
     bypass_sign_in @resource
-    redirect_to "/", flash: {success: "You have successfully impersonated #{current_user.full_name}"}
+    redirect_to "/", flash: { success: "You have successfully impersonated #{current_user.full_name}" }
   end
 end

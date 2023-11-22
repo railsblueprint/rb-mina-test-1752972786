@@ -13,11 +13,7 @@
       i.bi.bi-clock.ps-3
       '
       = @resource.created_at.strftime("%d %B, %Y %H:%M")
-    .text-end
-      - if policy(@resource).edit?
-        = link_to t('action.edit'), url_for({action: :edit, id: @resource.id}), class: "card-link btn btn-link"
-      - if policy(@resource).destroy?
-        = link_to  @resource, data: {"turbo-method": :delete}, class: "card-link btn btn-outline-danger" do
-          i.bi.bi-trash
-          '
-          = t('action.delete')
+    .actions
+      = edit_button(@resource)
+      = delete_button(@resource)
+.filler

@@ -1,5 +1,6 @@
 module ToggleBoolean
   extend ActiveSupport::Concern
+  include ApplicationHelper
 
   included do
     def self.toggle_boolean *fields
@@ -11,16 +12,24 @@ module ToggleBoolean
     end
   end
 
+  # rubocop:disable Metrics/AbcSize
   def toggle_boolean_action field
     load_resource
-    @resource.update!(field => !@resource.send(field))
+    if policy(@resource).update?
+      @resource.update!(field => !@resource.send(field))
+      flash.now[:success] = "Updated successfully"
+    else
+      flash.now[:alert] = "You are not authorized to perform this action."
+    end
 
     respond_to do |format|
       format.turbo_stream {
         render turbo_stream: turbo_stream.replace("#{@resource.id}_#{field}", partial: "shared/toggle_bool",
-                                                                              locals:  { field: field })
+                                                                              locals:  { field: }) +
+                             turbo_stream.append("flash_inner", component_to_string(:toastr_flash, append: true))
       }
       format.html { redirect_to @resource }
     end
   end
+  # rubocop:enable Metrics/AbcSize
 end

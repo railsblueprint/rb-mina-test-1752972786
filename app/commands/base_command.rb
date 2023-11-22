@@ -132,20 +132,17 @@ class BaseCommand < Dry::Struct
   include ActiveModel::Validations
 
   class << self
-    attr_accessor :adapter_klass
-    attr_accessor :transactional
+    attr_accessor :adapter_klass, :transactional
 
-    def self.skip_transaction!
-      # attribute :transactional, Types::Bool.default(false)
-    end
-
-    def adapter(klass = nil)
+    def adapter(klass=nil)
       self.adapter_klass = klass if klass
-      self.adapter_klass
+      adapter_klass || detect_adapter
     end
 
     def detect_adapter
-      adapter self.module_parent.name.singularize.safe_constantize
+      return if module_parent == Object
+
+      module_parent.name.singularize.safe_constantize
     end
 
     def transactional?
@@ -161,61 +158,67 @@ class BaseCommand < Dry::Struct
     end
 
     def strict_attributes!
-      define_singleton_method(:"strict_attributes_mode?") { true }
+      define_singleton_method(:strict_attributes_mode?) { true }
     end
 
     def permit_all_params!
-      define_singleton_method(:"permit_all_params?") { true }
+      define_singleton_method(:permit_all_params?) { true }
     end
 
     def skip_transaction!
-      define_singleton_method(:"transactional?") { false }
+      define_singleton_method(:transactional?) { false }
     end
 
     alias dry_struct_attribute attribute
 
-    def attribute(name, type, &block)
-      name = strict_attributes_mode? ? name : :"#{name}?"
-      type = type.optional if !strict_attributes_mode?
+    def attribute(name, type, &)
+      unless strict_attributes_mode?
+        original_name = name.to_sym
+        define_method(:"#{original_name}=") do |value|
+          attributes[original_name] = value
+        end
+        name = "#{name}?"
+        type = type.optional
+      end
 
-      dry_struct_attribute(name, type, &block)
+      dry_struct_attribute(name, type, &)
     end
 
-    def call(*args)
-      new(*args).tap { |obj|
+    def call(*)
+      new(*).tap { |obj|
         yield obj if block_given?
       }.call
     end
 
-    def call_later(*args)
-      new(*args).tap do |command|
+    def call_later(*)
+      new(*).tap do |command|
         yield command if block_given?
 
         return command if command.preflight_nok?
 
-        DelayedCommandJob.perform_later(self, *args)
+        DelayedCommandJob.perform_later(self, *)
 
         command.broadcast_ok
       end
     end
 
-    def call_at(delay, *args)
-      new(*args).tap do |command|
+    def call_at(delay, *)
+      new(*).tap do |command|
         yield command if block_given?
 
         return command if command.preflight_nok?
 
-        DelayedCommandJob.set(delay).perform_later(self, *args)
+        DelayedCommandJob.set(delay).perform_later(self, *)
 
         command.broadcast_ok
       end
     end
 
-    def call_for(params, additional_attributes = {}, &block)
-      self.call(attributes_from_params(params, additional_attributes), &block)
+    def call_for(params, additional_attributes={}, &)
+      call(attributes_from_params(params, additional_attributes), &)
     end
 
-    def attributes_from_params(params, additional_attributes = {})
+    def attributes_from_params(params, additional_attributes={})
       if permit_all_params?
         params.require(model_name.param_key)
               .permit!
@@ -224,7 +227,7 @@ class BaseCommand < Dry::Struct
               .deep_symbolize_keys
       else
         params.require(model_name.param_key)
-              .permit(attribute_names)
+              .permit(permitted_attributes)
               .to_h
               .merge(additional_attributes)
               .deep_symbolize_keys
@@ -233,18 +236,22 @@ class BaseCommand < Dry::Struct
       additional_attributes
     end
 
+    def permitted_attributes
+      schema.keys.map { |attr| attr.type == Types::Array.optional ? { attr.name => [] } : attr.name }
+    end
+
     # restore method overwritten by Dry::Struct and required by bootstrap_forms
-    def try(*args, &block)
-      ActiveSupport::Tryable.instance_method(:try).bind_call(self, *args, &block)
+    def try(...)
+      ActiveSupport::Tryable.instance_method(:try).bind_call(self, ...)
     end
 
     def model_name
-      ActiveModel::Name.new(adapter_klass || self)
+      ActiveModel::Name.new(adapter || self)
     end
   end
 
   def adapter
-    self.class.adapter_klass
+    self.class.adapter
   end
 
   def transactional?

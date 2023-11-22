@@ -11,6 +11,7 @@ en:
       'yes': "Sí"
       'no': "No"
       search_btn: "Search"
+      item_delete_unauthorized: "You are not authorized to delete this item"
     crud:
       header:
         search_placeholder: "Type for search"

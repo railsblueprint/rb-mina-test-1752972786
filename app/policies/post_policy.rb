@@ -1,5 +1,4 @@
 class PostPolicy < ApplicationPolicy
-
   def new?
     user.present?
   end
@@ -9,7 +8,7 @@ class PostPolicy < ApplicationPolicy
   def edit?
     return false unless user
 
-    resource.user == user  || user.moderator? || user.admin? || user.superadmin?
+    resource.user == user || user.moderator? || user.admin? || user.superadmin?
   end
 
   def update? = edit?

@@ -5,7 +5,7 @@ require 'wannabe_bool'
 require 'yaml'
 
 overrides_filename = "#{File.dirname(__FILE__)}/deploy/#{ARGV[0]}.yml"
-DEPLOY_SETTINGS = File.exists?(overrides_filename) ? YAML.load_file(overrides_filename) : {}
+DEPLOY_SETTINGS = File.exist?(overrides_filename) ? YAML.load_file(overrides_filename) : {}
 
 set :default_stage, :staging
 
@@ -114,7 +114,7 @@ task :deploy do
     invoke :'deploy:cleanup'
 
     on :launch do
-      invoke :'puma:reload'
+      invoke :'puma:restart'
       invoke :'whenever:update'
       invoke :'deploy:log'
     end

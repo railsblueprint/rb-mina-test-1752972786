@@ -1,6 +1,7 @@
 module Users
   module Attributes
     extend ActiveSupport::Concern
+    include Crud::Attributes
 
     included do
       attribute :first_name, Types::String

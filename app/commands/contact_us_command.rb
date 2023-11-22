@@ -14,11 +14,11 @@ class ContactUsCommand < BaseCommand
     TemplateMailer.email(:contact_form_message, {
       to:           Setting.contact_form_receivers,
       reply_to:     email,
-      subject:      subject,
+      subject:,
       sender_name:  name,
       sender_email: email,
-      message:      message
+      message:
 
-    }).deliver_later
+    }).deliver_now
   end
 end

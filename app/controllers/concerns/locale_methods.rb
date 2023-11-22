@@ -28,6 +28,6 @@ module LocaleMethods
 
   def validated_locale(locale)
     locale = locale&.to_sym
-    return locale if I18n.available_locales.include?(locale)
+    locale if I18n.available_locales.include?(locale)
   end
 end

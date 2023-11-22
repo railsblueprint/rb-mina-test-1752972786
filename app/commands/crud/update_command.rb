@@ -13,7 +13,10 @@ module Crud
     end
 
     def update_resource
-      resource.update(attributes.without(:current_user, :id))
+      return if resource.update(attributes.without(:current_user, :id))
+
+      errors.add(:base, :failed, message: resource.errors.full_messages.to_sentence)
+      abort_command
     end
 
     memoize def resource
@@ -22,6 +25,12 @@ module Crud
 
     def broadcast_ok
       broadcast :ok, resource
+    end
+
+    def authorized?
+      return true if resource.nil?
+
+      Pundit.policy!(current_user, resource).update?
     end
 
     def persisted?

@@ -8,7 +8,7 @@ class Admin::PostsController < Admin::CrudController
       @selected_user = User.find(params[:user_id])
     end
   end
-  # rubocop:enable Style/GuardClaus
+  # rubocop:enable Style/GuardClause
 
   def scope
     model.includes(:user)

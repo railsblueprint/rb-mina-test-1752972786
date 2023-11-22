@@ -1,5 +1,3 @@
 class Admin::DesignSystemController < Admin::Controller
-  def colors
-
-  end
+  def colors; end
 end

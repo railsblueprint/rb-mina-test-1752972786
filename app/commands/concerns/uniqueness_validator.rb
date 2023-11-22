@@ -6,7 +6,7 @@ module UniquenessValidator
     # rubocop:disable Lint/ConstantDefinitionInBlock
     # this code is mostly copied from ActiveRecord::Validations::UniquenessValidator
     class UniquenessValidator < ActiveRecord::Validations::UniquenessValidator
-      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
       def validate_each(record, attribute, value)
         finder_class = record.adapter
         value = map_enum_attribute(finder_class, attribute, value)
@@ -26,10 +26,10 @@ module UniquenessValidator
             conditions = options[:conditions]
 
             relation = if conditions.arity.zero?
-              relation.instance_exec(&conditions)
-            else
-              relation.instance_exec(record, &conditions)
-            end
+                         relation.instance_exec(&conditions)
+                       else
+                         relation.instance_exec(record, &conditions)
+                       end
           end
         rescue RangeError
           relation = finder_class.none
@@ -43,31 +43,25 @@ module UniquenessValidator
         record.errors.add(attribute, :taken, **error_options)
       end
 
-      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
 
       protected
 
-        def scope_relation(record, relation)
-          Array(options[:scope]).each do |scope_item|
-            scope_value = if record.adapter._reflect_on_association(scope_item)
-              record.association(scope_item).reader
-            else
-              record.send(scope_item)
-            end
-            relation = relation.where(scope_item => scope_value)
-          end
-
-          relation
+      def scope_relation(record, relation)
+        Array(options[:scope]).each do |scope_item|
+          scope_value = if record.adapter._reflect_on_association(scope_item)
+                          record.association(scope_item).reader
+                        else
+                          record.send(scope_item)
+                        end
+          relation = relation.where(scope_item => scope_value)
         end
+
+        relation
+      end
     end
 
     # rubocop:enable Lint/ConstantDefinitionInBlock
   end
   # rubocop:enable Metrics/BlockLength
-
-  included do
-    def adapter
-      self.class.adapter_klass
-    end
-  end
 end

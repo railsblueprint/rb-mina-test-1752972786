@@ -18,6 +18,12 @@ module Crud
       adapter.find_by(id:)
     end
 
+    def authorized?
+      return true if resource.nil?
+
+      Pundit.policy!(current_user, resource).destroy?
+    end
+
     def broadcast_ok
       broadcast :ok, resource
     end

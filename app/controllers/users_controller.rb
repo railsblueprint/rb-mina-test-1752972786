@@ -64,6 +64,6 @@ class UsersController < ApplicationController
     impersonator = User.find_by_id(session[:impersonator_id])
     bypass_sign_in impersonator
     session[:impersonator_id] = nil
-    redirect_to "/", flash: {success: "You have been disavowed from impersonation"}
+    redirect_to "/", flash: { success: "You have been disavowed from impersonation" }
   end
 end

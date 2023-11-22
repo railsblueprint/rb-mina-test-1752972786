@@ -1,8 +1,8 @@
 # rubocop:disable Metrics/ModuleLength
 # TODO: split into files
 module FormsHelper
-  def inside_layout(parent_layout, &block)
-    view_flow.set :layout, capture(&block)
+  def inside_layout(parent_layout, &)
+    view_flow.set :layout, capture(&)
     render template: "layouts/#{parent_layout}"
   end
 
@@ -30,7 +30,7 @@ module FormsHelper
   end
 
   # Bootstrap icon helper
-  def bi icon, options = {}
+  def bi icon, options={}
     raw "<i class='bi bi-#{icon} #{options[:class]}'></i>"
   end
 
@@ -60,16 +60,6 @@ module FormsHelper
 
   def fal icon
     raw "<i class='fal fa-#{icon}'></i>"
-  end
-
-  def data_filter fields
-    content_for :scripts do
-      raw fields.map { |c|
-        "<div class='filter-data' data-field='#{c}' data-url='#{url_for(params.permit(fields + [:q, :filter]).merge(
-                                                                          c => nil, :page => nil, :filter => true
-                                                                        ))}'></div>"
-      }.join("\n")
-    end
   end
 
   def copy_field_button
@@ -102,10 +92,10 @@ module FormsHelper
                options_for_select(options, params[name]),
                class: "form-control form-control-sm select2",
                **settings,
-               data: {
+               data:  {
                  **settings.fetch(:data, {}),
-                 controller: controller,
-                 url: url_for(**request.query_parameters, name => nil, page: nil)
+                 controller:,
+                 url:        url_for(**request.query_parameters, name => nil, :page => nil)
                }
   end
 
@@ -125,8 +115,8 @@ module FormsHelper
     filter_by :user_id,
               default_option,
               data: {
-                controller: "admin--user-select",
-                empty:      I18n.t("search.any")
+                source: "/admin/users/lookup",
+                empty:  I18n.t("search.any")
               }
   end
 
@@ -189,7 +179,11 @@ module FormsHelper
   # rubocop:enable Metrics/MethodLength
 
   def toggle_bool resource, field, options={}
-    link_to url_for(action: "toggle_#{field}", id: resource.id), data: { turbo_method: :patch } do
+    if policy(resource).update?
+      link_to url_for(action: "toggle_#{field}", id: resource.id), data: { turbo_method: :patch } do
+        toggle_bool_icon resource, field, options
+      end
+    else
       toggle_bool_icon resource, field, options
     end
   end
@@ -230,8 +224,7 @@ module FormsHelper
     link_to [:admin, resource],
             data:  { turbo_method: :delete,
                      controller: "confirmation", action: "confirmation#click",
-                     confirm:      "Are you sure you want to delete this #{resource.class.name}?"
-            },
+                     confirm:      "Are you sure you want to delete this #{resource.class.name}?" },
             class: "btn btn-outline-danger #{'btn-sm' if options[:small]}" do
       "#{bi('trash')} Delete".html_safe
     end
@@ -240,25 +233,29 @@ module FormsHelper
   def edit_button(resource, options={})
     return unless policy(resource).edit?
 
+    css_class = "btn btn-outline-primary #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}"
+
     link_to [:edit, :admin, resource],
-            class: "btn btn-outline-primary #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}",
+            class:              css_class,
             "data-turbo-frame": "_top" do
-      "#{bi('pencil')} #{t("actions.edit")}".html_safe
+      "#{bi('pencil')} #{t('actions.edit')}".html_safe
     end
   end
 
   def action_button(resource, action, options={})
     return unless policy(resource).send(:"#{action}?")
+
     css_class = options[:class] || "btn-outline-secondary"
 
     link_to [action, :admin, resource],
-            class: "btn #{css_class} #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}",
+            class:              "btn #{css_class} #{'btn-sm' if options[:small]} " \
+                                "#{'stretched-link' if options[:stretched]}",
             "data-turbo-frame": "_top" do
       "#{bi(options[:icon])} #{t("actions.#{action}")}".html_safe
     end
   end
 
-def impersonate_button(resource, options={})
+  def impersonate_button(resource, options={})
     return unless policy(resource).impersonate?
 
     title = if options[:no_title]
@@ -268,16 +265,15 @@ def impersonate_button(resource, options={})
             end
 
     button_to [:impersonate, :admin, resource],
-            method: 'POST',
-            target: "_blank",
-            form_class: "m-0 p-0",
-            class: "btn #{'btn-sm' if options[:small]} btn-warning",
-            "data-bs-toggle": "tooltip",
-            title: t('actions.login_as_user'),
-            "data-turbo-frame": "_top",
-            "data-confirm": t(".become_user_confirmation", user: resource.full_name) do
-
-      [bi('arrow-up-right-square'), title].compact.join(" ").html_safe
+              method:             "POST",
+              target:             "_blank",
+              form_class:         "m-0 p-0",
+              class:              "btn #{'btn-sm' if options[:small]} btn-warning",
+              "data-bs-toggle":   "tooltip",
+              title:              t("actions.login_as_user"),
+              "data-turbo-frame": "_top",
+              "data-confirm":     t(".become_user_confirmation", user: resource.full_name) do
+      [bi("arrow-up-right-square"), title].compact.join(" ").html_safe
     end
   end
 
@@ -285,20 +281,22 @@ def impersonate_button(resource, options={})
     return unless policy(resource).create
 
     link_to [:new, :admin, resource.to_s.underscore.to_sym],
-            class: "btn btn-primary #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}",
+            class:              "btn btn-primary #{'btn-sm' if options[:small]} " \
+                                "#{'stretched-link' if options[:stretched]}",
             "data-turbo-frame": "_top" do
-      "#{bi('plus-lg')} #{t("actions.create")}".html_safe
+      "#{bi('plus-lg')} #{t('actions.create')}".html_safe
     end
   end
 
   def view_button(resource, options={})
     return unless policy(resource).show?
-    return if options[:fallback_from].present? &&  policy(resource).send(:"#{options[:fallback_from]}?")
+    return if options[:fallback_from].present? && policy(resource).send(:"#{options[:fallback_from]}?")
 
     link_to [:admin, resource],
-            class: "btn btn-outline-primary #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}",
+            class:              "btn btn-outline-primary #{'btn-sm' if options[:small]} " \
+                                "#{'stretched-link' if options[:stretched]}",
             "data-turbo-frame": "_top" do
-      "#{bi('eye')} #{t("actions.details")}".html_safe
+      "#{bi('eye')} #{t('actions.details')}".html_safe
     end
   end
 

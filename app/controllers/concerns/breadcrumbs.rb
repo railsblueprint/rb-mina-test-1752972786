@@ -1,22 +1,19 @@
 module Breadcrumbs
   extend ActiveSupport::Concern
 
-  included do
+  included do # rubocop:disable Metrics/BlockLength
     helper_method :search_url
 
-    # rubocop:disable Rails/LexicallyScopedActionFilter
     before_action :update_search_url, only: [:index]
 
     before_action :prepend_breadcrumbs
     before_action :set_index_breadcrumbs
     before_action :set_search_breadcrumb
-    before_action :set_resource_breadcrumbs, if: ->(controller) {
+    before_action :set_resource_breadcrumbs, if: lambda { |controller|
       controller.action_name.to_sym.in?(controller.actions_with_resource)
     }
     before_action :set_edit_breadcrumbs, only: [:edit, :update]
     before_action :set_create_breadcrumbs, only: [:new, :create]
-    # rubocop:enable Rails/LexicallyScopedActionFilter
-
     # Use to add parent level breadcrumbs
     def prepend_breadcrumbs; end
 
@@ -50,8 +47,12 @@ module Breadcrumbs
       ""
     end
 
+    def after_destroy_path
+      search_url || index_url
+    end
+
     def update_search_url
-      search_options =  request.query_parameters.reject{|k,v| v.blank? }
+      search_options = request.query_parameters.reject { |_k, v| v.blank? }
       session[search_url_key] = url_for(**search_options, page: nil)
     end
 

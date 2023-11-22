@@ -26,6 +26,10 @@ class ApplicationPolicy
     @user&.admin? || @user&.superadmin?
   end
 
+  def respond_to_missing? _name
+    true
+  end
+
   class Scope
     attr_reader :user, :scope
 
