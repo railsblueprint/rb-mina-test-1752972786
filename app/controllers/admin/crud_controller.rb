@@ -11,12 +11,6 @@ class Admin::CrudController < Admin::Controller
     base_actions_with_resource + [:logs]
   end
 
-  def logs
-    breadcrumb t("actions.logs"), { action: :logs }
-    @pagy, @resources = pagy(@resource.user_logs.order(created_at: :desc))
-    render "admin/user_logs/index"
-  end
-
   def filter_boolean field
     return unless params[field].present?
 

@@ -14,7 +14,7 @@ class Admin::Controller < ApplicationController
   private
 
   def check_admin_role
-    return if current_user.has_role?(:admin)
+    return if current_user.admin?
 
     flash[:error] = "You cannot access this page"
     redirect_to "/"

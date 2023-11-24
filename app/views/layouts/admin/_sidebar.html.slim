@@ -66,7 +66,7 @@ aside#sidebar.sidebar
                   = t('admin.nav.good_job')
       - unless Setting.hide_demo_elements
         li.nav-heading
-          = t('admin.nav.design_system')
+          = t('admin.nav.design_system.design_system')
         li.nav-item
           = nav_link admin_design_system_colors_path do
             i.bi.bi-palette
@@ -79,7 +79,7 @@ aside#sidebar.sidebar
             i.bi.bi-chevron-down.ms-auto
           ul#components-nav class="nav-content collapse #{class_names(show: components?)}" data-bs-parent="#sidebar-nav"
             li
-              = nav_link admin_design_system_components_alert_path do
+              = nav_link admin_design_system_components_alerts_path do
                 i.bi.bi-circle
                 span
                   = t('admin.nav.design_system.alerts')
@@ -186,12 +186,12 @@ aside#sidebar.sidebar
               = nav_link admin_design_system_tables_general_path do
                 i.bi.bi-circle
                 span
-                  = t('admin.nav.design_system.general_tables')
+                  = t('admin.nav.design_system.tables_general')
             li
               = nav_link admin_design_system_tables_data_path do
                 i.bi.bi-circle
                 span
-                  = t('admin.nav.design_system.data_tables')
+                  = t('admin.nav.design_system.tables_data')
         li.nav-item
           a.nav-link.nav-group data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#" class=class_names(collapsed: !charts?)
             i.bi.bi-bar-chart
@@ -203,17 +203,17 @@ aside#sidebar.sidebar
               = nav_link admin_design_system_charts_chartjs_path do
                 i.bi.bi-circle
                 span
-                  = t('admin.nav.design_system.chart_js')
+                  = t('admin.nav.design_system.chartjs')
             li
               = nav_link admin_design_system_charts_apexcharts_path do
                 i.bi.bi-circle
                 span
-                  = t('admin.nav.design_system.apex_charts')
+                  = t('admin.nav.design_system.apexcharts')
             li
               = nav_link admin_design_system_charts_echarts_path do
                 i.bi.bi-circle
                 span
-                  = t('admin.nav.design_system.e_charts')
+                  = t('admin.nav.design_system.echarts')
         li.nav-item
           a.nav-link.nav-group data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#"  class=class_names(collapsed: !icons?)
             i.bi.bi-gem
@@ -225,7 +225,7 @@ aside#sidebar.sidebar
               = nav_link admin_design_system_icons_bootstrap_path do
                 i.bi.bi-circle
                 span
-                  = t('admin.nav.design_system.bootstrap_icons')
+                  = t('admin.nav.design_system.bootstrap')
             li
               = nav_link admin_design_system_icons_boxicons_path do
                 i.bi.bi-circle
@@ -235,4 +235,4 @@ aside#sidebar.sidebar
               = nav_link admin_design_system_icons_remix_path do
                 i.bi.bi-circle
                 span
-                  = t('admin.nav.design_system.remix_icons')
+                  = t('admin.nav.design_system.remix')

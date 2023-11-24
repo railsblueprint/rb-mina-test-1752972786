@@ -6,6 +6,10 @@ class Post < ApplicationRecord
                              rich_text_body: [:body]
                            }
 
+  multisearchable against: [:id, :title], associated_against: {
+    rich_text_body: [:body]
+  }
+
   extend FriendlyId
   friendly_id :transliterated_title, use: :slugged, routes: :id
 

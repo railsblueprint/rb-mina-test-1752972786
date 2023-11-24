@@ -8,14 +8,14 @@ nav.navbar.navbar-dark.navbar-expand-xl.fixed-top.header
         span
           = t("platform.name")
     .search-bar
-      form.search-form.d-flex.align-items-center[method="POST" action="#"]
-        input[type="text" name="query" placeholder="Search" title="Enter search keyword"]
-        button[type="submit" title="Search"]
+      form.search-form.d-flex.align-items-center action="/admin/search"
+        input type="text" name="q" placeholder="Search" title="Enter search keyword"
+        button type="submit" title="Search"
           i.bi.bi-search
     nav.header-nav.ms-auto
       ul.d-flex.align-items-center
         li.nav-item.d-block.d-xl-none.pe-3
-          a.nav-link.nav-icon.search-bar-toggle[data-controller="admin--search-bar" data-action="click->admin--search-bar#toggle" href="javascript:void(0)"]
+          a.nav-link.nav-icon.search-bar-toggle data-controller="admin--search-bar" data-action="click->admin--search-bar#toggle" href="javascript:void(0)"
             i.bi.bi-search
         li.nav-item.dropdown.pe-3
           = render partial: "layouts/admin/user_menu"

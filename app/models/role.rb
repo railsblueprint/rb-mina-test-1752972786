@@ -15,8 +15,7 @@ class Role < ApplicationRecord
 
   ROLES.map do |role|
     define_singleton_method(role) do
-      @roles ||= {}
-      @roles[role] ||= Role.find_or_create_by(name: role)
+      Role.find_or_create_by(name: role)
     end
   end
 end

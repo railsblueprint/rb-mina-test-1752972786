@@ -18,7 +18,7 @@ require 'wisper/rspec/matchers'
 require 'factory_bot_rails'
 require 'simplecov'
 require "shoulda-matchers"
-SimpleCov.start
+require 'devise'
 
 RSpec.configure do |config|
   # config.infer_spec_type_from_file_location!
@@ -53,6 +53,7 @@ RSpec.configure do |config|
 
   config.include Shoulda::Matchers::ActiveModel, type: :command
   config.include Shoulda::Matchers::ActiveRecord, type: :command
+
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards

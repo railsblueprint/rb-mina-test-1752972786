@@ -1,0 +1,22 @@
+.toolbar.d-flex
+  h1 Global search
+  .flex-grow-1
+  / = bootstrap_form_tag( url: { action: :search },  html: { class:  "w-50" }, method: :get) do |f|
+  /   = render "unity/cms_core/crud/formless_search_field", placeholder: local_assigns[:placeholder], f: f
+.row.mb-3
+  .col-sm-3
+  .col-md-9.col-sm-9
+    = render AdminFilteredSearchComponent.new
+
+= turbo_frame_tag "resources" do
+  = turbo_stream_action_tag("replace", target: "flash", template: component(:toastr_flash))
+  = turbo_stream_action_tag("replace", target: "breadcrumbs", template: component(:breadcrumbs, _breadcrumbs))
+  - if @results.present?
+    ol class="collection collection-container"
+      li.item.item-container
+        div.attribute Type
+        div.attribute Name
+        div.attribute
+      = render partial: "resource", collection: @results, as: :resource
+
+    = paginator @results

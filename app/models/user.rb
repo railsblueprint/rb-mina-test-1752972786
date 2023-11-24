@@ -6,6 +6,11 @@ class User < ApplicationRecord
          :confirmable, :lockable, :trackable
   # :timeoutable
 
+  include PgSearch::Model
+  pg_search_scope :search, against: [:id, :first_name, :last_name, :email]
+
+  multisearchable against: [:id, :first_name, :last_name, :email]
+
   has_many :posts, dependent: :nullify
 
   def full_name
@@ -19,6 +24,10 @@ class User < ApplicationRecord
   def initials
     @_initials ||= full_name.gsub(/[^\p{L} ]/, "").split
                             .tap { |a| break a.size > 1 ? a[0][0] + a[1][0] : a[0][0..1] }
+  end
+
+  def searchable_name
+    full_name
   end
 
   def avatar_color

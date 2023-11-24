@@ -1,6 +1,8 @@
 namespace :admin do
 
   root 'dashboard#show'
+  get "search", to: "dashboard#search", as: "search"
+  post "search", to: "dashboard#search"
 
   authenticate :user, ->(user) { user.has_role?('superadmin') } do
     mount GoodJob::Engine, at: 'good_job'
@@ -41,7 +43,7 @@ namespace :admin do
 
   namespace :design_system do
     get 'colors'
-    get 'components/alert'
+    get 'components/alerts'
     get "components/accordion"
     get "components/badges"
     get "components/breadcrumbs"
@@ -67,12 +69,5 @@ namespace :admin do
     get 'icons/bootstrap'
     get 'icons/remix'
     get 'icons/boxicons'
-    get 'pages/profile'
-    get 'pages/faq'
-    get 'pages/contact'
-    get 'pages/register'
-    get 'pages/login'
-    get 'pages/error'
-    get 'pages/blank'
   end
 end
