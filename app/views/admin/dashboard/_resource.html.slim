@@ -4,5 +4,5 @@ li.item.item-container
   .attribute data-name="Title"
     = resource.searchable.try(:searchable_name) || resource.searchable.try(:name) || resource.searchable.try(:title)
   .actions
-    = edit_button(resource.searchable) if resource.searchable
-    = delete_button(resource.searchable) if resource.searchable
+    = edit_button(resource.searchable, stretched: true, small: true) if resource.searchable
+    = delete_button(resource.searchable, small: true) if resource.searchable

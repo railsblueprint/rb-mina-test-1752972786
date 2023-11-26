@@ -11,7 +11,7 @@ html
     = javascript_include_tag "admin", "data-turbo-track": "reload"
     = javascript_importmap_tags "application_admin"
     = hotwire_livereload_tags
-  body class=body_class
+  body class=body_class data-controller="sidebar"
     = render "layouts/admin/header"
     = render "layouts/admin/sidebar"
     = component :toastr_flash

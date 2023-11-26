@@ -7,4 +7,9 @@ export default class extends Controller {
   show() {
     $("body").toggleClass("sidebar-shown");
   }
+  
+  escape() {
+    $("body").removeClass("sidebar-shown");
+  }
+
 }

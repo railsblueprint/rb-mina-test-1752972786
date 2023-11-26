@@ -9,10 +9,11 @@ div data-controller="post" data-post-id-value=post.id id=dom_id(post)
       div.pt-2
         i.bi.bi-person
         '
-        = link_to post.user.full_name, post.user
-        i.bi.bi-clock.ps-3
-        '
-        = post.created_at.strftime("%d %B, %Y %H:%M")
+        - if post.user.present?
+          = link_to post.user.full_name, post.user
+          i.bi.bi-clock.ps-3
+          '
+          = post.created_at.strftime("%d %B, %Y %H:%M")
       .text-end
         - if policy(post).edit?
           = link_to t('action.edit'), edit_post_path(post), class: "card-link btn btn-link"

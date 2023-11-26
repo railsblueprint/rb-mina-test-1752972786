@@ -3,13 +3,17 @@ html {
 }
 
 body {
-  min-height: calc(100vh - $navbar-height - $main-section-padding-top - $footer-height);
+  min-height: calc(100vh - $navbar-height - $main-section-margin-top - $footer-height);
   min-width: 320px;
+
+  &.sidebar-shown {
+    overflow: hidden;
+  }
 }
 
 main#main {
-  margin-top: calc($navbar-height + $main-section-padding-top);
-  min-height: calc(100vh - $navbar-height - $main-section-padding-top - $footer-height);
+  margin-top: calc($navbar-height + $main-section-margin-top);
+  min-height: calc(100vh - $navbar-height - $main-section-margin-top - $footer-height);
   display: flex;
   flex-direction: column;
 
@@ -19,36 +23,50 @@ main#main {
     flex-grow: 1
   }
 
-  padding: 20px 30px;
-}
+  padding: 20px $main-section-padding-x;
 
-@include media-breakpoint-down(xl) {
-  main#main {
+  @include media-breakpoint-down(xl) {
     margin-left: 0 !important;
+  }
+  @include media-breakpoint-down(sm) {
+    padding-left: $main-section-sm-padding-x;
+    padding-right: $main-section-sm-padding-x;
   }
 }
 
 @include media-breakpoint-up(xl) {
   main#main, footer {
-    margin-left: calc($sidebar-width + 12px);
-    width: calc(100% - $sidebar-width - 24px);
+    margin-left: calc($sidebar-width + $main-section-margin-x);
+    width: calc(100% - $sidebar-width - $main-section-margin-x * 2);
     margin-right: 0 !important;
   }
 }
 
 .sidebar-hidden {
   main#main, footer {
-    margin-left: calc($sidebar-hidden-width + 12px)!important;
-    width: calc(100% - $sidebar-hidden-width - 24px);
+    margin-left: calc($sidebar-hidden-width + $main-section-margin-x)!important;
+    width: calc(100% - $sidebar-hidden-width - $main-section-margin-x * 2);
   }
 }
 
 .sidebar-shown {
   main#main {
     pointer-events: none;
-    backdrop-filter: blur(2px);
-    height: calc(100vh - $navbar-height - $main-section-padding-top);
-    overflow: hidden;
+    height: calc(100vh - $navbar-height - $main-section-margin-top - $footer-height);
+
+    &::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: $main-backdrop-z-index;
+    }
   }
 }
 

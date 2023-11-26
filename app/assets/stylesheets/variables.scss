@@ -10,15 +10,22 @@ $info: #a6a737;
 $light: #d1eaf6;
 $dark: #070201;
 
-$min-contrast-ratio: 3.1;
-
 $navbar-height: 60px;
 $footer-height: 62px;
 
 $sidebar-width: 300px;
 $sidebar-hidden-width: 25px;
 
-$main-section-padding-top: 0px;
+$main-section-margin-top: 0px;
+$main-section-padding-x: 2rem;
+$main-section-sm-padding-x: 0.5rem;
+$main-section-margin-x: 12px;
+
+
+$main-backdrop-z-index: 10;
+$back-to-top-z-index: 2;
+
+
 
 
 $sidebar-bg: var(--bs-primary);
