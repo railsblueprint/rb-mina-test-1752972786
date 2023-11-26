@@ -3,7 +3,7 @@
     = tabs nav_class: "nav-tabs-bordered" do |tab|
       - tab.add title: "Overview" do
         .pt-3
-          = bootstrap_form_for(@command, url: {action: :update}, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
+          = bootstrap_form_for([:admin, @command], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
             = f.text_field :first_name
             = f.text_field :last_name
             = f.text_field :job
@@ -18,25 +18,44 @@
 
             = f.form_group label: {text: "Roles"}
               - Role.all.each do |r|
-                = f.check_box :role_ids, {label: r.name, :multiple => true, :checked => @resource.roles.include?(r), disabled: !policy(@resource).change_roles?}, r.id, ''
+                = f.check_box :role_ids, {label: r.name, :multiple => true, :checked => @command.role_ids&.include?(r.id), disabled: !policy(User).change_roles?}, r.id, ''
             = f.form_group
-              = f.submit
+              .d-flex.justify-content-between
+                .actions
+                  = f.submit
+                  = link_to t("actions.cancel"), params[:return_to] || search_url || { action: :index }, class: "btn btn-outline-secondary"
+                - if @resource.present?
+                  .actions
+                    = delete_button(@resource)
       - tab.add title: "Social" do
         .pt-3
-          = bootstrap_form_for(@command, url: {action: :update}, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
+          = bootstrap_form_for([:admin, @command], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
             = f.text_field :twitter_profile, prepend: link_field_button
             = f.text_field :facebook_profile, prepend: link_field_button
             = f.text_field :instagram_profile, prepend: link_field_button
             = f.text_field :linkedin_profile, prepend: link_field_button
             = f.form_group
-              = f.submit
-      - if policy(@resource).change_password?
+              .d-flex.justify-content-between
+                .actions
+                  = f.submit
+                  = link_to t("actions.cancel"), params[:return_to] || search_url || { action: :index }, class: "btn btn-outline-secondary"
+                - if @resource.present?
+                  .actions
+                    = delete_button(@resource)
+
+      - if @resource && policy(@resource).change_password?
         - tab.add title: "Password" do
           .pt-3
-            = bootstrap_form_for(@command, url: {action: :update}, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-4') do |f|
+            = bootstrap_form_for([:admin, @command], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-4') do |f|
               = f.password_field :password
               = f.password_field :password_confirmation
               = f.form_group
-                = f.submit t("actions.change_password")
+                .d-flex.justify-content-between
+                  .actions
+                    = f.submit t("actions.change_password")
+                    = link_to t("actions.cancel"), params[:return_to] || search_url || { action: :index }, class: "btn btn-outline-secondary"
+                - if @resource.present?
+                  .actions
+                    = delete_button(@resource)
 .filler
 

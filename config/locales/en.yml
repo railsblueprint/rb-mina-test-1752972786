@@ -12,6 +12,8 @@ en:
       'no': "No"
       search_btn: "Search"
       item_delete_unauthorized: "You are not authorized to delete this item"
+      item_create_unauthorized: "You are not authorized to create this item"
+      item_update_unauthorized: "You are not authorized to update this item"
     crud:
       header:
         search_placeholder: "Type for search"

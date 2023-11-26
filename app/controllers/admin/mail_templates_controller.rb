@@ -33,12 +33,12 @@ class Admin::MailTemplatesController < Admin::CrudController
     end
   end
 
-  def destroy
-    @resource = MailTemplate.find(params[:id])
-    @resource.update(deleted_at: Time.now)
-    flash[:success] = t("messages.successfully_deleted")
-    redirect_to action: :index, status: :see_other
-  end
+  # def destroy
+  #   @resource = MailTemplate.find(params[:id])
+  #   @resource.update(deleted_at: Time.now)
+  #   flash[:success] = t("messages.successfully_deleted")
+  #   redirect_to action: :index, status: :see_other
+  # end
 
   def preview
     template = MailTemplate.find(params[:id])

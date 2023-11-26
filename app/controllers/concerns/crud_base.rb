@@ -43,6 +43,10 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
           flash.now[:error] = errors[:base].to_sentence.presence || "Failed to update item"
           render :edit, status: :unprocessable_entity
         end
+        command.on(:unauthorized) do
+          flash[:alert] = I18n.t("admin.common.item_update_unauthorized")
+          redirect_to({ action: :index })
+        end
       end
     end
 
@@ -56,6 +60,10 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
           @command = command
           flash.now[:error] = errors[:base].to_sentence.presence || "Failed to create item"
           render :new, status: :unprocessable_entity
+        end
+        command.on(:unauthorized) do
+          flash[:alert] = I18n.t("admin.common.item_create_unauthorized")
+          redirect_to({ action: :index })
         end
       end
     end
@@ -77,10 +85,6 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
       end
     end
     # rubocop:enable Metrics/AbcSize
-
-    def filters
-      []
-    end
 
     private
 
