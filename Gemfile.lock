@@ -516,6 +516,10 @@ GEM
       activesupport (= 7.1.2)
       bundler (>= 1.15.0)
       railties (= 7.1.2)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -567,6 +571,9 @@ GEM
     rspec-expectations (3.12.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
+    rspec-html-matchers (0.10.0)
+      nokogiri (~> 1)
+      rspec (>= 3.0.0.a)
     rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
@@ -787,6 +794,7 @@ DEPENDENCIES
   pundit (~> 2.3)
   quill-editor-rails
   rails (~> 7.1.0)
+  rails-controller-testing
   rake (~> 13.0)
   redis (>= 4.0)
   redis-rails-instrumentation (~> 1.0)
@@ -794,6 +802,7 @@ DEPENDENCIES
   rollbar (~> 3.3)
   rollbar-user_informer!
   roo (~> 2.8)
+  rspec-html-matchers
   rspec-rails
   rubocop
   rubocop-performance

@@ -33,9 +33,9 @@ module ApplicationHelper
 
   def paginator collection
     raw <<~PAGINATOR
-        <div class="paginator">
-        <nav class="<%= nav_class %>">
-          <ul class="pagination <%= pagination_class %>">
+      <div class="paginator">
+        <nav class="">
+          <ul class="pagination">
             <li class="page-item disabled">
               <span class="page-link">
                 #{page_entries_info collection}

@@ -171,6 +171,8 @@ group :test do
   gem "guard"
   gem "guard-rspec"
   gem "mocha"
+  gem "rails-controller-testing"
+  gem "rspec-html-matchers"
   gem "rspec-rails"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
