@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   def new
-    @command ||= ContactUsCommand.new
+    @command ||= ContactUsCommand.new(name: current_user&.full_name, email: current_user&.email)
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace("frame_new_contact_us_command", partial: "form") }
