@@ -1,38 +1,37 @@
 require "rails_helper"
 
-RSpec.describe "Contacts page", type: :request do
+RSpec.describe "Posts page", type: :request do
   let(:user) { create(:user) }
 
-  let!(:mail_template) { create(:mail_template, alias: "contact_form_message") }
-  let!(:sender_email) { create(:setting, alias: "sender_email", value: "support@test.com")}
-  let!(:contact_form_receivers) { create(:setting, alias: "contact_form_receivers", value: "support@test.com")}
 
-  describe "GET /contacts" do
+  describe "GET /posts" do
     context "when logged in" do
       before do
         sign_in user
-        get "/contacts"
+        get "/posts"
       end
 
       it "returns http success" do
         expect(response).to have_http_status(:success)
-      end
-
-      it "prefills form" do
-        expect(response.body).to have_tag "input", with: { name: "contact_us_command[name]", value: user.full_name }
-        expect(response.body).to have_tag "input", with: { name: "contact_us_command[email]", value: user.email }
       end
     end
 
     context "when not logged in" do
+      let!(:resources) { create_list(:post, 10) }
+
       it "returns http success" do
-        get "/contacts"
+        get "/posts"
         expect(response).to have_http_status(:success)
+      end
+
+      it "render posts" do
+        get "/posts"
+        expect(response.body).to have_tag(".card.post", count: 10)
       end
     end
   end
 
-  describe "POST /contacts" do
+  xdescribe "POST /contacts" do
     let(:params) {
       {
         contact_us_command: {

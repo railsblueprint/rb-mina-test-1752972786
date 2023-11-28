@@ -10,25 +10,20 @@ class PostsController < ApplicationController
     request.variant = :turbo_frame if turbo_frame_request?
   end
 
-  # GET /posts or /posts.json
   def index
     scope = Post.all.includes(:user).with_all_rich_text
     scope = scope.search(params[:q]) if params[:q].present?
     scope = scope.order(created_at: :desc)
 
     @pagy, @posts = pagy(scope, items: 5)
-    # @posts = Post.all.order(created_at: :desc).page(params[:page]).per(2)
   end
 
-  # GET /posts/1 or /posts/1.json
   def show; end
 
-  # GET /posts/new
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
   def edit; end
 
   # rubocop:disable Metrics/AbcSize
@@ -72,12 +67,11 @@ class PostsController < ApplicationController
   end
   # rubocop:enable Metrics/AbcSize
 
-  # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+      format.html { redirect_to posts_url, notice: "Post was successfully deleted." }
       format.json { head :no_content }
     end
   end

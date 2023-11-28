@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :enable_rollbar_link
 
+  etag { current_user&.id }
+
   rescue_from Pundit::NotAuthorizedError do
     message = if request.get?
                 I18n.t("messages.you_cannot_access_this_page")

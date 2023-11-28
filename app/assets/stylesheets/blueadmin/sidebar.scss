@@ -7,7 +7,7 @@
   z-index: 996;
   background-color: $sidebar-bg;
 
-  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
   transition: 0.2s ease-in-out;
 
   .sidebar-wrapper {
@@ -197,7 +197,7 @@
     left: -$sidebar-width;
     .open-handle {
       visibility: hidden;
-      opacity: 0%;
+      opacity: 0;
     }
   }
   .sidebar-shown {

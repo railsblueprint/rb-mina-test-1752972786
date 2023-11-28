@@ -7,7 +7,7 @@ section.section
             | Bootstrap Form Builder
           = bootstrap_form_tag(layout: :horizontal, label_col: 'col-sm-3', control_col: 'col-sm-9') do |f|
             = f.text_field :text
-            = f.text_field :url, value: "http://railsblueprint.com/", prepend: link_field_button
+            = f.text_field :url, value: "https://railsblueprint.com/", prepend: link_field_button
             = f.text_field :copy_field, value: SecureRandom.hex(32), prepend: copy_field_button
             = f.select :select2, options_for_select(["One", "Two", "Three"]), {}, class: "select2"
             = f.form_group

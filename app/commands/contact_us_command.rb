@@ -19,6 +19,6 @@ class ContactUsCommand < BaseCommand
       sender_email: email,
       message:
 
-    }).deliver_now
+    }).deliver_later
   end
 end

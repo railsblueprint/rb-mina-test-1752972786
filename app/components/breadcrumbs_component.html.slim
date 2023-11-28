@@ -7,4 +7,4 @@
             - if crumb.url.blank? || crumb.current?
               = raw crumb.name
             - else
-              = link_to raw(crumb.name), crumb.url, target: "_top", "aria-current": (crumb.current? ? "page" : "")
+              = link_to raw(crumb.name), crumb.url, "data-turbo-frame": "_top", "aria-current": (crumb.current? ? "page" : "")

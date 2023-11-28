@@ -1,4 +1,4 @@
-class TemplateMailer < ActionMailer::Base
+class TemplateMailer < ApplicationMailer
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   # TODO: refactor
   def email template_alias, params={}

@@ -4,7 +4,7 @@ section.section.profile
       .card
         .card-body.profile-card.pt-4.d-flex.flex-column.align-items-center
           .profile-image
-            .rounded-circle.circle-border.m-b-md alt=@resource.full_name class="color-#{@resource.avatar_color}"
+            .rounded-circle.circle-border.m-b-md class="color-#{@resource.avatar_color}"
               span = @resource.initials
           h2
             = @resource.full_name

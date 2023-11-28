@@ -1,13 +1,13 @@
 a.nav-link.nav-profile.d-flex.align-items-center.pe-0.ps-2 href="#" data-bs-toggle="dropdown"
   .profile-image.icon.d-md-none
-    .rounded-circle.circle-border.m-auto alt=current_user.full_name class="color-#{current_user.avatar_color}"
+    .rounded-circle.circle-border.m-auto class="color-#{current_user.avatar_color}"
       span = current_user.initials
   span.d-none.d-md-block.dropdown-toggle
     = current_user.short_name
-ul.dropdown-menu.dropdown-menu-end.dropdown-menu-arrow.profile
+ul.dropdown-menu.dropdown-menu-end.dropdown-menu-arrow.profile  data-controller="theme"
   li.dropdown-header
     .profile-image
-      .rounded-circle.circle-border.mb-3.m-auto alt=current_user.full_name class="color-#{current_user.avatar_color}"
+      .rounded-circle.circle-border.mb-3.m-auto class="color-#{current_user.avatar_color}"
         span = current_user.initials
     h6
       = current_user.short_name
@@ -35,13 +35,6 @@ ul.dropdown-menu.dropdown-menu-end.dropdown-menu-arrow.profile
       | My Profile
   li
     hr.dropdown-divider
-  - if session[:impersonator_id].present?
-    = link_to disavow_path, "data-turbo-method": "POST", class: "dropdown-item d-flex align-items-center" do
-      i.bi.bi-arrow-counterclockwise
-      span
-        | Disavow
-    li
-      hr.dropdown-divider
   li
     = link_to faq_path, class: "dropdown-item d-flex align-items-center" do
       i.bi.bi-question-circle
@@ -49,25 +42,24 @@ ul.dropdown-menu.dropdown-menu-end.dropdown-menu-arrow.profile
         | Need Help?
   li
     hr.dropdown-divider
-  . data-controller="theme"
-    li
-      button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="light" data-action="theme#set"
-        = bi "sun-fill", class: "me-2 opacity-50 theme-icon"
-        |  Light
-        .flex-grow-1
-        = bi :check, class: "ms-auto d-none"
-    li
-      button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="dark" data-action="theme#set"
-        = bi "moon-stars-fill", class: "me-2 opacity-50 theme-icon"
-        | Dark
-        .flex-grow-1
-        = bi :check, class: "ms-auto d-none"
-    li
-      button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="auto" data-action="theme#set"
-        = bi "circle-half", class: "me-2 opacity-50 theme-icon"
-        | Auto
-        .flex-grow-1
-        = bi :check, class: "ms-auto d-none"
+  li
+    button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="light" data-action="theme#set"
+      = bi "sun-fill", class: "me-2 opacity-50 theme-icon"
+      |  Light
+      .flex-grow-1
+      = bi :check, class: "ms-auto d-none"
+  li
+    button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="dark" data-action="theme#set"
+      = bi "moon-stars-fill", class: "me-2 opacity-50 theme-icon"
+      | Dark
+      .flex-grow-1
+      = bi :check, class: "ms-auto d-none"
+  li
+    button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="auto" data-action="theme#set"
+      = bi "circle-half", class: "me-2 opacity-50 theme-icon"
+      | Auto
+      .flex-grow-1
+      = bi :check, class: "ms-auto d-none"
   li
     hr.dropdown-divider
   li
