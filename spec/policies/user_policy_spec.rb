@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe UserPolicy do
   let(:klass) { User }
   let(:object) { build(:user) }

@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe TemplateMailer, type: :mailer do
   describe 'email' do
     let(:user) { create(:user) }

@@ -147,8 +147,8 @@ module FormsHelper
 
   # rubocop:disable Metrics/MethodLength
   # TODO: convert to a constant
-  def bool_icons
-    @_bool_icons ||= {
+  memoize def bool_icons
+    {
       nil      => {
         true  => bi("check-lg"),
         false => bi("x-lg")

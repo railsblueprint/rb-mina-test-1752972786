@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe TemplateDeviseMailer, type: :mailer do
   let(:user) { create(:user) }
 

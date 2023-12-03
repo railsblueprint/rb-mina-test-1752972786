@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe PagePolicy do
   let(:klass) { Page }
   let(:object) { build(:page) }

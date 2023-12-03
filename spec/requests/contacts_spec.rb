@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe "Contacts page", type: :request do
   let(:user) { create(:user) }
 

@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Posts::UpdateCommand, type: :command do
 
   let(:admin) {create(:user,:superadmin)}

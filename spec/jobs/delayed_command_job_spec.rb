@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe DelayedCommandJob do
   class GoodCommand < BaseCommand
     def process; end

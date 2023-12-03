@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe "Admin Posts", type: :request do
   let(:admin) { create(:user, :admin) }
   let(:moderator) { create(:user, :moderator) }

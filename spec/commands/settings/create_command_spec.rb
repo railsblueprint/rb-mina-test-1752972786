@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Settings::CreateCommand, type: :command do
   let(:admin) {create(:user, :superadmin)}
   let(:user) {create(:user)}

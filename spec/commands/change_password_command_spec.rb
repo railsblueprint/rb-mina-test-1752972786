@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe ChangePasswordCommand, type: :command do
   let(:admin) {create(:user,:admin)}
   let(:user) {create(:user, password: "12345678")}

@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe ApplicationPolicy do
   let(:object) { double("test object") }
   subject { described_class }

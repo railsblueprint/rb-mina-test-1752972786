@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
     @resource = params[:id].present? ? User.find(params[:id]) : current_user
+    render_404 unless @resource
   end
 
   def edit
@@ -62,8 +63,13 @@ class UsersController < ApplicationController
 
   def disavow
     impersonator = User.find_by_id(session[:impersonator_id])
-    bypass_sign_in impersonator
-    session[:impersonator_id] = nil
-    redirect_to "/", flash: { success: "You have been disavowed from impersonation" }
+    if impersonator.nil?
+      session[:impersonator_id] = nil
+      redirect_to "/", flash: { info: "You did not have impersonation" }
+    else
+      bypass_sign_in impersonator
+      session[:impersonator_id] = nil
+      redirect_to "/", flash: { success: "You have been disavowed from impersonation" }
+    end
   end
 end

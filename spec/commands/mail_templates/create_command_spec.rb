@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe MailTemplates::CreateCommand, type: :command do
   let(:admin) {create(:user,:admin)}
   let(:user) {create(:user)}

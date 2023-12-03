@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Admin::DesignSystem::FormsController, type: :controller do
   render_views
 

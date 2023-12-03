@@ -28,7 +28,7 @@ module ToggleBoolean
                                                                               locals:  { field: }) +
                              turbo_stream.append("flash_inner", component_to_string(:toastr_flash, append: true))
       }
-      format.html { redirect_to @resource }
+      format.html { redirect_to action: :show }
     end
   end
   # rubocop:enable Metrics/AbcSize

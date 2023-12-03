@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe ContactUsCommand, type: :command do
   let(:params) { {name: "456", email: "abcd@dot.com", subject: "help", message: "me please"} }
 

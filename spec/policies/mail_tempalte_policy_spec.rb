@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe MailTemplatePolicy do
   let(:klass) { MailTemplate }
   let(:object) { build(:mail_template) }

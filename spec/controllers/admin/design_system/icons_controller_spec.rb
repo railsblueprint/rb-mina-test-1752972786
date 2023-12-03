@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Admin::DesignSystem::IconsController, type: :controller do
   render_views
 

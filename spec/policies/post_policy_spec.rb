@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe PostPolicy do
   let(:klass) { Post }
   let(:object) { build(:post) }

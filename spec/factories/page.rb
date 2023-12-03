@@ -9,7 +9,7 @@ FactoryBot.define do
     }
 
     url { title.parameterize }
-    seo_title { title }
+    seo_title { title.gsub("''", " ") }
     seo_keywords { title.gsub(" ", ", ") }
     seo_description { Faker::Lorem.paragraph(sentence_count: rand(10) + 1, supplemental: true) }
     icon { ["app", "at", "award", "basket", "battery", "bookmark", "chat-left-text", "cloud", "cpu", "envelope"].sample }

@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe BaseCommand do
   class BadCommand < BaseCommand
   end

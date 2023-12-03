@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe SettingPolicy do
   let(:klass) { Setting }
   let(:object) { build(:setting) }

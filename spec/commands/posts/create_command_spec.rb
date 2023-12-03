@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Posts::CreateCommand, type: :command do
 
   let(:admin) {create(:user,:admin)}

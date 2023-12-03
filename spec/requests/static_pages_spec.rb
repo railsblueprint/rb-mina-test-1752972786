@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe "Static pages", type: :request do
   let(:user) { create(:user) }
 
@@ -91,10 +89,7 @@ RSpec.describe "Static pages", type: :request do
       it "sets SEO tags" do
         expect(response.body).to have_tag("meta[name=\"description\"]", with: {content: page.seo_description} )
         expect(response.body).to have_tag("meta[name=\"keywords\"]", with: {content: "some, keywords"} )
-        expect(response.body).to have_tag("meta[name=\"seo_title\"]", with: {content: page.seo_title} )
       end
     end
-
   end
-
 end

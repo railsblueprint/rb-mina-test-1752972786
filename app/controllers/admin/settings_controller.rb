@@ -37,8 +37,4 @@ class Admin::SettingsController < Admin::CrudController
   def mass_update_params
     params.permit![:settings]
   end
-
-  def safe_params
-    params.require(:setting).permit(:alias, :description, :type, :value, :set)
-  end
 end

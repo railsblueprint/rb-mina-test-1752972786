@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Admin::DesignSystem::ChartsController, type: :controller do
   render_views
 
