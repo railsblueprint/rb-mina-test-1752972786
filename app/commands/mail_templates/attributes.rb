@@ -11,6 +11,7 @@ module MailTemplates
       attribute :body, Types::String | Types::Nominal(ActionText::RichText)
 
       validates :alias, :layout, presence: true
+      validates :alias, uniqueness: true
     end
   end
 end

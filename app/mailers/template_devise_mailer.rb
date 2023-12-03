@@ -18,8 +18,8 @@ class TemplateDeviseMailer < Devise::Mailer
     TemplateMailer.email(:reset_password_instructions, {
       to:        record.email,
       user:      record,
-      token:     token,
-      reset_url: reset_url
+      token:,
+      reset_url:
     }).deliver_later
   end
 
@@ -29,8 +29,8 @@ class TemplateDeviseMailer < Devise::Mailer
     TemplateMailer.email(:unlock_instructions, {
       to:         record.email,
       user:       record,
-      token:      token,
-      unlock_url: unlock_url
+      token:,
+      unlock_url:
     }).deliver_later
   end
 

@@ -11,7 +11,7 @@ FactoryBot.define do
     url { title.parameterize }
     seo_title { title }
     seo_keywords { title.gsub(" ", ", ") }
-    seo_description { Faker::Lorem.paragraph(sentence_count: rand(10), supplemental: true) }
+    seo_description { Faker::Lorem.paragraph(sentence_count: rand(10) + 1, supplemental: true) }
     icon { ["app", "at", "award", "basket", "battery", "bookmark", "chat-left-text", "cloud", "cpu", "envelope"].sample }
     show_in_sidebar { rand(10) == 0  }
     active { true }

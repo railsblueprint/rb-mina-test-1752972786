@@ -26,13 +26,11 @@ class TemplateMailer < ApplicationMailer
       }
     end
 
-
-    mail(from:         Setting.sender_email,
-         to:           params[:to],
-         reply_to:     params[:reply_to],
-         bcc:          params[:bcc],
-         subject:      template_subject.render(params),
-    ) do | format |
+    mail(from:     Setting.sender_email,
+         to:       params[:to],
+         reply_to: params[:reply_to],
+         bcc:      params[:bcc],
+         subject:  template_subject.render(params)) do |format|
       format.html { template_body.render(params) }
     end
   end
