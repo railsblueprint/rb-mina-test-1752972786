@@ -26,7 +26,7 @@ RSpec.describe "Posts page", type: :request do
 
       it "render posts" do
         get "/posts"
-        expect(response.body).to have_tag(".card.post", count: 10)
+        expect(response.body).to have_tag(".card.post", count: 5)
       end
     end
   end

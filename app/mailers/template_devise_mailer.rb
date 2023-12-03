@@ -6,9 +6,9 @@ class TemplateDeviseMailer < Devise::Mailer
 
   def confirmation_instructions(record, token, _opts={})
     TemplateMailer.email(:confirmation_instructions, {
-      :to                => record.email,
-      "user"             => record,
-      "confirmation_url" => user_confirmation_url(confirmation_token: token)
+      to:               record.email,
+      user:             record,
+      confirmation_url: user_confirmation_url(confirmation_token: token)
     }).deliver_later
   end
 
@@ -16,10 +16,10 @@ class TemplateDeviseMailer < Devise::Mailer
     reset_url = edit_user_password_url(reset_password_token: token)
 
     TemplateMailer.email(:reset_password_instructions, {
-      :to         => record.email,
-      "user"      => record,
-      "token"     => token,
-      "reset_url" => reset_url
+      to:        record.email,
+      user:      record,
+      token:     token,
+      reset_url: reset_url
     }).deliver_later
   end
 
@@ -27,24 +27,24 @@ class TemplateDeviseMailer < Devise::Mailer
     unlock_url = unlock_url(record, unlock_token: token)
 
     TemplateMailer.email(:unlock_instructions, {
-      :to          => record.email,
-      "user"       => record,
-      "token"      => token,
-      "unlock_url" => unlock_url
+      to:         record.email,
+      user:       record,
+      token:      token,
+      unlock_url: unlock_url
     }).deliver_later
   end
 
   def email_changed(record, _opts={})
     TemplateMailer.email(:email_changed, {
-      :to    => record.email,
-      "user" => record
+      to:   record.email,
+      user: record
     }).deliver_later
   end
 
   def password_change(record, _opts={})
     TemplateMailer.email(:password_change, {
-      :to    => record.email,
-      "user" => record
+      to:   record.email,
+      user: record
     }).deliver_later
   end
 end

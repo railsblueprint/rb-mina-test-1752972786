@@ -172,6 +172,7 @@ group :test do
   gem "guard-rspec"
   gem "mocha"
   gem "rails-controller-testing"
+  gem "rspec-collection_matchers"
   gem "rspec-html-matchers"
   gem "rspec-rails"
   gem "selenium-webdriver"

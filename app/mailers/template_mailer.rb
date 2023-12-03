@@ -8,6 +8,7 @@ class TemplateMailer < ApplicationMailer
 
     if template.blank?
       Rails.logger.error "Mail template #{template_alias} not found!"
+      Rollbar.error "Mail template #{template_alias} not found!"
       return
     end
 
@@ -25,13 +26,15 @@ class TemplateMailer < ApplicationMailer
       }
     end
 
+
     mail(from:         Setting.sender_email,
          to:           params[:to],
          reply_to:     params[:reply_to],
          bcc:          params[:bcc],
          subject:      template_subject.render(params),
-         body:         template_body.render(params),
-         content_type: "text/html")
+    ) do | format |
+      format.html { template_body.render(params) }
+    end
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 end

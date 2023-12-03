@@ -21,9 +21,8 @@ class User < ApplicationRecord
     [first_name&.first, last_name].filter_map(&:presence).join(". ").presence || email
   end
 
-  def initials
-    @_initials ||= full_name.gsub(/[^\p{L} ]/, "").split
-                            .tap { |a| break a.size > 1 ? a[0][0] + a[1][0] : a[0][0..1] }
+  memoize def initials
+    full_name.gsub(/[^\p{L} ]/, "").split.tap { |a| break a.size > 1 ? a[0][0] + a[1][0] : a[0][0..1] }
   end
 
   def searchable_name
