@@ -4,6 +4,7 @@
       - tab.add title: "Overview" do
         .pt-3
           = turbo_frame_tag "profile" do
+            = render_turbo_flash
             = bootstrap_form_for(@command, url: :edit_profile, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
               = f.text_field :first_name
               = f.text_field :last_name
@@ -19,6 +20,7 @@
       - tab.add title: "Social" do
         .pt-3
           = turbo_frame_tag "social" do
+            = render_turbo_flash
             = bootstrap_form_for(@command, url: :edit_profile, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8') do |f|
               = f.text_field :twitter_profile, prepend: link_field_button
               = f.text_field :facebook_profile, prepend: link_field_button
@@ -29,7 +31,7 @@
       - tab.add title: "Password" do
         .pt-3
           = turbo_frame_tag "password" do
-            = turbo_stream_action_tag("replace", target: "flash", template: component(:toastr_flash))
+            = render_turbo_flash
             = bootstrap_form_for(@password_command, url: :update_password, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-4') do |f|
               = f.password_field :current_password
               = f.password_field :password

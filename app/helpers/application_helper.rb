@@ -28,7 +28,9 @@ module ApplicationHelper
   end
 
   def render_turbo_flash
-    render turbo_stream: turbo_stream.replace("flash", component_to_string(:toastr_flash))
+    return unless turbo_frame_request?
+
+    turbo_stream_action_tag("replace", target: "flash", template: component(:toastr_flash))
   end
 
   def paginator collection

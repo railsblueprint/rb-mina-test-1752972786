@@ -2,16 +2,13 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   include DevisePatches
   include Pagy::Backend
+  include TurboMethods
 
   before_action :enable_rollbar_link
 
   etag { current_user&.id }
 
-  layout lambda {
-    !turbo_frame_breakout? && turbo_frame_request? ? "turbo_rails/frame" : "application"
-  }
-
-  add_flash_types :turbo_breakout, :success, :info
+  add_flash_types :success, :info
 
   rescue_from Pundit::NotAuthorizedError do
     message = if request.get?
@@ -22,9 +19,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert: message
   end
 
-  def turbo_frame_breakout?
-    flash[:turbo_breakout].present?.tap { flash.delete(:turbo_breakout) }
-  end
+  set_layout "application"
 
   def enable_rollbar_link
     cookies.signed.permanent["show_rollbar_link"] = true if current_user&.has_role?(:superadmin)
