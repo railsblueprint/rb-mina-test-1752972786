@@ -3,7 +3,9 @@ class Admin::Controller < ApplicationController
   before_action :check_admin_role
   # before_action :check_permissions
 
-  layout -> { turbo_frame_request? ? "turbo_rails/frame" : "admin" }
+  layout lambda {
+    turbo_frame_request? && !turbo_frame_breakout ? "turbo_rails/frame" : "application"
+  }
 
   before_action do
     @page_title = t(".page_title")

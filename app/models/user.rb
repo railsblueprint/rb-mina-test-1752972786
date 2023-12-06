@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   rolify
 
   devise :database_authenticatable, :registerable,
@@ -52,8 +54,7 @@ class User < ApplicationRecord
     attributes.with_indifferent_access
               .slice(:id, :email, :unconfirmed_email, :first_name, :last_name, :job, :company)
               .merge({
-                "self_url"  => url_for([:profile,
-                                        { id: }.merge(Rails.application.config.action_mailer.default_url_options)]),
+                "self_url"  => url_for([:profile, { id: }]),
                 "self_path" => url_for([:profile, { id:, only_path: true }])
               })
   end

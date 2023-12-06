@@ -10,30 +10,22 @@ $.turbo = {
         return $document.off('.turbo').on("" + load + ".turbo", this.onLoad).on("" + fetch + ".turbo", this.onFetch);
     },
     addCallback: function(callback) {
-        // console.log("jQuery.global addCallback");
-        // console.log("turbo.ready", $.turbo.isReady);
-
         if ($.turbo.isReady) {
-            // console.log("Running delayed callback");
             callback($);
         }
         return $document.on('turbo:ready', function() {
-            // console.log("Running delayed callback");
             return callback($);
         });
     },
     onLoad: function() {
-        // console.log("jQuery.global onLoad");
         $.turbo.isReady = true;
         return $document.trigger('turbo:ready');
     },
     onFetch: function() {
-        // console.log("jQuery.global onFetch");
         $.turbo.isReady = false;
         return true;
     },
     register: function() {
-        // console.log("jQuery.global register");
         $(this.onLoad);
         return $.fn.ready = this.addCallback;
     }
@@ -42,6 +34,13 @@ $.turbo = {
 $.turbo.register();
 
 $.turbo.use('turbo:load', 'turbo:before-fetch-request');
+
+document.addEventListener("turbo:frame-missing", function(event) {
+    if (event.detail.response.redirected) {
+        event.preventDefault()
+        event.detail.visit(event.detail.response);
+    }
+})
 
 export default $;
 

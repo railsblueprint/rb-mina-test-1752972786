@@ -203,6 +203,7 @@ en:
     copy_to_clipboard: "Copy to clipboard"
     open_link_in_new_tab: "Open link in new tab"
     impersonate: "Impersonate"
+    update_profile: "Update profile"
   locales:
     en:
       short: EN

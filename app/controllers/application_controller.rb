@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
 
   etag { current_user&.id }
 
+  layout lambda {
+    !turbo_frame_breakout? && turbo_frame_request? ? "turbo_rails/frame" : "application"
+  }
+
+  add_flash_types :turbo_breakout, :success, :info
+
   rescue_from Pundit::NotAuthorizedError do
     message = if request.get?
                 I18n.t("messages.you_cannot_access_this_page")
@@ -14,6 +20,10 @@ class ApplicationController < ActionController::Base
                 I18n.t("messages.you_cannot_peform_this_action")
               end
     redirect_to root_path, alert: message
+  end
+
+  def turbo_frame_breakout?
+    flash[:turbo_breakout].present?.tap { flash.delete(:turbo_breakout) }
   end
 
   def enable_rollbar_link

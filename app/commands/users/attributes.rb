@@ -21,6 +21,9 @@ module Users
       attribute :linkedin_profile, Types::String
 
       attribute :role_ids, Types::Array
+
+      validates :twitter_profile, :facebook_profile, :instagram_profile, :linkedin_profile,
+                format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
     end
   end
 end
