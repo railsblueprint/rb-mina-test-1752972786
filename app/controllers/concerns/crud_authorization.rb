@@ -1,6 +1,7 @@
 module CrudAuthorization
   extend ActiveSupport::Concern
   include Pundit::Authorization
+  include ApplicationHelper
 
   included do
     rescue_from Pundit::NotAuthorizedError do
@@ -9,7 +10,9 @@ module CrudAuthorization
                 else
                   "You are not authorized to perform this action."
                 end
-      redirect_to admin_root_path, alert: message
+
+      path = admin? ? admin_root_path : root_path
+      redirect_to path, alert: message
     end
 
     before_action :authorize_model, only: [:index, :new, :create]

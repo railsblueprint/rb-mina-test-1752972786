@@ -2,7 +2,7 @@ class Admin::Controller < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin_role
 
-  set_layout "admin"
+  use_layout "admin"
 
   before_action do
     @page_title = t(".page_title")

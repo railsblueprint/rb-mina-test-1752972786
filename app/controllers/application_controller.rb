@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert: message
   end
 
-  set_layout "application"
+  use_layout "application"
 
   def enable_rollbar_link
     cookies.signed.permanent["show_rollbar_link"] = true if current_user&.has_role?(:superadmin)

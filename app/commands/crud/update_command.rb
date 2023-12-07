@@ -13,10 +13,14 @@ module Crud
     end
 
     def update_resource
-      return if resource.update(attributes.without(:current_user, :id))
+      return if resource.update(resource_attributes)
 
       errors.add(:base, :failed, message: resource.errors.full_messages.to_sentence)
       abort_command
+    end
+
+    def resource_attributes
+      attributes.without(:current_user, :id)
     end
 
     memoize def resource

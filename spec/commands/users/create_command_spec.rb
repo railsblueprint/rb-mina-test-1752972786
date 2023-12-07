@@ -1,7 +1,7 @@
 describe Users::CreateCommand, type: :command do
 
-  let(:admin) {create(:user,:admin)}
-  let(:params) { {first_name: "John", last_name: "Doe", email: "<EMAIL>"} }
+  let!(:admin) {create(:user,:admin)}
+  let(:params) { {first_name: "John", last_name: "Doe", email: "email@example.com"} }
 
   let(:subject) { described_class.call(params.merge(current_user: admin)) }
 

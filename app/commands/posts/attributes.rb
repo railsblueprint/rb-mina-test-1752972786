@@ -8,7 +8,7 @@ module Posts
       attribute :user_id, Types::String
       attribute :body, Types::String | Types::Nominal(ActionText::RichText)
 
-      validates :title, :user_id, :body, presence: true
+      validates :title, :body, presence: true
     end
   end
 end

@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   # rubocop:enable Metrics/AbcSize
 
   def password
-    Users::ChangePasswordCommand.call_for(params, { user: current_user, current_user:}) do |command|
+    Users::ChangePasswordCommand.call_for(params, { user: current_user, current_user: }) do |command|
       command.on :ok do
         bypass_sign_in current_user
         redirect_to "/profile", success: "Your password has been changed.", turbo_breakout: true

@@ -6,7 +6,6 @@ describe Posts::CreateCommand, type: :command do
 
   let(:subject) { described_class.new(params.merge(current_user: admin)) }
 
-  it { should validate_presence_of(:user_id) }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:body) }
 

@@ -14,7 +14,7 @@ module TurboMethods
   end
 
   class_methods do
-    def set_layout layout_name
+    def use_layout layout_name
       define_method :layout_name do
         layout_name
       end

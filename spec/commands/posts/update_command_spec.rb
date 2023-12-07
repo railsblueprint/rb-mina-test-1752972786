@@ -7,7 +7,6 @@ describe Posts::UpdateCommand, type: :command do
 
   let(:subject) { described_class.new(params.merge(id: post.id, current_user: admin)) }
 
-  it { should validate_presence_of(:user_id) }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:body) }
 

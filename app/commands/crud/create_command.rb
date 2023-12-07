@@ -7,7 +7,16 @@ module Crud
     end
 
     def create_resource
-      @resource = adapter.create(attributes.without(:current_user))
+      @resource = adapter.create(resource_attributes)
+
+      return if @resource.persisted?
+
+      errors.add(:base, :failed, message: @resource.errors.full_messages.to_sentence)
+      abort_command
+    end
+
+    def resource_attributes
+      attributes.without(:current_user, :id)
     end
 
     def authorized?

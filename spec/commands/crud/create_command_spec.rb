@@ -44,11 +44,12 @@ RSpec.describe Crud::CreateCommand, type: :command do
 
     context "when resource is found" do
       it "calls create method " do
-        expect(SampleModel).to receive(:create).with({attr: "qwe"})
+        expect(SampleModel).to receive(:create).with({attr: "qwe"}).and_return(double(persisted?: true))
         subject.call
       end
 
       it "broadcasts ok" do
+        allow(SampleModel).to receive(:create).with({attr: "qwe"}).and_return(double(persisted?: true))
         expect(subject).to broadcast(:ok)
         subject.call
       end

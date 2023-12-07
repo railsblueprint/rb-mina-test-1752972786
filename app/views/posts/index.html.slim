@@ -9,5 +9,5 @@ h1
   = turbo_frame_tag "page_handler"
   .col-xxl-8.col-xl-10
     #posts
-      = render partial: "post", collection: @posts, as: :post
+      = render partial: "post", collection: @resources, as: :post
     = render partial: "pager"
