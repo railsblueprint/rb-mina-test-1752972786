@@ -1,6 +1,5 @@
 class Admin::SettingsController < Admin::CrudController
   include Breadcrumbs
-  before_action :set_editable
 
   def prepend_breadcrumbs
     breadcrumb t("admin.nav.configuration"), ""
@@ -11,16 +10,6 @@ class Admin::SettingsController < Admin::CrudController
     :description
   end
 
-  def set_editable
-    @editable = false
-
-    return unless Rails.env.development?
-    return unless current_user.has_role?(:superadmin)
-    return if Setting.disable_settings_editor
-
-    @editable = true
-  end
-
   def index
     super
     @unsaved = Setting.unsaved.any? if Rails.env.development?
@@ -29,12 +18,13 @@ class Admin::SettingsController < Admin::CrudController
   def no_show_action? = true
 
   def mass_update
-    Setting.update(mass_update_params.keys, mass_update_params.values) if params[:settings].present?
-    flash[:success] = t("messages.successfully_updated")
-    redirect_to action: :index, status: :see_other
-  end
-
-  def mass_update_params
-    params.permit![:settings]
+    Settings::MassUpdateCommand.call(settings: params.permit![:settings].to_h, current_user:) do |command|
+      command.on(:ok) do
+        redirect_to url_for(action: :index), status: :see_other, success: t("messages.successfully_updated")
+      end
+      command.on(:invalid, :abort) do |errors|
+        redirect_to url_for(action: :index), status: :see_other, alert: errors.full_messages.to_sentence
+      end
+    end
   end
 end

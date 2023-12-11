@@ -5,6 +5,10 @@ describe Settings::DestroyCommand, type: :command do
 
   let(:subject) { described_class.call(id: setting.id, current_user: admin) }
 
+  before do
+    allow(Rails.env).to receive(:development?).and_return(true)
+  end
+
   it "broadcasts ok" do
     expect{subject}.to broadcast(:ok)
   end

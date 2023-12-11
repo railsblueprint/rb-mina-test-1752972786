@@ -1,9 +1,6 @@
 class Setting < ApplicationRecord
   self.inheritance_column = nil
 
-  validates :alias, :type, :description, presence: true
-  validates :alias, uniqueness: true
-
   enum type: [:set, :string, :integer, :boolean, :json]
 
   if Rails.env.development?
@@ -12,7 +9,7 @@ class Setting < ApplicationRecord
     scope :unsaved, -> { unscoped.where.not(deleted_at: nil).or(Setting.where(not_migrated: true)) }
   end
 
-  # returns array of possible statuses with translation for use in selects in forms
+  # returns array of possible types with translation for use in selects in forms
   def self.type_enum
     types.map { |t| [type_text(t[0]), t[0].to_sym] }
   end

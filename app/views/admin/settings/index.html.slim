@@ -7,7 +7,7 @@
             h4.d-flex.justify-content-between style="width: 100%; margin: 0;"
               strong  style="padding-top: 5px"
                 = set.description
-            - if @editable
+            - if policy(set).edit?
               = link_to t("actions.edit"), [:edit, :admin, set], class: "btn btn-outline-primary action-edit-set", style: "margin-right: 20px;"
         .accordion-collapse.collapse aria-labelledby="heading-#{set.alias}" data-bs-parent="#accordionExample"  id="collapse-#{set.alias}"
           .accordion-body
@@ -15,7 +15,7 @@
               = f.fields_for "",n do |fn|
                 .row
                   .col-md-6
-                    - if @editable
+                    - if policy(n).edit?
                       = link_to [:edit, :admin, n] do
                         = n.alias
                     - else
@@ -34,7 +34,7 @@
     .mt-3
       = f.form_group
         = f.submit t('actions.save'), class: "btn btn-primary float-end"
-        - if @editable
+        - if policy(Setting).new?
           = link_to [:new, :admin, :setting]  , class: "btn btn-outline-primary" do
             = gi 'plus'
             = t(".create_setting")

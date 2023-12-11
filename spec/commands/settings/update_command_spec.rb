@@ -11,6 +11,10 @@ describe Settings::UpdateCommand, type: :command do
   it { should validate_presence_of(:type) }
   it { should validate_presence_of(:description) }
 
+  before do
+    allow(Rails.env).to receive(:development?).and_return(true)
+  end
+
   it "broadcasts ok" do
     expect{subject.call}.to broadcast(:ok)
   end

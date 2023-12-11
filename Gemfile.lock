@@ -609,8 +609,6 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    russian (0.6.0)
-      i18n (>= 0.5.0)
     sd_notify (0.1.1)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -809,7 +807,6 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-performance
-  russian (~> 0.6.0)
   sd_notify (~> 0.1.1)
   selenium-webdriver
   shoulda-matchers

@@ -2,7 +2,7 @@
   - flash.each do |(type, message)|
     - type = 'bg-success' if type == 'notice' || type == 'success'
     - type = 'bg-danger' if type == 'alert' || type == 'error'
-    .toast.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="#{type}" data-controller="toast" role="alert"
+    .toast.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="#{type}" data-controller="toast" role="alert" data-turbo-temporary="true"
       .d-flex
         .toast-body
           = message
@@ -15,7 +15,7 @@
         - flash.each do |(type, message)|
           - type = 'bg-success' if type == 'notice' || type == 'success'
           - type = 'bg-danger' if type == 'alert' || type == 'error'
-          .toast.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="#{type}" data-controller="toast" role="alert"
+          .toast.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="#{type}" data-controller="toast" role="alert" data-turbo-temporary="true"
             .d-flex
               .toast-body
                 = message
