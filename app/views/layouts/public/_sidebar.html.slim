@@ -1,6 +1,6 @@
 aside#sidebar.sidebar
   .sidebar-wrapper
-    ul#sidebar-nav.sidebar-nav
+    ul#sidebar-nav.sidebar-nav data-turbo-keep-scroll=true
       li.nav-item
         = active_link_to "/", class: "nav-link nav-link-main", active: :exclusive do
           i.bi.bi-house-fill

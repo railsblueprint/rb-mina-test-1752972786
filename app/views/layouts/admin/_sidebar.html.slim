@@ -2,7 +2,7 @@ aside#sidebar.sidebar
   .open-handle data-controller="sidebar" data-action="click->sidebar#hide"
     = bi "caret-left-fill"
   .sidebar-wrapper
-    ul#sidebar-nav.sidebar-nav
+    ul#sidebar-nav.sidebar-nav data-turbo-keep-scroll=true
       li.nav-item
         = active_link_to [:admin, :root], class: "nav-link nav-link-main", active: :exclusive do
           i.bi.bi-grid

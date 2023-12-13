@@ -42,5 +42,21 @@ document.addEventListener("turbo:frame-missing", function(event) {
     }
 })
 
+
+// Keeps scroll position of certain elements between navigations, usefull for long sidebar with scroll
+var scrollPositions = {};
+
+document.addEventListener("turbo:before-render", function(){
+    document.querySelectorAll("[data-turbo-keep-scroll]").forEach(function(element){
+        scrollPositions[element.id] = element.scrollTop;
+    });
+});
+
+document.addEventListener("turbo:render", function(){
+    document.querySelectorAll("[data-turbo-keep-scroll]").forEach(function(element){
+        element.scrollTop = scrollPositions[element.id];
+    });
+});
+
 export default $;
 
