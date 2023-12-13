@@ -145,7 +145,12 @@ group :development do
   gem "ed25519", "~> 1.3"
 
   gem "rubocop", require: false
+  gem "rubocop-capybara", require: false
+  gem "rubocop-factory_bot", require: false
   gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rake", require: false
+  gem "rubocop-rspec", require: false
 
   gem "active_record_query_trace"
   gem "better_errors"

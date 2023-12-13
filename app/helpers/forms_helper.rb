@@ -13,6 +13,7 @@ module FormsHelper
     alert:   "alert-warning"
   }.freeze
 
+  # rubocop:todo Rails/OutputSafety
   def flash_bootstrap
     raw flash.map { |key, value|
       "<div class='alert alert-dismissible #{FLASH_MAP[key.to_sym]}'  role='alert'>
@@ -61,6 +62,7 @@ module FormsHelper
   def fal icon
     raw "<i class='fal fa-#{icon}'></i>"
   end
+  # rubocop:enable Rails/OutputSafety
 
   def copy_field_button
     content_tag "button",
@@ -80,7 +82,8 @@ module FormsHelper
             "data-bs-toggle": "tooltip",
             "data-controller": "field-url",
             "data-local": options[:local],
-            target: "_blank" do
+            target: "_blank",
+            rel: "noreferrer" do
       bi "link-45deg"
     end
   end
@@ -208,7 +211,7 @@ module FormsHelper
   def clipboardable(text=nil, &block)
     text ||= capture(&block) if block
 
-    return unless text.present?
+    return if text.blank?
 
     content_tag(:span) do
       content_tag(:span, text, class: "clipboard_data") +
@@ -218,6 +221,7 @@ module FormsHelper
     end
   end
 
+  # rubocop:todo Rails/OutputSafety
   def delete_button(resource, options={})
     return unless policy(resource).destroy?
 
@@ -300,6 +304,8 @@ module FormsHelper
     end
   end
 
+  # rubocop:enable Rails/OutputSafety
+  #
   def percent value
     return "-" unless value
 

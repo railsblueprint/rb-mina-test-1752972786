@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
     @page = Page.active.find_by(url: "")
-    return unless @page.present?
+    return if @page.blank?
 
     set_meta_from_page
     render :page
@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
 
   def page
     @page = Page.active.find_by(url: params[:path])
-    return render_404 unless @page.present?
+    return render_404 if @page.blank?
 
     set_meta_from_page
   end

@@ -41,7 +41,7 @@ class UsersController < ApplicationController
         @password_command = command
         @command = Users::UpdateCommand.build_from_object(current_user)
 
-        flash.now[:alert] = "Failed to update password."
+        flash.now[:alert] = I18n.t("messages.failed_to_update_password")
         render "form", status: :unprocessable_entity
       end
     end
@@ -52,18 +52,18 @@ class UsersController < ApplicationController
 
     return if @resource.present?
 
-    redirect_to "/users/login", notice: "You must be signed in to edit your profile."
+    redirect_to "/users/login", notice: I18n.t("messages.you_must_be_signed_in_to_edit_your_profile")
   end
 
   def disavow
-    impersonator = User.find_by_id(session[:impersonator_id])
+    impersonator = User.find_by(id: session[:impersonator_id])
     if impersonator.nil?
       session[:impersonator_id] = nil
-      redirect_to "/", info: "You did not have impersonation"
+      redirect_to "/", info: I18n.t("messages.you_did_not_have_impersonation")
     else
       bypass_sign_in impersonator
       session[:impersonator_id] = nil
-      redirect_to "/", success: "You have been disavowed from impersonation"
+      redirect_to "/", success: I18n.t("messages.you_have_been_disavowed")
     end
   end
 end

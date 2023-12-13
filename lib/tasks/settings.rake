@@ -1,11 +1,11 @@
+def escape(value)
+  value.to_s.gsub('"', '\"')
+end
+
 # rubocop:disable Metrics/BlockLength:
 namespace :settings do
   desc "Generate migration for new settings"
   task generate: :environment do
-    def escape(value)
-      value.to_s.gsub('"', '\"')
-    end
-
     code = Setting.unscoped.where(not_migrated: true).where(deleted_at: nil).map { |setting|
       <<-CODEEND
     if Setting.where("alias": "#{setting.alias}").any?
@@ -36,7 +36,7 @@ namespace :settings do
     Setting.unscoped.where.not(deleted_at: nil).delete_all
 
     if code.present?
-      time = Time.now.strftime("%Y%m%d%H%M%S")
+      time = Time.current.strftime("%Y%m%d%H%M%S")
       timestamp = Time.now.to_i
       filename = "#{time}_create_settings#{timestamp}.rb"
       body = <<~CODEEND

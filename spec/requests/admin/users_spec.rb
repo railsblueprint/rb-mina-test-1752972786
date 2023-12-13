@@ -23,7 +23,6 @@ RSpec.describe "Admin Users", type: :request do
       expect(response.body).to include(testuser.last_name)
       expect(response.body).to_not include(otheruser.last_name)
     end
-
   end
 
   describe "GET /admin/users/lookup" do
@@ -48,7 +47,6 @@ RSpec.describe "Admin Users", type: :request do
         pagination: {more: false}
       }.deep_stringify_keys)
     end
-
   end
 
   describe "POST /admin/users/:id/impersonate" do
@@ -70,8 +68,5 @@ RSpec.describe "Admin Users", type: :request do
     it "rememebrs impersonator" do
       expect(session[:impersonator_id]).to eq(admin.id)
     end
-
   end
-
-
 end

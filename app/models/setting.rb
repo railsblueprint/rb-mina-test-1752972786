@@ -1,7 +1,7 @@
 class Setting < ApplicationRecord
   self.inheritance_column = nil
 
-  enum type: [:set, :string, :integer, :boolean, :json]
+  enum type: { set: 0, string: 1, integer: 2, boolean: 3, json: 4 }
 
   if Rails.env.development?
     default_scope -> { where(deleted_at: nil) }

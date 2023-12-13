@@ -35,12 +35,12 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
     def update
       update_command.call_for(params, context) do |command|
         command.on(:ok) do |item|
-          flash[:success] = "Successfully updated"
+          flash[:success] = I18n.t("admin.common.successfully_updated")
           redirect_to after_update_path(item)
         end
         command.on(:invalid, :abort) do |errors|
           @command = command
-          flash.now[:error] = errors[:base].to_sentence.presence || "Failed to update item"
+          flash.now[:error] = errors[:base].to_sentence.presence || I18n.t("admin.common.failed_to_update_item")
           render :edit, status: :unprocessable_entity
         end
         command.on(:unauthorized) do
@@ -53,12 +53,12 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
     def create
       create_command.call_for(params, context) do |command|
         command.on(:ok) do |item|
-          flash[:success] = "Successfully created"
+          flash[:success] = I18n.t("admin.common.successfully_created")
           redirect_to after_create_path(item)
         end
         command.on(:invalid, :abort) do |errors|
           @command = command
-          flash.now[:error] = errors[:base].to_sentence.presence || "Failed to create item"
+          flash.now[:error] = errors[:base].to_sentence.presence || I18n.t("admin.coomon.failed_to_create_item")
           render :new, status: :unprocessable_entity
         end
         command.on(:unauthorized) do

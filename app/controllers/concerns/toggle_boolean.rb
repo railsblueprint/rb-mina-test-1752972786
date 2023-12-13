@@ -17,9 +17,9 @@ module ToggleBoolean
     load_resource
     if policy(@resource).update?
       @resource.update!(field => !@resource.send(field))
-      flash.now[:success] = "Updated successfully"
+      flash.now[:success] = t("admin.common.successfully_updated")
     else
-      flash.now[:alert] = "You are not authorized to perform this action."
+      flash.now[:alert] = t("admin.common.not_authorized")
     end
 
     respond_to do |format|

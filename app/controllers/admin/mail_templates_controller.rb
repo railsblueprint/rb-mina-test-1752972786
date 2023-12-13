@@ -23,8 +23,8 @@ class Admin::MailTemplatesController < Admin::CrudController
   def preview
     template = MailTemplate.find(params[:id])
 
-    body = template.body
+    body = template.body.html_safe # rubocop:disable Rails/OutputSafety
 
-    render html: body.html_safe, layout: "layouts/mail/#{template.layout}"
+    render html: body, layout: "layouts/mail/#{template.layout}"
   end
 end

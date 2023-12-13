@@ -12,7 +12,7 @@ class Admin::CrudController < Admin::Controller
   end
 
   def filter_boolean field
-    return unless params[field].present?
+    return if params[field].blank?
 
     @resources = if params[field] == "nil"
                    @resources.where(field => nil)

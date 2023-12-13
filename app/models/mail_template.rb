@@ -8,7 +8,7 @@ class MailTemplate < ApplicationRecord
   scope :search, ->(q) { where("alias like :q or subject like :q ", q: "%#{q}%") }
 
   def self.available_layouts
-    Dir.entries("#{Rails.root}/app/views/layouts/mail").reject { |f|
+    Rails.root.join("app/views/layouts/mail").entries.map(&:to_s).reject { |f|
       f.start_with?(".")
     }.map(&it.split(".").first)
   end

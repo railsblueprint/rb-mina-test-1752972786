@@ -1,11 +1,11 @@
+def escape(value)
+  value.to_s.gsub('"', '\"').gsub(/\n/m, "\\n\" \\\n          \"")
+end
+
 # rubocop:disable Metrics/BlockLength:
 namespace :mail_templates do
   desc "Generate migration for new mail_templates"
   task generate: :environment do
-    def escape(value)
-      value.to_s.gsub('"', '\"').gsub(/\n/m, "\\n\" \\\n          \"")
-    end
-
     code = MailTemplate.unscoped.where(not_migrated: true).where(deleted_at: nil).map { |template|
       <<-CODEEND
     unless MailTemplate.where("alias": "#{template.alias}").any?
@@ -29,7 +29,7 @@ namespace :mail_templates do
     MailTemplate.unscoped.where.not(deleted_at: nil).delete_all
 
     if code.present?
-      time = Time.now.strftime("%Y%m%d%H%M%S")
+      time = Time.current.strftime("%Y%m%d%H%M%S")
       timestamp = Time.now.to_i
       filename = "#{time}_create_mail_templates#{timestamp}.rb"
       body = <<~CODEEND

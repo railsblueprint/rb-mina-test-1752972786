@@ -7,7 +7,7 @@ class Admin::DashboardController < Admin::Controller
 
   def search
     breadcrumb "Global search", url_for
-    return unless params[:q].present?
+    return if params[:q].blank?
 
     @results = PgSearch.multisearch(params[:q]).includes(:searchable).page(params[:page])
   end

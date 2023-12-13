@@ -33,6 +33,7 @@ module ApplicationHelper
     turbo_stream_action_tag("replace", target: "flash", template: component(:toastr_flash))
   end
 
+  # rubocop:todo Rails/OutputSafety
   def paginator collection
     raw <<~PAGINATOR
       <div class="paginator">
@@ -49,4 +50,5 @@ module ApplicationHelper
       </div>
     PAGINATOR
   end
+  # rubocop:enable Rails/OutputSafety
 end

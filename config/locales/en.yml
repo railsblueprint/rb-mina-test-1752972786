@@ -14,6 +14,10 @@ en:
       item_delete_unauthorized: "You are not authorized to delete this item"
       item_create_unauthorized: "You are not authorized to create this item"
       item_update_unauthorized: "You are not authorized to update this item"
+      successfully_updated: "Successfully updated"
+      failed_to_update_item: "Failed to update item"
+      successfully_created: "Successfully created"
+      not_authorized: "You are not authorized to perform this action"
     crud:
       header:
         search_placeholder: "Type for search"
@@ -179,6 +183,8 @@ en:
       sidebar: "Sidebar"
       url: "Url"
       title: "Title"
+    coomon:
+      failed_to_create_item: "Failed to create item"
   activerecord:
     attributes:
       setting:
@@ -220,6 +226,10 @@ en:
     failed_to_copy: "Failed to copy"
     you_cannot_access_this_page: "You cannot access this page"
     you_cannot_peform_this_action: "You cannot peform this action"
+    failed_to_update_password: "Failed to update password."
+    you_must_be_signed_in_to_edit_your_profile: "You must be signed in to edit your profile."
+    you_did_not_have_impersonation: "You did not have impersonation"
+    you_have_been_disavowed: "You have been disavowed from impersonation"
   you_have_unsaved_changes: "You have unsaved changes. Don't forget to run 'rake settings:generate' to generate data migration"
   action:
     delete: "Delete"
@@ -277,3 +287,6 @@ en:
           other: "Displaying <b>all %{count}</b> %{entry_name}"
       more_pages:
         display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
+  common:
+    no_access_to_page: "You cannot access this page"
+    successfully_updated: "Successfully updated"

@@ -15,7 +15,7 @@ class Admin::Controller < ApplicationController
   def check_admin_role
     return if current_user.admin?
 
-    flash[:alert] = "You cannot access this page"
+    flash[:alert] = I18n.t("common.no_access_to_page")
     redirect_to "/"
   end
 end

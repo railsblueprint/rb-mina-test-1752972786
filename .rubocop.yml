@@ -1,6 +1,11 @@
 require:
   - rubocop-performance
-
+  - rubocop-factory_bot
+  - rubocop-capybara
+  - rubocop-rails
+  - rubocop-rake
+  - rubocop-rspec
+  
 AllCops:
   TargetRubyVersion: 3.2
   Include:
@@ -161,6 +166,7 @@ Metrics/ModuleLength:
 Metrics/BlockLength:
   Exclude:
     - "**/*_spec.rb"
+    - "**/*.rake"
     - Gemfile
 
 Naming/MemoizedInstanceVariableName:
@@ -173,4 +179,16 @@ Style/FrozenStringLiteralComment:
   Enabled: false
   
 Style/ClassAndModuleChildren:
+  Enabled: false  
+  
+Rails/SkipsModelValidations:
+  Enabled: false
+  
+Rails/SquishedSQLHeredocs:  
+  Enabled: false
+  
+Rails/HelperInstanceVariable:
+  Enabled: false
+  
+Rails/HasAndBelongsToMany:
   Enabled: false  
