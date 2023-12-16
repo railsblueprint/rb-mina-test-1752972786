@@ -9,6 +9,8 @@ RSpec.describe Crud::DestroyCommand, type: :command do
           @id = "123"
         end
 
+        def errors = ActiveModel::Errors.new(self)
+
         def destroy = true
       end
     )
@@ -75,8 +77,6 @@ RSpec.describe Crud::DestroyCommand, type: :command do
       end
 
       it "broadcasts invalid" do
-        pp subject.valid?
-
         expect{subject.call}.to broadcast(:invalid)
       end
     end

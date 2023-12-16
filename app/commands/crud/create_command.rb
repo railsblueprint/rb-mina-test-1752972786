@@ -11,7 +11,8 @@ module Crud
 
       return if @resource.persisted?
 
-      errors.add(:base, :failed, message: @resource.errors.full_messages.to_sentence)
+      errors.copy!(@resource.errors)
+
       abort_command
     end
 

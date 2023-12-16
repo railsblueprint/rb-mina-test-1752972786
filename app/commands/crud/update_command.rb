@@ -15,7 +15,7 @@ module Crud
     def update_resource
       return if resource.update(resource_attributes)
 
-      errors.add(:base, :failed, message: resource.errors.full_messages.to_sentence)
+      errors.copy!(resource.errors)
       abort_command
     end
 

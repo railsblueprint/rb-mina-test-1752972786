@@ -33,6 +33,14 @@ $s2bs5-clear-icon: str-replace($btn-close-bg, #{$btn-close-color}, #{shade-color
   z-index: 10000;
 }
 
+.toast-body.details {
+  border-top: 1px solid white;
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
 .cm-editor{
   background-color: white;
   min-height: 20em;

@@ -132,7 +132,6 @@ RSpec.describe "Admin Settings", type: :request do
         expect(response).to redirect_to(admin_settings_path)
       end
       it "shows success message" do
-        pp flash
         expect(flash[:alert]).to be_present
       end
     end

@@ -3,6 +3,11 @@ en:
     sessions:
       new:
         login_to_your_account: "Login to your account"
+  errors:
+    messages:
+      restrict_dependent_destroy:
+        has_one: "Cannot delete record because a dependent %{record} exists"
+        has_many: "Cannot delete record because dependent %{record} exist"
   admin_filtered_search_component:
     search_placeholder: Type for search
   admin:
@@ -11,13 +16,15 @@ en:
       'yes': "Sí"
       'no': "No"
       search_btn: "Search"
-      item_delete_unauthorized: "You are not authorized to delete this item"
-      item_create_unauthorized: "You are not authorized to create this item"
-      item_update_unauthorized: "You are not authorized to update this item"
-      successfully_updated: "Successfully updated"
-      failed_to_update_item: "Failed to update item"
-      successfully_created: "Successfully created"
+      item_delete_unauthorized: "You are not authorized to delete this %{record}"
+      item_create_unauthorized: "You are not authorized to create this %{record}"
+      item_update_unauthorized: "You are not authorized to update this %{record}"
+      successfully_updated: "Successfully updated %{record}"
+      failed_to_update_item: "Failed to update %{record}"
+      successfully_created: "Successfully created %{record}"
       not_authorized: "You are not authorized to perform this action"
+      failed_to_create_item: "Failed to create %{record}"
+      failed_to_delete_item: "Failed to delete %{record}"
     crud:
       header:
         search_placeholder: "Type for search"
@@ -183,8 +190,6 @@ en:
       sidebar: "Sidebar"
       url: "Url"
       title: "Title"
-    coomon:
-      failed_to_create_item: "Failed to create item"
   activerecord:
     attributes:
       setting:

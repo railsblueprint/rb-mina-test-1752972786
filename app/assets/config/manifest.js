@@ -7,6 +7,6 @@
 //= link_tree ../../../node_modules/remixicon
 //= link_tree ../../../node_modules/@stimulus_reflex/polyfills
 
-//= link frontend.js
+//- link frontend.js
 //- link mail/foundation_emails.css
 //= link admin.js

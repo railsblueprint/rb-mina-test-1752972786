@@ -123,7 +123,9 @@ class BaseCommand < Dry::Struct
 
   class BaseError < StandardError
     attr_accessor :errors
-    def initialize(errors = nil)
+
+    def initialize(errors=nil)
+      super()
       @errors = errors
     end
 
@@ -132,11 +134,10 @@ class BaseCommand < Dry::Struct
     end
   end
 
-  class AbortCommand < BaseError ; end
-  class Invalid < BaseError ; end
-  class Stale < BaseError ; end
-  class Unauthorized < BaseError ; end
-
+  class AbortCommand < BaseError; end
+  class Invalid < BaseError; end
+  class Stale < BaseError; end
+  class Unauthorized < BaseError; end
 
   include Wisper::Publisher
   include ActiveSupport::Tryable
@@ -274,7 +275,7 @@ class BaseCommand < Dry::Struct
 
   # sets empty listeners to avoif raising exceptions
   def no_exceptions!
-    on(:invalid, :abort, :stale,:unauthorized){}
+    on(:invalid, :abort, :stale, :unauthorized) {} # rubocop:disable Lint/EmptyBlock
     self
   end
 
@@ -311,18 +312,21 @@ class BaseCommand < Dry::Struct
   def broadcast_unauthorized
     broadcast(:unauthorized)
     raise Unauthorized unless local_registrations.any?(&it.on.include?(:unauthorized))
+
     true
   end
 
   def broadcast_invalid
     broadcast(:invalid, errors)
     raise Invalid.new(errors) unless local_registrations.any?(&it.on.include?(:invalid))
+
     true
   end
 
   def broadcast_stale
     broadcast(:stale)
     raise Stale unless local_registrations.any?(&it.on.include?(:stale))
+
     true
   end
 

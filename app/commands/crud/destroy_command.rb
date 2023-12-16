@@ -11,7 +11,7 @@ module Crud
     end
 
     def destroy_resource
-      resource.destroy || abort_command
+      resource.destroy || (errors.copy!(resource.errors) && abort_command)
     end
 
     memoize def resource

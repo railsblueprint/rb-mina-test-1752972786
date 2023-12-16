@@ -17,10 +17,10 @@ import "select2"
 console.log("loaded application_admin")
 
 $(function() {
-  var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-  var toastList = toastElList.map(function (toastEl) {
-    $(toastEl).toast("show");
-  })
+  // var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+  // var toastList = toastElList.map(function (toastEl) {
+  //   $(toastEl).toast("show");
+  // })
 
   $("[data-bs-toggle=\"tooltip\"]").tooltip();
 
