@@ -10,6 +10,8 @@ RSpec.describe Crud::CreateCommand, type: :command do
       def self.create(...)
         new(...)
       end
+
+      def persisted? = true
     end
     )
 
@@ -31,9 +33,17 @@ RSpec.describe Crud::CreateCommand, type: :command do
       allow_any_instance_of(SampleModelPolicy).to receive(:create?).and_return(false)
     end
 
-    it "broadcasts unauthorized event" do
-      expect(subject).to broadcast(:unauthorized)
-      subject.call
+    it "raises unathorized error" do
+      expect{subject.call}.to raise_exception(BaseCommand::Unauthorized)
+    end
+
+    context "when listener present" do
+      before do
+        subject.on(:unauthorized){}
+      end
+      it "broadcasts unauthorized event" do
+        expect{subject.call}.to broadcast(:unauthorized)
+      end
     end
   end
 

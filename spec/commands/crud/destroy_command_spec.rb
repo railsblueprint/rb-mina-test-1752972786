@@ -30,7 +30,7 @@ RSpec.describe Crud::DestroyCommand, type: :command do
     allow(SampleModel).to receive(:find_by).and_return(resource)
   end
 
-  subject { SampleModels::DestroyCommand.new(id: resource.id, current_user: user) }
+  subject { SampleModels::DestroyCommand.new(id: resource.id, current_user: user).no_exceptions! }
 
   context "when user has not enough permissions" do
     before do
@@ -61,7 +61,7 @@ RSpec.describe Crud::DestroyCommand, type: :command do
     end
 
     context "when id is not given" do
-      subject { SampleModels::DestroyCommand.new(id: nil, current_user: user) }
+      subject { SampleModels::DestroyCommand.new(id: nil, current_user: user).no_exceptions! }
 
       it "broadcasts invalid" do
         expect(subject).to broadcast(:invalid)
@@ -75,8 +75,9 @@ RSpec.describe Crud::DestroyCommand, type: :command do
       end
 
       it "broadcasts invalid" do
-        expect(subject).to broadcast(:invalid)
-        subject.call
+        pp subject.valid?
+
+        expect{subject.call}.to broadcast(:invalid)
       end
     end
   end

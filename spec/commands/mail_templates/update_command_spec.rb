@@ -5,7 +5,7 @@ describe MailTemplates::UpdateCommand, type: :command do
   let(:mail_template) {create(:mail_template, alias: "new_template")}
   let(:params) { {alias: "new_template", layout: "simple", body: "zzz"} }
 
-  let(:subject) { described_class.new(params.merge(id: mail_template.id, current_user: admin)) }
+  let(:subject) { described_class.new(params.merge(id: mail_template.id, current_user: admin)).no_exceptions! }
 
   it { should validate_presence_of(:alias) }
   it { should validate_presence_of(:layout) }

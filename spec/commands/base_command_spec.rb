@@ -185,9 +185,20 @@ describe BaseCommand do
           allow(subject).to receive(:valid?).and_return(false)
         end
 
-        it "calls broadcast_invalid" do
-          expect(subject).to receive(:broadcast_invalid)
-          subject.call
+        it "raises error when there is no listener added" do
+          expect { subject.call }.to raise_exception(BaseCommand::Invalid)
+        end
+
+        context "when there is a listener added" do
+          before do
+            subject.on(:invalid){}
+          end
+          it "broadcasts invalid" do
+            expect { subject.call }.to broadcast(:invalid)
+          end
+          it "raises no error" do
+            expect { subject.call }.to_not raise_exception
+          end
         end
       end
 
@@ -241,14 +252,24 @@ describe BaseCommand do
     context "when command is aborted using #abort_command" do
       subject { class_with_abort.new }
 
-      it "broadcasts :abort with errors" do
-        expect { subject.call }.to broadcast(:abort, subject.errors)
+      it "raises exception when there is no listener to abort" do
+        expect { subject.call }.to raise_error(BaseCommand::AbortCommand)
       end
 
-      it "prevents further execution" do
-        allow(subject).to receive(:second_step).and_call_original
-        subject.call
-        expect(subject).to_not have_received(:second_step)
+      context "when abort listener is added" do
+        before do
+          subject.on(:abort ) {}
+        end
+        it "broadcasts :abort with errors" do
+          expect { subject.call }.to broadcast(:abort, subject.errors)
+          expect { subject.call }.to_not raise_error
+        end
+
+        it "prevents further execution" do
+          allow(subject).to receive(:second_step).and_call_original
+          subject.call
+          expect(subject).to_not have_received(:second_step)
+        end
       end
     end
   end

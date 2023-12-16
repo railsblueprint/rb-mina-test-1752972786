@@ -3,7 +3,7 @@ describe MailTemplates::CreateCommand, type: :command do
   let(:user) {create(:user)}
   let(:params) { {alias: "new_template", layout: "simple", body: "zzz"} }
 
-  let(:subject) { described_class.new(params.merge(current_user: admin)) }
+  let(:subject) { described_class.new(params.merge(current_user: admin)).no_exceptions! }
 
   it { should validate_presence_of(:alias) }
   it { should validate_presence_of(:layout) }

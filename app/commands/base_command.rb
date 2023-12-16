@@ -121,8 +121,22 @@ class BaseCommand < Dry::Struct
     include Dry::Types(default: :params)
   end
 
-  class AbortCommand < StandardError
+  class BaseError < StandardError
+    attr_accessor :errors
+    def initialize(errors = nil)
+      @errors = errors
+    end
+
+    def inspect
+      errors&.full_messages&.to_sentence.presence || "#{self.class.name}(no errors added)"
+    end
   end
+
+  class AbortCommand < BaseError ; end
+  class Invalid < BaseError ; end
+  class Stale < BaseError ; end
+  class Unauthorized < BaseError ; end
+
 
   include Wisper::Publisher
   include ActiveSupport::Tryable
@@ -258,6 +272,12 @@ class BaseCommand < Dry::Struct
     self.class.transactional?
   end
 
+  # sets empty listeners to avoif raising exceptions
+  def no_exceptions!
+    on(:invalid, :abort, :stale,:unauthorized){}
+    self
+  end
+
   def call
     if transactional?
       ActiveRecord::Base.transaction do
@@ -268,6 +288,8 @@ class BaseCommand < Dry::Struct
     end
   rescue AbortCommand
     broadcast(:abort, errors)
+
+    raise AbortCommand.new(errors) unless local_registrations.any?(&it.on.include?(:abort))
   end
 
   def call_without_transaction
@@ -288,14 +310,20 @@ class BaseCommand < Dry::Struct
 
   def broadcast_unauthorized
     broadcast(:unauthorized)
+    raise Unauthorized unless local_registrations.any?(&it.on.include?(:unauthorized))
+    true
   end
 
   def broadcast_invalid
     broadcast(:invalid, errors)
+    raise Invalid.new(errors) unless local_registrations.any?(&it.on.include?(:invalid))
+    true
   end
 
   def broadcast_stale
     broadcast(:stale)
+    raise Stale unless local_registrations.any?(&it.on.include?(:stale))
+    true
   end
 
   def abort_command

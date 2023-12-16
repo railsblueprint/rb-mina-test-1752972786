@@ -11,7 +11,7 @@ describe Settings::MassUpdateCommand, type: :command do
     setting3.id => {value: "value3"},
   } }
 
-  let(:subject) { described_class.new(settings: params, current_user: admin) }
+  let(:subject) { described_class.new(settings: params, current_user: admin).no_exceptions! }
 
   context "with invalid params" do
     let(:params) { {

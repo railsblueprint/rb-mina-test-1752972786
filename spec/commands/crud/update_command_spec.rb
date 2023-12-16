@@ -33,7 +33,7 @@ RSpec.describe Crud::UpdateCommand, type: :command do
     allow(SampleModel).to receive(:find_by).and_return(resource)
   end
 
-  subject { SampleModels::UpdateCommand.new(id: resource.id, current_user: user, attr: "123") }
+  subject { SampleModels::UpdateCommand.new(id: resource.id, current_user: user, attr: "123").no_exceptions! }
 
   it "returns true as persisted?" do
     expect(subject.persisted?).to eq(true)
@@ -79,7 +79,7 @@ RSpec.describe Crud::UpdateCommand, type: :command do
     end
 
     context "when id is not given" do
-      subject { SampleModels::UpdateCommand.new(id: nil, current_user: user, attr: "123") }
+      subject { SampleModels::UpdateCommand.new(id: nil, current_user: user, attr: "123").no_exceptions! }
 
       it "broadcasts invalid" do
         expect(subject).to broadcast(:invalid)
