@@ -246,19 +246,6 @@ module FormsHelper
     end
   end
 
-  def action_button(resource, action, options={})
-    return unless policy(resource).send(:"#{action}?")
-
-    css_class = options[:class] || "btn-outline-secondary"
-
-    link_to [action, :admin, resource],
-            class:              "btn #{css_class} #{'btn-sm' if options[:small]} " \
-                                "#{'stretched-link' if options[:stretched]}",
-            "data-turbo-frame": "_top" do
-      "#{bi(options[:icon])} #{t("actions.#{action}")}".html_safe
-    end
-  end
-
   def impersonate_button(resource, options={})
     return unless policy(resource).impersonate?
 
@@ -303,19 +290,6 @@ module FormsHelper
       "#{bi('eye')} #{t('actions.details')}".html_safe
     end
   end
-
   # rubocop:enable Rails/OutputSafety
-  #
-  def percent value
-    return "-" unless value
-
-    "%d %%" % (value * 100)
-  end
-
-  def price value
-    return "-" unless value
-
-    "%.2f" % value
-  end
 end
 # rubocop:enable Metrics/ModuleLength

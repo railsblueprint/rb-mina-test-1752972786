@@ -15,6 +15,7 @@ module ToggleBoolean
   # rubocop:disable Metrics/AbcSize
   def toggle_boolean_action field
     load_resource
+
     if policy(@resource).update?
       @resource.update!(field => !@resource.send(field))
       flash.now[:success] = t("admin.common.successfully_updated")
@@ -28,7 +29,7 @@ module ToggleBoolean
                                                                               locals:  { field: }) +
                              turbo_stream.append("flash_inner", component_to_string(:toastr_flash, append: true))
       }
-      format.html { redirect_to action: :show }
+      format.html { redirect_to(action: :show) }
     end
   end
   # rubocop:enable Metrics/AbcSize
