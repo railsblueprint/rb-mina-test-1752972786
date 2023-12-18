@@ -3,11 +3,9 @@ class Setting < ApplicationRecord
 
   enum type: { set: 0, string: 1, integer: 2, boolean: 3, json: 4 }
 
-  if Rails.env.development?
-    default_scope -> { where(deleted_at: nil) }
+  default_scope -> { where(deleted_at: nil) } if Rails.env.development?
 
-    scope :unsaved, -> { unscoped.where.not(deleted_at: nil).or(Setting.where(not_migrated: true)) }
-  end
+  scope :unsaved, -> { unscoped.where.not(deleted_at: nil).or(Setting.where(not_migrated: true)) }
 
   # returns array of possible types with translation for use in selects in forms
   def self.type_enum

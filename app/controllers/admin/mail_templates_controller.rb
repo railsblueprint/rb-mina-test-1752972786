@@ -3,7 +3,9 @@ class Admin::MailTemplatesController < Admin::CrudController
 
   def index
     super
-    @unsaved = MailTemplate.unsaved.any? if Rails.env.development?
+    return unless Rails.env.development?
+
+    @unsaved = MailTemplate.unsaved.any?
   end
 
   def filter_resources

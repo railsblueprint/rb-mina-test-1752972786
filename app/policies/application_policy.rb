@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def scope
-    Pundit.policy_scope!(user, record.class)
+    Pundit.policy_scope!(user, resource.class)
   end
 
   # enable default view actions
@@ -26,7 +26,7 @@ class ApplicationPolicy
     @user&.admin? || @user&.superadmin?
   end
 
-  def respond_to_missing? _name
+  def respond_to_missing? ...
     true
   end
 

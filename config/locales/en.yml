@@ -175,6 +175,7 @@ en:
     mail_templates:
       index:
         page_title: "Mail templates"
+      header:
         you_have_unsaved_changes: "You have unsaved changes. Don't forget to run 'rake mail_templates:generate' to generate data migration"
       new:
         page_title: "New template"

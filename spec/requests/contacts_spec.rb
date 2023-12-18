@@ -17,7 +17,7 @@ RSpec.describe "Contacts page", type: :request do
       end
 
       it "prefills form" do
-        expect(response.body).to have_tag "input", with: { name: "contact_us_command[name]", value: user.full_name }
+        expect(response.body).to have_tag "input", with: { name: "contact_us_command[name]", value: CGI.escapeHTML(user.full_name) }
         expect(response.body).to have_tag "input", with: { name: "contact_us_command[email]", value: user.email }
       end
     end

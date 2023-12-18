@@ -1,5 +1,5 @@
 RSpec.describe ApplicationPolicy do
-  let(:object) { double("test object") }
+  let(:object) { double("test object", all: "all_objects", class: double(all: "all_objects")) }
   subject { described_class }
 
   context "for guest user" do
@@ -51,6 +51,37 @@ RSpec.describe ApplicationPolicy do
 
     permissions :index?, :show?, :edit?, :create?, :update?, :destroy?, :unknown?  do
       it { is_expected.to permit(user, object) }
+    end
+  end
+
+  describe "#respond_to_missing?" do
+    let(:user) { build(:user, :admin) }
+    subject { described_class.new(user, object) }
+
+    it "should respond to all methods" do
+      expect(subject).to respond_to(:junk?)
+    end
+  end
+
+  describe "#scope" do
+    let(:user) { build(:user, :admin) }
+    subject { described_class.new(user, object) }
+
+    before do
+      stub_const("RSpec::Mocks::DoublePolicy", Class.new(ApplicationPolicy))
+    end
+
+    it "should respond to all methods" do
+      expect(subject.scope).to eq("all_objects")
+    end
+  end
+
+  describe "Scope" do
+    let(:user) { build(:user, :admin) }
+    let(:scope) { described_class::Scope.new(user, object) }
+
+    it "returns all objects" do
+      expect(scope.resolve).to eq("all_objects")
     end
   end
 end

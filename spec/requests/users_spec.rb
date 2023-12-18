@@ -59,7 +59,7 @@ RSpec.describe "Users pages", type: :request do
       end
 
       it "renders user's profile" do
-        expect(response.body).to include(other_user.full_name)
+        expect(response.body).to include(CGI.escapeHTML(other_user.full_name))
       end
 
       it "does not include link to edit profile" do
