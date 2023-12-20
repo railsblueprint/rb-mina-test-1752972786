@@ -57,6 +57,9 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'example.com' }
 
+  # add a view directory for the anonymous controller tests
+  config.paths['app/views'] << "spec/test_views"
+
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
   # config.web_console.development_only = false

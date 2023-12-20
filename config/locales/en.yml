@@ -17,7 +17,7 @@ en:
       'no': "No"
       search_btn: "Search"
       item_delete_unauthorized: "You are not authorized to delete this %{record}"
-      item_create_unauthorized: "You are not authorized to create this %{record}"
+      item_create_unauthorized: "You are not authorized to create %{record}"
       item_update_unauthorized: "You are not authorized to update this %{record}"
       successfully_updated: "Successfully updated %{record}"
       failed_to_update_item: "Failed to update %{record}"
