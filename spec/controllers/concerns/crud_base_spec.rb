@@ -226,5 +226,4 @@ RSpec.describe CrudBase, type: :controller do
       expect(flash[:error]).to eq "You are not authorized to delete this Page"
     end
   end
-
 end

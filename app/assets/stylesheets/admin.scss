@@ -27,6 +27,7 @@ $s2bs5-clear-icon: str-replace($btn-close-bg, #{$btn-close-color}, #{shade-color
 
 @import "theme";
 
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css";
 
 
 .toast-container {

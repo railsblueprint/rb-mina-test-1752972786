@@ -5,6 +5,7 @@ describe Admin::DesignSystem::IconsController, type: :controller do
 
   %w[
     bootstrap
+    fontawesome
     remix
     boxicons
   ].each do |chart_type|

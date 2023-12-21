@@ -29,40 +29,45 @@ module FormsHelper
             <div id="modal-window-content" class="modal-content">
         </div></div></div>'
   end
+  # rubocop:enable Rails/OutputSafety
 
   # Bootstrap icon helper
   def bi icon, options={}
-    raw "<i class='bi bi-#{icon} #{options[:class]}'></i>"
+    content_tag :i, nil, class: "bi bi-#{icon} #{options[:class]}"
   end
 
   # Bootstrap icon helper - using svg format
-  def bi_svg icon
-    raw "<svg class=\"bi bi-#{icon}\" width=\"32\" height=\"32\" viewBox=\"0 0 20 20\" " \
-        "fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">"
+  def bi_svg icon, options={}
+    content_tag :svg, nil, class: "bi bi-#{icon} #{options}",
+                width: "32", height: "32", viewBox: "0 0 20 20",
+                fill: "currentColor", xmlns: "http://www.w3.org/2000/svg"
   end
 
   # Glyphicons icon helpers
-  def gi icon
-    raw "<span class='glyphicon glyphicon-#{icon}'></span>"
+  def gi icon, options={}
+    content_tag :span, nil, class: "glyphicon glyphicon-#{icon} #{options[:class]}"
   end
 
   # Fontawsome icon helpers
-  def fa icon
-    raw "<i class='fa fa-#{icon}'></i>"
+  def fa icon, options={}
+    content_tag :i, nil, class: "fa fa-#{icon} #{options[:class]}"
   end
 
-  def fas icon
-    raw "<i class='fas fa-#{icon}'></i>"
+  def fab icon, options={}
+    content_tag :i, nil, class: "fab fa-#{icon} #{options[:class]}"
   end
 
-  def far icon
-    raw "<i class='far fa-#{icon}'></i>"
+  def fas icon, options={}
+    content_tag :i, nil, class: "fas fa-#{icon} #{options[:class]}"
   end
 
-  def fal icon
-    raw "<i class='fal fa-#{icon}'></i>"
+  def far icon, options={}
+    content_tag :i, nil, class: "far fa-#{icon} #{options[:class]}"
   end
-  # rubocop:enable Rails/OutputSafety
+
+  def fal icon, options={}
+    content_tag :i, nil, class: "fal fa-#{icon} #{options[:class]}"
+  end
 
   def copy_field_button
     content_tag "button",

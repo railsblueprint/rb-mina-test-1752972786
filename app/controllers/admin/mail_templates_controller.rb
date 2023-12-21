@@ -1,5 +1,7 @@
 class Admin::MailTemplatesController < Admin::CrudController
-  # before_action {check_role :superadmin}
+  def actions_with_resource
+    base_actions_with_resource + [:preview]
+  end
 
   def index
     super
@@ -23,10 +25,19 @@ class Admin::MailTemplatesController < Admin::CrudController
   end
 
   def preview
-    template = MailTemplate.find(params[:id])
+    parsed = Liquid::Template.parse(@resource.body)
+    body = parsed.render(template_attributes, {}).html_safe # rubocop:disable Rails/OutputSafety
 
-    body = template.body.html_safe # rubocop:disable Rails/OutputSafety
+    render html: body, layout: "layouts/mail/#{@resource.layout}"
+  end
 
-    render html: body, layout: "layouts/mail/#{template.layout}"
+  def template_attributes
+    @resource.body.scan(/{{(.*?)}}/).map { |match|
+      unfold_string_to_hash(match.first.strip.split("."), match.first.strip)
+    }.reduce(&:deep_merge)
+  end
+
+  def unfold_string_to_hash(key_parts, value)
+    { key_parts[0] => key_parts.size == 1 ? value : unfold_string_to_hash(key_parts[1..], value) }
   end
 end

@@ -134,6 +134,8 @@ en:
         remix: "Remix Icons"
         boxicons: "Boxicons"
         color_system: "Color system"
+        fontawesome: "FontAwesome icons"
+      global_search: "Global search"
     settings:
       page_title: "System settings"
       index:
@@ -216,6 +218,7 @@ en:
     open_link_in_new_tab: "Open link in new tab"
     impersonate: "Impersonate"
     update_profile: "Update profile"
+    preview: "Preview"
   locales:
     en:
       short: EN

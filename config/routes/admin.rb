@@ -67,6 +67,7 @@ namespace :admin do
     get 'charts/apexcharts'
     get 'charts/echarts'
     get 'icons/bootstrap'
+    get 'icons/fontawesome'
     get 'icons/remix'
     get 'icons/boxicons'
   end

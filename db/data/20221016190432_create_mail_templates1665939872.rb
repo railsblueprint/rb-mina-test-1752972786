@@ -3,7 +3,7 @@ class CreateMailTemplates1665939872 < ActiveRecord::Migration[7.0]
     unless MailTemplate.where("alias": "contact_form_message").any?
       MailTemplate.create(
         "alias":     "contact_form_message",
-        subject:      "[Rails Blueprint] New contact form message: {{subject}}",
+        subject:      "[{% t platform.name %}] New contact form message: {{subject}}",
         body:         "<p>Hi!</p>\n" \
           "\n" \
           "<p>New contact from message recieved: </p>\n" \

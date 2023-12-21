@@ -6,7 +6,7 @@
       = f.form_group class: "pb-0" do
         .d-flex.justify-content-between
           .actions
-            = f.submit t("actions.save"), class: "btn btn-primary"
+            = f.submit t("actions.save"), class: "btn btn-primary", "data-controller": "save-submit"
             = link_to t("actions.cancel"), params[:return_to] || search_url || { action: :index }, class: "btn btn-outline-secondary"
           .actions
             = delete_button(@resource)
