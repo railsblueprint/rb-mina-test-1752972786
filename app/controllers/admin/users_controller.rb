@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::CrudController
   def actions_with_resource
-    super + [:impersonate]
+    super + [:impersonate, :cancel_email_change, :resend_confirmation_email]
   end
 
   # rubocop:disable Metrics/AbcSize, Style/GuardClause
@@ -36,5 +36,15 @@ class Admin::UsersController < Admin::CrudController
     session[:impersonator_id] = current_user.id
     bypass_sign_in @resource
     redirect_to "/", flash: { success: "You have successfully impersonated #{current_user.full_name}" }
+  end
+
+  def cancel_email_change
+    @resource.update!(unconfirmed_email: nil)
+    redirect_to url_for({ action: :edit }), success: "Email change cancelled"
+  end
+
+  def resend_confirmation_email
+    @resource.send_confirmation_instructions
+    redirect_to url_for({ action: :edit }), success: "Confirmation email resent to #{@resource.unconfirmed_email}"
   end
 end

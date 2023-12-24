@@ -193,8 +193,11 @@ en:
       sidebar: "Sidebar"
       url: "Url"
       title: "Title"
-  activerecord:
+  activemodel:
     attributes:
+      user:
+        first_name: "Name first"
+        unconfirmed_email: "Unconfirmed email"
       setting:
         types:
           set: Set
@@ -219,6 +222,8 @@ en:
     impersonate: "Impersonate"
     update_profile: "Update profile"
     preview: "Preview"
+    cancel_change: "Cancel change"
+    resend_confirmation_email: "Resend confirmation email"
   locales:
     en:
       short: EN
@@ -227,9 +232,9 @@ en:
       short: RU
       full: Russian
   messages:
-    successfully_created: "Successfully created"
-    successfully_deleted: "Successfully deleted"
-    successfully_updated: "Successfully updated"
+    successfully_created: "Successfully created  %{resource}"
+    successfully_deleted: "Successfully deleted  %{resource}"
+    successfully_updated: "Successfully updated  %{resource}"
     delete_confirmation: "Are you sure you want to delete this %{resource}?"
     copied_successfully: "Copied successfully"
     failed_to_copy: "Failed to copy"

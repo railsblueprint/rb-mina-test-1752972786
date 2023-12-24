@@ -13,7 +13,7 @@ class Setting < ApplicationRecord
   end
 
   def self.type_text type
-    I18n.t(type, scope: [:activerecord, :attributes, :setting, :types])
+    I18n.t(type, scope: [:activemodel, :attributes, :setting, :types])
   end
 
   def type_text

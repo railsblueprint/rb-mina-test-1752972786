@@ -23,6 +23,8 @@ namespace :admin do
     end
     member do
       post :impersonate
+      post :cancel_email_change
+      post :resend_confirmation_email
     end
   end
 

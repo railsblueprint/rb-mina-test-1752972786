@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   patch "/profile/edit", to: "users#update"
   post "/profile/password", to: "users#password", as: :update_password
   post "/profile/disavow",  to: "users#disavow", as: :disavow
+  post "/profile/cancel_email_change", to: "users#cancel_email_change", as: :cancel_email_change
+  post "/profile/resend_confirmation_email", to: "users#resend_confirmation_email", as: :resend_confirmation_email
 
   get "/contacts", to: "contacts#new"
   post "/contacts", to: "contacts#create"

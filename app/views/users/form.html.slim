@@ -12,6 +12,14 @@
               = f.text_field :company
               = f.text_field :phone
               = f.text_field :email
+              - if @resource && @resource.unconfirmed_email.present?
+                = f.form_group :unconfirmed_email, label: {show: true}
+                  .actions.pt-1
+                    div.pt-1.ms-2
+                      = @resource.unconfirmed_email
+                    = link_to t('actions.resend_confirmation_email'), {action: :resend_confirmation_email}, class: "btn btn-sm btn-primary", "data-turbo-method": :post
+                    = link_to t('actions.cancel_change'), {action: :cancel_email_change}, class: "btn btn-sm btn-outline-primary", "data-turbo-method": :post
+
               = f.text_field :country
               = f.text_field :address
               = f.text_area :about, rows: 4

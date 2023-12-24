@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :load_resource, only: [:edit, :update, :password]
+  before_action :load_resource, only: [:edit, :update, :password, :cancel_email_change, :resend_confirmation_email]
   def show
     @resource = params[:id].present? ? User.find(params[:id]) : current_user
     render_404 unless @resource
@@ -65,5 +65,15 @@ class UsersController < ApplicationController
       session[:impersonator_id] = nil
       redirect_to "/", success: I18n.t("messages.you_have_been_disavowed")
     end
+  end
+
+  def cancel_email_change
+    @resource.update!(unconfirmed_email: nil)
+    redirect_to url_for({ action: :edit }), success: "Email change cancelled"
+  end
+
+  def resend_confirmation_email
+    @resource.send_confirmation_instructions
+    redirect_to url_for({ action: :edit }), success: "Confirmation email resent to #{@resource.unconfirmed_email}"
   end
 end
