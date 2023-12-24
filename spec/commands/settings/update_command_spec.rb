@@ -1,25 +1,24 @@
 describe Settings::UpdateCommand, type: :command do
-
-  let(:admin) {create(:user,:superadmin)}
-  let(:user) {create(:user)}
-  let(:setting) {create(:setting)}
-  let(:params) { {alias: "zzzz", type: "string", value: "value", description: "description"} }
+  let(:admin) { create(:user, :superadmin) }
+  let(:user) { create(:user) }
+  let(:setting) { create(:setting) }
+  let(:params) { { alias: "zzzz", type: "string", value: "value", description: "description" } }
 
   let(:subject) { described_class.new(params.merge(id: setting.id, current_user: admin)) }
-
-  it { should validate_presence_of(:alias) }
-  it { should validate_presence_of(:type) }
-  it { should validate_presence_of(:description) }
 
   before do
     allow(Rails.env).to receive(:development?).and_return(true)
   end
 
+  it { is_expected.to validate_presence_of(:alias) }
+  it { is_expected.to validate_presence_of(:type) }
+  it { is_expected.to validate_presence_of(:description) }
+
   it "broadcasts ok" do
-    expect{subject.call}.to broadcast(:ok)
+    expect { subject.call }.to broadcast(:ok)
   end
 
-  it "updates setting attributes", aggregate_failures: true do
+  it "updates setting attributes", :aggregate_failures do
     subject.call
     setting.reload
 

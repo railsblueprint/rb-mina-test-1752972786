@@ -1,5 +1,5 @@
 RSpec.describe "Admin Users", type: :request do
-  options = {resource: :users, model: User, has_filters: true}
+  options = { resource: :users, model: User, has_filters: true }
   include_examples "admin crud controller", options
   include_examples "admin crud controller paginated index", options
   include_examples "admin crud controller show resource", options
@@ -21,7 +21,7 @@ RSpec.describe "Admin Users", type: :request do
 
     it "finds user" do
       expect(response.body).to include(testuser.last_name)
-      expect(response.body).to_not include(otheruser.last_name)
+      expect(response.body).not_to include(otheruser.last_name)
     end
   end
 
@@ -43,8 +43,8 @@ RSpec.describe "Admin Users", type: :request do
 
     it "finds user and renders json" do
       expect(JSON.parse(response.body)).to eq({
-        results: [{id: testuser.id, text: testuser.full_name}],
-        pagination: {more: false}
+        results:    [{ id: testuser.id, text: testuser.full_name }],
+        pagination: { more: false }
       }.deep_stringify_keys)
     end
   end

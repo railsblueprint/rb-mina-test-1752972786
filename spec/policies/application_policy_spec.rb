@@ -1,6 +1,7 @@
 RSpec.describe ApplicationPolicy do
-  let(:object) { double("test object", all: "all_objects", class: double(all: "all_objects")) }
   subject { described_class }
+
+  let(:object) { double("test object", all: "all_objects", class: double(all: "all_objects")) }
 
   context "for guest user" do
     let(:user) { nil }
@@ -10,7 +11,7 @@ RSpec.describe ApplicationPolicy do
     end
 
     permissions :edit?, :create?, :update?, :destroy?, :unknown? do
-      it { is_expected.to_not permit(user, object) }
+      it { is_expected.not_to permit(user, object) }
     end
   end
 
@@ -22,7 +23,7 @@ RSpec.describe ApplicationPolicy do
     end
 
     permissions :edit?, :create?, :update?, :destroy?, :unknown? do
-      it { is_expected.to_not permit(user, object) }
+      it { is_expected.not_to permit(user, object) }
     end
   end
 
@@ -34,14 +35,14 @@ RSpec.describe ApplicationPolicy do
     end
 
     permissions :edit?, :create?, :update?, :destroy?, :unknown? do
-      it { is_expected.to_not permit(user, object) }
+      it { is_expected.not_to permit(user, object) }
     end
   end
 
   context "for admin user" do
     let(:user) { build(:user, :admin) }
 
-    permissions :index?, :show?, :edit?, :create?, :update?, :destroy?, :unknown?  do
+    permissions :index?, :show?, :edit?, :create?, :update?, :destroy?, :unknown? do
       it { is_expected.to permit(user, object) }
     end
   end
@@ -49,29 +50,31 @@ RSpec.describe ApplicationPolicy do
   context "for superadmin user" do
     let(:user) { build(:user, :admin) }
 
-    permissions :index?, :show?, :edit?, :create?, :update?, :destroy?, :unknown?  do
+    permissions :index?, :show?, :edit?, :create?, :update?, :destroy?, :unknown? do
       it { is_expected.to permit(user, object) }
     end
   end
 
   describe "#respond_to_missing?" do
-    let(:user) { build(:user, :admin) }
     subject { described_class.new(user, object) }
 
-    it "should respond to all methods" do
+    let(:user) { build(:user, :admin) }
+
+    it "responds to all methods" do
       expect(subject).to respond_to(:junk?)
     end
   end
 
   describe "#scope" do
-    let(:user) { build(:user, :admin) }
     subject { described_class.new(user, object) }
+
+    let(:user) { build(:user, :admin) }
 
     before do
       stub_const("RSpec::Mocks::DoublePolicy", Class.new(ApplicationPolicy))
     end
 
-    it "should respond to all methods" do
+    it "responds to all methods" do
       expect(subject.scope).to eq("all_objects")
     end
   end

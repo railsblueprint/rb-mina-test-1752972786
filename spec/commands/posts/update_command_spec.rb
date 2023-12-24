@@ -1,20 +1,19 @@
 describe Posts::UpdateCommand, type: :command do
-
-  let(:admin) {create(:user,:superadmin)}
-  let(:user) {create(:user)}
-  let(:post) {create(:post)}
-  let(:params) { {title: "Title", body: "Text", user_id: user.id} }
+  let(:admin) { create(:user, :superadmin) }
+  let(:user) { create(:user) }
+  let(:post) { create(:post) }
+  let(:params) { { title: "Title", body: "Text", user_id: user.id } }
 
   let(:subject) { described_class.new(params.merge(id: post.id, current_user: admin)) }
 
-  it { should validate_presence_of(:title) }
-  it { should validate_presence_of(:body) }
+  it { is_expected.to validate_presence_of(:title) }
+  it { is_expected.to validate_presence_of(:body) }
 
   it "broadcasts ok" do
-    expect{subject.call}.to broadcast(:ok)
+    expect { subject.call }.to broadcast(:ok)
   end
 
-  it "updates user attributes", aggregate_failures: true do
+  it "updates user attributes", :aggregate_failures do
     subject.call
     post.reload
 

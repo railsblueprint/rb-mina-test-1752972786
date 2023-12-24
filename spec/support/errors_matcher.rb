@@ -44,10 +44,11 @@ RSpec::Matchers.define :errors_including do |list|
       values = [{ type: values }] if values.is_a?(Symbol) || values.is_a?(Hash)
       values.map! { |value| value.is_a?(Symbol) ? { type: value } : value }
       values.all? { |value|
-        errors.errors.select { |e| e.attribute == key &&
+        errors.errors.any? { |e|
+          e.attribute == key &&
           e.type == value[:type] &&
           (value[:message].blank? || e.message == value[:message])
-        }.present?
+        }
       }
     }
   end
@@ -62,10 +63,11 @@ RSpec::Matchers.define :errors_exactly do |list|
       values = [{ type: values }] if values.is_a?(Symbol) || values.is_a?(Hash)
       values.map! { |value| value.is_a?(Symbol) ? { type: value } : value }
       values.all? { |value|
-        errors.errors.select { |e| e.attribute == key &&
+        errors.errors.any? { |e|
+          e.attribute == key &&
           e.type == value[:type] &&
           (value[:message].blank? || e.message == value[:message])
-        }.present?
+        }
       }
     } && errors.errors.count == list.values.flatten.count
   end

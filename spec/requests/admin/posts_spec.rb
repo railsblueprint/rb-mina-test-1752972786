@@ -1,7 +1,7 @@
 RSpec.describe "Admin Posts", type: :request do
   let(:admin) { create(:user, :admin) }
   let(:moderator) { create(:user, :moderator) }
-  let!(:page_size) {  Post.default_per_page }
+  let!(:page_size) { Post.default_per_page }
 
   options = { resource: :posts, model: Post, has_filters: true }
 
@@ -65,7 +65,8 @@ RSpec.describe "Admin Posts", type: :request do
 
     context "when searching by title" do
       let!(:posts) { create_list(:post, page_size + 15) }
-      let!(:post) {create(:post, title: "___SEARCH__TERM___")}
+      let!(:post) { create(:post, title: "___SEARCH__TERM___") }
+
       before do
         sign_in admin
 
@@ -82,7 +83,8 @@ RSpec.describe "Admin Posts", type: :request do
 
     context "when searching by user" do
       let!(:posts) { create_list(:post, page_size + 15) }
-      let!(:post) {create(:post)}
+      let!(:post) { create(:post) }
+
       before do
         sign_in admin
 
@@ -113,7 +115,7 @@ RSpec.describe "Admin Posts", type: :request do
     end
 
     it "includes link to the user" do
-      expect(response.body).to have_tag("a", with: {href: "/admin/users/#{post.user_id}"})
+      expect(response.body).to have_tag("a", with: { href: "/admin/users/#{post.user_id}" })
       expect(response.body).to include(post.user.full_name)
     end
   end
@@ -124,8 +126,8 @@ RSpec.describe "Admin Posts", type: :request do
     let(:params) {
       {
         post: {
-          title: "new title",
-          body: post.body.to_s,
+          title:   "new title",
+          body:    post.body.to_s,
           user_id: post.user_id
         }
       }
@@ -134,7 +136,7 @@ RSpec.describe "Admin Posts", type: :request do
     before do
       sign_in admin
 
-      patch "/admin/posts/#{post.id}", params: params
+      patch "/admin/posts/#{post.id}", params:
     end
 
     it "redirects to edit page" do
@@ -153,8 +155,8 @@ RSpec.describe "Admin Posts", type: :request do
     let(:params) {
       {
         post: {
-          title: "new title",
-          body: "new body",
+          title:   "new title",
+          body:    "new body",
           user_id: user.id
         }
       }
@@ -163,7 +165,7 @@ RSpec.describe "Admin Posts", type: :request do
     before do
       sign_in admin
 
-      post "/admin/posts", params: params
+      post "/admin/posts", params:
     end
 
     it "renders successfully" do

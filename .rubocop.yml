@@ -14,6 +14,7 @@ AllCops:
     - config.ru
     - lib/**/*.rake
     - app/**/*.rb
+    - spec/**/*.rb
   Exclude:
     - cache
     - 'node_modules/**/*'
@@ -192,3 +193,17 @@ Rails/HelperInstanceVariable:
   
 Rails/HasAndBelongsToMany:
   Enabled: false  
+  
+RSpec/ExampleLength:
+  Enabled: false
+ 
+RSpec/ContextWording:
+  Enabled: false
+  
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+  
+     

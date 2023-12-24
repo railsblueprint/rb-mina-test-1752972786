@@ -15,12 +15,12 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     before do
-      stub_const("TestPolicy" , Class.new(ApplicationPolicy) do
-        def index? = false
-        end)
+      stub_const("TestPolicy", Class.new(ApplicationPolicy) do
+                                 def index? = false
+                               end)
     end
 
-    context 'when condition' do
+    context "when condition" do
       context "get request" do
         it "redirects to root" do
           get :index
@@ -49,8 +49,7 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     it "raises ActionController::RoutingError" do
-      expect{get :index}.to raise_error(ActionController::RoutingError)
+      expect { get :index }.to raise_error(ActionController::RoutingError)
     end
   end
-
 end

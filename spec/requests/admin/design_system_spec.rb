@@ -3,15 +3,14 @@ RSpec.describe "Admin Design system", type: :request do
   let(:moderator) { create(:user, :moderator) }
 
   describe "GET /admin/design_system/colors" do
-
-    context "when not logged in " do
+    context "when not logged in" do
       it "redirects to login page" do
         get "/admin/design_system/colors"
         expect(response).to redirect_to("/users/login")
       end
     end
 
-    context "when does not have enough permissions " do
+    context "when does not have enough permissions" do
       it "redirects to login page" do
         sign_in moderator
 
@@ -29,5 +28,4 @@ RSpec.describe "Admin Design system", type: :request do
       end
     end
   end
-
 end

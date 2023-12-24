@@ -37,7 +37,6 @@ RSpec.describe "Static pages", type: :request do
 
       it "renders default home page" do
         expect(response.body).to include("Test homepage")
-
       end
 
       it "sets title" do
@@ -45,12 +44,11 @@ RSpec.describe "Static pages", type: :request do
       end
 
       it "sets SEO tags" do
-        expect(response.body).to have_tag("meta[name=\"description\"]", with: {content: page.seo_description} )
-        expect(response.body).to have_tag("meta[name=\"keywords\"]", with: {content: "homepage"} )
-        expect(response.body).to have_tag("meta[name=\"seo_title\"]", with: {content: page.seo_title} )
+        expect(response.body).to have_tag("meta[name=\"description\"]", with: { content: page.seo_description })
+        expect(response.body).to have_tag("meta[name=\"keywords\"]", with: { content: "homepage" })
+        expect(response.body).to have_tag("meta[name=\"seo_title\"]", with: { content: page.seo_title })
       end
     end
-
   end
 
   context "arbitrary page" do
@@ -58,7 +56,7 @@ RSpec.describe "Static pages", type: :request do
 
     context "when it does not exist" do
       it "returns http not_found" do
-        expect{get "/#{url}"}.to raise_error(ActionController::RoutingError)
+        expect { get "/#{url}" }.to raise_error(ActionController::RoutingError)
       end
     end
 
@@ -79,7 +77,6 @@ RSpec.describe "Static pages", type: :request do
 
       it "renders default home page" do
         expect(response.body).to include(page.body)
-
       end
 
       it "sets title" do
@@ -87,8 +84,8 @@ RSpec.describe "Static pages", type: :request do
       end
 
       it "sets SEO tags" do
-        expect(response.body).to have_tag("meta[name=\"description\"]", with: {content: page.seo_description} )
-        expect(response.body).to have_tag("meta[name=\"keywords\"]", with: {content: "some, keywords"} )
+        expect(response.body).to have_tag("meta[name=\"description\"]", with: { content: page.seo_description })
+        expect(response.body).to have_tag("meta[name=\"keywords\"]", with: { content: "some, keywords" })
       end
     end
   end

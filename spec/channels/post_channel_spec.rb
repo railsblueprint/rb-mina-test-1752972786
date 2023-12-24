@@ -1,7 +1,5 @@
-require 'rails_helper'
-
-RSpec.describe PostChannel, type: :channel do
-let(:post) { create(:post) }
+RSpec.describe PostChannel do
+  let(:post) { create(:post) }
 
   before do
     stub_connection

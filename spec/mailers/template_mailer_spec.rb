@@ -1,15 +1,16 @@
 RSpec.describe TemplateMailer, type: :mailer do
-  describe 'email' do
+  describe "email" do
     let(:user) { create(:user) }
 
-    let(:mail_template) { create(:mail_template,
-                             alias: "test_email",
-                             subject: "Welcome {{user_name}}",
-                             body: "To our test {{email_name}}!") }
-
+    let(:mail_template) {
+      create(:mail_template,
+             alias:   "test_email",
+             subject: "Welcome {{user_name}}",
+             body:    "To our test {{email_name}}!")
+    }
 
     let(:attachments) { {} }
-    let(:params) { { to: user.email, user_name: "Joe", email_name: "Welcome mail", attachments:} }
+    let(:params) { { to: user.email, user_name: "Joe", email_name: "Welcome mail", attachments: } }
     let(:template_name) { mail_template.alias }
 
     let(:mail) { described_class.email(template_name, params).deliver_now }
@@ -18,28 +19,28 @@ RSpec.describe TemplateMailer, type: :mailer do
       Setting.create!(alias: "sender_email", type: :string, value: "nobody@localhost", description: "Sender email")
     end
 
-    it 'renders the subject' do
+    it "renders the subject" do
       expect(mail.subject).to eq("Welcome Joe")
     end
 
-    it 'renders the receiver email' do
+    it "renders the receiver email" do
       expect(mail.to).to eq([user.email])
     end
 
-    it 'renders the sender email' do
+    it "renders the sender email" do
       expect(mail.from).to eq(["nobody@localhost"])
     end
 
-    it "generates multipart message"  do
-      expect(mail.body.parts.length).to  eq 2
+    it "generates multipart message" do
+      expect(mail.body.parts.length).to eq 2
       expect(mail.body.parts.map(&:content_type)).to eq ["text/plain; charset=UTF-8", "text/html; charset=UTF-8"]
     end
 
-    it 'renders variables into the body' do
+    it "renders variables into the body" do
       expect(mail.body.encoded).to match("Welcome mail")
     end
 
-    it 'sends an email' do
+    it "sends an email" do
       expect { mail }
         .to change { ActionMailer::Base.deliveries.count }.by(1)
     end
@@ -51,7 +52,7 @@ RSpec.describe TemplateMailer, type: :mailer do
         }
       }
 
-      it "generates multipart message"  do
+      it "generates multipart message" do
         # One part is message, second part is attachment
 
         expect(mail.body.parts.length).to eq 2
@@ -77,9 +78,9 @@ RSpec.describe TemplateMailer, type: :mailer do
     context "when template is not found" do
       let(:template_name) { "unknown_template" }
 
-      it 'does not send email' do
+      it "does not send email" do
         expect { mail }
-          .to_not change { ActionMailer::Base.deliveries.count }
+          .not_to(change { ActionMailer::Base.deliveries.count })
       end
 
       it "logs error message" do
@@ -91,7 +92,6 @@ RSpec.describe TemplateMailer, type: :mailer do
         expect(Rollbar).to receive(:error)
         mail
       end
-
     end
   end
 end

@@ -1,15 +1,15 @@
 describe ContactUsCommand, type: :command do
-  let(:params) { {name: "456", email: "abcd@dot.com", subject: "help", message: "me please"} }
+  let(:params) { { name: "456", email: "abcd@dot.com", subject: "help", message: "me please" } }
 
   let(:subject) { described_class.new(params) }
 
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:subject) }
-  it { should validate_presence_of(:message) }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:email) }
+  it { is_expected.to validate_presence_of(:subject) }
+  it { is_expected.to validate_presence_of(:message) }
 
   it "broadcasts ok" do
-    expect{subject.call}.to broadcast(:ok)
+    expect { subject.call }.to broadcast(:ok)
   end
 
   it "sends email" do

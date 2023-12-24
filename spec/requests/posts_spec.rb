@@ -1,7 +1,6 @@
 RSpec.describe "Posts page", type: :request do
   let(:user) { create(:user) }
 
-
   describe "GET /posts" do
     context "when logged in" do
       before do
@@ -101,7 +100,7 @@ RSpec.describe "Posts page", type: :request do
 
   describe "POST /posts" do
     let!(:user) { create(:user) }
-    let(:params) { { post: { title: "title", body: "content" } }}
+    let(:params) { { post: { title: "title", body: "content" } } }
 
     context "when not logged in" do
       before do
@@ -124,20 +123,19 @@ RSpec.describe "Posts page", type: :request do
       end
 
       it "redirect to new post" do
-        expect(response).to redirect_to /\/posts\/.+\/edit/
+        expect(response).to redirect_to(%r{/posts/.+/edit})
       end
 
       it "creates a new post" do
         expect(Post.count).to eq(1)
       end
-
     end
   end
 
   describe "GET /posts/:id" do
     let!(:user) { create(:user) }
     let!(:post) { create(:post, user:) }
-    let(:params) { { post: { title: "title", body: "content" } }}
+    let(:params) { { post: { title: "title", body: "content" } } }
 
     context "when not logged in" do
       before do
@@ -154,13 +152,14 @@ RSpec.describe "Posts page", type: :request do
       end
 
       it "does not show control buttons" do
-        expect(response.body).to_not have_tag(".card.post a", text: "Edit", count: 1)
-        expect(response.body).to_not have_tag(".card.post a", text: /Delete/, count: 1)
+        expect(response.body).not_to have_tag(".card.post a", text: "Edit", count: 1)
+        expect(response.body).not_to have_tag(".card.post a", text: /Delete/, count: 1)
       end
     end
 
     context "when logged in as a different user" do
       let(:other_user) { create(:user) }
+
       before do
         sign_in other_user
         get "/posts/#{post.id}"
@@ -176,11 +175,10 @@ RSpec.describe "Posts page", type: :request do
       end
 
       it "does not show control buttons" do
-        expect(response.body).to_not have_tag(".card.post a", text: "Edit", count: 1)
-        expect(response.body).to_not have_tag(".card.post a", text: /Delete/, count: 1)
+        expect(response.body).not_to have_tag(".card.post a", text: "Edit", count: 1)
+        expect(response.body).not_to have_tag(".card.post a", text: /Delete/, count: 1)
       end
     end
-
 
     context "when logged as author" do
       before do
@@ -211,9 +209,6 @@ RSpec.describe "Posts page", type: :request do
         get "/posts/#{post.id}"
       end
 
-      it "renders the post" do
-        expect(response).to be_successful
-      end
       before do
         sign_in moderator
         get "/posts/#{post.id}"
@@ -235,11 +230,10 @@ RSpec.describe "Posts page", type: :request do
     end
   end
 
-
   describe "GET /posts/:id/edit" do
     let!(:user) { create(:user) }
     let!(:post) { create(:post, user:) }
-    let(:params) { { post: { title: "title", body: "content" } }}
+    let(:params) { { post: { title: "title", body: "content" } } }
 
     context "when not logged in" do
       before do
@@ -253,6 +247,7 @@ RSpec.describe "Posts page", type: :request do
 
     context "when logged in as a different user" do
       let(:other_user) { create(:user) }
+
       before do
         sign_in other_user
         get "/posts/#{post.id}/edit"
@@ -262,7 +257,6 @@ RSpec.describe "Posts page", type: :request do
         expect(response).to redirect_to(root_path)
       end
     end
-
 
     context "when logged as author" do
       before do

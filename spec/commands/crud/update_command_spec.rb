@@ -1,8 +1,11 @@
 require "rails_helper"
 RSpec.describe Crud::UpdateCommand, type: :command do
+  subject { SampleModels::UpdateCommand.new(id: resource.id, current_user: user, attr: "123").no_exceptions! }
+
   before do
     stub_const("SampleModel", Class.new do
       attr_reader :id
+
       def self.find_by(...); end
 
       def initialize
@@ -14,26 +17,18 @@ RSpec.describe Crud::UpdateCommand, type: :command do
       def errors
         ActiveModel::Errors.new(self)
       end
-    end
-    )
+    end)
 
     stub_const("SampleModels", Module.new)
     stub_const("SampleModels::UpdateCommand", Class.new(Crud::UpdateCommand) do
-        attribute :attr, Crud::UpdateCommand::Types::String
-      end
-    )
-    stub_const("SampleModelPolicy" , Class.new(ApplicationPolicy))
-  end
-
-
-  let(:resource) {SampleModel.new}
-  let(:user) { create(:user) }
-
-  before do
+                                                attribute :attr, Crud::UpdateCommand::Types::String
+                                              end)
+    stub_const("SampleModelPolicy", Class.new(ApplicationPolicy))
     allow(SampleModel).to receive(:find_by).and_return(resource)
   end
 
-  subject { SampleModels::UpdateCommand.new(id: resource.id, current_user: user, attr: "123").no_exceptions! }
+  let(:resource) { SampleModel.new }
+  let(:user) { create(:user) }
 
   it "returns true as persisted?" do
     expect(subject.persisted?).to eq(true)
@@ -57,7 +52,7 @@ RSpec.describe Crud::UpdateCommand, type: :command do
 
     context "when resource is found" do
       it "calls update method on resource" do
-        expect(resource).to receive(:update).with({attr: "123"}).and_return(true)
+        expect(resource).to receive(:update).with({ attr: "123" }).and_return(true)
         subject.call
       end
 
@@ -69,7 +64,7 @@ RSpec.describe Crud::UpdateCommand, type: :command do
 
     context "when update fails" do
       before do
-        allow(resource).to receive(:update).with({attr: "123"}).and_return(false)
+        allow(resource).to receive(:update).with({ attr: "123" }).and_return(false)
       end
 
       it "broadcasts abort" do

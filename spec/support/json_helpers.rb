@@ -4,9 +4,8 @@ module JsonHelpers
   end
 
   def jsonapi_headers
-    { 'Content-Type' => 'application/vnd.api+json' }
+    { "Content-Type" => "application/vnd.api+json" }
   end
-
 end
 
 RSpec.configure do |config|

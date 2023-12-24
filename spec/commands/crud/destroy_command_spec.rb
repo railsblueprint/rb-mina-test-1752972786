@@ -1,38 +1,33 @@
 require "rails_helper"
 RSpec.describe Crud::DestroyCommand, type: :command do
+  subject { SampleModels::DestroyCommand.new(id: resource.id, current_user: user).no_exceptions! }
+
   before do
     stub_const("SampleModel", Class.new do
-        attr_reader :id
-        def self.find_by(...); end
+                                attr_reader :id
 
-        def initialize
-          @id = "123"
-        end
+                                def self.find_by(...); end
 
-        def errors = ActiveModel::Errors.new(self)
+                                def initialize
+                                  @id = "123"
+                                end
 
-        def destroy = true
-      end
-    )
+                                def errors = ActiveModel::Errors.new(self)
+
+                                def destroy = true
+                              end)
 
     stub_const("SampleModels", Module.new)
     stub_const("SampleModels::DestroyCommand", Class.new(Crud::DestroyCommand))
 
-    stub_const("SampleModelPolicy" , Class.new(ApplicationPolicy) do
-        def destroy?; end
-      end
-    )
-  end
-
-
-  let(:resource) {SampleModel.new}
-  let(:user) { create(:user) }
-
-  before do
+    stub_const("SampleModelPolicy", Class.new(ApplicationPolicy) do
+                                      def destroy?; end
+                                    end)
     allow(SampleModel).to receive(:find_by).and_return(resource)
   end
 
-  subject { SampleModels::DestroyCommand.new(id: resource.id, current_user: user).no_exceptions! }
+  let(:resource) { SampleModel.new }
+  let(:user) { create(:user) }
 
   context "when user has not enough permissions" do
     before do
@@ -77,7 +72,7 @@ RSpec.describe Crud::DestroyCommand, type: :command do
       end
 
       it "broadcasts invalid" do
-        expect{subject.call}.to broadcast(:invalid)
+        expect { subject.call }.to broadcast(:invalid)
       end
     end
   end

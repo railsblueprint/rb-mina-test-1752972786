@@ -10,7 +10,7 @@ RSpec.describe "Admin Settings", type: :request do
       load "app/models/setting.rb"
     end
 
-    include_examples "admin crud controller", {resource: :settings, model: Setting, prefix: "config"}
+    include_examples "admin crud controller", { resource: :settings, model: Setting, prefix: "config" }
   end
 
   describe "GET /admin/config/settings" do
@@ -24,12 +24,14 @@ RSpec.describe "Admin Settings", type: :request do
       end
 
       it "does not show edit settings links" do
-        expect(response.body).to_not have_tag("a", with: {href: edit_admin_setting_path(setting_group)})
-        expect(response.body).to_not have_tag("a", with: {href: edit_admin_setting_path(setting)})
+        expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting_group) })
+        expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting) })
       end
+
       it "does not shows create settings button" do
-        expect(response.body).to_not have_tag("a", with: {href: new_admin_setting_path})
+        expect(response.body).not_to have_tag("a", with: { href: new_admin_setting_path })
       end
+
       it "shows save button" do
         expect(response.body).to have_tag("input[type=submit]")
       end
@@ -54,42 +56,51 @@ RSpec.describe "Admin Settings", type: :request do
           before do
             get "/admin/config/settings"
           end
+
           it "shows edit settings links" do
-            expect(response.body).to have_tag("a", with: {href: edit_admin_setting_path(setting_group)})
-            expect(response.body).to have_tag("a", with: {href: edit_admin_setting_path(setting)})
+            expect(response.body).to have_tag("a", with: { href: edit_admin_setting_path(setting_group) })
+            expect(response.body).to have_tag("a", with: { href: edit_admin_setting_path(setting) })
           end
+
           it "shows create settings button" do
-            expect(response.body).to have_tag("a", with: {href: new_admin_setting_path})
+            expect(response.body).to have_tag("a", with: { href: new_admin_setting_path })
           end
         end
 
         context "and editing disabled" do
-          let!(:disable_settings_editor) { create(:setting, type: :boolean, set: setting_group, alias: "disable_settings_editor", value: true) }
+          let!(:disable_settings_editor) {
+            create(:setting, type: :boolean, set: setting_group, alias: "disable_settings_editor", value: true)
+          }
 
           before do
             get "/admin/config/settings"
           end
+
           it "does not show edit settings links" do
-            expect(response.body).to_not have_tag("a", with: {href: edit_admin_setting_path(setting_group)})
-            expect(response.body).to_not have_tag("a", with: {href: edit_admin_setting_path(setting)})
+            expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting_group) })
+            expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting) })
           end
+
           it "does not shows create settings button" do
-            expect(response.body).to_not have_tag("a", with: {href: new_admin_setting_path})
+            expect(response.body).not_to have_tag("a", with: { href: new_admin_setting_path })
           end
         end
       end
+
       context "when user is simpleadmin" do
         let(:admin) { create(:user, :admin) }
 
         before do
           get "/admin/config/settings"
         end
+
         it "does not show edit settings links" do
-          expect(response.body).to_not have_tag("a", with: {href: edit_admin_setting_path(setting_group)})
-          expect(response.body).to_not have_tag("a", with: {href: edit_admin_setting_path(setting)})
+          expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting_group) })
+          expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting) })
         end
+
         it "does not shows create settings button" do
-          expect(response.body).to_not have_tag("a", with: {href: new_admin_setting_path})
+          expect(response.body).not_to have_tag("a", with: { href: new_admin_setting_path })
         end
       end
     end
@@ -108,13 +119,15 @@ RSpec.describe "Admin Settings", type: :request do
       let(:params) {
         {
           settings: {
-            setting.id => {value: "new value"}
+            setting.id => { value: "new value" }
           }
         }
       }
+
       it "redirects to the settings page" do
         expect(response).to redirect_to(admin_settings_path)
       end
+
       it "shows success messakge" do
         expect(flash[:success]).to be_present
       end
@@ -124,18 +137,18 @@ RSpec.describe "Admin Settings", type: :request do
       let(:params) {
         {
           settings: {
-            "123" => {value: "new value"}
+            "123" => { value: "new value" }
           }
         }
       }
+
       it "redirects to the settings page" do
         expect(response).to redirect_to(admin_settings_path)
       end
+
       it "shows success message" do
         expect(flash[:alert]).to be_present
       end
     end
-
-
   end
 end

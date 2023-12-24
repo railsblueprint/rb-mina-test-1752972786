@@ -2,8 +2,8 @@ RSpec.describe "Contacts page", type: :request do
   let(:user) { create(:user) }
 
   let!(:mail_template) { create(:mail_template, alias: "contact_form_message") }
-  let!(:sender_email) { create(:setting, alias: "sender_email", value: "support@test.com")}
-  let!(:contact_form_receivers) { create(:setting, alias: "contact_form_receivers", value: "support@test.com")}
+  let!(:sender_email) { create(:setting, alias: "sender_email", value: "support@test.com") }
+  let!(:contact_form_receivers) { create(:setting, alias: "contact_form_receivers", value: "support@test.com") }
 
   describe "GET /contacts" do
     context "when logged in" do
@@ -17,7 +17,9 @@ RSpec.describe "Contacts page", type: :request do
       end
 
       it "prefills form" do
-        expect(response.body).to have_tag "input", with: { name: "contact_us_command[name]", value: CGI.escapeHTML(user.full_name) }
+        expect(response.body).to have_tag "input",
+                                          with: { name:  "contact_us_command[name]",
+                                                  value: CGI.escapeHTML(user.full_name) }
         expect(response.body).to have_tag "input", with: { name: "contact_us_command[email]", value: user.email }
       end
     end
@@ -34,13 +36,14 @@ RSpec.describe "Contacts page", type: :request do
     let(:params) {
       {
         contact_us_command: {
-          name: "Test user",
-          email: "mail@test.com",
+          name:    "Test user",
+          email:   "mail@test.com",
           subject: "subject",
           message: "message"
         }
       }
     }
+
     before do
       post "/contacts", params:
     end
@@ -57,10 +60,11 @@ RSpec.describe "Contacts page", type: :request do
       let(:params) {
         {
           contact_us_command: {
-            name: "Test user",
+            name: "Test user"
           }
         }
       }
+
       before do
         post "/contacts", params:
       end
@@ -75,13 +79,14 @@ RSpec.describe "Contacts page", type: :request do
       let(:params) {
         {
           contact_us_command: {
-            name: "Test user",
-            email: "mail@test.com",
+            name:    "Test user",
+            email:   "mail@test.com",
             subject: "subject",
             message: "message"
           }
         }
       }
+
       before do
         post "/contacts", as: :turbo_stream, params:
       end
@@ -96,13 +101,15 @@ RSpec.describe "Contacts page", type: :request do
         let(:params) {
           {
             contact_us_command: {
-              name: "Test user",
+              name: "Test user"
             }
           }
         }
+
         before do
           post "/contacts", as: :turbo_stream, params:
         end
+
         it "returns http success" do
           expect(response).to be_successful
           expect(response).to render_template(layout: false)
@@ -110,6 +117,5 @@ RSpec.describe "Contacts page", type: :request do
         end
       end
     end
-
   end
 end

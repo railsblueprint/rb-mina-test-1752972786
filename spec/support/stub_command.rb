@@ -10,8 +10,8 @@
 
 def stub_command(klass, event_to_publish, *published_event_args, &block)
   stub_const(klass, Class.new(BaseCommand) do
-    define_method(:call) do |*args|
-      block.call(errors) if block_given?
+    define_method(:call) do |*_args|
+      yield(errors) if block
       if published_event_args.any?
         publish(event_to_publish, *published_event_args)
       else
@@ -20,8 +20,9 @@ def stub_command(klass, event_to_publish, *published_event_args, &block)
     end
 
     # stub all methods
-    def self.method_missing ... ; end
-    def method_missing ... ; end
-
+    def self.method_missing ...; end
+    def self.respond_to_missing?(...) = true
+    def method_missing ...; end
+    def respond_to_missing?(...) = true
   end)
 end

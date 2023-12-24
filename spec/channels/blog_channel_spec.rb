@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe BlogChannel, type: :channel do
+RSpec.describe BlogChannel do
   before do
     stub_connection
   end

@@ -1,13 +1,11 @@
-RSpec.shared_examples 'toggle boolean' do |options|
-
+RSpec.shared_examples "toggle boolean" do |options|
   resource_name = options[:resource]
   attribute = options[:attribute]
-  slug = [options[:prefix],options[:resource]].compact.join("/")
+  slug = [options[:prefix], options[:resource]].compact.join("/")
 
   let(:factory) { resource_name.to_s.singularize.to_sym }
   let(:admin) { create(:user, :superadmin) }
   let(:user) { create(:user) }
-
 
   describe "PATCH /admin/#{slug}/:id/toggle_#{attribute}" do
     let!(:resource) { create(factory) }
@@ -20,11 +18,13 @@ RSpec.shared_examples 'toggle boolean' do |options|
       end
 
       it "redirect to the page" do
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
 
       it "changes attribute value" do
-        expect{patch("/admin/#{slug}/#{resource.id}/toggle_#{attribute}")}.to change{resource.reload.send(attribute)}
+        expect { patch("/admin/#{slug}/#{resource.id}/toggle_#{attribute}") }.to(change {
+                                                                                   resource.reload.send(attribute)
+                                                                                 })
       end
     end
 
@@ -36,13 +36,14 @@ RSpec.shared_examples 'toggle boolean' do |options|
       end
 
       it "redirect to the page" do
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
 
       it "does not change attribute value" do
-        expect{patch("/admin/#{slug}/#{resource.id}/toggle_#{attribute}")}.to_not change{resource.reload.send(attribute)}
+        expect { patch("/admin/#{slug}/#{resource.id}/toggle_#{attribute}") }.not_to(change {
+                                                                                       resource.reload.send(attribute)
+                                                                                     })
       end
     end
-
   end
 end

@@ -1,8 +1,11 @@
 require "rails_helper"
 RSpec.describe Crud::CreateCommand, type: :command do
+  subject { SampleModels::CreateCommand.new(attr: "qwe", current_user: user) }
+
   before do
     stub_const("SampleModel", Class.new do
       attr_reader :id
+
       def initialize(...)
         @id = "123"
       end
@@ -12,21 +15,17 @@ RSpec.describe Crud::CreateCommand, type: :command do
       end
 
       def persisted? = true
-    end
-    )
+    end)
 
     stub_const("SampleModels", Module.new)
     stub_const("SampleModels::CreateCommand", Class.new(Crud::CreateCommand) do
       attribute :attr, Crud::UpdateCommand::Types::String
-    end
-    )
-    stub_const("SampleModelPolicy" , Class.new(ApplicationPolicy))
+    end)
+    stub_const("SampleModelPolicy", Class.new(ApplicationPolicy))
   end
 
-  let(:resource) {SampleModel.new}
+  let(:resource) { SampleModel.new }
   let(:user) { create(:user) }
-
-  subject { SampleModels::CreateCommand.new(attr: "qwe", current_user: user) }
 
   context "when user has not enough permissions" do
     before do
@@ -34,15 +33,16 @@ RSpec.describe Crud::CreateCommand, type: :command do
     end
 
     it "raises unathorized error" do
-      expect{subject.call}.to raise_exception(BaseCommand::Unauthorized)
+      expect { subject.call }.to raise_exception(BaseCommand::Unauthorized)
     end
 
     context "when listener present" do
       before do
-        subject.on(:unauthorized){}
+        subject.on(:unauthorized) {}
       end
+
       it "broadcasts unauthorized event" do
-        expect{subject.call}.to broadcast(:unauthorized)
+        expect { subject.call }.to broadcast(:unauthorized)
       end
     end
   end
@@ -53,13 +53,13 @@ RSpec.describe Crud::CreateCommand, type: :command do
     end
 
     context "when resource is found" do
-      it "calls create method " do
-        expect(SampleModel).to receive(:create).with({attr: "qwe"}).and_return(double(persisted?: true))
+      it "calls create method" do
+        expect(SampleModel).to receive(:create).with({ attr: "qwe" }).and_return(double(persisted?: true))
         subject.call
       end
 
       it "broadcasts ok" do
-        allow(SampleModel).to receive(:create).with({attr: "qwe"}).and_return(double(persisted?: true))
+        allow(SampleModel).to receive(:create).with({ attr: "qwe" }).and_return(double(persisted?: true))
         expect(subject).to broadcast(:ok)
         subject.call
       end

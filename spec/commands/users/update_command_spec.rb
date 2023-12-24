@@ -1,8 +1,7 @@
 describe Users::UpdateCommand, type: :command do
-
-  let(:admin) {create(:user,:superadmin)}
-  let(:user) {create(:user)}
-  let(:params) { {first_name: "John", last_name: "Doe", email: "abcd@dot.com"} }
+  let(:admin) { create(:user, :superadmin) }
+  let(:user) { create(:user) }
+  let(:params) { { first_name: "John", last_name: "Doe", email: "abcd@dot.com" } }
 
   let(:subject) { described_class.call(params.merge(id: user.id, current_user: admin)) }
 
@@ -11,10 +10,10 @@ describe Users::UpdateCommand, type: :command do
   end
 
   it "broadcasts ok" do
-    expect{subject}.to broadcast(:ok)
+    expect { subject }.to broadcast(:ok)
   end
 
-  it "updates user attributes", aggregate_failures: true do
+  it "updates user attributes", :aggregate_failures do
     subject
     user.reload
 
@@ -22,7 +21,7 @@ describe Users::UpdateCommand, type: :command do
     expect(user.last_name).to eq("Doe")
   end
 
-  it "stores new email to unconfirmed_email", aggregate_failures: true do
+  it "stores new email to unconfirmed_email", :aggregate_failures do
     subject
     user.reload
 

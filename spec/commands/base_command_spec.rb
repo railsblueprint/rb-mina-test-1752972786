@@ -83,7 +83,7 @@ describe BaseCommand do
       let(:command_class) { WithArgumentsCommand }
       let(:expected_params) {
         {
-          a: "abc",
+          a:       "abc",
           user_id: "123"
         }
       }
@@ -94,15 +94,16 @@ describe BaseCommand do
       }
       let(:params) {
         ActionController::Parameters.new({
-                                           with_arguments_command: {
-                                             a: "abc",
-                                             other: "def"
-                                           },
-                                           ignored_params: {
-                                             key: "123"
-                                           }
-                                         })
+          with_arguments_command: {
+            a:     "abc",
+            other: "def"
+          },
+          ignored_params:         {
+            key: "123"
+          }
+        })
       }
+
       it "permits correct parameters" do
         expect(subject).to receive(:call).with(expected_params)
         subject.call_for params, additional_params
@@ -129,13 +130,13 @@ describe BaseCommand do
           expect_any_instance_of(subject).to receive(:preflight_nok?).and_return(true)
           allow(DelayedCommandJob).to receive(:perform_later)
           subject.call_later
-          expect(DelayedCommandJob).to_not have_received(:perform_later)
+          expect(DelayedCommandJob).not_to have_received(:perform_later)
         end
       end
     end
 
-    context "when invoked  with delay" do
-      let (:delay) { { wait: 5.minutes } }
+    context "when invoked with delay" do
+      let(:delay) { { wait: 5.minutes } }
 
       it "instanciates the command and checks preflight conditions" do
         expect_any_instance_of(subject).to receive(:preflight_nok?)
@@ -156,7 +157,7 @@ describe BaseCommand do
           expect_any_instance_of(subject).to receive(:preflight_nok?).and_return(true)
           allow(DelayedCommandJob).to receive(:set).and_call_original
           subject.call_at(delay)
-          expect(DelayedCommandJob).to_not have_received(:set)
+          expect(DelayedCommandJob).not_to have_received(:set)
         end
       end
     end
@@ -191,13 +192,15 @@ describe BaseCommand do
 
         context "when there is a listener added" do
           before do
-            subject.on(:invalid){}
+            subject.on(:invalid) {}
           end
+
           it "broadcasts invalid" do
             expect { subject.call }.to broadcast(:invalid)
           end
+
           it "raises no error" do
-            expect { subject.call }.to_not raise_exception
+            expect { subject.call }.not_to raise_exception
           end
         end
       end
@@ -211,7 +214,7 @@ describe BaseCommand do
         end
 
         it "does not raise exception" do
-          expect { subject }.to_not raise_exception
+          expect { subject }.not_to raise_exception
         end
       end
 
@@ -241,10 +244,11 @@ describe BaseCommand do
 
       context "when command is non-transactional" do
         subject { non_transactional_class.new }
+
         it "runs without transaction block" do
           allow(ActiveRecord::Base).to receive(:transaction).and_call_original
           subject.call
-          expect(ActiveRecord::Base).to_not have_received(:transaction)
+          expect(ActiveRecord::Base).not_to have_received(:transaction)
         end
       end
     end
@@ -258,17 +262,18 @@ describe BaseCommand do
 
       context "when abort listener is added" do
         before do
-          subject.on(:abort ) {}
+          subject.on(:abort) {}
         end
+
         it "broadcasts :abort with errors" do
           expect { subject.call }.to broadcast(:abort, subject.errors)
-          expect { subject.call }.to_not raise_error
+          expect { subject.call }.not_to raise_error
         end
 
         it "prevents further execution" do
           allow(subject).to receive(:second_step).and_call_original
           subject.call
-          expect(subject).to_not have_received(:second_step)
+          expect(subject).not_to have_received(:second_step)
         end
       end
     end

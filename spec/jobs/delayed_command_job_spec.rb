@@ -19,9 +19,10 @@ describe DelayedCommandJob do
 
   context "when called with correct class" do
     it "does not log errors" do
-      expect(Rails.logger).to_not receive(:error)
+      expect(Rails.logger).not_to receive(:error)
       run
     end
+
     it "calls command" do
       expect_any_instance_of(klass).to receive(:call)
       run
@@ -30,6 +31,7 @@ describe DelayedCommandJob do
 
   context "when called with wrong class" do
     let(:klass) { WrongClass }
+
     it "logs error" do
       expect(Rails.logger).to receive(:error)
       run
@@ -65,6 +67,7 @@ describe DelayedCommandJob do
 
   context "when command broadcasts :aborted" do
     let(:klass) { AbortedCommand }
+
     it "logs error" do
       expect(Rails.logger).to receive(:error).twice
       run

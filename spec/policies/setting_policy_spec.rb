@@ -1,18 +1,19 @@
 RSpec.describe SettingPolicy do
+  subject { described_class }
+
   let(:klass) { Setting }
   let(:object) { build(:setting) }
-  subject { described_class }
 
   [:guest, :basic, :moderator, :admin].each do |role|
     context "for guest user" do
       let(:user) { role == :guest ? nil : create(:user, role) }
 
       permissions :index?, :new?, :create? do
-        it { is_expected.to_not permit(user, klass) }
+        it { is_expected.not_to permit(user, klass) }
       end
 
       permissions :show?, :edit?, :update?, :destroy? do
-        it { is_expected.to_not permit(user, object) }
+        it { is_expected.not_to permit(user, object) }
       end
     end
   end
@@ -21,15 +22,15 @@ RSpec.describe SettingPolicy do
     let(:user) { build(:user, :superadmin) }
 
     context "non-dev environment" do
-      permissions :index?  do
+      permissions :index? do
         it { is_expected.to permit(user, klass) }
       end
 
-      permissions :new?, :create?  do
-        it { is_expected.to_not permit(user, klass) }
+      permissions :new?, :create? do
+        it { is_expected.not_to permit(user, klass) }
       end
 
-      permissions :mass_update?  do
+      permissions :mass_update? do
         it { is_expected.to permit(user, klass) }
       end
 
@@ -37,8 +38,8 @@ RSpec.describe SettingPolicy do
         it { is_expected.to permit(user, object) }
       end
 
-      permissions :edit?, :create?, :update?, :destroy?  do
-        it { is_expected.to_not permit(user, object) }
+      permissions :edit?, :create?, :update?, :destroy? do
+        it { is_expected.not_to permit(user, object) }
       end
     end
 
@@ -47,11 +48,11 @@ RSpec.describe SettingPolicy do
         allow(Rails.env).to receive(:development?).and_return(true)
       end
 
-      permissions :index?, :new?, :create?  do
+      permissions :index?, :new?, :create? do
         it { is_expected.to permit(user, klass) }
       end
 
-      permissions :show?, :edit?, :create?, :update?, :destroy?  do
+      permissions :show?, :edit?, :create?, :update?, :destroy? do
         it { is_expected.to permit(user, object) }
       end
     end

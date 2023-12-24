@@ -6,8 +6,8 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
   describe "#confirmation_instructions" do
     it "calls template mailer with correct parameters" do
       expect(TemplateMailer).to receive(:email).with(:confirmation_instructions, {
-        to: user.email,
-        user: user,
+        to:               user.email,
+        user:,
         confirmation_url: String
       }).and_return(double(deliver_later: true))
 
@@ -18,9 +18,9 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
   describe "#reset_password_instructions" do
     it "calls template mailer with correct parameters" do
       expect(TemplateMailer).to receive(:email).with(:reset_password_instructions, {
-        to: user.email,
-        user: user,
-        token: token,
+        to:        user.email,
+        user:,
+        token:,
         reset_url: String
       }).and_return(double(deliver_later: true))
 
@@ -31,9 +31,9 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
   describe "#unlock_instructions" do
     it "calls template mailer with correct parameters" do
       expect(TemplateMailer).to receive(:email).with(:unlock_instructions, {
-        to: user.email,
-        user: user,
-        token: token,
+        to:         user.email,
+        user:,
+        token:,
         unlock_url: String
       }).and_return(double(deliver_later: true))
 
@@ -44,8 +44,8 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
   describe "#email_changed" do
     it "calls template mailer with correct parameters" do
       expect(TemplateMailer).to receive(:email).with(:email_changed, {
-        to: user.email,
-        user: user
+        to:   user.email,
+        user:
       }).and_return(double(deliver_later: true))
 
       TemplateDeviseMailer.email_changed(user).deliver
@@ -55,8 +55,8 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
   describe "#password_change" do
     it "calls template mailer with correct parameters" do
       expect(TemplateMailer).to receive(:email).with(:password_change, {
-        to: user.email,
-        user: user
+        to:   user.email,
+        user:
       }).and_return(double(deliver_later: true))
 
       TemplateDeviseMailer.password_change(user).deliver

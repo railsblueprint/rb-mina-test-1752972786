@@ -1,16 +1,16 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Setting, type: :model do
   include Shoulda::Matchers::ActiveModel
   include Shoulda::Matchers::ActiveRecord
 
-  it { should have_db_column(:alias).of_type(:string) }
-  it { should have_db_column(:value).of_type(:string) }
+  let!(:invalid_json_setting) { create(:setting, alias: "invalid_setting", type: "json", value: "[") }
+  let!(:array_setting) { create(:setting, alias: "array_setting", type: "json", value: [1, 2, 3].to_json) }
+  let!(:json_setting) { create(:setting, alias: "json_setting", type: "json", value: { a: 1, b: 2 }.to_json) }
+  let!(:string_setting) { create(:setting, alias: "string_setting", type: "string", value: "some_string") }
 
-  let!(:string_setting) {create(:setting, alias: "string_setting", type: "string", value: "some_string")}
-  let!(:json_setting) {create(:setting, alias: "json_setting", type: "json", value: {a: 1, b:2}.to_json)}
-  let!(:array_setting) {create(:setting, alias: "array_setting", type: "json", value: [1,2,3].to_json)}
-  let!(:invalid_json_setting) {create(:setting, alias: "invalid_setting", type: "json", value: "[")}
+  it { is_expected.to have_db_column(:alias).of_type(:string) }
+  it { is_expected.to have_db_column(:value).of_type(:string) }
 
   describe "class_methods" do
     describe "#type_text" do
@@ -30,7 +30,7 @@ RSpec.describe Setting, type: :model do
     describe "#[]" do
       it "returns the value" do
         expect(described_class[:string_setting]).to eq("some_string")
-        expect(described_class[:array_setting]).to eq([1,2,3])
+        expect(described_class[:array_setting]).to eq([1, 2, 3])
       end
     end
 
@@ -53,11 +53,13 @@ RSpec.describe Setting, type: :model do
       it "returns a Hash when hash value is given" do
         expect(json_setting.parsed_json_value).to be_a(Hash)
       end
+
       it "returns an Array when array value is given" do
         expect(array_setting.parsed_json_value).to be_an(Array)
       end
+
       it "returns nil when invalid value is given" do
-        expect(invalid_json_setting.parsed_json_value).to be(nil)
+        expect(invalid_json_setting.parsed_json_value).to be_nil
       end
     end
   end

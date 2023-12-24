@@ -1,9 +1,9 @@
 RSpec.describe PostPolicy do
+  subject { described_class }
+
   let(:klass) { Post }
   let(:object) { build(:post) }
-  let(:own_object) { build(:post, user: user) }
-
-  subject { described_class }
+  let(:own_object) { build(:post, user:) }
 
   context "for guest user" do
     let(:user) { nil }
@@ -13,15 +13,15 @@ RSpec.describe PostPolicy do
     end
 
     permissions :new?, :create? do
-      it { is_expected.to_not permit(user, klass) }
+      it { is_expected.not_to permit(user, klass) }
     end
 
     permissions :show? do
       it { is_expected.to permit(user, object) }
     end
 
-    permissions :edit?, :update?, :destroy?, :change_password?,  :change_roles?, :impersonate? do
-      it { is_expected.to_not permit(user, object) }
+    permissions :edit?, :update?, :destroy?, :change_password?, :change_roles?, :impersonate? do
+      it { is_expected.not_to permit(user, object) }
     end
   end
 
@@ -36,36 +36,35 @@ RSpec.describe PostPolicy do
       it { is_expected.to permit(user, object) }
     end
 
-    permissions :edit?, :update?, :destroy?do
+    permissions :edit?, :update?, :destroy? do
       it { is_expected.to permit(user, own_object) }
     end
 
-    permissions :edit?, :update?, :destroy?do
-      it { is_expected.to_not permit(user, object) }
+    permissions :edit?, :update?, :destroy? do
+      it { is_expected.not_to permit(user, object) }
     end
   end
 
   context "for moderator user" do
     let(:user) { build(:user, :admin) }
 
-    permissions :index?, :new?, :create?  do
+    permissions :index?, :new?, :create? do
       it { is_expected.to permit(user, klass) }
     end
 
-    permissions :show?, :edit?, :create?, :update?, :destroy?  do
+    permissions :show?, :edit?, :create?, :update?, :destroy? do
       it { is_expected.to permit(user, object) }
     end
-
   end
 
   context "for admin user" do
     let(:user) { build(:user, :admin) }
 
-    permissions :index?, :new?, :create?  do
+    permissions :index?, :new?, :create? do
       it { is_expected.to permit(user, klass) }
     end
 
-    permissions :show?, :edit?, :create?, :update?, :destroy?  do
+    permissions :show?, :edit?, :create?, :update?, :destroy? do
       it { is_expected.to permit(user, object) }
     end
   end
@@ -73,11 +72,11 @@ RSpec.describe PostPolicy do
   context "for superadmin user" do
     let(:user) { build(:user, :superadmin) }
 
-    permissions :index?, :new?, :create?  do
+    permissions :index?, :new?, :create? do
       it { is_expected.to permit(user, klass) }
     end
 
-    permissions :show?, :edit?, :create?, :update?, :destroy?  do
+    permissions :show?, :edit?, :create?, :update?, :destroy? do
       it { is_expected.to permit(user, object) }
     end
   end

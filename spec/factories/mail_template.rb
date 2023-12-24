@@ -8,6 +8,5 @@ FactoryBot.define do
         Faker::Lorem.paragraph(sentence_count: rand(10), supplemental: true)
       end.join("<br/>")
     }
-
   end
 end

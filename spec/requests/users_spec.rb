@@ -5,7 +5,7 @@ RSpec.describe "Users pages", type: :request do
   describe "GET /profile" do
     context "when not logged in" do
       it "returns not found" do
-        expect{get "/profile"}.to raise_error(ActionController::RoutingError)
+        expect { get "/profile" }.to raise_error(ActionController::RoutingError)
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe "Users pages", type: :request do
       end
 
       it "does not include link to edit profile" do
-        expect(response.body).to_not have_tag("a", "Edit profile")
+        expect(response.body).not_to have_tag("a", "Edit profile")
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.describe "Users pages", type: :request do
       end
 
       it "does not include link to edit profile" do
-        expect(response.body).to_not have_tag("a", "Edit profile")
+        expect(response.body).not_to have_tag("a", "Edit profile")
       end
     end
 
@@ -145,14 +145,16 @@ RSpec.describe "Users pages", type: :request do
         expect(flash[:success]).to eq("You have been disavowed from impersonation")
       end
 
-      # TODO Is it possible to test that correct user is restored?
+      # TODO: Is it possible to test that correct user is restored?
     end
   end
 
   describe "POST /profile/password" do
     context "when not logged in" do
       before do
-        post "/profile/password", params: { user: { current_password: "<PASSWORD>", password: "<PASSWORD>", password_confirmation: "<PASSWORD>" } }
+        post "/profile/password",
+             params: { user: { current_password: "<PASSWORD>", password: "<PASSWORD>",
+password_confirmation: "<PASSWORD>" } }
       end
 
       it "redirects to login page" do
@@ -164,7 +166,9 @@ RSpec.describe "Users pages", type: :request do
       context "with valid params" do
         before do
           sign_in user
-          post "/profile/password", params: { user: { current_password: "12345678", password: "87654321", password_confirmation: "87654321" } }
+          post "/profile/password",
+               params: { user: { current_password: "12345678", password: "87654321",
+password_confirmation: "87654321" } }
         end
 
         it "redirects to profile page" do
@@ -177,11 +181,13 @@ RSpec.describe "Users pages", type: :request do
       context "with invalid params" do
         before do
           sign_in user
-          post "/profile/password", params: { user: { current_password: "bad_password", password: "87654321", password_confirmation: "87654321" } }
+          post "/profile/password",
+               params: { user: { current_password: "bad_password", password: "87654321",
+password_confirmation: "87654321" } }
         end
 
         it "redirects to profile page" do
-          expect(response).to  have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(flash[:alert]).to eq("Failed to update password.")
         end
       end
@@ -220,7 +226,7 @@ RSpec.describe "Users pages", type: :request do
         end
 
         it "redirects to profile page" do
-          expect(response).to  have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(flash[:alert]).to eq("Failed to update profile")
         end
       end
