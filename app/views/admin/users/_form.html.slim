@@ -22,7 +22,7 @@
             = f.form_group
               .d-flex.justify-content-between
                 .actions
-                  = f.submit
+                  = f.submit "data-controller": "save-submit"
                   = link_to t("actions.cancel"), params[:return_to] || search_url || { action: :index }, class: "btn btn-outline-secondary"
                 - if @resource.present?
                   .actions
@@ -37,7 +37,7 @@
             = f.form_group
               .d-flex.justify-content-between
                 .actions
-                  = f.submit
+                  = f.submit "data-controller": "save-submit"
                   = link_to t("actions.cancel"), params[:return_to] || search_url || { action: :index }, class: "btn btn-outline-secondary"
                 - if @resource.present?
                   .actions
@@ -52,7 +52,7 @@
               = f.form_group
                 .d-flex.justify-content-between
                   .actions
-                    = f.submit t("actions.change_password")
+                    = f.submit t("actions.change_password"), "data-controller": "save-submit"
                     = link_to t("actions.cancel"), params[:return_to] || search_url || { action: :index }, class: "btn btn-outline-secondary"
                 - if @resource.present?
                   .actions
