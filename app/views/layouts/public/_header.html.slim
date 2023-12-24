@@ -30,7 +30,7 @@ nav.navbar.navbar-dark.navbar-expand-xl.fixed-top.header
           = link_to new_user_registration_path, class: "btn btn-primary"  do
             | Sign up
 .search-bar-expandable
-  form.search-form.d-flex.align-items-center action="/admin/search"
+  form.search-form.d-flex.align-items-center action="/posts/" data-turbo-method="POST"
     input type="text" name="q" placeholder="Search" title="Enter search keyword"
     button type="submit" title="Search"
       i.bi.bi-search
