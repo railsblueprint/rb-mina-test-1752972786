@@ -5,21 +5,19 @@ div data-controller="post" data-post-id-value=post.id
         .card-title = link_to post.title, post
         .card-text
           == post.body
-    .card-footer.d-flex.justify-content-between
-      div.pt-2
-        - if post.user.present?
-          i.bi.bi-person
-          '
-          = link_to post.user.full_name, post.user
-        i.bi.bi-clock.ps-3
-        '
-        = post.created_at.strftime("%d %B, %Y %H:%M")
-      .text-end
-        - if policy(post).edit?
-          = link_to t('actions.edit'), edit_post_path(post), class: "card-link btn btn-link"
-        - if policy(post).destroy?
-          = link_to  post, data: {"turbo-method": :delete, controller: "confirmation", action: "confirmation#click", confirm: "Are tou sure you want to delete this post?" }, class: "card-link btn btn-outline-danger" do
-            i.bi.bi-trash
-            '
-            = t('actions.delete')
 
+    .card-footer.justify-content-between.actions
+      .actions
+        - if post.user
+          div.pt-1
+            i.bi.bi-person
+            '
+            = link_to post.user&.full_name, post.user
+        div.pt-1
+          i.bi.bi-clock
+          '
+          = post.created_at.strftime("%d %B, %Y %H:%M")
+      - unless local_assigns[:no_controls].to_b
+        .actions.justify-content-end
+          = edit_button(post)
+          = delete_button(post)

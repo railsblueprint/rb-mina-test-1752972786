@@ -18,7 +18,7 @@ Bundler.require(*Rails.groups)
 module Railsblueprint
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.1
     config.active_job.queue_adapter = :good_job
     config.exceptions_app = self.routes
 
@@ -30,6 +30,8 @@ module Railsblueprint
     config.after_initialize do |app|
       app.routes.default_url_options = app.config.action_mailer.default_url_options
     end
+
+    config.autoload_paths << "#{root}/app/liquid"
 
 
     # Configuration for the application, engines, and railties goes here.

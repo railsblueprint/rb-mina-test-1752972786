@@ -1,20 +1,3 @@
-# frozen_string_literal: true
-
-# https://gorails.com/episodes/devise-hotwire-turbo
-# class TurboFailureApp < Devise::FailureApp
-#   def respond
-#     if request_format == :turbo_stream
-#       redirect
-#     else
-#       super
-#     end
-#   end
-#
-#   def skip_format?
-#     %w(html turbo_stream */*).include? request_format.to_s
-#   end
-# end
-
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -332,7 +315,6 @@ end
 # https://github.com/heartcombo/devise/wiki/How-To%3A-Create-custom-layouts
 Rails.application.config.to_prepare do
   Devise::SessionsController.layout "devise"
-  # Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "devise" }
   Devise::RegistrationsController.layout "devise"
   Devise::ConfirmationsController.layout "devise"
   Devise::UnlocksController.layout "devise"

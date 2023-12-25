@@ -17,13 +17,9 @@ SimpleCov.start do
   add_group "Long files" do |src_file|
     src_file.lines.count > 100
   end
-  class MaxLinesFilter < SimpleCov::Filter
-    def matches?(source_file)
-      source_file.lines.count < filter_argument
-    end
+  add_group "Short files" do |src_file|
+    src_file.lines.count < 5
   end
-  add_group "Short files", MaxLinesFilter.new(5)
-
   # Exclude these paths from analysis
   add_filter 'lib/plugins'
   add_filter 'vendor'

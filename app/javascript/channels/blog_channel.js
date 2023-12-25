@@ -11,6 +11,6 @@ consumer.subscriptions.create("BlogChannel", {
   },
 
   received(data) {
-    if(data.cableReady) CableReady.perform(data.cableReady)
+    if(data.cableReady) CableReady.perform(data.operations)
   }
 });

@@ -12,6 +12,6 @@ RSpec.describe BlogChannel do
   it "streams for blog stream" do
     subscribe
 
-    expect(subscription).to have_stream_for("blog")
+    expect(subscription).to have_stream_from("blog:blog")
   end
 end

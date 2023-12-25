@@ -43,7 +43,7 @@ RSpec.describe "Posts page" do
 
       it "shows control buttons", :aggregate_failures do
         get "/posts"
-        expect(response.body).to have_tag(".card.post a", text: "Edit", count: 5)
+        expect(response.body).to have_tag(".card.post a", text: /Edit/, count: 5)
         expect(response.body).to have_tag(".card.post a", text: /Delete/, count: 5)
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe "Posts page" do
       end
 
       it "shows control buttons", :aggregate_failures do
-        expect(response.body).to have_tag(".card.post a", text: "Edit", count: 5)
+        expect(response.body).to have_tag(".card.post a", text: /Edit/, count: 5)
         expect(response.body).to have_tag(".card.post a", text: /Delete/, count: 5)
       end
     end
@@ -152,7 +152,7 @@ RSpec.describe "Posts page" do
       end
 
       it "does not show control buttons", :aggregate_failures do
-        expect(response.body).not_to have_tag(".card.post a", text: "Edit", count: 1)
+        expect(response.body).not_to have_tag(".card.post a", text: /Edit/, count: 1)
         expect(response.body).not_to have_tag(".card.post a", text: /Delete/, count: 1)
       end
     end
@@ -175,7 +175,7 @@ RSpec.describe "Posts page" do
       end
 
       it "does not show control buttons", :aggregate_failures do
-        expect(response.body).not_to have_tag(".card.post a", text: "Edit", count: 1)
+        expect(response.body).not_to have_tag(".card.post a", text: /Edit/, count: 1)
         expect(response.body).not_to have_tag(".card.post a", text: /Delete/, count: 1)
       end
     end
@@ -196,7 +196,7 @@ RSpec.describe "Posts page" do
       end
 
       it "shows control buttons", :aggregate_failures do
-        expect(response.body).to have_tag(".card.post a", text: "Edit", count: 1)
+        expect(response.body).to have_tag(".card.post a", text: /Edit/, count: 1)
         expect(response.body).to have_tag(".card.post a", text: /Delete/, count: 1)
       end
     end
@@ -219,7 +219,7 @@ RSpec.describe "Posts page" do
       end
 
       it "shows control buttons", :aggregate_failures do
-        expect(response.body).to have_tag(".card.post a", text: "Edit", count: 1)
+        expect(response.body).to have_tag(".card.post a", text: /Edit/, count: 1)
         expect(response.body).to have_tag(".card.post a", text: /Delete/, count: 1)
       end
     end

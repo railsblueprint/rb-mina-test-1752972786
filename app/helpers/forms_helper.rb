@@ -214,7 +214,9 @@ module FormsHelper
   def delete_button(resource, options={})
     return unless policy(resource).destroy?
 
-    link_to [:admin, resource],
+    url = admin? ? [:admin, resource] : [resource]
+
+    link_to url,
             data:  { turbo_method: :delete,
                      controller: "confirmation", action: "confirmation#click",
                      confirm:      "Are you sure you want to delete this #{resource.class.name}?" },
@@ -228,7 +230,9 @@ module FormsHelper
 
     css_class = "btn btn-outline-primary #{'btn-sm' if options[:small]} #{'stretched-link' if options[:stretched]}"
 
-    link_to [:edit, :admin, resource],
+    url = admin? ? [:edit, :admin, resource] : [:edit, resource]
+
+    link_to url,
             class:              css_class,
             "data-turbo-frame": "_top" do
       "#{bi('pencil')} #{t('actions.edit')}".html_safe

@@ -34,9 +34,10 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
     # rubocop:disable Metrics/AbcSize
     def update
       update_command.call_for(params, context) do |command|
-        command.on(:ok) do |item|
+        command.on(:ok) do |resource|
+          after_update(resource)
           flash[:success] = I18n.t("admin.common.successfully_updated", record: model.model_name)
-          redirect_to after_update_path(item)
+          redirect_to after_update_path(resource)
         end
         command.on(:invalid, :abort) do |errors|
           @command = command
@@ -55,9 +56,10 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
 
     def create
       create_command.call_for(params, context) do |command|
-        command.on(:ok) do |item|
+        command.on(:ok) do |resource|
+          after_create(resource)
           flash[:success] = I18n.t("admin.common.successfully_created", record: model.model_name)
-          redirect_to after_create_path(item)
+          redirect_to after_create_path(resource)
         end
         command.on(:invalid, :abort) do |errors|
           @command = command
@@ -77,7 +79,8 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
 
     def destroy
       destroy_command.call_for(params, context) do |command|
-        command.on(:ok) do |_item|
+        command.on(:ok) do |resource|
+          after_destroy(resource)
           flash[:notice] = I18n.t("admin.common.item_deleted_ok", record: model.model_name)
           redirect_to after_destroy_success_path
         end
@@ -168,6 +171,10 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
     def params_with_context
       context.merge(all_params)
     end
+
+    def after_create(_resource); end
+    def after_update(_resource); end
+    def after_destroy(_resource); end
 
     def after_create_path(item)
       url_for({ action: :edit, id: item.id })
