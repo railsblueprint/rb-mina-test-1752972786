@@ -1,4 +1,4 @@
-describe Admin::DesignSystem::FormsController, type: :controller do
+describe Admin::DesignSystem::FormsController do
   render_views
 
   let(:admin) { create(:user, :admin) }

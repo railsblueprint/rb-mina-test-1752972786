@@ -1,10 +1,10 @@
 describe Settings::UpdateCommand, type: :command do
+  subject { described_class.new(params.merge(id: setting.id, current_user: admin)) }
+
   let(:admin) { create(:user, :superadmin) }
   let(:user) { create(:user) }
   let(:setting) { create(:setting) }
   let(:params) { { alias: "zzzz", type: "string", value: "value", description: "description" } }
-
-  let(:subject) { described_class.new(params.merge(id: setting.id, current_user: admin)) }
 
   before do
     allow(Rails.env).to receive(:development?).and_return(true)

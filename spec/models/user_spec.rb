@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   include Shoulda::Matchers::ActiveModel
   include Shoulda::Matchers::ActiveRecord
 
@@ -65,15 +65,15 @@ RSpec.describe User, type: :model do
 
     describe "#has_role" do
       it "returns true when user has role" do
-        expect(admin.has_role?(:admin)).to be_truthy
+        expect(admin).to have_role(:admin)
       end
 
       it "returns false when user don't have role" do
-        expect(admin.has_role?(:other_role)).to be_falsy
+        expect(admin).not_to have_role(:other_role)
       end
 
       it "returns true for any role when user has superadmin role" do
-        expect(superadmin.has_role?(:other_role)).to be_truthy
+        expect(superadmin).to have_role(:other_role)
       end
     end
   end

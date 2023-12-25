@@ -1,10 +1,10 @@
 describe MailTemplates::UpdateCommand, type: :command do
+  subject { described_class.new(params.merge(id: mail_template.id, current_user: admin)).no_exceptions! }
+
   let(:admin) { create(:user, :superadmin) }
   let(:user) { create(:user) }
   let(:mail_template) { create(:mail_template, alias: "new_template") }
   let(:params) { { alias: "new_template", layout: "simple", body: "zzz" } }
-
-  let(:subject) { described_class.new(params.merge(id: mail_template.id, current_user: admin)).no_exceptions! }
 
   it { is_expected.to validate_presence_of(:alias) }
   it { is_expected.to validate_presence_of(:layout) }

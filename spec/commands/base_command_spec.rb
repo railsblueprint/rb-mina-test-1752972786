@@ -1,32 +1,46 @@
 describe BaseCommand do
-  class BadCommand < BaseCommand
-  end
+  before do
+    # rubocop:disable RSpec/DescribedClass
+    stub_const("BadCommand",
+               Class.new(BaseCommand))
+    stub_const("SampleCommand",
+               Class.new(BaseCommand) do
+                 def process; end
+               end)
+    stub_const("WithArgumentsCommand",
+               Class.new(BaseCommand) do
+                 attribute :a, BaseCommand::Types::String
+                 validates :a, presence: true
+                 def process; end
+               end)
+    stub_const("WithArgumentsStrictCommand",
+               Class.new(BaseCommand) do
+                 strict_attributes!
+                 attribute :a, BaseCommand::Types::String
+                 validates :a, presence: true
+                 def process; end
+               end)
+    stub_const("SubclassStrictCommand",
+               Class.new(WithArgumentsStrictCommand) do
+                 def process; end
+               end)
+    stub_const("NonTransactionalCommand",
+               Class.new(BaseCommand) do
+                 skip_transaction!
+                 def process; end
+               end)
+    stub_const("AbortedCommand",
+               Class.new(BaseCommand) do
+                 skip_transaction!
 
-  class SampleCommand < BaseCommand
-    def process; end
-  end
+                 def process
+                   abort_command
+                   second_step
+                 end
 
-  class WithArgumentsCommand < BaseCommand
-    attribute :a, Types::String
-    validates :a, presence: true
-    def process; end
-  end
-
-  class WithArgumentsStrictCommand < BaseCommand
-    strict_attributes!
-    attribute :a, Types::String
-    validates :a, presence: true
-    def process; end
-  end
-
-  class SubclassStrictCommand < WithArgumentsStrictCommand
-    def process; end
-  end
-
-  class NonTransactionalCommand < BaseCommand
-    skip_transaction!
-
-    def process; end
+                 def second_step; end
+               end)
+    # rubocop:enable RSpec/DescribedClass
   end
 
   let(:command_class) do
@@ -50,16 +64,6 @@ describe BaseCommand do
   end
 
   let(:class_with_abort) do
-    class AbortedCommand < BaseCommand
-      skip_transaction!
-
-      def process
-        abort_command
-        second_step
-      end
-
-      def second_step; end
-    end
     AbortedCommand
   end
 
@@ -105,7 +109,8 @@ describe BaseCommand do
       }
 
       it "permits correct parameters" do
-        expect(subject).to receive(:call).with(expected_params)
+        expect(subject).to receive(:call).with(expected_params) # rubocop:disable RSpec/SubjectStub
+
         subject.call_for params, additional_params
       end
     end
@@ -119,18 +124,16 @@ describe BaseCommand do
       context "when preflight checks are ok" do
         it "creates background job" do
           expect_any_instance_of(subject).to receive(:preflight_nok?).and_return(false)
-          allow(DelayedCommandJob).to receive(:perform_later)
+          expect(DelayedCommandJob).to receive(:perform_later)
           subject.call_later
-          expect(DelayedCommandJob).to have_received(:perform_later)
         end
       end
 
       context "when preflight checks are not ok" do
         it "does not create background job" do
           expect_any_instance_of(subject).to receive(:preflight_nok?).and_return(true)
-          allow(DelayedCommandJob).to receive(:perform_later)
+          expect(DelayedCommandJob).not_to receive(:perform_later)
           subject.call_later
-          expect(DelayedCommandJob).not_to have_received(:perform_later)
         end
       end
     end
@@ -146,18 +149,16 @@ describe BaseCommand do
       context "when preflight checks are ok" do
         it "creates background job" do
           expect_any_instance_of(subject).to receive(:preflight_nok?).and_return(false)
-          allow(DelayedCommandJob).to receive(:set).and_call_original
+          expect(DelayedCommandJob).to receive(:set).and_call_original
           subject.call_at(delay)
-          expect(DelayedCommandJob).to have_received(:set)
         end
       end
 
       context "when preflight checks are not ok" do
         it "does not create background job" do
           expect_any_instance_of(subject).to receive(:preflight_nok?).and_return(true)
-          allow(DelayedCommandJob).to receive(:set).and_call_original
+          expect(DelayedCommandJob).not_to receive(:set).and_call_original
           subject.call_at(delay)
-          expect(DelayedCommandJob).not_to have_received(:set)
         end
       end
     end
@@ -167,13 +168,13 @@ describe BaseCommand do
     subject { command_class.new }
 
     it "returns false as persisited? by default" do
-      expect(subject.persisted?).to eq(false)
+      expect(subject.persisted?).to be(false)
     end
 
     context "when subclass of this command is #call'ed" do
       context "with valid parameters" do
         before do
-          allow(subject).to receive(:valid?).and_return(true)
+          allow(subject).to receive(:valid?).and_return(true) # rubocop:disable RSpec/SubjectStub
         end
 
         it "calls broadcast_ok" do
@@ -183,7 +184,7 @@ describe BaseCommand do
 
       context "with invalid parameters" do
         before do
-          allow(subject).to receive(:valid?).and_return(false)
+          allow(subject).to receive(:valid?).and_return(false) # rubocop:disable RSpec/SubjectStub
         end
 
         it "raises error when there is no listener added" do
@@ -192,7 +193,7 @@ describe BaseCommand do
 
         context "when there is a listener added" do
           before do
-            subject.on(:invalid) {}
+            subject.on(:invalid) {} # rubocop:disable Lint/EmptyBlock
           end
 
           it "broadcasts invalid" do
@@ -209,7 +210,7 @@ describe BaseCommand do
         subject { command_with_arguments_class.new }
 
         it "calls broadcast_invalid" do
-          expect(subject).to receive(:broadcast_invalid)
+          expect(subject).to receive(:broadcast_invalid) # rubocop:disable RSpec/SubjectStub
           subject.call
         end
 
@@ -236,9 +237,8 @@ describe BaseCommand do
 
       context "when command is transactional" do
         it "runs in transaction block" do
-          allow(ActiveRecord::Base).to receive(:transaction).and_call_original
+          expect(ActiveRecord::Base).to receive(:transaction).and_call_original
           subject.call
-          expect(ActiveRecord::Base).to have_received(:transaction)
         end
       end
 
@@ -246,9 +246,8 @@ describe BaseCommand do
         subject { non_transactional_class.new }
 
         it "runs without transaction block" do
-          allow(ActiveRecord::Base).to receive(:transaction).and_call_original
+          expect(ActiveRecord::Base).not_to receive(:transaction)
           subject.call
-          expect(ActiveRecord::Base).not_to have_received(:transaction)
         end
       end
     end
@@ -262,7 +261,7 @@ describe BaseCommand do
 
       context "when abort listener is added" do
         before do
-          subject.on(:abort) {}
+          subject.on(:abort) {} # rubocop:disable Lint/EmptyBlock
         end
 
         it "broadcasts :abort with errors" do
@@ -271,9 +270,8 @@ describe BaseCommand do
         end
 
         it "prevents further execution" do
-          allow(subject).to receive(:second_step).and_call_original
+          expect(subject).not_to receive(:second_step) # rubocop:disable RSpec/SubjectStub
           subject.call
-          expect(subject).not_to have_received(:second_step)
         end
       end
     end

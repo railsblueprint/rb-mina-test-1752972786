@@ -38,7 +38,7 @@ RSpec.describe Crud::CreateCommand, type: :command do
 
     context "when listener present" do
       before do
-        subject.on(:unauthorized) {}
+        subject.on(:unauthorized) {} # rubocop:disable Lint/EmptyBlock
       end
 
       it "broadcasts unauthorized event" do
@@ -54,12 +54,15 @@ RSpec.describe Crud::CreateCommand, type: :command do
 
     context "when resource is found" do
       it "calls create method" do
-        expect(SampleModel).to receive(:create).with({ attr: "qwe" }).and_return(double(persisted?: true))
+        expect(SampleModel).to receive(:create).with({ attr: "qwe" })
+                                               .and_return(instance_double(ActiveRecord::Base, persisted?: true))
+
         subject.call
       end
 
       it "broadcasts ok" do
-        allow(SampleModel).to receive(:create).with({ attr: "qwe" }).and_return(double(persisted?: true))
+        allow(SampleModel).to receive(:create).with({ attr: "qwe" })
+                                              .and_return(instance_double(ActiveRecord::Base, persisted?: true))
         expect(subject).to broadcast(:ok)
         subject.call
       end

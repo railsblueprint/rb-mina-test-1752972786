@@ -1,10 +1,10 @@
 describe Pages::UpdateCommand, type: :command do
+  subject { described_class.new(params.merge(id: page.id, current_user: admin)) }
+
   let(:admin) { create(:user, :superadmin) }
   let(:user) { create(:user) }
   let(:page) { create(:page) }
   let(:params) { { title: "Title", body: "Text", url: "zzz" } }
-
-  let(:subject) { described_class.new(params.merge(id: page.id, current_user: admin)) }
 
   it { is_expected.to validate_presence_of(:url) }
   it { is_expected.to validate_presence_of(:title) }

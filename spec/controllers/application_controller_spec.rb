@@ -1,4 +1,4 @@
-RSpec.describe ApplicationController, type: :controller do
+RSpec.describe ApplicationController do
   describe "rescue from pundit errors" do
     controller do
       before_action do

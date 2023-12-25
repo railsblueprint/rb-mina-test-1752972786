@@ -3,7 +3,7 @@ RSpec.shared_examples "admin crud controller" do |options|
   slug = [options[:prefix], options[:resource]].compact.join("/")
   model = options[:model]
   has_filters = options[:has_filters]
-  header_lines = has_filters ? 2 : 1
+  has_filters ? 2 : 1
 
   let(:initial_count) { model.count }
 
@@ -22,41 +22,16 @@ RSpec.shared_examples "admin crud controller" do |options|
       get "/admin/#{slug}/#{resource.id}/edit"
     end
 
-    it "renders successfully" do
+    it "renders successfully, :aggregate_failures", :aggregate_failures do
       expect(response).to have_http_status(:ok)
       expect(response.body).to have_form "/admin/#{slug}/#{resource.id}", :post
     end
 
-    it "renders action buttons" do
+    it "renders action buttons", :aggregate_failures do
       expect(response.body).to have_tag("input", type: "submit", value: "Save")
       expect(response.body).to have_tag("a", seen: "Cancel")
       expect(response.body).to have_tag("a", seen: "Delete")
     end
-  end
-
-  describe "PATCH /admin/#{slug}/:id" do
-    let!(:resource) { create(factory) }
-
-    let(:params) {
-      {
-        factory => resource.attributes
-      }
-    }
-
-    before do
-      sign_in admin
-
-      patch "/admin/#{slug}/#{resource.id}", params:
-    end
-
-    # it "redirects to edit page" do
-    #   expect(response).to redirect_to("/admin/#{slug}/#{resource.id}/edit")
-    #   expect(flash[:success]).to match(/Successfully updated/)
-    # end
-
-    # it "updates the post" do
-    #   expect(post.reload.title).to eq("new title")
-    # end
   end
 
   describe "GET /admin/#{slug}/new" do
@@ -68,42 +43,15 @@ RSpec.shared_examples "admin crud controller" do |options|
       get "/admin/#{slug}/new"
     end
 
-    it "renders successfully" do
+    it "renders successfully", :aggregate_failures do
       expect(response).to have_http_status(:ok)
       expect(response.body).to have_form "/admin/#{slug}", :post
     end
 
-    it "renders action buttons" do
+    it "renders action buttons", :aggregate_failures do
       expect(response.body).to have_tag("input", type: "submit", value: "Save")
       expect(response.body).to have_tag("a", seen: "Cancel")
     end
-  end
-
-  describe "POST /admin/#{slug}" do
-    let!(:resource) { build(factory) }
-
-    let(:params) {
-      {
-        factory => resource.attributes
-      }
-    }
-
-    before do
-      sign_in admin
-
-      post "/admin/#{slug}", params:
-    end
-
-    # it "renders successfully" do
-    #   created_resource = model.first
-    #
-    #   expect(response).to redirect_to("/admin/#{slug}/#{created_resource&.id}/edit")
-    #   expect(flash[:success]).to match(/Successfully created/)
-    # end
-
-    # it "creates a new post" do
-    #   expect{model.count}.to change.
-    # end
   end
 
   describe "DELETE /admin/#{slug}/:id" do
@@ -125,7 +73,7 @@ end
 RSpec.shared_examples "admin crud controller empty search" do |options|
   resource_name = options[:resource]
   slug = [options[:prefix], options[:resource]].compact.join("/")
-  model = options[:model]
+  options[:model]
   has_filters = options[:has_filters]
   header_lines = has_filters ? 2 : 1
 
@@ -158,11 +106,11 @@ RSpec.shared_examples "admin crud controller empty search" do |options|
 end
 
 RSpec.shared_examples "admin crud controller show resource" do |options|
-  resource_name = options[:resource]
+  options[:resource]
   slug = [options[:prefix], options[:resource]].compact.join("/")
-  model = options[:model]
+  options[:model]
   has_filters = options[:has_filters]
-  header_lines = has_filters ? 2 : 1
+  has_filters ? 2 : 1
 
   let(:admin) { create(:user, :admin) }
 

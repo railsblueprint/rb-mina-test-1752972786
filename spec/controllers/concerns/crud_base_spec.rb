@@ -1,8 +1,8 @@
-RSpec.describe CrudBase, type: :controller do
+RSpec.describe CrudBase do
   render_views false
 
   controller(ApplicationController) do
-    include CrudBase
+    include CrudBase # rubocop:disable RSpec/DescribedClass
     def model
       Page
     end
@@ -18,9 +18,12 @@ RSpec.describe CrudBase, type: :controller do
 
   before do
     stub_const "Anonymous", Module.new
-    stub_command("Anonymous::CreateCommand", :ok, double(model_name: "Anonymous", id: 1))
-    stub_command("Anonymous::UpdateCommand", :ok, double(model_name: "Anonymous", id: 1))
-    stub_command("Anonymous::DestroyCommand", :ok, double(model_name: "Anonymous", id: 1))
+    stub_command("Anonymous::CreateCommand", :ok,
+                 instance_double(ActiveRecord::Base, model_name: "Anonymous", id: 1))
+    stub_command("Anonymous::UpdateCommand", :ok,
+                 instance_double(ActiveRecord::Base, model_name: "Anonymous", id: 1))
+    stub_command("Anonymous::DestroyCommand", :ok,
+                 instance_double(ActiveRecord::Base, model_name: "Anonymous", id: 1))
   end
 
   describe "#index" do

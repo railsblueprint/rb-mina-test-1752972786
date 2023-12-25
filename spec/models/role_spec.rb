@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Role, type: :model do
+RSpec.describe Role do
   include Shoulda::Matchers::ActiveModel
   include Shoulda::Matchers::ActiveRecord
 

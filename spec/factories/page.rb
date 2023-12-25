@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :page do
-    title { Faker::Hacker.say_something_smart.split(" ")[0..2].join(" ") }
+    title { Faker::Hacker.say_something_smart.split[0..2].join(" ") }
 
     body {
-      "<h1>#{title}</h1>" + rand(30).times.map do
+      "<h1>#{title}</h1>" + Array.new(rand(30)) {
         Faker::Lorem.paragraph(sentence_count: rand(30), supplemental: true)
-      end.join("<br/>")
+      }.join("<br/>")
     }
 
     url { title.parameterize }

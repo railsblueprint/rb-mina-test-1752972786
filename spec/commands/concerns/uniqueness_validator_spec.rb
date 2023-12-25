@@ -76,7 +76,7 @@ RSpec.describe UniquenessValidator do
 
       context "when attribute is unique" do
         it "returns valid" do
-          expect(subject.valid?).to be_truthy
+          expect(subject).to be_valid
         end
       end
 
@@ -84,7 +84,7 @@ RSpec.describe UniquenessValidator do
         let!(:user) { create(:user, email: "test@localhost") }
 
         it "returns invalid" do
-          expect(subject.valid?).to be_falsey
+          expect(subject).not_to be_valid
         end
       end
     end
@@ -98,7 +98,7 @@ RSpec.describe UniquenessValidator do
 
       context "when attribute is unique" do
         it "returns valid" do
-          expect(subject.valid?).to be_truthy
+          expect(subject).to be_valid
         end
       end
 
@@ -106,7 +106,7 @@ RSpec.describe UniquenessValidator do
         let!(:user) { create(:user, email: "test@localhost") }
 
         it "returns valid" do
-          expect(subject.valid?).to be_truthy
+          expect(subject).to be_valid
         end
       end
 
@@ -114,7 +114,7 @@ RSpec.describe UniquenessValidator do
         let!(:user) { create(:user, email: "test@localhost", last_name: "123") }
 
         it "returns invalid" do
-          expect(subject.valid?).to be_falsey
+          expect(subject).not_to be_valid
         end
       end
     end
@@ -128,7 +128,7 @@ RSpec.describe UniquenessValidator do
 
       context "when attribute is unique" do
         it "returns valid" do
-          expect(subject.valid?).to be_truthy
+          expect(subject).to be_valid
         end
       end
 
@@ -136,7 +136,7 @@ RSpec.describe UniquenessValidator do
         let!(:user) { create(:user, email: "test@localhost") }
 
         it "returns valid" do
-          expect(subject.valid?).to be_truthy
+          expect(subject).to be_valid
         end
       end
 
@@ -144,7 +144,7 @@ RSpec.describe UniquenessValidator do
         let!(:user) { create(:user, email: "test@localhost", last_name: "321") }
 
         it "returns invalid" do
-          expect(subject.valid?).to be_falsey
+          expect(subject).not_to be_valid
         end
       end
     end
@@ -154,7 +154,7 @@ RSpec.describe UniquenessValidator do
 
       context "when attribute is unique" do
         it "returns valid" do
-          expect(subject.valid?).to be_truthy
+          expect(subject).to be_valid
         end
       end
 
@@ -162,7 +162,7 @@ RSpec.describe UniquenessValidator do
         let!(:user) { create(:user, email: "test@localhost") }
 
         it "returns invalid" do
-          expect(subject.valid?).to be_falsey
+          expect(subject).not_to be_valid
         end
       end
 
@@ -172,7 +172,7 @@ RSpec.describe UniquenessValidator do
         let!(:user) { create(:user, email: "test@localhost") }
 
         it "returns valid" do
-          expect(subject.valid?).to be_truthy
+          expect(subject).to be_valid
         end
       end
     end
@@ -187,7 +187,7 @@ RSpec.describe UniquenessValidator do
 
         context "when attribute is unique" do
           it "returns valid" do
-            expect(subject.valid?).to be_truthy
+            expect(subject).to be_valid
           end
         end
 
@@ -195,7 +195,7 @@ RSpec.describe UniquenessValidator do
           let!(:user) { create(:user, email: "test@localhost", first_name: "123") }
 
           it "returns invalid" do
-            expect(subject.valid?).to be_falsey
+            expect(subject).not_to be_valid
           end
         end
 
@@ -203,7 +203,7 @@ RSpec.describe UniquenessValidator do
           let!(:user) { create(:user, email: "test@localhost", first_name: "456") }
 
           it "returns invalid" do
-            expect(subject.valid?).to be_truthy
+            expect(subject).to be_valid
           end
         end
       end
@@ -215,7 +215,7 @@ RSpec.describe UniquenessValidator do
 
         context "when attribute is unique" do
           it "returns valid" do
-            expect(subject.valid?).to be_truthy
+            expect(subject).to be_valid
           end
         end
 
@@ -223,7 +223,7 @@ RSpec.describe UniquenessValidator do
           let!(:user) { create(:user, email: "test@localhost", first_name: "123") }
 
           it "returns invalid" do
-            expect(subject.valid?).to be_falsey
+            expect(subject).not_to be_valid
           end
         end
 
@@ -231,7 +231,7 @@ RSpec.describe UniquenessValidator do
           let!(:user) { create(:user, email: "test@localhost", first_name: "456") }
 
           it "returns valid" do
-            expect(subject.valid?).to be_truthy
+            expect(subject).to be_valid
           end
         end
 
@@ -241,7 +241,7 @@ RSpec.describe UniquenessValidator do
           let!(:user) { create(:user, email: "test@localhost", first_name: "123") }
 
           it "returns valid" do
-            expect(subject.valid?).to be_truthy
+            expect(subject).to be_valid
           end
         end
       end

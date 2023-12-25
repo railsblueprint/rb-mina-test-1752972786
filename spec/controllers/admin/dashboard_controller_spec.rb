@@ -1,4 +1,4 @@
-describe Admin::DashboardController, type: :controller do
+describe Admin::DashboardController do
   render_views
 
   subject { post :show }

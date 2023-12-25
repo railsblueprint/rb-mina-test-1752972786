@@ -1,10 +1,10 @@
 describe Settings::CreateCommand, type: :command do
+  subject { described_class.new(params.merge(current_user: admin)) }
+
   let(:admin) { create(:user, :superadmin) }
   let(:user) { create(:user) }
 
   let(:params) { { alias: "zzzz", type: "string", value: "value", description: "description" } }
-
-  let(:subject) { described_class.new(params.merge(current_user: admin)) }
 
   before do
     allow(Rails.env).to receive(:development?).and_return(true)
@@ -19,6 +19,6 @@ describe Settings::CreateCommand, type: :command do
   end
 
   it "creates a new page" do
-    expect { subject.call }.to change { Setting.count }.by(1)
+    expect { subject.call }.to change(Setting, :count).by(1)
   end
 end

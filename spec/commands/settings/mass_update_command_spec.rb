@@ -1,18 +1,16 @@
 describe Settings::MassUpdateCommand, type: :command do
+  subject { described_class.new(settings: params, current_user: admin).no_exceptions! }
+
   let(:admin) { create(:user, :superadmin) }
-  let(:setting1) { create(:setting) }
-  let(:setting2) { create(:setting) }
-  let(:setting3) { create(:setting) }
+  let(:settings) { create_list(:setting, 3) }
 
   let(:params) {
     {
-      setting1.id => { value: "value1" },
-      setting2.id => { value: "value2" },
-      setting3.id => { value: "value3" }
+      settings[0].id => { value: "value1" },
+      settings[1].id => { value: "value2" },
+      settings[2].id => { value: "value3" }
     }
   }
-
-  let(:subject) { described_class.new(settings: params, current_user: admin).no_exceptions! }
 
   context "with invalid params" do
     let(:params) {
@@ -35,9 +33,9 @@ describe Settings::MassUpdateCommand, type: :command do
 
     it "updates setting attributes", :aggregate_failures do
       subject.call
-      expect(setting1.reload.value).to eq("value1")
-      expect(setting2.reload.value).to eq("value2")
-      expect(setting3.reload.value).to eq("value3")
+      expect(settings[0].reload.value).to eq("value1")
+      expect(settings[1].reload.value).to eq("value2")
+      expect(settings[2].reload.value).to eq("value3")
     end
   end
 

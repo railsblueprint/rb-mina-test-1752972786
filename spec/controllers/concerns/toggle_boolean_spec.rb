@@ -1,7 +1,7 @@
-RSpec.describe ToggleBoolean, type: :controller do
+RSpec.describe ToggleBoolean do
   controller(ApplicationController) do
     include CrudBase
-    include ToggleBoolean
+    include ToggleBoolean # rubocop:disable RSpec/DescribedClass
     toggle_boolean :active
 
     def show; end
@@ -27,7 +27,7 @@ RSpec.describe ToggleBoolean, type: :controller do
       it "does not change value" do
         post :toggle_active, params: { id: page.id }
 
-        expect(page.reload.active).to eq(true)
+        expect(page.reload.active).to be(true)
         expect(flash[:alert]).to eq I18n.t("admin.common.not_authorized")
       end
     end
@@ -40,7 +40,7 @@ RSpec.describe ToggleBoolean, type: :controller do
       it "succeeds" do
         post :toggle_active, params: { id: page.id }
 
-        expect(page.reload.active).to eq(false)
+        expect(page.reload.active).to be(false)
 
         expect(flash[:success]).to eq I18n.t("admin.common.successfully_updated")
       end

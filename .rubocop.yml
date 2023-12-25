@@ -205,5 +205,25 @@ RSpec/MultipleMemoizedHelpers:
 
 RSpec/MessageSpies:
   EnforcedStyle: receive
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 6
   
+RSpec/AnyInstance:
+  Enabled: false
+  
+RSpec/LetSetup:
+  Enabled: false    
      
+RSpec/RepeatedExampleGroupBody:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false     
+  
+RSpec/StubbedMock:
+  Enabled: false
+    

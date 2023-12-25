@@ -1,4 +1,4 @@
-RSpec.describe TemplateMailer, type: :mailer do
+RSpec.describe TemplateMailer do
   describe "email" do
     let(:user) { create(:user) }
 
@@ -31,7 +31,7 @@ RSpec.describe TemplateMailer, type: :mailer do
       expect(mail.from).to eq(["nobody@localhost"])
     end
 
-    it "generates multipart message" do
+    it "generates multipart message", :aggregate_failures do
       expect(mail.body.parts.length).to eq 2
       expect(mail.body.parts.map(&:content_type)).to eq ["text/plain; charset=UTF-8", "text/html; charset=UTF-8"]
     end
@@ -52,7 +52,7 @@ RSpec.describe TemplateMailer, type: :mailer do
         }
       }
 
-      it "generates multipart message" do
+      it "generates multipart message", :aggregate_failures do
         # One part is message, second part is attachment
 
         expect(mail.body.parts.length).to eq 2
@@ -64,7 +64,7 @@ RSpec.describe TemplateMailer, type: :mailer do
         )
       end
 
-      it "includes attachments" do
+      it "includes attachments", :aggregate_failures do
         expect(mail.attachments.size).to eq(1)
 
         attachment = mail.attachments.first

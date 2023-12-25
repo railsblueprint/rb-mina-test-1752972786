@@ -4,9 +4,9 @@ FactoryBot.define do
     subject { Faker::Hacker.say_something_smart }
     layout { MailTemplate.available_layouts.sample }
     body {
-      rand(10).times.map do
+      Array.new(rand(10)) {
         Faker::Lorem.paragraph(sentence_count: rand(10), supplemental: true)
-      end.join("<br/>")
+      }.join("<br/>")
     }
   end
 end

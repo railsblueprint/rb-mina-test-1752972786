@@ -1,4 +1,4 @@
-RSpec.describe "Admin Posts", type: :request do
+RSpec.describe "Admin Posts" do
   let(:admin) { create(:user, :admin) }
   let(:moderator) { create(:user, :moderator) }
   let!(:page_size) { Post.default_per_page }
@@ -45,21 +45,11 @@ RSpec.describe "Admin Posts", type: :request do
         get "/admin/posts"
       end
 
-      it "renders posts" do
+      it "renders posts", :aggregate_failures do
         posts.each do |post|
           expect(response.body).to have_tag("div.attribute", seen: post.user.full_name, count: 1)
           expect(response.body).to have_tag("div.attribute", seen: post.title, count: 1)
         end
-      end
-    end
-
-    context "when there is more than one page" do
-      let!(:posts) { create_list(:post, page_size + 15) }
-
-      before do
-        sign_in admin
-
-        get "/admin/posts"
       end
     end
 
@@ -73,7 +63,7 @@ RSpec.describe "Admin Posts", type: :request do
         get "/admin/posts?q=___SEARCH__TERM___"
       end
 
-      it "finds post" do
+      it "finds post", :aggregate_failures do
         expect(response.body).to include("Displaying <b>1</b> post")
 
         expect(response.body).to have_tag("div.attribute", seen: post.title, count: 1)
@@ -91,7 +81,7 @@ RSpec.describe "Admin Posts", type: :request do
         get "/admin/posts?user_id=#{post.user.id}"
       end
 
-      it "finds post" do
+      it "finds post", :aggregate_failures do
         expect(response.body).to include("Displaying <b>1</b> post")
 
         expect(response.body).to have_tag("div.attribute", seen: post.title, count: 1)
@@ -109,12 +99,12 @@ RSpec.describe "Admin Posts", type: :request do
       get "/admin/posts/#{post.id}"
     end
 
-    it "renders successfully" do
+    it "renders successfully", :aggregate_failures do
       expect(response.body).to include(post.title)
       expect(response.body).to include(post.body.to_s)
     end
 
-    it "includes link to the user" do
+    it "includes link to the user", :aggregate_failures do
       expect(response.body).to have_tag("a", with: { href: "/admin/users/#{post.user_id}" })
       expect(response.body).to include(post.user.full_name)
     end
@@ -139,7 +129,7 @@ RSpec.describe "Admin Posts", type: :request do
       patch "/admin/posts/#{post.id}", params:
     end
 
-    it "redirects to edit page" do
+    it "redirects to edit page", :aggregate_failures do
       expect(response).to redirect_to("/admin/posts/#{post.id}/edit")
       expect(flash[:success]).to match(/Successfully updated/)
     end
@@ -168,7 +158,7 @@ RSpec.describe "Admin Posts", type: :request do
       post "/admin/posts", params:
     end
 
-    it "renders successfully" do
+    it "renders successfully", :aggregate_failures do
       post = user.posts.first
 
       expect(response).to redirect_to("/admin/posts/#{post.id}/edit")

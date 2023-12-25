@@ -1,4 +1,4 @@
-RSpec.describe "Contacts page", type: :request do
+RSpec.describe "Contacts page" do
   let(:user) { create(:user) }
 
   let!(:mail_template) { create(:mail_template, alias: "contact_form_message") }
@@ -16,7 +16,7 @@ RSpec.describe "Contacts page", type: :request do
         expect(response).to have_http_status(:success)
       end
 
-      it "prefills form" do
+      it "prefills form", :aggregate_failures do
         expect(response.body).to have_tag "input",
                                           with: { name:  "contact_us_command[name]",
                                                   value: CGI.escapeHTML(user.full_name) }
@@ -69,7 +69,7 @@ RSpec.describe "Contacts page", type: :request do
         post "/contacts", params:
       end
 
-      it "returns http success" do
+      it "returns http success", :aggregate_failures do
         expect(response).to be_successful
         expect(response).to render_template("new")
       end
@@ -91,7 +91,7 @@ RSpec.describe "Contacts page", type: :request do
         post "/contacts", as: :turbo_stream, params:
       end
 
-      it "returns http success" do
+      it "returns http success", :aggregate_failures do
         expect(response).to be_successful
         expect(response).to render_template(layout: false)
         expect(response.body).to include('<turbo-stream action="replace" target="frame_new_contact_us_command">')
@@ -110,7 +110,7 @@ RSpec.describe "Contacts page", type: :request do
           post "/contacts", as: :turbo_stream, params:
         end
 
-        it "returns http success" do
+        it "returns http success", :aggregate_failures do
           expect(response).to be_successful
           expect(response).to render_template(layout: false)
           expect(response.body).to include('<turbo-stream action="replace" target="frame_new_contact_us_command">')

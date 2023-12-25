@@ -1,4 +1,4 @@
-RSpec.describe "Admin Dashboard", type: :request do
+RSpec.describe "Admin Dashboard" do
   let(:admin) { create(:user, :admin) }
   let(:user) { create(:user) }
 
@@ -82,11 +82,8 @@ RSpec.describe "Admin Dashboard", type: :request do
         get "/admin/search?q=test"
       end
 
-      it "renders the page" do
+      it "renders the page", :aggregate_failures do
         expect(response).to be_successful
-      end
-
-      it "renders the page" do
         expect(response.body).to have_tag(".collection li.item")
       end
     end

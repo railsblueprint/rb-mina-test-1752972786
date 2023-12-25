@@ -1,12 +1,13 @@
 describe Users::UpdateCommand, type: :command do
+  subject { described_class.call(params.merge(id: user.id, current_user: admin)) }
+
   let(:admin) { create(:user, :superadmin) }
   let(:user) { create(:user) }
   let(:params) { { first_name: "John", last_name: "Doe", email: "abcd@dot.com" } }
 
-  let(:subject) { described_class.call(params.merge(id: user.id, current_user: admin)) }
-
   before do
-    allow(TemplateDeviseMailer).to receive(:confirmation_instructions).and_return(double(deliver: true))
+    allow(TemplateDeviseMailer).to receive(:confirmation_instructions)
+      .and_return(instance_double(Mail::Message, deliver: true))
   end
 
   it "broadcasts ok" do

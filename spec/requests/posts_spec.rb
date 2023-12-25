@@ -1,4 +1,4 @@
-RSpec.describe "Posts page", type: :request do
+RSpec.describe "Posts page" do
   let(:user) { create(:user) }
 
   describe "GET /posts" do
@@ -41,7 +41,7 @@ RSpec.describe "Posts page", type: :request do
         get "/posts"
       end
 
-      it "shows control buttons" do
+      it "shows control buttons", :aggregate_failures do
         get "/posts"
         expect(response.body).to have_tag(".card.post a", text: "Edit", count: 5)
         expect(response.body).to have_tag(".card.post a", text: /Delete/, count: 5)
@@ -57,7 +57,7 @@ RSpec.describe "Posts page", type: :request do
         get "/posts"
       end
 
-      it "shows control buttons" do
+      it "shows control buttons", :aggregate_failures do
         expect(response.body).to have_tag(".card.post a", text: "Edit", count: 5)
         expect(response.body).to have_tag(".card.post a", text: /Delete/, count: 5)
       end
@@ -146,12 +146,12 @@ RSpec.describe "Posts page", type: :request do
         expect(response).to be_successful
       end
 
-      it "shows the body" do
+      it "shows the body", :aggregate_failures do
         expect(response.body).to include(ERB::Util.h(post.title))
         expect(response.body).to include(post.body.to_s)
       end
 
-      it "does not show control buttons" do
+      it "does not show control buttons", :aggregate_failures do
         expect(response.body).not_to have_tag(".card.post a", text: "Edit", count: 1)
         expect(response.body).not_to have_tag(".card.post a", text: /Delete/, count: 1)
       end
@@ -169,12 +169,12 @@ RSpec.describe "Posts page", type: :request do
         expect(response).to be_successful
       end
 
-      it "shows the body" do
+      it "shows the body", :aggregate_failures do
         expect(response.body).to include(ERB::Util.h(post.title))
         expect(response.body).to include(post.body.to_s)
       end
 
-      it "does not show control buttons" do
+      it "does not show control buttons", :aggregate_failures do
         expect(response.body).not_to have_tag(".card.post a", text: "Edit", count: 1)
         expect(response.body).not_to have_tag(".card.post a", text: /Delete/, count: 1)
       end
@@ -190,12 +190,12 @@ RSpec.describe "Posts page", type: :request do
         expect(response).to be_successful
       end
 
-      it "shows the body" do
+      it "shows the body", :aggregate_failures do
         expect(response.body).to include(ERB::Util.h(post.title))
         expect(response.body).to include(post.body.to_s)
       end
 
-      it "shows control buttons" do
+      it "shows control buttons", :aggregate_failures do
         expect(response.body).to have_tag(".card.post a", text: "Edit", count: 1)
         expect(response.body).to have_tag(".card.post a", text: /Delete/, count: 1)
       end
@@ -209,21 +209,16 @@ RSpec.describe "Posts page", type: :request do
         get "/posts/#{post.id}"
       end
 
-      before do
-        sign_in moderator
-        get "/posts/#{post.id}"
-      end
-
       it "renders the post" do
         expect(response).to be_successful
       end
 
-      it "shows the body" do
+      it "shows the body", :aggregate_failures do
         expect(response.body).to include(ERB::Util.h(post.title))
         expect(response.body).to include(post.body.to_s)
       end
 
-      it "shows control buttons" do
+      it "shows control buttons", :aggregate_failures do
         expect(response.body).to have_tag(".card.post a", text: "Edit", count: 1)
         expect(response.body).to have_tag(".card.post a", text: /Delete/, count: 1)
       end

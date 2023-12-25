@@ -1,4 +1,4 @@
-RSpec.describe TemplateDeviseMailer, type: :mailer do
+RSpec.describe TemplateDeviseMailer do
   let(:user) { create(:user) }
 
   let(:token) { SecureRandom.uuid }
@@ -9,9 +9,9 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
         to:               user.email,
         user:,
         confirmation_url: String
-      }).and_return(double(deliver_later: true))
+      }).and_return(instance_double(ActionMailer::MessageDelivery, deliver_later: true))
 
-      TemplateDeviseMailer.confirmation_instructions(user, token).deliver
+      described_class.confirmation_instructions(user, token).deliver
     end
   end
 
@@ -22,9 +22,9 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
         user:,
         token:,
         reset_url: String
-      }).and_return(double(deliver_later: true))
+      }).and_return(instance_double(ActionMailer::MessageDelivery, deliver_later: true))
 
-      TemplateDeviseMailer.reset_password_instructions(user, token).deliver
+      described_class.reset_password_instructions(user, token).deliver
     end
   end
 
@@ -35,9 +35,9 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
         user:,
         token:,
         unlock_url: String
-      }).and_return(double(deliver_later: true))
+      }).and_return(instance_double(ActionMailer::MessageDelivery, deliver_later: true))
 
-      TemplateDeviseMailer.unlock_instructions(user, token).deliver
+      described_class.unlock_instructions(user, token).deliver
     end
   end
 
@@ -46,9 +46,9 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
       expect(TemplateMailer).to receive(:email).with(:email_changed, {
         to:   user.email,
         user:
-      }).and_return(double(deliver_later: true))
+      }).and_return(instance_double(ActionMailer::MessageDelivery, deliver_later: true))
 
-      TemplateDeviseMailer.email_changed(user).deliver
+      described_class.email_changed(user).deliver
     end
   end
 
@@ -57,9 +57,9 @@ RSpec.describe TemplateDeviseMailer, type: :mailer do
       expect(TemplateMailer).to receive(:email).with(:password_change, {
         to:   user.email,
         user:
-      }).and_return(double(deliver_later: true))
+      }).and_return(instance_double(ActionMailer::MessageDelivery, deliver_later: true))
 
-      TemplateDeviseMailer.password_change(user).deliver
+      described_class.password_change(user).deliver
     end
   end
 end

@@ -1,10 +1,10 @@
 describe Posts::UpdateCommand, type: :command do
+  subject { described_class.new(params.merge(id: post.id, current_user: admin)) }
+
   let(:admin) { create(:user, :superadmin) }
   let(:user) { create(:user) }
   let(:post) { create(:post) }
   let(:params) { { title: "Title", body: "Text", user_id: user.id } }
-
-  let(:subject) { described_class.new(params.merge(id: post.id, current_user: admin)) }
 
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_presence_of(:body) }

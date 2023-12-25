@@ -1,10 +1,10 @@
-RSpec.describe "Admin Users", type: :request do
+RSpec.describe "Admin Users" do
   options = { resource: :users, model: User, has_filters: true }
+  let(:admin) { create(:user, :superadmin) }
+
   include_examples "admin crud controller", options
   include_examples "admin crud controller paginated index", options
   include_examples "admin crud controller show resource", options
-
-  let(:admin) { create(:user, :superadmin) }
 
   describe "GET /admin/users" do
     let!(:testuser) { create(:user, first_name: "test") }
@@ -19,7 +19,7 @@ RSpec.describe "Admin Users", type: :request do
       expect(response).to be_successful
     end
 
-    it "finds user" do
+    it "finds user", :aggregate_failures do
       expect(response.body).to include(testuser.last_name)
       expect(response.body).not_to include(otheruser.last_name)
     end
@@ -42,7 +42,7 @@ RSpec.describe "Admin Users", type: :request do
     end
 
     it "finds user and renders json" do
-      expect(JSON.parse(response.body)).to eq({
+      expect(response.parsed_body).to eq({
         results:    [{ id: testuser.id, text: testuser.full_name }],
         pagination: { more: false }
       }.deep_stringify_keys)
@@ -51,6 +51,7 @@ RSpec.describe "Admin Users", type: :request do
 
   describe "POST /admin/users/:id/impersonate" do
     let!(:testuser) { create(:user, first_name: "test") }
+    let(:admin) { create(:user, :superadmin) }
 
     before do
       sign_in admin

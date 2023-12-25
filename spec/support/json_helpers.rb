@@ -1,6 +1,6 @@
 module JsonHelpers
   def json_response
-    @json ||= JSON.parse(response.body)
+    @_json_response ||= JSON.parse(response.body)
   end
 
   def jsonapi_headers

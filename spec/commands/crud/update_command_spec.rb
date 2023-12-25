@@ -31,7 +31,7 @@ RSpec.describe Crud::UpdateCommand, type: :command do
   let(:user) { create(:user) }
 
   it "returns true as persisted?" do
-    expect(subject.persisted?).to eq(true)
+    expect(subject.persisted?).to be(true)
   end
 
   context "when user has not enough permissions" do

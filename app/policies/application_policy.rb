@@ -26,7 +26,7 @@ class ApplicationPolicy
     @user&.admin? || @user&.superadmin?
   end
 
-  def respond_to_missing? ...
+  def respond_to_missing?(...)
     true
   end
 

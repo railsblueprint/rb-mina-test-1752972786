@@ -1,4 +1,4 @@
-RSpec.describe "Admin Pages", type: :request do
+RSpec.describe "Admin Pages" do
   options = { resource: :pages, model: Page, has_filters: true }
 
   include_examples "admin crud controller", options

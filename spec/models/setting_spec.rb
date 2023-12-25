@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Setting, type: :model do
+RSpec.describe Setting do
   include Shoulda::Matchers::ActiveModel
   include Shoulda::Matchers::ActiveRecord
 
@@ -28,14 +28,14 @@ RSpec.describe Setting, type: :model do
     end
 
     describe "#[]" do
-      it "returns the value" do
+      it "returns the value", :aggregate_failures do
         expect(described_class[:string_setting]).to eq("some_string")
         expect(described_class[:array_setting]).to eq([1, 2, 3])
       end
     end
 
     describe "#to_liquid" do
-      it "returns a hash with all values" do
+      it "returns a hash with all values", :aggregate_failures do
         expect(described_class.to_liquid).to be_a(Hash)
         expect(described_class.to_liquid.keys.count).to eq(4)
       end

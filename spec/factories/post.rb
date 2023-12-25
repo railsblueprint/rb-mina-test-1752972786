@@ -3,11 +3,11 @@ FactoryBot.define do
     title { Faker::Hacker.say_something_smart }
 
     body {
-      rand(10).times.map do
+      Array.new(rand(10)) {
         Faker::Lorem.paragraph(sentence_count: rand(10), supplemental: true)
-      end.join("<br/>")
+      }.join("<br/>")
     }
 
-    association :user
+    user
   end
 end

@@ -1,4 +1,4 @@
-RSpec.describe "Admin Settings", type: :request do
+RSpec.describe "Admin Settings" do
   let(:admin) { create(:user, :superadmin) }
 
   describe "CRUD operations" do
@@ -23,7 +23,7 @@ RSpec.describe "Admin Settings", type: :request do
         get "/admin/config/settings"
       end
 
-      it "does not show edit settings links" do
+      it "does not show edit settings links", :aggregate_failures do
         expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting_group) })
         expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting) })
       end
@@ -57,7 +57,7 @@ RSpec.describe "Admin Settings", type: :request do
             get "/admin/config/settings"
           end
 
-          it "shows edit settings links" do
+          it "shows edit settings links", :aggregate_failures do
             expect(response.body).to have_tag("a", with: { href: edit_admin_setting_path(setting_group) })
             expect(response.body).to have_tag("a", with: { href: edit_admin_setting_path(setting) })
           end
@@ -76,7 +76,7 @@ RSpec.describe "Admin Settings", type: :request do
             get "/admin/config/settings"
           end
 
-          it "does not show edit settings links" do
+          it "does not show edit settings links", :aggregate_failures do
             expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting_group) })
             expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting) })
           end
@@ -94,7 +94,7 @@ RSpec.describe "Admin Settings", type: :request do
           get "/admin/config/settings"
         end
 
-        it "does not show edit settings links" do
+        it "does not show edit settings links", :aggregate_failures do
           expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting_group) })
           expect(response.body).not_to have_tag("a", with: { href: edit_admin_setting_path(setting) })
         end

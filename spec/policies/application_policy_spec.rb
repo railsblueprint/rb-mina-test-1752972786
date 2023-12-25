@@ -1,7 +1,9 @@
 RSpec.describe ApplicationPolicy do
   subject { described_class }
 
-  let(:object) { double("test object", all: "all_objects", class: double(all: "all_objects")) }
+  # rubocop:disable RSpec/VerifiedDoubles
+  let(:object) { double("test object", all: "all_objects", class: double("model", name: "Model", all: "all_objects")) }
+  # rubocop:enable RSpec/VerifiedDoubles
 
   context "for guest user" do
     let(:user) { nil }
@@ -71,7 +73,7 @@ RSpec.describe ApplicationPolicy do
     let(:user) { build(:user, :admin) }
 
     before do
-      stub_const("RSpec::Mocks::DoublePolicy", Class.new(ApplicationPolicy))
+      stub_const("RSpec::Mocks::DoublePolicy", Class.new(described_class))
     end
 
     it "responds to all methods" do

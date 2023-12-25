@@ -1,4 +1,4 @@
-describe Admin::DesignSystem::IconsController, type: :controller do
+describe Admin::DesignSystem::IconsController do
   render_views
 
   let(:admin) { create(:user, :admin) }

@@ -1,4 +1,4 @@
-RSpec.describe "Users pages", type: :request do
+RSpec.describe "Users pages" do
   let(:user) { create(:user, password: "12345678") }
   let(:other_user) { create(:user) }
 
@@ -78,7 +78,7 @@ RSpec.describe "Users pages", type: :request do
       end
 
       it "renders user's profile" do
-        expect(response.body).to include(user.full_name)
+        expect(response.body).to include(CGI.escapeHTML(user.full_name))
       end
 
       it "includes link to edit profile" do
@@ -108,7 +108,7 @@ RSpec.describe "Users pages", type: :request do
         expect(response).to have_http_status(:success)
       end
 
-      it "includes forms" do
+      it "includes forms", :aggregate_failures do
         expect(response.body).to have_form "/profile/edit", :post
         expect(response.body).to have_form "/profile/password", :post
       end
@@ -171,10 +171,10 @@ password_confirmation: "<PASSWORD>" } }
 password_confirmation: "87654321" } }
         end
 
-        it "redirects to profile page" do
+        it "redirects to profile page", :aggregate_failures do
           expect(response).to redirect_to(profile_path)
           expect(flash[:success]).to eq("Your password has been changed.")
-          expect(flash[:turbo_breakout]).to eq(true)
+          expect(flash[:turbo_breakout]).to be(true)
         end
       end
 
@@ -186,7 +186,7 @@ password_confirmation: "87654321" } }
 password_confirmation: "87654321" } }
         end
 
-        it "redirects to profile page" do
+        it "redirects to profile page", :aggregate_failures do
           expect(response).to have_http_status(:unprocessable_entity)
           expect(flash[:alert]).to eq("Failed to update password.")
         end
@@ -212,10 +212,10 @@ password_confirmation: "87654321" } }
           patch "/profile/edit", params: { user: { first_name: "123" } }
         end
 
-        it "redirects to profile page" do
+        it "redirects to profile page", :aggregate_failures do
           expect(response).to redirect_to(profile_path)
           expect(flash[:success]).to eq("Your profile has been updated")
-          expect(flash[:turbo_breakout]).to eq(true)
+          expect(flash[:turbo_breakout]).to be(true)
         end
       end
 
@@ -225,7 +225,7 @@ password_confirmation: "87654321" } }
           patch "/profile/edit", params: { user: { facebook_profile: "123" } }
         end
 
-        it "redirects to profile page" do
+        it "redirects to profile page", :aggregate_failures do
           expect(response).to have_http_status(:unprocessable_entity)
           expect(flash[:alert]).to eq("Failed to update profile")
         end

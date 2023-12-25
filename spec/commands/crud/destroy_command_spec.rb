@@ -18,7 +18,7 @@ RSpec.describe Crud::DestroyCommand, type: :command do
                               end)
 
     stub_const("SampleModels", Module.new)
-    stub_const("SampleModels::DestroyCommand", Class.new(Crud::DestroyCommand))
+    stub_const("SampleModels::DestroyCommand", Class.new(described_class))
 
     stub_const("SampleModelPolicy", Class.new(ApplicationPolicy) do
                                       def destroy?; end

@@ -1,7 +1,7 @@
 describe ContactUsCommand, type: :command do
-  let(:params) { { name: "456", email: "abcd@dot.com", subject: "help", message: "me please" } }
+  subject { described_class.new(params) }
 
-  let(:subject) { described_class.new(params) }
+  let(:params) { { name: "456", email: "abcd@dot.com", subject: "help", message: "me please" } }
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:email) }

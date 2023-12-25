@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
     @page = Page.active.find_by(url: "")
-    return if @page.blank?
+    return if @page.blank? # renders default home
 
     set_meta_from_page
     render :page

@@ -1,9 +1,9 @@
 describe Users::ChangePasswordCommand, type: :command do
+  subject { described_class.new(params.merge(user:, current_user: user)).no_exceptions! }
+
   let(:admin) { create(:user, :admin) }
   let(:user) { create(:user, password: "12345678") }
   let(:params) { { password: "456789", password_confirmation: "456789", current_password: "12345678" } }
-
-  let(:subject) { described_class.new(params.merge(user:, current_user: user)).no_exceptions! }
 
   it { is_expected.to validate_presence_of(:user) }
   it { is_expected.to validate_presence_of(:password) }

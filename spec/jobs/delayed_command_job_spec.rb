@@ -1,15 +1,15 @@
 describe DelayedCommandJob do
-  class GoodCommand < BaseCommand
-    def process; end
+  before do
+    stub_const("GoodCommand", Class.new(BaseCommand) do
+                                def process; end
+                              end)
+    stub_const("AbortedCommand", Class.new(BaseCommand) do
+                                   def process
+                                     abort_command
+                                   end
+                                 end)
+    stub_const("WrongClass", Class.new)
   end
-
-  class AbortedCommand < BaseCommand
-    def process
-      abort_command
-    end
-  end
-
-  class WrongClass; end
 
   let(:klass) { GoodCommand }
   let(:arguments) { { a: 1, b: "2" } }
@@ -38,7 +38,7 @@ describe DelayedCommandJob do
     end
   end
 
-  context "when command broadcasts :invalid" do
+  context "when command broadcasts :invalid", :aggregate_failures do
     it "logs error" do
       expect_any_instance_of(klass).to receive(:valid?).and_return(false)
 
@@ -47,7 +47,7 @@ describe DelayedCommandJob do
     end
   end
 
-  context "when command broadcasts :stale" do
+  context "when command broadcasts :stale", :aggregate_failures do
     it "logs error" do
       expect_any_instance_of(klass).to receive(:stale?).and_return(true)
 

@@ -137,22 +137,6 @@ module FormsHelper
     filter_by_binary :active
   end
 
-  def filter_by_liked
-    filter_by_binary :liked
-  end
-
-  def filter_by_crawled
-    filter_by_binary :crawled
-  end
-
-  def filter_by_blocked
-    filter_by_binary :blocked
-  end
-
-  def filter_by_in_stock
-    filter_by_binary :in_stock
-  end
-
   # rubocop:disable Metrics/MethodLength
   # TODO: convert to a constant
   memoize def bool_icons

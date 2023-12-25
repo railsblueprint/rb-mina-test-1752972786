@@ -1,4 +1,4 @@
-RSpec.describe "Static pages", type: :request do
+RSpec.describe "Static pages" do
   let(:user) { create(:user) }
 
   describe "GET /" do
@@ -11,11 +11,8 @@ RSpec.describe "Static pages", type: :request do
         expect(response).to have_http_status(:success)
       end
 
-      it "renders default home page" do
+      it "renders default home page", :aggregate_failures do
         expect(response).to render_template("static_pages/home")
-      end
-
-      it "renders default home page" do
         expect(response.body).to include("Welcome to Rails Blueprint")
       end
     end
@@ -43,7 +40,7 @@ RSpec.describe "Static pages", type: :request do
         expect(response.body).to have_tag("title", "Rails Blueprint | HomePage")
       end
 
-      it "sets SEO tags" do
+      it "sets SEO tags", :aggregate_failures do
         expect(response.body).to have_tag("meta[name=\"description\"]", with: { content: page.seo_description })
         expect(response.body).to have_tag("meta[name=\"keywords\"]", with: { content: "homepage" })
         expect(response.body).to have_tag("meta[name=\"seo_title\"]", with: { content: page.seo_title })
@@ -83,7 +80,7 @@ RSpec.describe "Static pages", type: :request do
         expect(response.body).to have_tag("title", "Rails Blueprint | #{page.title}")
       end
 
-      it "sets SEO tags" do
+      it "sets SEO tags", :aggregate_failures do
         expect(response.body).to have_tag("meta[name=\"description\"]", with: { content: page.seo_description })
         expect(response.body).to have_tag("meta[name=\"keywords\"]", with: { content: "some, keywords" })
       end

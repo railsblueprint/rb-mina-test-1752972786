@@ -1,4 +1,4 @@
-describe Admin::DesignSystem::ChartsController, type: :controller do
+describe Admin::DesignSystem::ChartsController do
   render_views
 
   let(:admin) { create(:user, :admin) }

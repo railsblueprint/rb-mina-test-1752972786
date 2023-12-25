@@ -22,16 +22,12 @@ RSpec.describe SettingPolicy do
     let(:user) { build(:user, :superadmin) }
 
     context "non-dev environment" do
-      permissions :index? do
+      permissions :index?, :mass_update? do
         it { is_expected.to permit(user, klass) }
       end
 
       permissions :new?, :create? do
         it { is_expected.not_to permit(user, klass) }
-      end
-
-      permissions :mass_update? do
-        it { is_expected.to permit(user, klass) }
       end
 
       permissions :show? do

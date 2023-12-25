@@ -1,9 +1,9 @@
 describe MailTemplates::CreateCommand, type: :command do
+  subject { described_class.new(params.merge(current_user: admin)).no_exceptions! }
+
   let(:admin) { create(:user, :admin) }
   let(:user) { create(:user) }
   let(:params) { { alias: "new_template", layout: "simple", body: "zzz" } }
-
-  let(:subject) { described_class.new(params.merge(current_user: admin)).no_exceptions! }
 
   it { is_expected.to validate_presence_of(:alias) }
   it { is_expected.to validate_presence_of(:layout) }
@@ -13,7 +13,7 @@ describe MailTemplates::CreateCommand, type: :command do
   end
 
   it "creates a new mail template" do
-    expect { subject.call }.to change { MailTemplate.count }.by(1)
+    expect { subject.call }.to change(MailTemplate, :count).by(1)
   end
 
   context "with duplicated alias" do
