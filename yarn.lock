@@ -149,10 +149,10 @@ core-js@^3.4.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.33.2.tgz#312bbf6996a3a517c04c99b9909cdd27138d1ceb"
   integrity sha512-XeBzWI6QL3nJQiHmdzbAOiMYqjrb7hwU7A39Qhvd/POSa/t9E1AeZyEZx3fNvp/vtM8zXwhoL0FsiS0hD0pruQ==
 
-dayjs@^1.10.7:
-  version "1.10.7"
-  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.10.7.tgz#2cf5f91add28116748440866a0a1d26f3a6ce468"
-  integrity sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==
+dayjs@^1.11.10:
+  version "1.11.10"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.10.tgz#68acea85317a6e164457d6d6947564029a6a16a0"
+  integrity sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==
 
 detect-hover@^1.0.3:
   version "1.0.3"
@@ -183,6 +183,11 @@ detect-touch-events@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmjs.org/detect-touch-events/-/detect-touch-events-2.0.2.tgz#541cc49b05ca544726a3bf2802c5b23e53aeeebb"
   integrity sha512-g8GWBkJLiIDRJfRXEdrd1wMXpNyGId2DkbfuwFahSb4OCvn717hyRJtAcEDISfp3zkwEhZ4Y4woHPA6DeyB3Fw==
+
+diff-dom@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/diff-dom/-/diff-dom-5.1.2.tgz#951627784bc45e32999f0c97cd42e4cf8c35791f"
+  integrity sha512-ayOX+pBYzyLdt7iXFd+8jvWzhrcWk+9gQqYk7Zz8/0hpIsqSbtk6MNbtds+Ox6B8ONsdtIcfPmk3NXPdgb3+xQ==
 
 echarts@^5.2.2:
   version "5.2.2"
@@ -456,12 +461,13 @@ select2@^4.1.0-rc.0:
   resolved "https://registry.yarnpkg.com/select2/-/select2-4.1.0-rc.0.tgz#ba3cd3901dda0155e1c0219ab41b74ba51ea22d8"
   integrity sha512-Hr9TdhyHCZUtwznEH2CBf7967mEM0idtJ5nMtjvk3Up5tPukOLXbHUNmh10oRfeNIhj+3GD3niu+g6sVK+gK0A==
 
-simple-datatables@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.npmjs.org/simple-datatables/-/simple-datatables-3.2.0.tgz#a30b42c28dffce7772f8151641e40f8e233aa8b8"
-  integrity sha512-lWwrH7SbTHp4SBQmvGty3NFzruzcbz/URUkkcwd8AdnZrQUtSitGwKeJ64qUVv2JXWP+RLOe1xpN8bW4Z6gjSQ==
+simple-datatables@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/simple-datatables/-/simple-datatables-9.0.0.tgz#691878785833220292c5d1c436fa8e570e877679"
+  integrity sha512-Muux/vfv07QFIWOduJiPnWoxRNGTijc0GEcqZ0XShonXZSqYq7BkDhvaI7OSoLmGZXo45z3Yrk+IRF4A1iosUg==
   dependencies:
-    dayjs "^1.10.7"
+    dayjs "^1.11.10"
+    diff-dom "^5.1.2"
 
 simpledotcss@^2.0.0:
   version "2.0.0"
@@ -481,6 +487,11 @@ stimulus_reflex@^3.5.0-pre9:
     "@hotwired/stimulus" ">= 3.0"
     "@rails/actioncable" ">= 6.0"
     cable_ready ">= 5.0.0-pre9"
+
+suneditor@^2.45.1:
+  version "2.45.1"
+  resolved "https://registry.yarnpkg.com/suneditor/-/suneditor-2.45.1.tgz#5ce56a2d67bfd31e2c21f777cc7f5a522631eb06"
+  integrity sha512-fLxc0nLwd77vaPuf78D+VAFNAgX9hLps6h96JA/LUCpqt4LeYnEaIE1RfJojX+BhSA+krl5qZ8pdgqcoo3dN3g==
 
 svg.draggable.js@^2.2.2:
   version "2.2.2"

@@ -8,7 +8,6 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "https://ga.jspm.io/npm:@hotwired/stimulus@3.1.0/dist/stimulus.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
-pin "@stimulus_reflex/polyfills", to: "@stimulus_reflex/polyfills",  preload: true
 pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.1/dist/jquery.js", preload: true
 pin "jquery.global", to: "jquery.global.js", preload: true
 pin "keyboard-pagination", to: "libs/jquery.keyboard-pagination.js"
@@ -50,3 +49,9 @@ pin "cable_ready", to: "https://ga.jspm.io/npm:cable_ready@5.0.0-pre9/dist/cable
 pin "morphdom", to: "https://ga.jspm.io/npm:morphdom@2.6.1/dist/morphdom.js"
 pin "sortablejs", to: "https://ga.jspm.io/npm:sortablejs@1.15.0/modular/sortable.esm.js"
 pin "fontawesome", to: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/index.js"
+pin "simple-datatables", to: "simple-datatables/dist/module.js"
+
+pin "suneditor", to: "https://ga.jspm.io/npm:suneditor@2.45.1/src/suneditor.js"
+pin "suneditor/plugins", to: "https://ga.jspm.io/npm:suneditor@2.45.1/src/plugins/index.js"
+pin "codemirror5", to: "https://ga.jspm.io/npm:codemirror@5.49.0/lib/codemirror.js"
+pin "codemirror5/mode/htmlmixed", to: "https://ga.jspm.io/npm:codemirror@5.49.0/mode/htmlmixed/htmlmixed.js"

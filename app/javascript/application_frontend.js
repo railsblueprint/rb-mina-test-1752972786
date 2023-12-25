@@ -7,19 +7,7 @@ import "trix";
 import "@rails/actiontext";
 
 $(function() {
-  var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-  var toastList = toastElList.map(function (toastEl) {
-    $(toastEl).toast("show");
-  })
-
   $("[data-bs-toggle=\"tooltip\"]").tooltip();
 
-  // Needed to enable link inside button
-  $(".action-edit-set").click((e) => {
-    const target = e.currentTarget;
-    Turbo.visit(target.href);
-  })
-
   $(".alert").alert();
-
 })

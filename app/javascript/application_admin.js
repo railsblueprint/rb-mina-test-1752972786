@@ -3,8 +3,6 @@ import 'jquery.global'
 import * as bootstrap from "bootstrap"
 import "@hotwired/turbo-rails";
 import 'channels';
-// Probably need to fix it. Does not load
-// import '@stimulus_reflex/polyfills'
 import "controllers";
 import "trix";
 import "@rails/actiontext";
@@ -17,10 +15,6 @@ import "select2"
 console.log("loaded application_admin")
 
 $(function() {
-  // var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-  // var toastList = toastElList.map(function (toastEl) {
-  //   $(toastEl).toast("show");
-  // })
 
   $("[data-bs-toggle=\"tooltip\"]").tooltip();
 

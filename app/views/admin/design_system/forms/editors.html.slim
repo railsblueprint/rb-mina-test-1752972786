@@ -46,7 +46,7 @@ section.section
         .card-body
           h5.card-title
             | TinyMCE Editor
-          textarea.tinymce[data-controller="editors--tinymce"]
+          textarea.tinymce data-controller="editors--tinymce"
             p
               | Hello World!
             p
@@ -54,3 +54,33 @@ section.section
               strong
                 |  full
               |  editor
+    .col-lg-6
+      .card
+        .card-body
+          h5.card-title
+            | Suneditor
+          textarea.w-100 data-controller="editors--suneditor"
+            p
+              | Hello World!
+            p
+              | This is Suneditor
+    .col-lg-6
+      .card
+        .card-body
+          h5.card-title
+            | Codemirror
+          textarea.w-100 data-controller="editors--codemirror"
+            p
+              | Hello World!
+            p
+              | This is CodeMirror
+      .card
+        .card-body
+          h5.card-title
+            | Trix
+          trix-editor input="x"
+          textarea.d-none id="x"
+            p
+              | Hello World!
+            p
+              | This is Trix editor
