@@ -58,6 +58,7 @@ namespace :admin do
     get "components/pagination"
     get "components/progress"
     get "components/spinners"
+    get "components/toasts"
     get "components/tooltips"
     get 'forms/editors'
     get "forms/elements"

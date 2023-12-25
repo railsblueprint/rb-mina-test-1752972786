@@ -135,6 +135,7 @@ en:
         boxicons: "Boxicons"
         color_system: "Color system"
         fontawesome: "FontAwesome icons"
+        toasts: "Toasts"
       global_search: "Global search"
     settings:
       page_title: "System settings"

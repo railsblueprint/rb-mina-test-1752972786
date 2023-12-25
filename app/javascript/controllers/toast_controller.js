@@ -6,7 +6,6 @@ export default class extends Controller {
     }
 
     details() {
-        console.log("show details")
         $(".details").toggleClass("show")
     }
 }

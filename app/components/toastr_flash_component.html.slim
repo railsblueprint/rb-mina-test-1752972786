@@ -1,8 +1,8 @@
 - capture_to_local captured_content=:captured_content
   - flash.each do |(type, message)|
-    - type = 'bg-success' if type == 'notice' || type == 'success'
-    - type = 'bg-danger' if type == 'alert' || type == 'error'
-    .toast.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="#{type}" data-controller="toast" role="alert" data-turbo-temporary="true"
+    - type = 'info' if type == 'notice'
+    - type = 'danger' if type == 'alert' || type == 'error'
+    .toast.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="bg-#{type}" data-controller="toast" role="alert" data-turbo-temporary="true"
       - if message.is_a? Hash
         .d-flex
           .toast-body.flex-grow-1
