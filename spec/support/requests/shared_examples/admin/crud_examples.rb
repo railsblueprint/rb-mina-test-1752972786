@@ -187,7 +187,7 @@ RSpec.shared_examples "admin crud controller paginated index" do |options|
 
       it "redirects to the home #{slug}", :aggregate_failures do
         expect(response).to redirect_to("/")
-        expect(flash[:alert]).to match(/You cannot access this page/)
+        expect(flash[:error]).to match(/You cannot access this page/)
       end
     end
 

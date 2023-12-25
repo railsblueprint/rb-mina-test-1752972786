@@ -28,7 +28,8 @@ RSpec.describe ToggleBoolean do
         post :toggle_active, params: { id: page.id }
 
         expect(page.reload.active).to be(true)
-        expect(flash[:alert]).to eq I18n.t("admin.common.not_authorized")
+
+        expect(flash[:error]).to eq I18n.t("admin.common.not_authorized")
       end
     end
 

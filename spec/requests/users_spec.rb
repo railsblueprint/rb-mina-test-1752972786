@@ -182,13 +182,15 @@ password_confirmation: "87654321" } }
         before do
           sign_in user
           post "/profile/password",
-               params: { user: { current_password: "bad_password", password: "87654321",
-password_confirmation: "87654321" } }
+               params: { user: {
+                 current_password: "bad_password", password: "87654321", password_confirmation: "87654321"
+               } }
         end
 
         it "redirects to profile page", :aggregate_failures do
           expect(response).to have_http_status(:unprocessable_entity)
-          expect(flash[:alert]).to eq("Failed to update password.")
+          pp flash
+          expect(flash[:error]).to eq("Failed to update password.")
         end
       end
     end
@@ -227,7 +229,7 @@ password_confirmation: "87654321" } }
 
         it "redirects to profile page", :aggregate_failures do
           expect(response).to have_http_status(:unprocessable_entity)
-          expect(flash[:alert]).to eq("Failed to update profile")
+          expect(flash[:error]).to eq("Failed to update profile")
         end
       end
     end

@@ -28,7 +28,7 @@ RSpec.describe "Admin Dashboard" do
       end
 
       it "shows flash message" do
-        expect(flash[:alert]).to eq("You cannot access this page")
+        expect(flash[:error]).to eq("You cannot access this page")
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe "Admin Dashboard" do
       end
 
       it "shows flash message" do
-        expect(flash[:alert]).to eq("You cannot access this page")
+        expect(flash[:error]).to eq("You cannot access this page")
       end
     end
 

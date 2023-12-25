@@ -20,7 +20,7 @@ module ToggleBoolean
       @resource.update!(field => !@resource.send(field))
       flash.now[:success] = t("admin.common.successfully_updated")
     else
-      flash.now[:alert] = t("admin.common.not_authorized")
+      flash.now[:error] = t("admin.common.not_authorized")
     end
 
     respond_to do |format|

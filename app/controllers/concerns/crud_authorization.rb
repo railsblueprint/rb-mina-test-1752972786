@@ -12,7 +12,7 @@ module CrudAuthorization
                 end
 
       path = admin? ? admin_root_path : root_path
-      redirect_to path, alert: message
+      redirect_to path, error: message
     end
 
     # rubocop:disable Rails/LexicallyScopedActionFilter

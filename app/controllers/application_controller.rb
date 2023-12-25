@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   etag { current_user&.id }
 
-  add_flash_types :success, :info
+  add_flash_types :success, :info, :error
 
   rescue_from Pundit::NotAuthorizedError do
     message = if request.get?
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
               else
                 I18n.t("messages.you_cannot_peform_this_action")
               end
-    redirect_to root_path, alert: message
+    redirect_to root_path, error: message
   end
 
   use_layout "application"

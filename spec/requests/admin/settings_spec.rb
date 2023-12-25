@@ -147,7 +147,7 @@ RSpec.describe "Admin Settings" do
       end
 
       it "shows success message" do
-        expect(flash[:alert]).to be_present
+        expect(flash[:error]).to be_present
       end
     end
   end

@@ -21,11 +21,11 @@ class UsersController < ApplicationController
       command.on(:invalid, :abort) do |errors|
         @command = command
         @password_command = Users::ChangePasswordCommand.new
-        flash.now[:alert] = errors[:base].to_sentence.presence || "Failed to update profile"
+        flash.now[:error] = errors[:base].to_sentence.presence || "Failed to update profile"
         render "form", status: :unprocessable_entity
       end
       command.on(:unauthorized) do
-        redirect_to "/", alert: I18n.t("admin.common.item_update_unauthorized"), turbo_breakout: true
+        redirect_to "/", error: I18n.t("admin.common.item_update_unauthorized"), turbo_breakout: true
       end
     end
   end
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
         @password_command = command
         @command = Users::UpdateCommand.build_from_object(current_user)
 
-        flash.now[:alert] = I18n.t("messages.failed_to_update_password")
+        flash.now[:error] = I18n.t("messages.failed_to_update_password")
         render "form", status: :unprocessable_entity
       end
     end

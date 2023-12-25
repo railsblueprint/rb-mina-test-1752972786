@@ -7,7 +7,7 @@ section.section
             | Toasts Examples
           .text-center
             - [:primary, :secondary, :success, :danger, :warning, :info, :light, :dark].each do |type|
-              .toast.mb-3.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="bg-#{type}" data-controller="toast" role="alert" data-bs-autohide="false"
+              .toast.m-auto.mb-3.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="bg-#{type}" data-controller="toast" role="alert" data-bs-autohide="false"
                 .d-flex
                   .toast-body.flex-grow-1
                     | A simple #{type} toast — check it out!
@@ -18,10 +18,10 @@ section.section
           h5.card-title
             | Toasts with extra info
           - [:primary, :secondary, :success, :danger, :warning, :info, :light, :dark].each do |type|
-            .toast.mb-3.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="bg-#{type}" data-controller="toast" role="alert" data-bs-autohide="false"
+            .toast.m-auto.mb-3.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="bg-#{type}" data-controller="toast" role="alert" data-bs-autohide="false"
               .d-flex
                 .toast-body.flex-grow-1
-                  .d-flex.justify-content-between.
+                  .d-flex.justify-content-between
                     | A simple #{type} toast — check it out!
                     a.text-white type="button" data-bs-toggle="collapse" data-bs-target="#details_#{type}" aria-expanded="false" aria-controls="details_#{type}"
                       | Details

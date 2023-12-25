@@ -53,5 +53,5 @@ pin "simple-datatables", to: "simple-datatables/dist/module.js"
 
 pin "suneditor", to: "https://ga.jspm.io/npm:suneditor@2.45.1/src/suneditor.js"
 pin "suneditor/plugins", to: "https://ga.jspm.io/npm:suneditor@2.45.1/src/plugins/index.js"
-pin "codemirror5", to: "https://ga.jspm.io/npm:codemirror@5.49.0/lib/codemirror.js"
+pin "codemirror5", to: "https://ga.jspm.io/npm:codemirror@5.58.2/lib/codemirror.js"
 pin "codemirror5/mode/htmlmixed", to: "https://ga.jspm.io/npm:codemirror@5.49.0/mode/htmlmixed/htmlmixed.js"

@@ -23,7 +23,7 @@ class Admin::SettingsController < Admin::CrudController
         redirect_to url_for(action: :index), status: :see_other, success: t("messages.successfully_updated")
       end
       command.on(:invalid, :abort) do |errors|
-        redirect_to url_for(action: :index), status: :see_other, alert: errors.full_messages.to_sentence
+        redirect_to url_for(action: :index), status: :see_other, error: errors.full_messages.to_sentence
       end
     end
   end

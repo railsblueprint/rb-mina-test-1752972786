@@ -6,7 +6,7 @@
       - if message.is_a? Hash
         .d-flex
           .toast-body.flex-grow-1
-            .d-flex.justify-content-between.
+            .d-flex.justify-content-between
               = message[:message]
               a.text-white type="button" data-bs-toggle="collapse" data-bs-target="#details_#{message.object_id}" aria-expanded="false" aria-controls="details_#{message.object_id}"
                 | Details

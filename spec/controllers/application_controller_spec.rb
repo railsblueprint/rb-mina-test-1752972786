@@ -26,7 +26,8 @@ RSpec.describe ApplicationController do
           get :index
 
           expect(response).to redirect_to(root_path)
-          expect(flash.alert).to eq(I18n.t("messages.you_cannot_access_this_page"))
+
+          expect(flash[:error]).to eq(I18n.t("messages.you_cannot_access_this_page"))
         end
       end
 
@@ -35,7 +36,7 @@ RSpec.describe ApplicationController do
           post :index
 
           expect(response).to redirect_to(root_path)
-          expect(flash.alert).to eq(I18n.t("messages.you_cannot_peform_this_action"))
+          expect(flash[:error]).to eq(I18n.t("messages.you_cannot_peform_this_action"))
         end
       end
     end
