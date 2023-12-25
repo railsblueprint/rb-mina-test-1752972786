@@ -10,6 +10,4 @@
 //= link_tree ../../../node_modules/@cable_ready/polyfills
 //= link_tree ../../../node_modules/simple-datatables/dist
 
-//- link frontend.js
-//- link mail/foundation_emails.css
 //= link admin.js

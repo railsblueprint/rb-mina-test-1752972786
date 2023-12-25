@@ -20,11 +20,14 @@ def stub_command(klass, event_to_publish, *published_event_args, &block)
     end
 
     # stub all methods
-    def self.method_missing (...); end
+    def self.method_missing(...); end
+
     def self.respond_to_missing?(...)
       true
     end
+
     def method_missing(...); end
+
     def respond_to_missing?(...)
       true
     end

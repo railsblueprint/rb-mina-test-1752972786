@@ -1,6 +1,6 @@
 - capture_to_local captured_content=:captured_content
   - flash.each do |(type, message)|
-    - type = 'info' if type == 'notice'
+    - type = 'success' if type == 'notice'
     - type = 'danger' if type == 'alert' || type == 'error'
     .toast.align-items-center.text-white aria-atomic="true" aria-live="assertive" class="bg-#{type}" data-controller="toast" role="alert" data-turbo-temporary="true"
       - if message.is_a? Hash

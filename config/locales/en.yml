@@ -1,64 +1,74 @@
+---
 en:
-  devise:
-    sessions:
-      new:
-        login_to_your_account: "Login to your account"
-  errors:
-    messages:
-      restrict_dependent_destroy:
-        has_one: "Cannot delete record because a dependent %{record} exists"
-        has_many: "Cannot delete record because dependent %{record} exist"
-  admin_filtered_search_component:
-    search_placeholder: Type for search
+  actions:
+    cancel: Cancel
+    cancel_change: Cancel change
+    change_password: Change password
+    close: Close
+    copy_to_clipboard: Copy to clipboard
+    create: Create
+    delete: Delete
+    details: Details
+    edit: Edit
+    impersonate: Impersonate
+    login_as_user: Login as user
+    new: New
+    open_link_in_new_tab: Open link in new tab
+    please_confirm: Please confirm
+    preview: Preview
+    resend_confirmation_email: Resend confirmation email
+    save: Save
+    send_message: Send Message
+    'true': 'Yes'
+    update_profile: Update profile
+    'yes': 'Yes'
+  activemodel:
+    attributes:
+      setting:
+        types:
+          boolean: Boolean
+          integer: Integer
+          json: JSON
+          set: Set
+          string: String
+      user:
+        first_name: Name first
+        unconfirmed_email: Unconfirmed email
   admin:
     common:
-      item_deleted_ok: "Successfully deleted"
-      'yes': "Sí"
-      'no': "No"
-      search_btn: "Search"
-      item_delete_unauthorized: "You are not authorized to delete this %{record}"
-      item_create_unauthorized: "You are not authorized to create %{record}"
-      item_update_unauthorized: "You are not authorized to update this %{record}"
-      successfully_updated: "Successfully updated %{record}"
-      failed_to_update_item: "Failed to update %{record}"
-      successfully_created: "Successfully created %{record}"
-      not_authorized: "You are not authorized to perform this action"
-      failed_to_create_item: "Failed to create %{record}"
-      failed_to_delete_item: "Failed to delete %{record}"
+      failed_to_create_item: Failed to create %{record}
+      failed_to_delete_item: Failed to delete %{record}
+      failed_to_update_item: Failed to update %{record}
+      item_create_unauthorized: You are not authorized to create %{record}
+      item_delete_unauthorized: You are not authorized to delete this %{record}
+      item_deleted_ok: Successfully deleted
+      item_update_unauthorized: You are not authorized to update this %{record}
+      'no': 'No'
+      not_authorized: You are not authorized to perform this action
+      search_btn: Search
+      successfully_created: Successfully created %{record}
+      successfully_updated: Successfully updated %{record}
+      'yes': true
+    controller:
+      page_title: Page title
     crud:
       header:
-        search_placeholder: "Type for search"
+        search_placeholder: Type for search
       search_field:
-        search_placeholder: "Type for search"
-    demo:
-      forms:
-        editors:
-          page_title: Editors
-        elements:
-          page_title: Form elements
-        layouts:
-          page_title: Form layouts
-        validation:
-          page_title: Validation
+        search_placeholder: Type for search
+    design_system:
       charts:
-        chartjs:
-          page_title: Chart.JS
         apexcharts:
           page_title: ApexCharts
+        chartjs:
+          page_title: Chart.JS
         echarts:
           page_title: ECharts
-      icons:
-        bootstrap:
-          page_title: Bootstrap icons
-        boxicons:
-          page_title: Boxicons
-        remix:
-          page_title: Remix icons
       components:
-        alert:
-          page_title: Alert
         accordion:
           page_title: Accordion
+        alert:
+          page_title: Alert
         badges:
           page_title: Badges
         breadcrumbs:
@@ -73,235 +83,210 @@ en:
           page_title: List group
         modal:
           page_title: Modals
-        tabs:
-          page_title: Tabs
         pagination:
           page_title: Pagination
         progress:
           page_title: Progress bars
         spinners:
           page_title: Spinners
+        tabs:
+          page_title: Tabs
         tooltips:
           page_title: Tooltips
+      forms:
+        editors:
+          page_title: Editors
+        elements:
+          page_title: Form elements
+        layouts:
+          page_title: Form layouts
+        validation:
+          page_title: Validation
+      icons:
+        bootstrap:
+          page_title: Bootstrap icons
+        boxicons:
+          page_title: Boxicons
+        remix:
+          page_title: Remix icons
       tables:
-        general:
-          page_title: General tables
         data:
           page_title: Data tables
+        general:
+          page_title: General tables
+    mail_templates:
+      alias: Alias
+      edit:
+        page_title: Edit template
+      header:
+        you_have_unsaved_changes: You have unsaved changes. Don't forget to run 'rake mail_templates:generate' to generate data migration
+      index:
+        page_title: Mail templates
+      new:
+        page_title: New template
+      subject: Subject
     nav:
-      dashboard: "Dashboard"
-      configuration: "Configuration"
-      maintenance: "Maintenance"
-      pages: "Pages"
-      posts: "Posts"
-      settings: "Settings"
-      mail_templates: "Mail templates"
-      users: Users
-      demos: "Demos"
-      components: "Components"
-      pg_hero: "Pg Hero"
-      good_job: "Good Job"
+      components: Components
+      configuration: Configuration
+      dashboard: Dashboard
+      demos: Demos
       design_system:
-        design_system: "Design system"
-        alerts: "Alerts"
-        accordion: "Accordion"
-        badges: "Badges"
-        breadcrumbs: "Breadcrumbs"
-        buttons: "Buttons"
-        cards: "Cards"
-        carousel: "Carousel"
-        list_group: "List group"
-        modal: "Modal"
-        tabs: "Tabs"
-        pagination: "Pagination"
-        progress: "Progress"
-        spinners: "Spinners"
-        tooltips: "Tooltips"
-        forms: "Forms"
-        form_elements: "Form Elements"
-        form_layouts: "Form Layouts"
-        form_editors: "Form Editors"
-        form_validation: "Form Validation"
-        tables: "Tables"
-        tables_general: "General Tables"
-        tables_data: "Data Tables"
-        charts: "Charts"
-        chartjs: "Chart.js"
-        apexcharts: "ApexCharts"
-        echarts: "ECharts"
-        icons: "Icons"
-        bootstrap: "Bootstrap Icons"
-        remix: "Remix Icons"
-        boxicons: "Boxicons"
-        color_system: "Color system"
-        fontawesome: "FontAwesome icons"
-        toasts: "Toasts"
-      global_search: "Global search"
+        accordion: Accordion
+        alerts: Alerts
+        apexcharts: ApexCharts
+        badges: Badges
+        bootstrap: Bootstrap Icons
+        boxicons: Boxicons
+        breadcrumbs: Breadcrumbs
+        buttons: Buttons
+        cards: Cards
+        carousel: Carousel
+        chartjs: Chart.js
+        charts: Charts
+        color_system: Color system
+        design_system: Design system
+        echarts: ECharts
+        fontawesome: FontAwesome icons
+        form_editors: Form Editors
+        form_elements: Form Elements
+        form_layouts: Form Layouts
+        form_validation: Form Validation
+        forms: Forms
+        icons: Icons
+        list_group: List group
+        modal: Modal
+        pagination: Pagination
+        progress: Progress
+        remix: Remix Icons
+        spinners: Spinners
+        tables: Tables
+        tables_data: Data Tables
+        tables_general: General Tables
+        tabs: Tabs
+        toasts: Toasts
+        tooltips: Tooltips
+      global_search: Global search
+      good_job: Good Job
+      mail_templates: Mail templates
+      maintenance: Maintenance
+      pages: Pages
+      pg_hero: Pg Hero
+      posts: Posts
+      settings: Settings
+      users: Users
+    pages:
+      active: Active
+      page_title: Pages
+      sidebar: Sidebar
+      title: Title
+      url: Url
+    posts:
+      author: Author
+      created_at: Created at
+      page_title: Posts
+      title: Title
     settings:
-      page_title: "System settings"
       index:
-        page_title: "System settings"
-        create_setting: "Create setting"
-      mass_update:
-        sucessfully_updated: "Sucessfully updated"
-    districts:
-      index:
-        page_title: "Districts"
-      name: Name
-      reference: "Reference"
-      subdomain: "Subdomain"
-      domain: "Domain"
+        create_setting: Create setting
+        page_title: System settings
+      page_title: System settings
     users:
-      page_title: "Users"
-      index:
-        become_user_confirmation: "Are you sure you want to login as '%{user}'? You will have to relogin to return to your account."
+      company: Company
+      email: E-mail
+      job: Job
+      name: Name
+      page_title: Users
+      registered: Registered
+      roles: Roles
       show:
         posts_count:
-          one: "1 post"
+          one: 1 post
           other: "%{count} posts"
-      email: "E-mail"
-      name: "Name"
-      roles: "Roles"
-      registered: "Registered"
-      job: "Job"
-      company: "Company"
-    posts:
-      page_title: "Posts"
-      index:
-        create_post: "Create post"
-        title: Title
-        author: Author
-        created_at: Created at
-      title: "Title"
-      author: "Author"
-      created_at: "Created at"
-    mail_templates:
-      index:
-        page_title: "Mail templates"
-      header:
-        you_have_unsaved_changes: "You have unsaved changes. Don't forget to run 'rake mail_templates:generate' to generate data migration"
-      new:
-        page_title: "New template"
-      edit:
-        page_title: "Edit template"
-      alias: "Alias"
-      subject: "Subject"
-    pages:
-      page_title: Pages
-      index:
-        create_page: "Create page"
-      active: "Active"
-      sidebar: "Sidebar"
-      url: "Url"
-      title: "Title"
-  activemodel:
-    attributes:
-      user:
-        first_name: "Name first"
-        unconfirmed_email: "Unconfirmed email"
-      setting:
-        types:
-          set: Set
-          string: String
-          integer: Integer
-          boolean: Boolean
-          json: JSON
-  actions:
-    yes: "Yes"
-    edit: "Edit"
-    save: "Save"
-    create: "Create"
-    close: "Close"
-    new: "New"
-    cancel: "Cancel"
-    send_message: "Send Message"
-    please_confirm: "Please confirm"
-    login_as_user: "Login as user"
-    change_password: "Change password"
-    copy_to_clipboard: "Copy to clipboard"
-    open_link_in_new_tab: "Open link in new tab"
-    impersonate: "Impersonate"
-    update_profile: "Update profile"
-    preview: "Preview"
-    cancel_change: "Cancel change"
-    resend_confirmation_email: "Resend confirmation email"
-  locales:
-    en:
-      short: EN
-      full: English
-    ru:
-      short: RU
-      full: Russian
-  messages:
-    successfully_created: "Successfully created  %{resource}"
-    successfully_deleted: "Successfully deleted  %{resource}"
-    successfully_updated: "Successfully updated  %{resource}"
-    delete_confirmation: "Are you sure you want to delete this %{resource}?"
-    copied_successfully: "Copied successfully"
-    failed_to_copy: "Failed to copy"
-    you_cannot_access_this_page: "You cannot access this page"
-    you_cannot_peform_this_action: "You cannot peform this action"
-    failed_to_update_password: "Failed to update password."
-    you_must_be_signed_in_to_edit_your_profile: "You must be signed in to edit your profile."
-    you_did_not_have_impersonation: "You did not have impersonation"
-    you_have_been_disavowed: "You have been disavowed from impersonation"
-  you_have_unsaved_changes: "You have unsaved changes. Don't forget to run 'rake settings:generate' to generate data migration"
-  action:
-    delete: "Delete"
-    edit: "Edit"
-  contacts:
-    form:
-      your_name: "Your name"
-      your_email: "Your email"
-      subject: "Subject"
-      message: "Message"
-    new:
-      contact_us: "Contact us"
-      address: "Address"
-      call_us: "Call Us"
-      email_us: "Email Us"
-      open_hours: "Open Hours"
+  common:
+    no_access_to_page: You cannot access this page
   company:
-    address_1: "A108 Adam Street,"
-    address_2: "New York, NY 535022"
+    address_1: A108 Adam Street,
+    address_2: New York, NY 535022
+    email_1: info@example.com
+    email_2: contact@example.com
     phone_1: "+1 5589 55488 55"
     phone_2: "+1 6678 254445 41"
-    email_1: "info@example.com"
-    email_2: "contact@example.com"
-    workdays: "Monday - Friday"
-    workhours: "9:00AM - 05:00PM"
-  search:
-    any: "-- Any --"
-  posts:
-    index:
-      page_title: Blog
-      search_results: "Search results for '%{q}'"
-      nothing_found: "Nothing found"
-  mail_templates:
-    names:
-      clean_html: "Empty plain html template"
-      clean: "Empty inky template"
-      mailer:  "Fixed-width inky template"
-  views:
-    pagination:
-      first: "&laquo;&nbsp;First"
-      last: "Last&nbsp;&raquo;"
-      previous: "&lsaquo;&nbsp;Prev"
-      next: "Next&nbsp;&rsaquo;"
-      truncate: "&hellip;"
+    workdays: Monday - Friday
+    workhours: 9:00AM - 05:00PM
+  contacts:
+    form:
+      message: Message
+      subject: Subject
+      your_email: Your email
+      your_name: Your name
+    new:
+      contact_us: Contact us
+  devise:
+    sessions:
+      new:
+        login_to_your_account: Login to your account
+  errors:
+    messages:
+      restrict_dependent_destroy:
+        has_many: Cannot delete record because dependent %{record} exist
+        has_one: Cannot delete record because a dependent %{record} exists
+  forms_helper:
+    impersonate_button:
+      become_user_confirmation: Become user confirmation
   helpers:
     page_entries_info:
       entry:
-        zero: "entries"
-        one: "entry"
-        other: "entries"
+        one: entry
+        other: entries
+        zero: entries
+      more_pages:
+        display_entries: Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total
       one_page:
         display_entries:
-          zero: "No %{entry_name} found"
-          one: "Displaying <b>1</b> %{entry_name}"
-          other: "Displaying <b>all %{count}</b> %{entry_name}"
-      more_pages:
-        display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
-  common:
-    no_access_to_page: "You cannot access this page"
-    successfully_updated: "Successfully updated"
+          one: Displaying <b>1</b> %{entry_name}
+          other: Displaying <b>all %{count}</b> %{entry_name}
+          zero: No %{entry_name} found
+  locales:
+    en:
+      full: English
+      short: EN
+    ru:
+      full: Russian
+      short: RU
+  mail_templates:
+    names:
+      clean: Empty inky template
+      clean_html: Empty plain html template
+      mailer: Fixed-width inky template
+  messages:
+    copied_successfully: Copied successfully
+    delete_confirmation: Are you sure you want to delete this %{resource}?
+    failed_to_copy: Failed to copy
+    failed_to_update_password: Failed to update password.
+    successfully_updated: Successfully updated  %{resource}
+    you_cannot_access_this_page: You cannot access this page
+    you_cannot_peform_this_action: You cannot peform this action
+    you_did_not_have_impersonation: You did not have impersonation
+    you_have_been_disavowed: You have been disavowed from impersonation
+    you_must_be_signed_in_to_edit_your_profile: You must be signed in to edit your profile.
+  pages:
+    contacts:
+      address: Address
+      call_us: Call us
+      email_us: Email us
+      open_hours: Open hours
+  posts:
+    index:
+      nothing_found: Nothing found
+      page_title: Blog
+      search_results: Search results for '%{q}'
+  search:
+    any: "-- Any --"
+  views:
+    pagination:
+      first: "&laquo;&nbsp;First"
+      last: Last&nbsp;&raquo;
+      next: Next&nbsp;&rsaquo;
+      previous: "&lsaquo;&nbsp;Prev"
+      truncate: "&hellip;"
+  you_have_unsaved_changes: You have unsaved changes. Don't forget to run 'rake settings:generate' to generate data migration
