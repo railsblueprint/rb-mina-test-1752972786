@@ -6,26 +6,22 @@ aside#sidebar.sidebar
       li.nav-item
         = active_link_to [:admin, :root], class: "nav-link nav-link-main", active: :exclusive do
           i.bi.bi-grid
-          span
-            = t('admin.nav.dashboard')
+          span = t('admin.nav.dashboard')
       - if policy(User).index?
         li.nav-item
           = active_link_to [:admin, :users], class: "nav-link nav-link-main" do
             i.bi.bi-people-fill
-            span
-              = t('admin.nav.users')
+            span = t('admin.nav.users')
       - if policy(Post).index?
         li.nav-item
           = active_link_to [:admin, :posts], class: "nav-link nav-link-main" do
             i.bi.bi-newspaper
-            span
-              | Blog
+            span = t('admin.nav.posts')
       - if policy(Page).index?
         li.nav-item
           = active_link_to [:admin, :pages], class: "nav-link nav-link-main" do
             i.bi.bi-file
-            span
-              | Pages
+            span = t('admin.nav.pages')
       - if policy(Setting).index? || policy(MailTemplate).index?
         li.nav-item
           a.nav-link.nav-group.collapsed[data-bs-target="#configuration-nav" data-bs-toggle="collapse" href="#"]

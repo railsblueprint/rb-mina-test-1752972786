@@ -9,16 +9,24 @@ en:
     create: Create
     delete: Delete
     details: Details
+    disavow: Disavow
     edit: Edit
     impersonate: Impersonate
+    login: Login
     login_as_user: Login as user
+    my_profile: My Profile
+    need_help_q: Need Help?
     new: New
+    next_page: Next page >
     open_link_in_new_tab: Open link in new tab
     please_confirm: Please confirm
     preview: Preview
     resend_confirmation_email: Resend confirmation email
     save: Save
+    search: Search
     send_message: Send Message
+    sign_out: Sign Out
+    sign_up: Sign up
     'true': 'Yes'
     update_profile: Update profile
     'yes': 'Yes'
@@ -39,6 +47,7 @@ en:
       failed_to_create_item: Failed to create %{record}
       failed_to_delete_item: Failed to delete %{record}
       failed_to_update_item: Failed to update %{record}
+      impersonate_success: You have successfully impersonated %{user}
       item_create_unauthorized: You are not authorized to create %{record}
       item_delete_unauthorized: You are not authorized to delete this %{record}
       item_deleted_ok: Successfully deleted
@@ -114,6 +123,9 @@ en:
           page_title: Data tables
         general:
           page_title: General tables
+    global_search:
+      name: Name
+      type: Type
     mail_templates:
       alias: Alias
       edit:
@@ -126,6 +138,7 @@ en:
         page_title: New template
       subject: Subject
     nav:
+      admin: Admin
       components: Components
       configuration: Configuration
       dashboard: Dashboard
@@ -144,6 +157,7 @@ en:
         chartjs: Chart.js
         charts: Charts
         color_system: Color system
+        components: Components
         design_system: Design system
         echarts: ECharts
         fontawesome: FontAwesome icons
@@ -167,6 +181,7 @@ en:
         tooltips: Tooltips
       global_search: Global search
       good_job: Good Job
+      home: Home
       mail_templates: Mail templates
       maintenance: Maintenance
       pages: Pages
@@ -193,17 +208,25 @@ en:
     users:
       company: Company
       email: E-mail
+      form:
+        overview: Overview
+        password: Password
+        roles: Roles
+        social: Social
       job: Job
       name: Name
       page_title: Users
       registered: Registered
       roles: Roles
       show:
+        overview: Overview
         posts_count:
           one: 1 post
           other: "%{count} posts"
+        social: Social
   common:
     no_access_to_page: You cannot access this page
+    unknown: Unknown
   company:
     address_1: A108 Adam Street,
     address_2: New York, NY 535022
@@ -221,6 +244,8 @@ en:
       your_name: Your name
     new:
       contact_us: Contact us
+    success:
+      your_message_was_successfully: Your message was successfully sent
   devise:
     sessions:
       new:
@@ -259,16 +284,28 @@ en:
       clean_html: Empty plain html template
       mailer: Fixed-width inky template
   messages:
+    built_with: Built with
+    confirmationl_resent: Confirmation email resent to %{email}
     copied_successfully: Copied successfully
     delete_confirmation: Are you sure you want to delete this %{resource}?
+    details: Details
+    email_change_cancelled: Email change cancelled
     failed_to_copy: Failed to copy
     failed_to_update_password: Failed to update password.
+    failed_to_update_profile: Failed to update profile
+    password_changed: Your password has been changed.
+    profile_updated: Your profile has been updated
     successfully_updated: Successfully updated  %{resource}
     you_cannot_access_this_page: You cannot access this page
     you_cannot_peform_this_action: You cannot peform this action
     you_did_not_have_impersonation: You did not have impersonation
     you_have_been_disavowed: You have been disavowed from impersonation
     you_must_be_signed_in_to_edit_your_profile: You must be signed in to edit your profile.
+  nav:
+    blog: Blog
+    contacts: Contacts
+    faq: F.A.Q
+    home: Home
   pages:
     contacts:
       address: Address
@@ -276,12 +313,43 @@ en:
       email_us: Email us
       open_hours: Open hours
   posts:
+    edit:
+      editing_post: Editing post
     index:
       nothing_found: Nothing found
       page_title: Blog
       search_results: Search results for '%{q}'
+    new:
+      back_to_posts: Back to posts
+      new_post: New post
   search:
     any: "-- Any --"
+  theme:
+    auto: Auto
+    dark: Dark
+    light: Light
+  users:
+    form:
+      overview: Overview
+      password: Password
+      social: Social
+    show:
+      about: About
+      address: Address
+      company: Company
+      country: Country
+      edit_profile: Edit profile
+      email: Email
+      facebook: Facebook
+      full_name: Full Name
+      instagram: Instagram
+      job: Job
+      linkedin: Linkedin
+      overview: Overview
+      phone: Phone
+      posts: Posts
+      social: Social
+      twitter: Twitter
   views:
     pagination:
       first: "&laquo;&nbsp;First"

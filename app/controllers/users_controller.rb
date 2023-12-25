@@ -16,12 +16,12 @@ class UsersController < ApplicationController
   def update
     Users::UpdateCommand.call_for(params, { id: current_user.id, current_user: }) do |command|
       command.on(:ok) do |_item|
-        redirect_to "/profile", success: "Your profile has been updated", turbo_breakout: true
+        redirect_to "/profile", success: I18n.t("messages.profile_updated"), turbo_breakout: true
       end
       command.on(:invalid, :abort) do |errors|
         @command = command
         @password_command = Users::ChangePasswordCommand.new
-        flash.now[:error] = errors[:base].to_sentence.presence || "Failed to update profile"
+        flash.now[:error] = errors[:base].to_sentence.presence || I18n.t("messages.failed_to_update_profile")
         render "form", status: :unprocessable_entity
       end
       command.on(:unauthorized) do
@@ -29,13 +29,12 @@ class UsersController < ApplicationController
       end
     end
   end
-  # rubocop:enable Metrics/AbcSize
 
   def password
     Users::ChangePasswordCommand.call_for(params, { user: current_user, current_user: }) do |command|
       command.on :ok do
         bypass_sign_in current_user
-        redirect_to "/profile", success: "Your password has been changed.", turbo_breakout: true
+        redirect_to "/profile", success: I18n.t("messages.password_changed"), turbo_breakout: true
       end
       command.on :invalid, :abort do |_errors|
         @password_command = command
@@ -46,6 +45,7 @@ class UsersController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def load_resource
     @resource = current_user
@@ -69,11 +69,12 @@ class UsersController < ApplicationController
 
   def cancel_email_change
     @resource.update!(unconfirmed_email: nil)
-    redirect_to url_for({ action: :edit }), success: "Email change cancelled"
+    redirect_to url_for({ action: :edit }), success: t("messages.email_change_cancelled")
   end
 
   def resend_confirmation_email
     @resource.send_confirmation_instructions
-    redirect_to url_for({ action: :edit }), success: "Confirmation email resent to #{@resource.unconfirmed_email}"
+    redirect_to url_for({ action: :edit }),
+                success: t("messages.confirmationl_resent", email: @resource.unconfirmed_email)
   end
 end

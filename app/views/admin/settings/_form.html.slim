@@ -3,10 +3,3 @@
 = f.text_field :description
 = f.select :type, Setting.type_enum
 = f.text_field :value
-/ = f.form_group
-  = f.submit @resource.persisted? ? t("actions.save"): t("actions.create"), class: "btn btn-primary"
-  = link_to t('actions.cancel'), [:admin,:settings], class: "btn btn-link"
-  - if @resource.persisted?
-    = link_to [:admin, @resource], data: {turbo_method: :delete, confirm: t("messages.delete_confirmation", resource: @resource.class.name)}, class: "btn btn-link text-danger" do
-      = gi 'trash'
-      = t("actions.delete")

@@ -36,8 +36,8 @@
         = f.submit t('actions.save'), class: "btn btn-primary float-end"
         - if policy(Setting).new?
           = link_to [:new, :admin, :setting]  , class: "btn btn-outline-primary" do
-            = gi 'plus'
+            = bi 'plus-lg'
             = t(".create_setting")
-          - if @unsaved
-            span.m-3.text-danger= t('you_have_unsaved_changes')
+        - if @unsaved
+          span.m-3.text-danger= t('you_have_unsaved_changes')
         .clearfix

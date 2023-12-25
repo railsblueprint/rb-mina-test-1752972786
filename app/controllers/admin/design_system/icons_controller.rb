@@ -1,7 +1,7 @@
 class Admin::DesignSystem::IconsController < Admin::Controller
   before_action do
     breadcrumb t("admin.nav.design_system.design_system"), ""
-    breadcrumb "Icons", ""
+    breadcrumb t("admin.nav.design_system.icons"), ""
     breadcrumb t("admin.nav.design_system.#{params[:action]}"), url_for
   end
 

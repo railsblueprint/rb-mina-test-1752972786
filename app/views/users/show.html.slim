@@ -26,85 +26,84 @@ section.section.profile
         .text-center.mb-3
           - if @resource == current_user
             = link_to [:edit_profile], class: "btn btn-primary" do
-              | Edit profile
+              = t('.edit_profile')
 
     .col-xl-8
       .card
         .card-body.pt-3
           = tabs nav_class: "nav-tabs-bordered" do |tab|
-            - tab.add title: "Overview" do
+            - tab.add title: t(".overview") do
               .profile-overview.pt-4
                 .row
                   .col-lg-3.col-md-4.label
-                    | Email
+                    = t('.email')
                   .col-lg-9.col-md-8
                     = link_to @resource.email, "mailto:#{@resource.email}", class: "text-decoration-dashed"
                 .row
                   .col-lg-3.col-md-4.label
-                    | Full Name
+                    = t('.full_name')
                   .col-lg-9.col-md-8
                     = @resource.full_name
                 .row
                   .col-lg-3.col-md-4.label
-                    | Company
+                    = t('.company')
                   .col-lg-9.col-md-8
                     = @resource.company
                 .row
                   .col-lg-3.col-md-4.label
-                    | Job
+                    = t('.job')
                   .col-lg-9.col-md-8
                     = @resource.job
                 .row
                   .col-lg-3.col-md-4.label
-                    | Country
+                    = t('.country')
                   .col-lg-9.col-md-8
                     = @resource.country
                 .row
                   .col-lg-3.col-md-4.label
-                    | Address
+                    = t('.address')
                   .col-lg-9.col-md-8
                     = @resource.address
                 .row
                   .col-lg-3.col-md-4.label
-                    | Phone
+                    = t('.phone')
                   .col-lg-9.col-md-8
                     = @resource.phone
                 h5.card-title
-                  | About
+                  = t('.about')
                 p.small.fst-italic
                   = @resource.about
-            - tab.add title: "Social" do
+            - tab.add title: t(".social") do
               .profile-overview.pt-4
                 .row
                   .col-lg-3.col-md-4.label
-                    | Twitter
+                    = t('.twitter')
                   .col-lg-9.col-md-8
                     - if @resource.twitter_profile
                       = link_to @resource.twitter_profile, @resource.twitter_profile, target: "_blank"
                 .row
                   .col-lg-3.col-md-4.label
-                    | Facebook
+                    = t('.facebook')
                   .col-lg-9.col-md-8
                     - if @resource.facebook_profile
                       = link_to @resource.facebook_profile, @resource.facebook_profile, target: "_blank"
                 .row
                   .col-lg-3.col-md-4.label
-                    | Instagram
+                    = t('.instagram')
                   .col-lg-9.col-md-8
                     - if @resource.instagram_profile
                       = link_to @resource.instagram_profile, @resource.instagram_profile, target: "_blank"
                 .row
                   .col-lg-3.col-md-4.label
-                    | Linkedin
+                    = t('.linkedin')
                   .col-lg-9.col-md-8
                     - if @resource.linkedin_profile
                       = link_to @resource.linkedin_profile, @resource.linkedin_profile, target: "_blank"
             - if @resource.posts.any?
-              - tab.add title: "Posts" do
+              - tab.add title: t(".posts") do
                 .profile-overview.pt-4
                   - @resource.posts.each do |post|
                     h6
                       = post.created_at.strftime("%d-%m-%Y %H:%M")
                       '
                       = link_to post.title, [post, id: post.slug]
-

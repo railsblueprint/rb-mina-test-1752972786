@@ -5,22 +5,22 @@ aside#sidebar.sidebar
         = active_link_to "/", class: "nav-link nav-link-main", active: :exclusive do
           i.bi.bi-house-fill
           span
-            | Home
+            = t('nav.home')
       li.nav-item
         = active_link_to :posts, class: "nav-link nav-link-main" do
           i.bi.bi-newspaper
           span
-            | Blog
+            = t('nav.blog')
       li.nav-item
         = active_link_to :contacts, class: "nav-link nav-link-main" do
           i.bi.bi-envelope
           span
-            | Contacts
+            = t('nav.contacts')
       li.nav-item
         = active_link_to faq_path, class: "nav-link nav-link-main" do
           i.bi.bi-question-circle
           span
-            | F.A.Q
+            = t('nav.faq')
       - Page.sidebar.each do |page|
         li.nav-item
           = active_link_to "/#{page.url}", class: "nav-link nav-link-main" do

@@ -17,47 +17,43 @@ ul.dropdown-menu.dropdown-menu-end.dropdown-menu-arrow.profile  data-controller=
       - if session[:impersonator_id].present?
         = link_to disavow_path, "data-turbo-method": "POST", class: "btn btn-sm btn-outline-danger" do
           i.bi.bi-arrow-counterclockwise
-          span
-            | Disavow
+          span = t('actions.disavow')
   li
     hr.dropdown-divider
   - if current_user.has_role?(:admin)
     li
       = link_to "/admin", class: "dropdown-item d-flex align-items-center" do
         i.bi.bi-briefcase
-        span
-          | Admin
+        span = t("admin.nav.admin")
     li
       hr.dropdown-divider
   = link_to profile_path, class: "dropdown-item d-flex align-items-center" do
     i.bi.bi-person
-    span
-      | My Profile
+    span = t('actions.my_profile')
   li
     hr.dropdown-divider
   li
     = link_to faq_path, class: "dropdown-item d-flex align-items-center" do
       i.bi.bi-question-circle
-      span
-        | Need Help?
+      span = t('actions.need_help_q')
   li
     hr.dropdown-divider
   li
     button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="light" data-action="theme#set"
       = bi "sun-fill", class: "me-2 opacity-50 theme-icon"
-      |  Light
+      = t('theme.light')
       .flex-grow-1
       = bi :check, class: "ms-auto d-none"
   li
     button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="dark" data-action="theme#set"
       = bi "moon-stars-fill", class: "me-2 opacity-50 theme-icon"
-      | Dark
+      = t('theme.dark')
       .flex-grow-1
       = bi :check, class: "ms-auto d-none"
   li
     button type="button" class="dropdown-item d-flex align-items-center" data-theme-theme-param="auto" data-action="theme#set"
       = bi "circle-half", class: "me-2 opacity-50 theme-icon"
-      | Auto
+      = t('theme.auto')
       .flex-grow-1
       = bi :check, class: "ms-auto d-none"
   li
@@ -65,5 +61,4 @@ ul.dropdown-menu.dropdown-menu-end.dropdown-menu-arrow.profile  data-controller=
   li
     = link_to destroy_user_session_path, class: "dropdown-item d-flex align-items-center", "data-turbo-method": "DELETE" do
       i.bi.bi-box-arrow-right
-      span
-        | Sign Out
+      span = t('actions.sign_out')

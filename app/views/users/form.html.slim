@@ -1,7 +1,7 @@
 .card
   .card-body.pt-3
     = tabs nav_class: "nav-tabs-bordered" do |tab|
-      - tab.add title: "Overview" do
+      - tab.add title: t(".overview") do
         .pt-3
           = turbo_frame_tag "profile" do
             = render_turbo_flash
@@ -25,7 +25,7 @@
               = f.text_area :about, rows: 4
               = f.form_group
                 = f.submit t('actions.update_profile')
-      - tab.add title: "Social" do
+      - tab.add title: t(".social") do
         .pt-3
           = turbo_frame_tag "social" do
             = render_turbo_flash
@@ -36,7 +36,7 @@
               = f.text_field :linkedin_profile, prepend: link_field_button
               = f.form_group
                 = f.submit t('actions.update_profile')
-      - tab.add title: "Password" do
+      - tab.add title: t(".password") do
         .pt-3
           = turbo_frame_tag "password" do
             = render_turbo_flash

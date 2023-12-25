@@ -1,4 +1,6 @@
 class Admin::Controller < ApplicationController
+  include FormsHelper
+
   before_action :authenticate_user!
   before_action :check_admin_role
 
@@ -6,8 +8,9 @@ class Admin::Controller < ApplicationController
 
   before_action do
     @page_title = t(".page_title")
-    breadcrumb "<i class='bi bi-house-fill'></i>Home", :root_path
-    breadcrumb "Admin", :admin_root_path
+    icon = "<i class=\"bi bi-house-fill \"></i>"
+    breadcrumb icon + t("admin.nav.home"), :root_path
+    breadcrumb t("admin.nav.admin"), :admin_root_path
   end
 
   private
@@ -15,7 +18,7 @@ class Admin::Controller < ApplicationController
   def check_admin_role
     return if current_user.admin?
 
-    flash[:error] = I18n.t("common.no_access_to_page")
+    flash[:error] = t("common.no_access_to_page")
     redirect_to "/"
   end
 end

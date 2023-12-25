@@ -8,8 +8,8 @@ nav.navbar.navbar-dark.navbar-expand-xl.fixed-top.header
         = t("platform.name")
   .search-bar
     form.search-form.d-flex.align-items-center action="/posts/" data-turbo-method="POST"
-      input[type="text" name="q" placeholder="Search" title="Enter search keyword"]
-      button[type="submit" title="Search"]
+      input type="text" name="q" placeholder=t("actions.search")
+      button type="submit" title=t("actions.search")
         i.bi.bi-search
 
   nav.header-nav.end-icons
@@ -25,12 +25,12 @@ nav.navbar.navbar-dark.navbar-expand-xl.fixed-top.header
       - else
         li.nav-item.d-block.me-3
           = link_to new_user_session_path, class: "btn btn-outline-primary"  do
-            | Login
+            = t('actions.login')
         li.nav-item.d-block
           = link_to new_user_registration_path, class: "btn btn-primary"  do
-            | Sign up
+            = t('actions.sign_up')
 .search-bar-expandable
   form.search-form.d-flex.align-items-center action="/posts/" data-turbo-method="POST"
-    input type="text" name="q" placeholder="Search" title="Enter search keyword"
-    button type="submit" title="Search"
+    input type="text" name="q" placeholder=t("actions.search")
+    button type="submit" title=t("actions.search")
       i.bi.bi-search

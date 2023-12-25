@@ -10,8 +10,8 @@ h1 Global search
   - if @results.present?
     ol class="collection collection-container"
       li.item.item-container
-        div.attribute Type
-        div.attribute Name
+        div.attribute =t("admin.global_search.type")
+        div.attribute =t("admin.global_search.name")
         div.attribute
       = render partial: "resource", collection: @results, as: :resource
 

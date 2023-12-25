@@ -189,7 +189,6 @@ password_confirmation: "87654321" } }
 
         it "redirects to profile page", :aggregate_failures do
           expect(response).to have_http_status(:unprocessable_entity)
-          pp flash
           expect(flash[:error]).to eq("Failed to update password.")
         end
       end

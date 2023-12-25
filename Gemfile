@@ -153,6 +153,8 @@ group :development do
   gem "rubocop-rake", require: false
   gem "rubocop-rspec", require: false
 
+  gem "slimkeyfy"
+
   gem "active_record_query_trace"
   gem "better_errors"
   gem "binding_of_caller"
@@ -173,9 +175,6 @@ group :test do
   gem "database_cleaner"
   gem "factory_bot"
   gem "factory_bot_rails", "6.2.0"
-  gem "guard"
-  gem "guard-rspec"
-  gem "mocha"
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
   gem "rspec-html-matchers"

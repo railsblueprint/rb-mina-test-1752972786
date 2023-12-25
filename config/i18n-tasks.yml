@@ -126,6 +126,7 @@ ignore_unused:
   - 'loaf.*'
   - 'actions.*'
   - 'locales.*'
+  - 'i18n.transliterate.*'
   - 'helpers.page_entries_info.*'
   - '*.page_title'
 # - 'simple_form.{yes,no}'

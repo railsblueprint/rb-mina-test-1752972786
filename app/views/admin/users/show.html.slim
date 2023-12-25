@@ -39,7 +39,7 @@ section.section.profile
       .card
         .card-body.pt-3
           = tabs nav_class: "nav-tabs-bordered" do |tab|
-            - tab.add title: "Overview" do
+            - tab.add title: t(".overview") do
               .profile-overview.pt-4
                 .row
                   .col-lg-3.col-md-4.label
@@ -85,7 +85,7 @@ section.section.profile
                   | About
                 p.small.fst-italic
                   = @resource.about
-            - tab.add title: "Social" do
+            - tab.add title: t(".social") do
               .profile-overview.pt-4
                 .row
                   .col-lg-3.col-md-4.label
