@@ -1,4 +1,5 @@
 li class="item item-container"
+  .attribute.hidden-small = impersonate_button(resource, no_title: true, small: true)
   .attribute-container.contact
     .attribute data-name=t("admin.users.email") = resource.email
     .attribute data-name=t("admin.users.name") = resource.full_name
@@ -10,4 +11,6 @@ li class="item item-container"
   .actions
     = edit_button(resource, stretched: true, small: true)
     = view_button(resource, stretched: true, small: true, fallback_from: :edit)
+    .d-md-none
+      = impersonate_button(resource, small: true)
     = delete_button(resource, small: true)

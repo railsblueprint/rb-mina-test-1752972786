@@ -2,7 +2,7 @@
   &.action-index {
     @include media-breakpoint-up(md) {
       .item-container {
-        grid-template-columns: 5fr 3fr 2fr 2fr 2fr;
+        grid-template-columns: 52px  5fr 3fr 2fr 2fr 2fr;
       }
     }
     .contact {

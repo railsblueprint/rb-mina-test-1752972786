@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::CrudController
   def actions_with_resource
-    super + [:cancel_email_change, :resend_confirmation_email]
+    super + [:impersonate, :cancel_email_change, :resend_confirmation_email]
   end
 
   # rubocop:disable Metrics/AbcSize, Style/GuardClause
@@ -30,6 +30,12 @@ class Admin::UsersController < Admin::CrudController
 
   def name_attribute
     :full_name
+  end
+
+  def impersonate
+    session[:impersonator_id] = current_user.id
+    bypass_sign_in @resource
+    redirect_to "/", success: t("admin.common.impersonate_success", user: @resource.full_name)
   end
 
   def cancel_email_change

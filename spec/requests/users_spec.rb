@@ -115,6 +115,40 @@ RSpec.describe "Users pages" do
     end
   end
 
+  describe "POST /profile/disavow" do
+    context "when does not jave impersonation" do
+      before do
+        post "/profile/disavow"
+      end
+
+      it "redirects to home page" do
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "shows info message" do
+        expect(flash[:info]).to eq("You did not have impersonation")
+      end
+    end
+
+    context "when has impersonation" do
+      before do
+        sign_in user
+        allow_any_instance_of(UsersController).to receive(:session) { { impersonator_id: other_user.id } }
+        post "/profile/disavow"
+      end
+
+      it "redirects to home page" do
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "shows success message" do
+        expect(flash[:success]).to eq("You have been disavowed from impersonation")
+      end
+
+      # TODO: Is it possible to test that correct user is restored?
+    end
+  end
+
   describe "POST /profile/password" do
     context "when not logged in" do
       before do

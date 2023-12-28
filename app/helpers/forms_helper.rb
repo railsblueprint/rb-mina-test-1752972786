@@ -239,6 +239,28 @@ module FormsHelper
     end
   end
 
+  def impersonate_button(resource, options={})
+    return unless policy(resource).impersonate?
+
+    title = if options[:no_title]
+              nil
+            else
+              options[:title] || t("actions.impersonate")
+            end
+
+    button_to [:impersonate, :admin, resource],
+              method:             "POST",
+              target:             "_blank",
+              form_class:         "m-0 p-0",
+              class:              "btn #{'btn-sm' if options[:small]} btn-warning",
+              "data-bs-toggle":   "tooltip",
+              title:              t("actions.login_as_user"),
+              "data-turbo-frame": "_top",
+              "data-confirm":     t(".become_user_confirmation", user: resource.full_name) do
+      [bi("arrow-up-right-square"), title].compact.join(" ").html_safe
+    end
+  end
+
   def create_button(resource, options={})
     return unless policy(resource).create
 

@@ -63,7 +63,7 @@ RSpec.describe UserPolicy do
       it { is_expected.to permit(user, user) }
     end
 
-    permissions :change_roles?, :change_password? do
+    permissions :change_roles?, :change_password?, :impersonate? do
       it { is_expected.not_to permit(user, object) }
     end
   end
@@ -83,7 +83,7 @@ RSpec.describe UserPolicy do
       it { is_expected.to permit(user, user) }
     end
 
-    permissions :change_roles?, :change_password? do
+    permissions :change_roles?, :change_password?, :impersonate? do
       it { is_expected.not_to permit(user, object) }
     end
   end

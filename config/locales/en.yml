@@ -11,6 +11,7 @@ en:
     details: Details
     disavow: Disavow
     edit: Edit
+    impersonate: Impersonate
     login: Login
     login_as_user: Login as user
     my_profile: My Profile
@@ -46,6 +47,7 @@ en:
       failed_to_create_item: Failed to create %{record}
       failed_to_delete_item: Failed to delete %{record}
       failed_to_update_item: Failed to update %{record}
+      impersonate_success: You have successfully impersonated %{user}
       item_create_unauthorized: You are not authorized to create %{record}
       item_delete_unauthorized: You are not authorized to delete this %{record}
       item_deleted_ok: Successfully deleted
@@ -253,6 +255,9 @@ en:
       restrict_dependent_destroy:
         has_many: Cannot delete record because dependent %{record} exist
         has_one: Cannot delete record because a dependent %{record} exists
+  forms_helper:
+    impersonate_button:
+      become_user_confirmation: Become user confirmation
   helpers:
     page_entries_info:
       entry:
@@ -293,6 +298,8 @@ en:
     successfully_updated: Successfully updated  %{resource}
     you_cannot_access_this_page: You cannot access this page
     you_cannot_peform_this_action: You cannot peform this action
+    you_did_not_have_impersonation: You did not have impersonation
+    you_have_been_disavowed: You have been disavowed from impersonation
     you_must_be_signed_in_to_edit_your_profile: You must be signed in to edit your profile.
   nav:
     blog: Blog
@@ -317,6 +324,10 @@ en:
       new_post: New post
   search:
     any: "-- Any --"
+  theme:
+    auto: Auto
+    dark: Dark
+    light: Light
   users:
     form:
       overview: Overview

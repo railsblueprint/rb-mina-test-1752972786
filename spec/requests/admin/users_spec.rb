@@ -48,4 +48,26 @@ RSpec.describe "Admin Users" do
       }.deep_stringify_keys)
     end
   end
+
+  describe "POST /admin/users/:id/impersonate" do
+    let!(:testuser) { create(:user, first_name: "test") }
+    let(:admin) { create(:user, :superadmin) }
+
+    before do
+      sign_in admin
+      post "/admin/users/#{testuser.id}/impersonate"
+    end
+
+    it "redirects to home page" do
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "shows success message" do
+      expect(flash[:success]).to be_present
+    end
+
+    it "rememebrs impersonator" do
+      expect(session[:impersonator_id]).to eq(admin.id)
+    end
+  end
 end
