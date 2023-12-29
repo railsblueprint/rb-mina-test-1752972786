@@ -99,6 +99,7 @@ gem "liquid"
 gem "loaf", "~> 0.10.0"
 gem "mail", "~> 2.7"
 gem "net-http", "~> 0.2.0"
+gem "newrelic_rpm"
 gem "nokogiri", "~> 1.13"
 gem "pagy", "~> 5.10"
 gem "pg_search", "~> 2.3"
@@ -153,6 +154,7 @@ group :development do
   gem "rubocop-rake", require: false
   gem "rubocop-rspec", require: false
 
+  gem "html2slim-ruby3"
   gem "slimkeyfy"
 
   gem "active_record_query_trace"
