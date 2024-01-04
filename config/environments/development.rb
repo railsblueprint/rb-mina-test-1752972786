@@ -86,6 +86,7 @@ Rails.application.configure do
       )
   end
 
+  config.hosts << "localhost.railsblueprint.com:4120"
   config.web_console.whitelisted_ips = '0.0.0.0'
   config.web_console.development_only = false
 end

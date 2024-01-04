@@ -536,6 +536,7 @@ GEM
       ffi (~> 1.0)
     rdoc (6.6.0)
       psych (>= 4.0.0)
+    recaptcha (5.16.0)
     redis (4.8.1)
     redis-rails-instrumentation (1.0.1)
       activesupport (>= 3.0)
@@ -803,6 +804,7 @@ DEPENDENCIES
   rails (~> 7.1.0)
   rails-controller-testing
   rake (~> 13.0)
+  recaptcha (~> 5.16)
   redis (>= 4.0)
   redis-rails-instrumentation (~> 1.0)
   rolify (~> 6.0)

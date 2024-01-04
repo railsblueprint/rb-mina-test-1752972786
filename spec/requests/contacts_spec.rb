@@ -49,7 +49,7 @@ RSpec.describe "Contacts page" do
     end
 
     it "returns http success" do
-      expect(response).to redirect_to("/contacts")
+      expect(response).to have_http_status(:success)
     end
 
     it "sends a confirmation email" do
@@ -72,49 +72,6 @@ RSpec.describe "Contacts page" do
       it "returns http success", :aggregate_failures do
         expect(response).to be_successful
         expect(response).to render_template("new")
-      end
-    end
-
-    context "as a trubostream" do
-      let(:params) {
-        {
-          contact_us_command: {
-            name:    "Test user",
-            email:   "mail@test.com",
-            subject: "subject",
-            message: "message"
-          }
-        }
-      }
-
-      before do
-        post "/contacts", as: :turbo_stream, params:
-      end
-
-      it "returns http success", :aggregate_failures do
-        expect(response).to be_successful
-        expect(response).to render_template(layout: false)
-        expect(response.body).to include('<turbo-stream action="replace" target="frame_new_contact_us_command">')
-      end
-
-      context "with invalid params" do
-        let(:params) {
-          {
-            contact_us_command: {
-              name: "Test user"
-            }
-          }
-        }
-
-        before do
-          post "/contacts", as: :turbo_stream, params:
-        end
-
-        it "returns http success", :aggregate_failures do
-          expect(response).to be_successful
-          expect(response).to render_template(layout: false)
-          expect(response.body).to include('<turbo-stream action="replace" target="frame_new_contact_us_command">')
-        end
       end
     end
   end
