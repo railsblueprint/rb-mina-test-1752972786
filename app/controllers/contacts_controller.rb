@@ -1,35 +1,21 @@
 class ContactsController < ApplicationController
   def new
-    @command ||= ContactUsCommand.new(name: current_user&.full_name, email: current_user&.email)
-
-    respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace("frame_new_contact_us_command", partial: "form") }
-      format.html         { render "new" }
-    end
+    @command = ContactUsCommand.new(name: current_user&.full_name, email: current_user&.email, current_user:)
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # TODO: how i can fix it?
   def create
-    ContactUsCommand.call_for(params) do |command|
+    ContactUsCommand.call_for(params, current_user:) do |command|
       @command = command
       command.on :ok do
-        respond_to do |format|
-          format.turbo_stream {
-            render turbo_stream: turbo_stream.replace("frame_new_contact_us_command", partial: "success")
-          }
-          format.html         { redirect_to action: :new }
-        end
+        render "success"
       end
-      command.on :invalid, :abort do
-        respond_to do |format|
-          format.turbo_stream {
-            render turbo_stream: turbo_stream.replace("frame_new_contact_us_command", partial: "form")
-          }
-          format.html { render "new" }
-        end
+      command.on :invalid, :abort do |errors|
+        flash.now[:error] = {
+          message: "Failed to send your message. Please try again.",
+          details: errors.full_messages
+        }
+        render "new"
       end
     end
   end
-  # rubocop:enable Metrics/AbcSize
 end

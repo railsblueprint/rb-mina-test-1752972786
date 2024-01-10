@@ -45,6 +45,12 @@ en:
         first_name: Name first
         unconfirmed_email: Unconfirmed email
   activerecord:
+    errors:
+      models:
+        contact_us_command:
+          attributes:
+            recaptcha:
+              format: "%{message}"
     help:
       page:
         url: Keep empty for home page
@@ -261,6 +267,7 @@ en:
       restrict_dependent_destroy:
         has_many: Cannot delete record because dependent %{record} exist
         has_one: Cannot delete record because a dependent %{record} exists
+      verification_failed: Please prove you're not a robot
   forms_helper:
     impersonate_button:
       become_user_confirmation: Become user confirmation

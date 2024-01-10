@@ -12,6 +12,9 @@ h5.card-title.text-center.pb-3.fs-4
     = f.password_field :password, autocomplete: "new-password", floating: true
   .col-12
     = f.password_field :password_confirmation, autocomplete: "new-password", floating: true
+  - if resource.should_validate_recaptcha?
+    .col-12
+      = recaptcha f
   .actions
     = f.submit t('.sign_up'), class: "btn btn-primary w-100"
   = render "devise/shared/links"
