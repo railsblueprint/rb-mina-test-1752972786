@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   draw(:admin)
 
-  resources :posts
+  resources :posts, path: :blog
   resources :users, only: [:show]
 
   get "/profile", to: "users#show", as: :profile
