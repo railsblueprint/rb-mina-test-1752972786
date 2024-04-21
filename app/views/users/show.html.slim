@@ -3,9 +3,22 @@ section.section.profile
     .col-xl-4
       .card
         .card-body.profile-card.pt-4.d-flex.flex-column.align-items-center
-          .profile-image
-            .rounded-circle.circle-border.m-b-md class="color-#{@resource.avatar_color}"
-              span = @resource.initials
+          - if @resource == current_user
+            = link_to url_for({action: :edit_avatar}), "data-turbo-frame": "modal", class: "text-decoration-none" do
+              .profile-image
+                - if @resource.avatar.present?
+                  = image_tag @resource.avatar, class: "rounded-circle circle-border"
+                - else
+                  .rounded-circle.circle-border.m-b-md class="color-#{@resource.avatar_color}"
+                    span = @resource.initials
+            = link_to t("actions.change_avatar"), {action: :edit_avatar}, "data-turbo-frame": "modal"
+          - else
+            .profile-image
+              - if @resource.avatar.present?
+                = image_tag @resource.avatar, class: "rounded-circle circle-border"
+              - else
+                .rounded-circle.circle-border.m-b-md class="color-#{@resource.avatar_color}"
+                  span = @resource.initials
           h2
             = @resource.full_name
           h3

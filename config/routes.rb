@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   get "/profile", to: "users#show", as: :profile
   get "/profile/edit", to: "users#edit", as: :edit_profile
+  get "/profile/edit_avatar", to: "users#edit_avatar", as: :edit_avatar
+  patch "/profile/update_avatar", to: "users#update_avatar", as: :update_avatar
   patch "/profile/edit", to: "users#update"
   post "/profile/password", to: "users#password", as: :update_password
   post "/profile/disavow",  to: "users#disavow", as: :disavow
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
     get code, to: 'errors#show', code: code
   end
 
-  get "/*path", to: 'static_pages#page'
-
+  get "/*path", to: 'static_pages#page', constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
 end

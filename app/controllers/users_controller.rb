@@ -11,8 +11,28 @@ class UsersController < ApplicationController
     render :form
   end
 
+  def edit_avatar
+    @command = Users::UpdateAvatarCommand.build_from_object(current_user)
+  end
+
   # rubocop:disable Metrics/AbcSize
   # TODO: how i can fix it?
+  def update_avatar
+    Users::UpdateAvatarCommand.call_for(params, { id: current_user.id, current_user: }) do |command|
+      command.on(:ok) do |_item|
+        redirect_to "/profile", success: I18n.t("messages.profile_updated"), turbo_breakout: true
+      end
+      command.on(:invalid, :abort) do |errors|
+        @command = command
+        flash.now[:error] = errors[:base].to_sentence.presence || I18n.t("messages.failed_to_update_profile")
+        render "edit_avatar", status: :unprocessable_entity
+      end
+      command.on(:unauthorized) do
+        redirect_to "/", error: I18n.t("admin.common.item_update_unauthorized"), turbo_breakout: true
+      end
+    end
+  end
+
   def update
     Users::UpdateCommand.call_for(params, { id: current_user.id, current_user: }) do |command|
       command.on(:ok) do |_item|

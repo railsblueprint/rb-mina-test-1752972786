@@ -12,7 +12,7 @@ module Users
     validate_recaptcha action: "registration", if: -> { should_validate_recaptcha? }
 
     def should_validate_recaptcha?
-      recaptcha_configured? && (AppConfig.recaptcha&.show&.on_registration)
+      recaptcha_configured? && AppConfig.recaptcha&.show&.on_registration
     end
 
     def process

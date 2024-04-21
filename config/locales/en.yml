@@ -342,6 +342,8 @@ en:
     dark: Dark
     light: Light
   users:
+    change_avatar:
+      change_avatar: Change avatar
     form:
       overview: Overview
       password: Password
