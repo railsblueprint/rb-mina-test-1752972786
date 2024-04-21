@@ -14,6 +14,8 @@ class User < ApplicationRecord
   multisearchable against: [:id, :first_name, :last_name, :email]
 
   has_many :posts, dependent: :nullify
+  has_one_attached :avatar
+  has_one_attached :avatar_source
 
   def full_name
     [first_name, last_name].filter_map(&:presence).join(" ").presence || email

@@ -40,3 +40,20 @@
 .profile .profile-edit img {
   max-width: 120px;
 }
+
+.avatar-editor {
+  .avatar-editor-dropzone {
+    border: 2px solid transparent;
+
+    &.drag-over {
+      border: 2px solid $primary;
+    }
+  }
+}
+
+.avatar-editor-actions {
+  margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}

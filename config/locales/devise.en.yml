@@ -1,5 +1,9 @@
 ---
 en:
+  actions:
+    change_avatar: Change avatar
+    choose_file: Choose file
+    save_changes: Save changes
   activerecord:
     attributes:
       user:
@@ -146,3 +150,8 @@ en:
       not_saved:
         one: '1 error prohibited this %{resource} from being saved:'
         other: "%{count} errors prohibited this %{resource} from being saved:"
+  users:
+    change:
+      avatar:
+        drop_image_here_or: Drop image here or
+        remove_avatar: Remove avatar

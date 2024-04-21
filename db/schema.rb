@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_07_092403) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_26_183954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -52,6 +52,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_092403) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -232,6 +235,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_092403) do
     t.string "linkedin_profile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "avatar_settings", default: {}, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

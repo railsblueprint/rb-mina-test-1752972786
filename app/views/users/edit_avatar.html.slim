@@ -1,0 +1,41 @@
+= turbo_frame_tag "modal"
+  = turbo_frame_tag "modal_inner"
+    .modal tabindex="-1" data-controller="auto-modal"
+      .modal-dialog.modal-dialog-centered.modal-lg
+        .modal-content
+          = bootstrap_form_for @command, url: url_for(action: :update_avatar) do |f|
+            .modal-header
+              h5.modal-title = t("users.change_avatar.change_avatar")
+              button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+            .modal-body
+              div.avatar-editor data-controller="avatar-editor"
+                = f.hidden_field :avatar_settings, "data-avatar-editor-target": "settings"
+                = f.hidden_field :avatar_cropped, "data-avatar-editor-target": "cropped"
+                = f.hidden_field :remove_avatar, "data-avatar-editor-target": "remove"
+                .d-none
+                  = f.file_field :avatar_source, accept: "image/*", "data-avatar-editor-target": "upload", "data-action": "avatar-editor#change"
+                .avatar-editor-dropzone  data-avatar-editor-target="dropzone"
+                  div
+                    = image_tag @command.avatar_source.presence || "", class: "img-fluid", "data-avatar-editor-target": "source"
+                  div.avatar-editor-placeholder.ratio.ratio-4x3.border-2.text-center class=('d-none' if @command.avatar_source.present?)
+                    div.d-flex.flex-column.justify-content-center
+                      h2= t('users.change.avatar.drop_image_here_or')
+                      div
+                        button class="btn btn-outline-secondary align-content-center" data-action="avatar-editor#upload"
+                          i.bi.bi-upload
+                          '
+                          = t('actions.choose_file')
+                .avatar-editor-actions class=("d-none" if @command.avatar_source.blank?)
+                  button class="btn btn-outline-secondary" data-action="avatar-editor#upload"
+                    i.bi.bi-upload
+                    '
+                    = t('actions.choose_file')
+                  button class="btn btn-outline-danger" data-action="avatar-editor#remove"
+                    i.bi.bi-x-lg
+                    '
+                    = t('users.change.avatar.remove_avatar')
+            .modal-footer
+              button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                = t('actions.cancel')
+              button type="submit" class="btn btn-primary"
+                = t('actions.save_changes')
