@@ -10,6 +10,7 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
+  config.reload_classes_only_on_change = true
 
   # Show full error reports.
   config.consider_all_requests_local = true
@@ -87,6 +88,6 @@ Rails.application.configure do
   end
 
   config.hosts << "localhost.railsblueprint.com:4120"
-  config.web_console.whitelisted_ips = '0.0.0.0'
-  config.web_console.development_only = false
+  # config.web_console.whitelisted_ips = '0.0.0.0'
+  # config.web_console.development_only = false
 end

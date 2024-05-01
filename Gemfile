@@ -71,7 +71,7 @@ gem "font-awesome-rails", "~> 4.7"
 gem "groupdate", "~> 6.0"
 gem "inline_svg", "~> 1.8"
 gem "meta-tags", "~> 2.16"
-gem "pg", "~> 1.2"
+gem "pg"
 gem "pghero", "~> 3.1"
 gem "sidekiq", "~> 6.3"
 gem "whenever", "~> 1.0", require: false
@@ -105,6 +105,7 @@ gem "faraday-multipart", "~> 1.0"
 gem "friendly_id", "~> 5.4"
 gem "good_job", "~> 4.0"
 gem "hotwire-livereload", github: "elik-ru/hotwire-livereload"
+# gem "hotwire-livereload", path: "../../github/hotwire-livereload"
 gem "i18n-tasks", "~> 1.0.13"
 gem "inky-rb", require: "inky"
 gem "its-it", "~> 1.3"
@@ -143,6 +144,9 @@ gem "memoit", "~> 0.4.1"
 gem "pundit", "~> 2.3"
 gem "sweet_notifications", github: "elik-ru/sweet_notifications", branch: "rails-7.1-compatibility"
 
+# Rails Bluprint Pro
+gem "stripe-rails"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: [:mri, :mingw, :x64_mingw]
@@ -153,10 +157,12 @@ group :development do
   gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
+  gem "memory_profiler"
+  gem "rack-mini-profiler"
+  gem "stackprof"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "spring"
   # fix net-ssh bug for deploy
   gem "bcrypt_pbkdf", "~> 1.1"
   gem "ed25519", "~> 1.3"

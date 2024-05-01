@@ -1,0 +1,10 @@
+= f.collection_select :user_id, User.all, :id, :full_name, {}, data: {controller: 'admin--user-select'}
+= f.collection_select :subscription_type_id, Billing::SubscriptionType.all, :id, :name, {}
+= f.text_field :start_date
+= f.text_field :renew_date
+/ = f.text_field :name
+/ = f.text_field :reference
+/ = f.text_area :description, rows: 5
+/ = f.select :periodicity, Billing::SubscriptionType.periodicities.keys
+/ = f.text_field :price
+= f.check_box :cancelled

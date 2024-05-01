@@ -1,0 +1,15 @@
+li.item.item-container
+  .attribute =model.human_attribute_name(:name)
+  .attribute =model.human_attribute_name(:reference)
+  .attribute =model.human_attribute_name(:price)
+  .attribute =model.human_attribute_name(:periodicity)
+  .attribute =model.human_attribute_name(:active)
+  div
+li.item.item-container
+  .attribute.hidden-md
+  .attribute.hidden-md
+  .attribute.hidden-md
+  .attribute.hidden-md
+  .attribute.boolean data-name=model.human_attribute_name(:active) = filter_by_active
+  .attribute.hidden-md
+  div.hidden-md

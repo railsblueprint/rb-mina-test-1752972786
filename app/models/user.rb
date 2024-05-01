@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Rails.application.routes.url_helpers
+  include Devise::Controllers::UrlHelpers
 
   rolify
 
@@ -18,6 +19,9 @@ class User < ApplicationRecord
   has_many :user_identities, dependent: :destroy
   has_one_attached :avatar
   has_one_attached :avatar_source
+
+  has_many :subscriptions, class_name: "Billing::Subscription", dependent: :destroy
+  attr_writer :skip_confirmation_notification
 
   def full_name
     [first_name, last_name].filter_map(&:presence).join(" ").presence || email
@@ -53,13 +57,40 @@ class User < ApplicationRecord
     end
   end
 
+  def prepare_for_confitmation!
+    return if confirmed?
+
+    skip_password_change_notification!
+    self.password = SecureRandom.hex(10)
+    save
+    return if @raw_confirmation_token
+
+    generate_confirmation_token!
+  end
+
   def to_liquid
-    attributes.with_indifferent_access
-              .slice(:id, :email, :unconfirmed_email, :first_name, :last_name, :job, :company)
-              .merge({
-                "self_url"  => url_for([:profile, { id: }]),
-                "self_path" => url_for([:profile, { id:, only_path: true }])
-              })
+    {
+      ** liquid_attributes,
+      ** confirmation_attrs,
+      confirmed: confirmed?,
+      self_url:  url_for([:profile, { id: }]),
+      self_path: url_for([:profile, { id:, only_path: true }])
+    }
+  end
+
+  def liquid_attributes
+    attributes
+      .with_indifferent_access
+      .slice(:id, :email, :unconfirmed_email, :first_name, :last_name, :job, :company)
+  end
+
+  def confirmation_attrs
+    return {} if confirmed?
+
+    {
+      confirmation_url: user_confirmation_url(confirmation_token: @raw_confirmation_token),
+      password:
+    }
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/MethodLength

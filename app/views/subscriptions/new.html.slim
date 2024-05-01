@@ -1,0 +1,8 @@
+- @subscriptions_types.each do |type|
+  .card.col-4
+    .card-body.text-center.p-v5
+      h3 =type.name
+      p = type.description
+      h2 = type.price
+      = link_to "Subscribe",  subscribe_submit_path(reference: type.reference), class: "btn btn-primary"
+.

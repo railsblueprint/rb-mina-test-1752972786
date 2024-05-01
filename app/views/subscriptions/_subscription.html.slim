@@ -1,0 +1,41 @@
+.card
+  .card-header.pb-0.pt-3
+    .card-title.d-flex.justify-content-between
+      h3 = subscription.subscription_type.name
+      h3
+        .badge.text-bg-primary
+          = subscription.subscription_type.price.round
+          |  &euro; / Year
+  .card-body
+    .d-flex.justify-content-between
+      div
+        h4 Started
+        = l subscription.start_date, format: :long
+      div
+        - if subscription.cancelled || subscription.renew_date < Date.current
+          h4 End date
+        - else
+          h4 Renew date
+        = l subscription.renew_date, format: :long
+      div.g-1
+      div
+        a data-bs-toggle="collapse" href="#invoices_#{subscription.id}" role="button" aria-expanded="false" aria-controls="invoices_#{subscription.id}"
+          h4 Invoices
+      div
+        .actions
+          - if subscription.cancelled || subscription.renew_date < Date.current
+            = button_to "Renew subscription", renew_subscription_path(id: subscription.id), class: "btn btn-outline-secondary"
+          - else
+            = link_to "Cancel subscription", cancel_subscription_path(id: subscription.id), class: "btn btn-outline-secondary", data: {"turbo-method": "POST", confirm: "Are you sure you want to cancel this subscription?", controller: "confirmation", action: "confirmation#click"}
+    .collapse id="invoices_#{subscription.id}"
+      = turbo_frame_tag subscription, src: invoices_subscription_path(id: subscription.id), loading: "lazy"
+        hr
+        .text-center
+          .spinner-grow.text-primary[role="status"]
+          '
+          .spinner-grow.text-primary[role="status"]
+          '
+          .spinner-grow.text-primary[role="status"]
+            span.visually-hidden
+              | Loading...
+

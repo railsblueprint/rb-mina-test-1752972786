@@ -22,6 +22,26 @@ aside#sidebar.sidebar
           = active_link_to [:admin, :pages], class: "nav-link nav-link-main" do
             i.bi.bi-file
             span = t('admin.nav.pages')
+      - if policy(Billing::Subscription).index? || policy(Billing::SubscriptionType).index?
+        li.nav-item
+          a.nav-link.nav-group.collapsed[data-bs-target="#configuration-nav" data-bs-toggle="collapse" href="#"]
+            i.bi.bi-currency-dollar
+            span
+              = t('admin.nav.billing')
+            i.bi.bi-chevron-down.ms-auto
+          ul#configuration-nav class="nav-content collapse #{class_names(show: billing?)}" data-bs-parent="#sidebar-nav"
+            - if policy(Billing::SubscriptionType).index?
+              li
+                = active_link_to [:admin, :billing, :subscriptions], class: "nav-link" do
+                  i.bi.bi-circle
+                  span
+                    = t('admin.nav.billing/subscriptions')
+            - if policy(Billing::Subscription).index?
+              li
+                = active_link_to [:admin, :billing, :subscription_types], class: "nav-link" do
+                  i.bi.bi-circle
+                  span
+                    = t('admin.nav.billing/subscription_types')
       - if policy(Setting).index? || policy(MailTemplate).index?
         li.nav-item
           a.nav-link.nav-group.collapsed[data-bs-target="#configuration-nav" data-bs-toggle="collapse" href="#"]

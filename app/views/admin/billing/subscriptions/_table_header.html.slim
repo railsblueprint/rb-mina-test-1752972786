@@ -1,0 +1,15 @@
+li.item.item-container
+  .attribute =model.human_attribute_name(:name)
+  .attribute =model.human_attribute_name(:type)
+  .attribute =model.human_attribute_name(:start_date)
+  .attribute =model.human_attribute_name(:renew_date)
+  .attribute =model.human_attribute_name(:cancelled)
+  div
+li.item.item-container
+  .attribute.hidden-md
+  .attribute.hidden-md
+  .attribute.hidden-md
+  .attribute.hidden-md
+  .attribute.boolean data-name=model.human_attribute_name(:cancelled) = filter_by_binary :cancelled
+  .attribute.hidden-md
+  div.hidden-md

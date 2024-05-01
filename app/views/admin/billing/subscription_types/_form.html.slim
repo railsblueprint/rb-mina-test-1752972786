@@ -1,0 +1,6 @@
+= f.text_field :name
+= f.text_field :reference
+= f.text_area :description, rows: 5
+= f.select :periodicity, Billing::SubscriptionType.periodicities.keys
+= f.text_field :price
+= f.check_box :active

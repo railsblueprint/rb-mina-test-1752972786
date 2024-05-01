@@ -1,0 +1,12 @@
+.mx-auto
+  .card.mb-3.shadow-lg
+    .card-body
+      .pt-4.pb-2
+        h5.card-title.text-center.pb-3
+          h2.text-center You have successfully subscribed to #{@plan&.name}
+          p.text-center
+            | You will receive an email with further instructions
+          - if current_user.present?
+            .text-center
+              = link_to my_subscriptions_path, class: "btn btn-outline-primary"
+                | Goto my subscriptions

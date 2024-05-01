@@ -1,0 +1,14 @@
+li class="item item-container"
+  .attribute data-name=model.human_attribute_name(:name)
+    = resource.name
+  .attribute data-name=model.human_attribute_name(:reference)
+    = resource.reference
+  .attribute data-name=model.human_attribute_name(:price)
+    = resource.price
+  .attribute data-name=model.human_attribute_name(:peridocity)
+    = resource.periodicity
+  .attribute.boolean data-name=model.human_attribute_name(:active) = toggle_bool resource, :active
+  .actions
+    = edit_button(resource, stretched: true, small: true)
+    = view_button(resource, stretched: true, small: true, fallback_from: :edit)
+    = delete_button(resource, small: true)

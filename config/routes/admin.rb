@@ -29,6 +29,16 @@ namespace :admin do
     end
   end
 
+  namespace :billing do
+    resources :addresses
+    resources :subscriptions
+    resources :subscription_types do
+      member do
+        patch :toggle_active
+      end
+    end
+  end
+
   concern :mass_updatable do
     collection do
       post :mass_update

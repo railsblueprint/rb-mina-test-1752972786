@@ -3,6 +3,10 @@ module AdminHelper
     request.original_fullpath.start_with?("/admin/config")
   end
 
+  def billing?
+    request.original_fullpath.start_with?("/admin/billing")
+  end
+
   def maintenance?
     request.original_fullpath.start_with?("/admin/pg_hero", "/admin/good_job")
   end

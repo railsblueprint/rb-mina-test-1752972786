@@ -2,7 +2,8 @@ require_relative "boot"
 
 require "rails/all"
 require 'good_job/engine'
-require_relative 'app_config' if File.exist?('app/config/app_config.rb')
+
+require_relative 'app_config' if File.exist?('config/app_config.rb')
 
 # Prevent problems with double loading between `development` and `test` environments
 if defined?(Rake.application) && Rake.application.top_level_tasks.grep(/^(default$|spec(:|$))/).any?
@@ -34,6 +35,7 @@ module Railsblueprint
     end
 
     config.autoload_paths << "#{root}/app/liquid"
+    config.middleware.insert_before Rack::Sendfile, ActionDispatch::DebugLocks
 
     # Configuration for the application, engines, and railties goes here.
     #

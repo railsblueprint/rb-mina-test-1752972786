@@ -261,10 +261,17 @@ module FormsHelper
     end
   end
 
-  def create_button(resource, options={})
-    return unless policy(resource).create
+  def create_button(resource, options={}) # rubocop:disable Metrics/AbcSize
+    return unless policy(resource).new?
 
-    link_to [:new, :admin, resource.to_s.underscore.to_sym],
+    url = if admin?
+            [:new, :admin,
+             resource.to_s.underscore.tr("/", "_").to_sym]
+          else
+            [:new, resource.to_s.underscore.tr("/", "_").to_sym]
+          end
+
+    link_to url,
             class:              "btn btn-primary #{'btn-sm' if options[:small]} " \
                                 "#{'stretched-link' if options[:stretched]}",
             "data-turbo-frame": "_top" do

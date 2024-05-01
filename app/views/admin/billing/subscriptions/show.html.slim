@@ -1,0 +1,31 @@
+.card
+  .card-body
+    .card-text
+      table.table
+        tr
+          th User
+          td
+            .d-flex.justify-content-between
+              .
+                = link_to [:admin, @resource.user]
+                  = @resource.user.email
+                br
+                = @resource.user.full_name
+              = impersonate_button(@resource.user)
+        tr
+          th Subscription type
+          td = @resource.subscription_type.name
+        tr
+          th Start date
+          td = @resource.start_date.strftime("%d/%m/%Y")
+        tr
+          th Renew date
+          td = @resource.renew_date.strftime("%d/%m/%Y")
+        tr
+          th Cancelled
+          td = @resource.cancelled ? "Yes" : "No"
+  .card-footer.d-flex
+    .actions
+      = edit_button(@resource)
+      = delete_button(@resource)
+.filler

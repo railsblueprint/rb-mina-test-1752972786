@@ -36,6 +36,9 @@ ul.dropdown-menu.dropdown-menu-end.dropdown-menu-arrow.profile  data-controller=
   = link_to profile_path, class: "dropdown-item d-flex align-items-center" do
     i.bi.bi-person
     span = t('actions.my_profile')
+  = link_to my_subscriptions_path, class: "dropdown-item d-flex align-items-center" do
+    i.bi.bi-currency-dollar
+    span = t('actions.my_subscriptions')
   li
     hr.dropdown-divider
   li

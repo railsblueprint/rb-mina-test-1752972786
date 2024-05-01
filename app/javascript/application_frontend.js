@@ -5,6 +5,8 @@ import 'channels';
 import "controllers";
 import "trix";
 import "@rails/actiontext";
+import "select2"
+
 
 $(function() {
   $("[data-bs-toggle=\"tooltip\"]").tooltip();

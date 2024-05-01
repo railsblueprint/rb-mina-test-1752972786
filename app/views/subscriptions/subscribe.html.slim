@@ -1,0 +1,21 @@
+.mx-auto
+  .card.mb-3.shadow-lg
+    .card-body
+      .pt-4.pb-2
+        h5.card-title.text-center.pb-3
+          = t('.sign_up')
+        = bootstrap_form_for(@command, as: :user, url: url_for(), html: { class: "row g-3 needs-validation" }) do |f|
+          / = render "devise/shared/error_messages", resource: resource
+          .col-sm-6
+            = f.text_field :first_name, floating: true, autocomplete: "first_name", autofocus: true
+          .col-sm-6
+            = f.text_field :last_name, floating: true, autocomplete: "last_name"
+          .col-12
+            = f.email_field :email, autocomplete: "email", floating: true
+            .col-12
+              = recaptcha f
+          .actions
+            = f.submit t('.checkout'), class: "btn btn-lg btn-primary w-100"
+        .d-grid.mt-3
+          = link_to "I already have an account", url_for(login: true), class: "btn btn-outline-primary"
+.

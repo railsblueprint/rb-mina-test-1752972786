@@ -1,0 +1,11 @@
+- if @subscriptions.any?
+  .text-end
+    = link_to AppConfig.stripe_portal_url+"?prefilled_email=#{current_user.email}", target: :_blank, class: "btn btn-outline-secondary" do
+      | Manage your subscriptions on stripe customer portal
+- if @subscriptions.active.any?
+  h1 Active subscriptions
+  = render partial: "subscriptions/subscription", collection: @subscriptions.active, as: :subscription
+- if @subscriptions.expired.any?
+  h1 Expired subscriptions
+  = render partial: "subscriptions/subscription", collection: @subscriptions.expired, as: :subscription
+.

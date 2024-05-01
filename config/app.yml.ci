@@ -9,6 +9,7 @@ test:
        host: 'example.com'
   redis:
     url: 
+  stripe:    
 
 development:
   app_prefix: rbp_basic
@@ -21,3 +22,4 @@ development:
        host: 'example.com'
   redis:
     url:
+  stripe:    

@@ -36,19 +36,19 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
       update_command.call_for(params, context) do |command|
         command.on(:ok) do |resource|
           after_update(resource)
-          flash[:success] = I18n.t("admin.common.successfully_updated", record: model.model_name)
+          flash[:success] = I18n.t("admin.common.successfully_updated", record: model.model_name.human)
           redirect_to after_update_path(resource)
         end
         command.on(:invalid, :abort) do |errors|
           @command = command
           flash.now[:error] = {
-            message: I18n.t("admin.common.failed_to_update_item", record: model.model_name),
+            message: I18n.t("admin.common.failed_to_update_item", record: model.model_name.human),
             details: errors.full_messages
           }
           render :edit, status: :unprocessable_entity
         end
         command.on(:unauthorized) do
-          flash[:error] = I18n.t("admin.common.item_update_unauthorized", record: model.model_name)
+          flash[:error] = I18n.t("admin.common.item_update_unauthorized", record: model.model_name.human)
           redirect_to({ action: :index })
         end
       end
@@ -58,20 +58,20 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
       create_command.call_for(params, context) do |command|
         command.on(:ok) do |resource|
           after_create(resource)
-          flash[:success] = I18n.t("admin.common.successfully_created", record: model.model_name)
+          flash[:success] = I18n.t("admin.common.successfully_created", record: model.model_name.human)
           redirect_to after_create_path(resource)
         end
         command.on(:invalid, :abort) do |errors|
           @command = command
           flash.now[:error] = {
-            message: I18n.t("admin.common.failed_to_create_item", record: model.model_name),
+            message: I18n.t("admin.common.failed_to_create_item", record: model.model_name.human),
             details: errors.full_messages
           }
 
           render :new, status: :unprocessable_entity
         end
         command.on(:unauthorized) do
-          flash[:error] = I18n.t("admin.common.item_create_unauthorized", record: model.model_name)
+          flash[:error] = I18n.t("admin.common.item_create_unauthorized", record: model.model_name.human)
           redirect_to({ action: :index })
         end
       end
@@ -81,18 +81,18 @@ module CrudBase # rubocop:disable Metrics/ModuleLength
       destroy_command.call_for(params, context) do |command|
         command.on(:ok) do |resource|
           after_destroy(resource)
-          flash[:notice] = I18n.t("admin.common.item_deleted_ok", record: model.model_name)
+          flash[:notice] = I18n.t("admin.common.item_deleted_ok", record: model.model_name.human)
           redirect_to after_destroy_success_path
         end
         command.on(:invalid, :abort) do |errors|
           flash[:error] = {
-            message: I18n.t("admin.common.failed_to_delete_item", record: model.model_name),
+            message: I18n.t("admin.common.failed_to_delete_item", record: model.model_name.human),
             details: errors.full_messages
           }
           redirect_to after_destroy_fail_path
         end
         command.on(:unauthorized) do
-          flash[:error] = I18n.t("admin.common.item_delete_unauthorized", record: model.model_name)
+          flash[:error] = I18n.t("admin.common.item_delete_unauthorized", record: model.model_name.human)
           redirect_to after_destroy_fail_path
         end
       end

@@ -1,0 +1,18 @@
+= turbo_frame_tag @subscription
+   hr
+   - @invoices.each do |invoice|
+      .d-flex.justify-content-between
+        div = invoice.number
+        div = l Time.at(invoice.effective_at).to_date, format: :long
+        div
+          = invoice.total / 100
+          |  &euro;
+        div
+          - if invoice.paid?
+            .text-success Paid
+          - else
+            .text-danger Not paid
+        div
+          = link_to invoice.invoice_pdf
+            i.bi.bi-download.me-2
+            | Download invoice

@@ -15,6 +15,7 @@ en:
     login: Login
     login_as_user: Login as user
     my_profile: My Profile
+    my_subscriptions: My subscriptions
     need_help_q: Need Help?
     new: New
     next_page: Next page >
@@ -151,6 +152,9 @@ en:
       subject: Subject
     nav:
       admin: Admin
+      billing: Billing
+      billing/subscription_types: Subscription types
+      billing/subscriptions: Subscriptions
       components: Components
       configuration: Configuration
       dashboard: Dashboard
@@ -268,6 +272,7 @@ en:
       restrict_dependent_destroy:
         has_many: Cannot delete record because dependent %{record} exist
         has_one: Cannot delete record because a dependent %{record} exists
+      taken_in_stripe: has been already taken in Stripe
       verification_failed: Please prove you're not a robot
   forms_helper:
     impersonate_button:
@@ -322,6 +327,7 @@ en:
     contacts: Contacts
     faq: F.A.Q
     home: Home
+    subscription_plans: Subscription plans
   pages:
     contacts:
       address: Address
@@ -340,6 +346,13 @@ en:
       new_post: New post
   search:
     any: "-- Any --"
+  subscriptions:
+    cancel_subscription:
+      failed_to_cancel_subscription: Failed to cancel subscription
+    do_subscribe:
+      failed_to_subscribe: Failed to subscribe
+    renew:
+      failed_to_renew_subscription: Failed to renew subscription
   theme:
     auto: Auto
     dark: Dark

@@ -18,6 +18,13 @@
 
 @import "https://ga.jspm.io/npm:cropperjs@1.6.1/dist/cropper.css";
 
+@import "select2/src/scss/core";
+//Next line fixes incompatibility with bootstrap 5.2.3 and later
+$s2bs5-clear-icon: str-replace($btn-close-bg, #{$btn-close-color}, #{shade-color(red, 50%)}) !default;
+@import "select2-bootstrap-5-theme/src/include-all";
+@import "stripe_elements_custom";
+
+
 .toast-container {
   z-index: 10000;
 }

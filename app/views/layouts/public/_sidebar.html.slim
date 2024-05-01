@@ -17,6 +17,11 @@ aside#sidebar.sidebar
           span
             = t('nav.contacts')
       li.nav-item
+        = active_link_to subscribe_index_path, class: "nav-link nav-link-main" do
+          i.bi.bi-currency-dollar
+          span
+            = t('nav.subscription_plans')
+      li.nav-item
         = active_link_to faq_path, class: "nav-link nav-link-main" do
           i.bi.bi-question-circle
           span

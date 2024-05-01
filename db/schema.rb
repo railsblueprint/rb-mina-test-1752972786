@@ -54,6 +54,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_140127) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "billing_subscription_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.string "reference"
+    t.integer "periodicity", default: 2, null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.boolean "active", default: true, null: false
+    t.string "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "billing_subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "subscription_type_id", null: false
+    t.date "start_date", null: false
+    t.date "renew_date", null: false
+    t.boolean "cancelled", default: false, null: false
+    t.string "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_type_id"], name: "index_billing_subscriptions_on_subscription_type_id"
+    t.index ["user_id"], name: "index_billing_subscriptions_on_user_id"
+  end
+
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
@@ -262,9 +287,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_140127) do
     t.datetime "updated_at", null: false
     t.jsonb "avatar_settings", default: {}, null: false
     t.string "github_profile"
+    t.string "stripe_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["stripe_id"], name: "index_users_on_stripe_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
@@ -278,5 +305,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_140127) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "billing_subscriptions", "billing_subscription_types", column: "subscription_type_id"
+  add_foreign_key "billing_subscriptions", "users"
   add_foreign_key "user_identities", "users"
 end

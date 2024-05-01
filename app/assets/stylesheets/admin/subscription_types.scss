@@ -1,0 +1,9 @@
+.controller-admin-billing-subscription_types {
+  &.action-index {
+    @include media-breakpoint-up(md) {
+      .item-container {
+        grid-template-columns: 2fr  2fr 1fr 1fr 1fr 2fr;
+      }
+    }
+  }
+}
