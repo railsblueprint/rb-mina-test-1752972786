@@ -22,7 +22,7 @@ what really matters. It includes best practices for rapid development of your Ra
 
 Main features:
 
-- Latest Ruby on Rails (7.2)
+- Latest Ruby on Rails (7.2.2)
 - Latest Ruby (3.3.0)
 - Hotwire stack (Turbo, Stimulus)
 - Action Cable and Stimulus Reflex for even more reactivity
