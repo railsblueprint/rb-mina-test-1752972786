@@ -84,7 +84,7 @@ gem "bundle-audit", "~> 0.1.0"
 gem "cable_ready", "~> 5.0.pre9"
 gem "creek", "~> 2.5"
 gem "dartsass-rails", "~> 0.4.0"
-gem "data_migrate"
+gem "data_migrate", "~> 11.0"
 gem "down", "~> 5.3"
 gem "faraday", "~> 2.2"
 gem "faraday-multipart", "~> 1.0"
@@ -154,7 +154,7 @@ group :development do
   gem "rubocop-rake", require: false
   gem "rubocop-rspec", require: false
 
-  gem "html2slim-ruby3"
+  # gem "html2slim-ruby3"  # Commented out due to hpricot Ruby 3.3 compatibility issues
 
   gem "active_record_query_trace"
   gem "better_errors"

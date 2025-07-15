@@ -323,9 +323,6 @@ GEM
       activesupport (>= 6.1)
     highline (2.1.0)
     hiredis (0.6.3)
-    hpricot (0.8.6)
-    html2slim-ruby3 (0.2.1)
-      hpricot
     htmlentities (4.3.4)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
@@ -740,7 +737,7 @@ DEPENDENCIES
   capybara
   creek (~> 2.5)
   dartsass-rails (~> 0.4.0)
-  data_migrate
+  data_migrate (~> 11.0)
   debug
   devise (~> 4.8)
   devise-i18n
@@ -761,7 +758,6 @@ DEPENDENCIES
   groupdate (~> 6.0)
   hiredis
   hotwire-livereload!
-  html2slim-ruby3
   i18n-tasks (~> 1.0.13)
   image_processing (~> 1.2)
   importmap-rails
