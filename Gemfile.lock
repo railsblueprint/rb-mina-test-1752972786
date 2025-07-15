@@ -681,7 +681,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
-    uri (0.13.0)
+    uri (0.13.2)
     useragent (0.16.11)
     view_component (3.9.0)
       activesupport (>= 5.2.0, < 8.0)
@@ -834,7 +834,7 @@ DEPENDENCIES
   tinymce-rails-langs (~> 5.20200505)
   turbo-rails
   tzinfo-data
-  uri (~> 0.12)
+  uri (~> 0.13.2)
   view_component
   view_component_reflex
   wannabe_bool (~> 0.7.1)
