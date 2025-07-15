@@ -1,5 +1,7 @@
 ## Rails Blueprint. Basic edition.
 
+**Version:** 1.0.0 (see VERSION_BASIC file)
+
 ### Rationale
 
 [Ruby on Rails](https://rubyonrails.org) is awesome and was splendid since the beginning. The legendary video 
@@ -20,11 +22,11 @@ what really matters. It includes best practices for rapid development of your Ra
 
 Main features:
 
-- Latest Ruby on Rails (7.1)
+- Latest Ruby on Rails (7.2)
 - Latest Ruby (3.3.0)
 - Hotwire stack (Turbo, Stimulus)
 - Action Cable and Stimulus Reflex for even more reactivity
-- Bootstrap 5.3.2
+- Bootstrap 5.3.0
 - Slim for compact views
 - Awesome livereload
 - Users and roles.
