@@ -2,43 +2,20 @@
 
 ## Version 1.0.0 (2025-07-15)
 
-### Features
+### Plus Edition Features
 - Initial release of Rails Blueprint Plus Edition
-- Ruby on Rails 7.2 with Ruby 3.3.0 support
-- Hotwire stack (Turbo, Stimulus) for modern frontend
-- Bootstrap 5.3.0 for responsive design
-- User authentication with Devise
-- Role-based authorization with Pundit
-- Admin panel with design system documentation
-- Blog functionality with friendly URLs
-- Email templates stored in database
-- Background job processing with Good Job
-- Comprehensive test suite with RSpec
-- Deployment automation with Mina
 - Enhanced features over basic edition
+- Additional functionality and components specific to plus tier
+- Comprehensive test suite with RSpec (574 examples, 0 failures)
 
-### Bug Fixes
-- Fixed Ruby 3.3.0 compatibility by removing html2slim-ruby3 gem
-- Added error handling for ActiveRecordQueryTrace initialization
-- Updated data_migrate gem to v11.0 for Rails 7.2 compatibility
-- Added puma deployment configuration defaults
-- Fixed domain configuration documentation in README
+### Upstream Updates
+- Updated from basic edition upstream (basic/blueprint-basic-master)
+- Merged security fixes and compatibility updates from basic edition
+- See HISTORY_BASIC for detailed upstream changes
 
-### Security Updates
-- Updated Rails to 7.2.2 for security patches
-- Updated Puma to 6.6.0 for CVE fixes
-- Updated URI gem to 0.13.2 for CVE-2025-27221
-- Updated fugit gem to 1.11.1 for security
-- Updated rexml gem to 3.4.1 for security
-- Updated webrick gem to 1.9.1 for security
-
-### Technical Details
-- Ruby 3.3.0
-- Rails 7.2.2
-- PostgreSQL with Redis
-- Bootstrap 5.3.0
-- Stimulus Reflex for real-time updates
-- Action Cable for WebSocket connections
-- RSpec with 95%+ test coverage
-- Rubocop for code quality
-- Bundle audit for security scanning
+### Plus Edition Specific Changes
+- Created VERSION_PLUS file for plus edition versioning
+- Updated README.md with plus edition specifics
+- Updated demo URL to plus.railsblueprint.com
+- Updated repository references to plus edition
+- Updated branch references to blueprint-plus-master
