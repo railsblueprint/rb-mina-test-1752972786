@@ -1,6 +1,6 @@
-## Rails Blueprint. Basic edition.
+## Rails Blueprint. Plus edition.
 
-**Version:** 1.0.0 (see VERSION_BASIC file)
+**Version:** 1.0.0 (see VERSION_PLUS file)
 
 ### Rationale
 
@@ -47,7 +47,7 @@ Main features:
 Basically you get a ready application you can deploy to your server and start to use instantly after a short
 configuration process. And next you can extend it with your own features.
 
-Just check out the demo: https://basic.railsblueprint.com before proceeding.
+Just check out the demo: https://plus.railsblueprint.com before proceeding.
 
 ### Obtaining the code
 Depneding on your intetions you can go in 2 paths:
@@ -55,8 +55,8 @@ Depneding on your intetions you can go in 2 paths:
 ##### 1. You don't care about future updates or just want to play around.
 Simply clone the project, remove .git directory and check in the project you git repository:
 ```
-git clone git@github.com:railsblueprint/basic.git
-cd basic
+git clone git@github.com:railsblueprint/plus.git
+cd plus
 rm -rf .git
 git init .
 git add .
@@ -68,14 +68,14 @@ git push origin master
 Please keep in mind that smooth updates are not guaranteed. Working on your project suppose changing provided
 source code, meaning merge conflicts are inevitable. Though we try to make upgrade as painless as we can.
 ##### 2.1 If you're using github
-- Fork the rails blueprint project. Main branch is named `blueprint-basic-master`  
+- Fork the rails blueprint project. Main branch is named `blueprint-plus-master`  
 - Create you own master branch and set it as default
 - Checkout your master branch locally and start working on it
 ##### 2.2 If you're using different git provider
 Clone blueprint specifying different origin name, add your git provider as origin and push there
 
 ```
-git clone --origin blueprint git@github.com:railsblueprint/basic.git
+git clone --origin blueprint git@github.com:railsblueprint/plus.git
 git branch master
 git remote add origin "Your git repository"
 git push origin master
@@ -151,12 +151,12 @@ Change stage to production for deploying to production environment
 
 ### Updating
 #### When useing github
-1. Update `blueprint-basic-master` branch from upstream repo.
-2. Merge `blueprint-basic-master` to your master. It is recommendable to first create a temporary branch and check that after update everythign works as expected.
+1. Update `blueprint-plus-master` branch from upstream repo.
+2. Merge `blueprint-plus-master` to your master. It is recommendable to first create a temporary branch and check that after update everythign works as expected.
 
 #### When useing different environment
-1. Update `blueprint-basic-master` branch from blueprint remote (`git fetch blueprint`
-2. Merge `blueprint-basic-master` to your master. It is recommendable to first create a temporary branch and check that after update everythign works as expected.
+1. Update `blueprint-plus-master` branch from blueprint remote (`git fetch blueprint`
+2. Merge `blueprint-plus-master` to your master. It is recommendable to first create a temporary branch and check that after update everythign works as expected.
 
 Use `bundle rails blueprint:init` to check if anything changed in configuration files. It won't overwrite any 
 configuration file automatically, you'll be prompted for each file which differs from default values and provided with standard rails
