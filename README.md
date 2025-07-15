@@ -1,6 +1,6 @@
-## Rails Blueprint. Plus edition.
+## Rails Blueprint. Pro edition.
 
-**Version:** 1.2.3 (see VERSION_PLUS file)
+**Version:** 1.2.2 (see VERSION_PRO file)
 
 ### Rationale
 
@@ -43,6 +43,9 @@ Main features:
 - Rubocop and security checks in place
 - Github actions configured
 - Translation ready
+- Stripe integration for billing and subscriptions
+- Advanced user management with billing profiles
+- Pro-level features and functionality
 
 **Plus edition additional features:**
 - User avatar support with image upload
@@ -54,10 +57,17 @@ Main features:
   - Production: Allows crawlers except for admin areas
   - Served directly by nginx for optimal performance
 
+**Pro edition additional features:**
+- Full Stripe integration for payments and subscriptions
+- Billing management system with subscription tiers
+- Customer billing portal
+- Webhook handling for Stripe events
+- Advanced admin panels for subscription management
+
 Basically you get a ready application you can deploy to your server and start to use instantly after a short
 configuration process. And next you can extend it with your own features.
 
-Just check out the demo: https://plus.railsblueprint.com before proceeding.
+Just check out the demo: https://pro.railsblueprint.com before proceeding.
 
 ## Documentation
 
@@ -76,8 +86,8 @@ Depneding on your intetions you can go in 2 paths:
 ##### 1. You don't care about future updates or just want to play around.
 Simply clone the project, remove .git directory and check in the project you git repository:
 ```
-git clone git@github.com:railsblueprint/plus.git
-cd plus
+git clone git@github.com:railsblueprint/pro.git
+cd pro
 rm -rf .git
 git init .
 git add .
@@ -89,14 +99,14 @@ git push origin master
 Please keep in mind that smooth updates are not guaranteed. Working on your project suppose changing provided
 source code, meaning merge conflicts are inevitable. Though we try to make upgrade as painless as we can.
 ##### 2.1 If you're using github
-- Fork the rails blueprint project. Main branch is named `blueprint-plus-master`  
+- Fork the rails blueprint project. Main branch is named `blueprint-pro-master`  
 - Create you own master branch and set it as default
 - Checkout your master branch locally and start working on it
 ##### 2.2 If you're using different git provider
 Clone blueprint specifying different origin name, add your git provider as origin and push there
 
 ```
-git clone --origin blueprint git@github.com:railsblueprint/plus.git
+git clone --origin blueprint git@github.com:railsblueprint/pro.git
 git branch master
 git remote add origin "Your git repository"
 git push origin master
@@ -283,12 +293,12 @@ This endpoint is useful for:
 
 ### Updating
 #### When useing github
-1. Update `blueprint-plus-master` branch from upstream repo.
-2. Merge `blueprint-plus-master` to your master. It is recommendable to first create a temporary branch and check that after update everythign works as expected.
+1. Update `blueprint-pro-master` branch from upstream repo.
+2. Merge `blueprint-pro-master` to your master. It is recommendable to first create a temporary branch and check that after update everythign works as expected.
 
 #### When useing different environment
-1. Update `blueprint-plus-master` branch from blueprint remote (`git fetch blueprint`
-2. Merge `blueprint-plus-master` to your master. It is recommendable to first create a temporary branch and check that after update everythign works as expected.
+1. Update `blueprint-pro-master` branch from blueprint remote (`git fetch blueprint`
+2. Merge `blueprint-pro-master` to your master. It is recommendable to first create a temporary branch and check that after update everythign works as expected.
 
 Use `bundle rails blueprint:init` to check if anything changed in configuration files. It won't overwrite any 
 configuration file automatically, you'll be prompted for each file which differs from default values and provided with standard rails

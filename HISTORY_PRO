@@ -1,0 +1,46 @@
+# Rails Blueprint Pro Edition - Change History
+
+## Version 1.2.1 (2025-07-16)
+
+### Upstream Changes from Plus Edition  
+- **Admin Password Management**: Fixed admin password change functionality
+  - Added dedicated `UpdatePasswordCommand` for secure password updates
+  - Implemented `update_password` controller action with proper validation
+  - Added independent password change form using polymorphic path helpers
+  - Users receive automatic email notifications when password is changed by admin
+  - Comprehensive test coverage for password change functionality
+- Successfully merged with plus edition impersonation feature
+- Both impersonate and password change functionality working correctly
+
+### Pro Edition Specific
+- Maintained all pro edition features including Stripe integration
+- Enhanced admin user management with password change capabilities
+- All pro-specific billing features preserved and working
+- Full test suite compatibility maintained
+
+## Version 1.0.0 (2025-07-15)
+
+### Pro Edition Features
+- Initial release of Rails Blueprint Pro Edition
+- Stripe integration for billing and subscriptions
+- Advanced user management with billing profiles
+- Subscription management and billing administration
+- Webhook processing for Stripe events
+- Pro-level features and functionality
+- Enhanced admin panel with billing sections
+- Comprehensive test suite with RSpec (574 examples, 0 failures)
+
+### Upstream Updates
+- Updated from plus edition upstream (plus/blueprint-plus-master)
+- Merged security fixes and compatibility updates from plus edition
+- See HISTORY_PLUS and HISTORY_BASIC for detailed upstream changes
+
+### Pro Edition Specific Changes
+- Created VERSION_PRO file for pro edition versioning
+- Updated README.md with pro edition specifics
+- Updated demo URL to pro.railsblueprint.com
+- Updated repository references to pro edition
+- Updated branch references to blueprint-pro-master
+- Added Stripe billing and subscription functionality
+- Added billing admin controllers and views
+- Added subscription management features
