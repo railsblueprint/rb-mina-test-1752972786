@@ -10,7 +10,7 @@ RSpec.describe "Admin Settings" do
       load "app/models/setting.rb"
     end
 
-    include_examples "admin crud controller", { resource: :settings, model: Setting, prefix: "config" }
+    it_behaves_like "admin crud controller", { resource: :settings, model: Setting, prefix: "config" }
   end
 
   describe "GET /admin/config/settings" do
