@@ -25,7 +25,7 @@ RSpec.describe "Admin Mail Templates" do
       allow(Rails.env).to receive(:development?).and_return(true)
 
       # Reload model class
-      Object.send(:remove_const, :MailTemplate)
+      Object.send(:remove_const, :MailTemplate) # rubocop:disable RSpec/RemoveConst
       load "app/models/mail_template.rb"
 
       sign_in admin

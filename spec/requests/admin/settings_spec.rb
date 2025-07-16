@@ -6,7 +6,7 @@ RSpec.describe "Admin Settings" do
       allow(Rails.env).to receive(:development?).and_return(true)
 
       # Reload model class
-      Object.send(:remove_const, :Setting)
+      Object.send(:remove_const, :Setting) # rubocop:disable RSpec/RemoveConst
       load "app/models/setting.rb"
     end
 
@@ -45,7 +45,7 @@ RSpec.describe "Admin Settings" do
         allow(Rails.env).to receive(:development?).and_return(true)
 
         # Reload model class
-        Object.send(:remove_const, :Setting)
+        Object.send(:remove_const, :Setting) # rubocop:disable RSpec/RemoveConst
         load "app/models/setting.rb"
 
         sign_in admin

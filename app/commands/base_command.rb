@@ -305,6 +305,7 @@ class BaseCommand < Dry::Struct
     false
   end
 
+  # rubocop:disable Naming/PredicateMethod
   def broadcast_unauthorized
     broadcast(:unauthorized)
     raise Unauthorized unless local_registrations.any?(&it.on.include?(:unauthorized))
@@ -325,6 +326,7 @@ class BaseCommand < Dry::Struct
 
     true
   end
+  # rubocop:enable Naming/PredicateMethod
 
   def abort_command
     raise AbortCommand

@@ -3,7 +3,7 @@ RSpec.shared_examples "admin crud controller" do |options|
   slug = [options[:prefix], options[:resource]].compact.join("/")
   model = options[:model]
   has_filters = options[:has_filters]
-  has_filters ? 2 : 1
+  has_filters ? 2 : 1 # rubocop:disable Lint/Void
 
   let(:initial_count) { model.count }
 
@@ -110,7 +110,7 @@ RSpec.shared_examples "admin crud controller show resource" do |options|
   slug = [options[:prefix], options[:resource]].compact.join("/")
   options[:model]
   has_filters = options[:has_filters]
-  has_filters ? 2 : 1
+  has_filters ? 2 : 1 # rubocop:disable Lint/Void
 
   let(:admin) { create(:user, :admin) }
 
