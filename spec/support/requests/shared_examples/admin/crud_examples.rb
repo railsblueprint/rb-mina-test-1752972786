@@ -106,12 +106,13 @@ RSpec.shared_examples "admin crud controller empty search" do |options|
 end
 
 RSpec.shared_examples "admin crud controller show resource" do |options|
-  options[:resource]
+  resource_name = options[:resource]
   slug = [options[:prefix], options[:resource]].compact.join("/")
   options[:model]
   has_filters = options[:has_filters]
   has_filters ? 2 : 1 # rubocop:disable Lint/Void
 
+  let(:factory) { resource_name.to_s.singularize.to_sym }
   let(:admin) { create(:user, :admin) }
 
   describe "GET /admin/#{slug}/:id" do
