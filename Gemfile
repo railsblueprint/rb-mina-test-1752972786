@@ -157,6 +157,7 @@ group :development do
   gem "rubocop-rails", require: false
   gem "rubocop-rake", require: false
   gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
 
   # gem "html2slim-ruby3"  # Commented out due to hpricot Ruby 3.3 compatibility issues
 
