@@ -1,6 +1,6 @@
 ## Rails Blueprint. Plus edition.
 
-**Version:** 1.0.0 (see VERSION_PLUS file)
+**Version:** 1.1.0 (see VERSION_PLUS file)
 
 ### Rationale
 

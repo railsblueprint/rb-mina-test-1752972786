@@ -1,5 +1,20 @@
 # Rails Blueprint Plus Edition - Change History
 
+## Version 1.1.0 (2025-07-16)
+
+### Upstream Changes from Basic Edition
+- Updated Rails from 7.2.1 to 8.0.2 for security improvements
+- Updated Ruby from 3.3.0 to 3.4.4 with YJIT and jemalloc optimizations
+- Updated dependencies for Rails 8 compatibility
+- Added comprehensive Ruby installation instructions for performance optimizations
+- Fixed RuboCop issues with safe navigation chain length warnings
+
+### Plus Edition Specific
+- Maintained all plus edition features and functionality
+- All tests passing (574 examples, 0 failures)
+- Security audit clean (no vulnerabilities found)
+- Code quality maintained (RuboCop compliant)
+
 ## Version 1.0.0 (2025-07-15)
 
 ### Plus Edition Features

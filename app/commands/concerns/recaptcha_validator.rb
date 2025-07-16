@@ -33,7 +33,7 @@ module RecaptchaValidator
     memoize def recaptcha_v3_response_valid?
       verify_recaptcha action:         recaptcha_action,
                        skip_remote_ip: true,
-                       minimum_score:  AppConfig.recaptcha&.v3&.minimum_score&.to_f || 0.99,
+                       minimum_score:  AppConfig.recaptcha&.v3&.minimum_score&.to_f || 0.99, # rubocop:disable Style/SafeNavigationChainLength
                        secret_key:     AppConfig.recaptcha.v3.secret_key,
                        response:       recaptcha_v3_response
     end
