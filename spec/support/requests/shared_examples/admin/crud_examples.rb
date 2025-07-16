@@ -2,7 +2,6 @@ RSpec.shared_examples "admin crud controller" do |options|
   resource_name = options[:resource]
   slug = [options[:prefix], options[:resource]].compact.join("/")
   model = options[:model]
-  has_filters = options[:has_filters]
 
   let(:initial_count) { model.count }
 
@@ -72,7 +71,6 @@ end
 RSpec.shared_examples "admin crud controller empty search" do |options|
   resource_name = options[:resource]
   slug = [options[:prefix], options[:resource]].compact.join("/")
-  options[:model]
   has_filters = options[:has_filters]
   header_lines = has_filters ? 2 : 1
 
@@ -107,8 +105,6 @@ end
 RSpec.shared_examples "admin crud controller show resource" do |options|
   resource_name = options[:resource]
   slug = [options[:prefix], options[:resource]].compact.join("/")
-  model = options[:model]
-  has_filters = options[:has_filters]
 
   let(:factory) { resource_name.to_s.singularize.to_sym }
   let(:admin) { create(:user, :admin) }
