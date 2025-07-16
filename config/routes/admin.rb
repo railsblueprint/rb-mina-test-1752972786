@@ -25,6 +25,7 @@ namespace :admin do
       post :impersonate
       post :cancel_email_change
       post :resend_confirmation_email
+      patch :update_password
     end
   end
 

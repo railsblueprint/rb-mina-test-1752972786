@@ -1,5 +1,22 @@
 # Rails Blueprint Plus Edition - Change History
 
+## Version 1.2.1 (2025-07-16)
+
+### Upstream Changes from Basic Edition
+- **Admin Password Management**: Fixed admin password change functionality
+  - Added dedicated `UpdatePasswordCommand` for secure password updates
+  - Implemented `update_password` controller action with proper validation
+  - Added independent password change form using polymorphic path helpers
+  - Users receive automatic email notifications when password is changed by admin
+  - Comprehensive test coverage for password change functionality
+
+### Plus Edition Specific
+- Successfully merged basic edition password changes with plus edition impersonation feature
+- Both impersonate and password change functionality working correctly
+- All tests passing (28 examples, 0 failures)
+- RuboCop compliant code
+- Enhanced user management capabilities with both features
+
 ## Version 1.1.0 (2025-07-16)
 
 ### Upstream Changes from Basic Edition
