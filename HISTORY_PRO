@@ -18,6 +18,23 @@
 - All pro-specific billing features preserved and working
 - Full test suite compatibility maintained
 
+## Version 1.1.0 (2025-07-16)
+
+### Upstream Changes from Plus Edition
+- Updated Rails from 7.2.1 to 8.0.2 for security improvements
+- Updated Ruby from 3.3.0 to 3.4.4 with YJIT and jemalloc optimizations
+- Updated dependencies for Rails 8 compatibility
+- Added comprehensive Ruby installation instructions for performance optimizations
+- Fixed RuboCop issues and code quality improvements
+
+### Pro Edition Specific
+- Maintained all pro edition features including Stripe billing integration
+- Preserved subscription management and billing administration
+- Maintained webhook processing for Stripe events
+- All pro-specific features working correctly
+- Code quality maintained (RuboCop compliant)
+- Security audit clean (no vulnerabilities found)
+
 ## Version 1.0.0 (2025-07-15)
 
 ### Pro Edition Features
