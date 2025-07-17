@@ -1,6 +1,6 @@
 ## Rails Blueprint. Plus edition.
 
-**Version:** 1.2.2 (see VERSION_PLUS file)
+**Version:** 1.2.3 (see VERSION_PLUS file)
 
 ### Rationale
 
@@ -43,6 +43,15 @@ Main features:
 - Rubocop and security checks in place
 - Github actions configured
 - Translation ready
+
+**Plus edition additional features:**
+- User avatar support with image upload
+- Google reCAPTCHA integration for forms
+- Admin impersonation (login as any user)
+- Environment-specific robots.txt management
+  - Staging: Blocks all search engine crawlers
+  - Production: Allows crawlers except for admin areas
+  - Served directly by nginx for optimal performance
 
 Basically you get a ready application you can deploy to your server and start to use instantly after a short
 configuration process. And next you can extend it with your own features.
@@ -202,6 +211,22 @@ bundle exec mina staging deploy:current # for deploying currently checked out br
 BRANCH=branch_named bundle exec mina staging deploy # for deploying specific branch
 ```
 Change stage to production for deploying to production environment
+
+#### Nginx Configuration Notes
+
+The Plus edition includes environment-specific robots.txt handling through nginx. The configuration template is located at `config/deploy/templates/nginx.conf.erb`. 
+
+**Important:** If you have manually configured SSL certificates, running `mina nginx:setup` will overwrite your nginx configuration. In such cases, you may need to manually update the nginx config to include the robots.txt rewrite rules:
+
+```nginx
+location = /robots.txt {
+  <% if fetch(:rails_env) == 'production' %>
+  try_files /robots-production.txt =404;
+  <% else %>
+  try_files /robots-staging.txt =404;
+  <% end %>
+}
+```
 
 ### Health Monitoring
 
