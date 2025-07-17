@@ -1,5 +1,23 @@
 # Rails Blueprint Pro Edition - Change History
 
+## Version 1.2.2 (2025-07-18)
+
+### New Pro Features
+- **Automated Sitemap Generation**: SEO-optimized XML sitemap generation
+  - Implemented using sitemap_generator gem v6.3.0
+  - Created SitemapGeneratorCommand following command pattern
+  - Automated daily generation via GoodJob cron at 2 AM
+  - Includes all published pages and posts with proper priorities
+  - Manual generation available via `rails sitemap:generate`
+  - Automatic search engine submission in production
+  - Sitemap reference added to production robots.txt
+  - Comprehensive test coverage with 18 specs
+
+### Upstream Changes from Plus Edition
+- **Robots.txt Management**: Environment-specific robots.txt serving
+  - Staging blocks all crawlers, production allows except /admin
+  - Handled at nginx level for optimal performance
+
 ## Version 1.2.1 (2025-07-16)
 
 ### Upstream Changes from Plus Edition  

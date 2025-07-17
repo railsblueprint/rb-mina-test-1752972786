@@ -63,6 +63,7 @@ Main features:
 - Customer billing portal
 - Webhook handling for Stripe events
 - Advanced admin panels for subscription management
+- Automated sitemap generation with scheduled updates
 
 Basically you get a ready application you can deploy to your server and start to use instantly after a short
 configuration process. And next you can extend it with your own features.
