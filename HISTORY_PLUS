@@ -1,5 +1,22 @@
 # Rails Blueprint Plus Edition - Change History
 
+## Version 1.2.3 (2025-07-17)
+
+### New Features
+- **Robots.txt Management**: Added environment-specific robots.txt serving
+  - Created `robots-staging.txt` that disallows all crawlers (prevents staging indexing)
+  - Created `robots-production.txt` that allows crawlers except /admin paths
+  - Implemented nginx rewrite rules to serve appropriate file based on environment
+  - Custom nginx configuration template with robots.txt location block
+  - No controller needed - handled entirely at nginx level for performance
+
+### Technical Implementation
+- Static files in `public/` directory for maximum performance
+- Nginx rewrite based on `rails_env` configuration variable
+- Staging environment blocks all crawlers to prevent accidental indexing
+- Production environment allows indexing except administrative areas
+- Added crawl-delay directive for respectful crawling
+
 ## Version 1.2.2 (2025-07-16)
 
 ### Upstream Changes from Basic Edition

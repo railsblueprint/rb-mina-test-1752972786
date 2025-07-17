@@ -1,0 +1,5 @@
+# Robots.txt for staging environment
+# Disallow all crawlers to prevent staging content from being indexed
+
+User-agent: *
+Disallow: /
