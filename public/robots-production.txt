@@ -1,0 +1,10 @@
+# Robots.txt for production environment
+# Allow all crawlers except for admin areas
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin
+
+# Common crawl delays
+Crawl-delay: 1
