@@ -33,6 +33,9 @@
 
 /public/assets
 
+# Ignore generated sitemap files
+/public/sitemaps/
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 

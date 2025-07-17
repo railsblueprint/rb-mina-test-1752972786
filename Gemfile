@@ -129,6 +129,7 @@ gem "rollbar-user_informer", github: "railsblueprint/rollbar-user_informer"
 gem "roo", "~> 2.8"
 gem "sd_notify", "~> 0.1.1"
 gem "simple_xlsx_reader", "~> 1.0"
+gem "sitemap_generator", "~> 6.3"
 gem "slim", "~> 4.1"
 gem "stimulus_reflex", "~> 3.5.pre9"
 gem "uri", "~> 0.13.2"
@@ -144,7 +145,7 @@ gem "memoit", "~> 0.4.1"
 gem "pundit", "~> 2.3"
 gem "sweet_notifications", github: "elik-ru/sweet_notifications", branch: "rails-7.1-compatibility"
 
-# Rails Bluprint Pro
+# Rails Blueprint Pro
 gem "stripe-rails"
 
 group :development, :test do

@@ -9,6 +9,13 @@ Rails.application.configure do
   config.good_job.poll_interval = 30 # seconds
   config.good_job.shutdown_timeout = 25 # seconds
 
-  # config.good_job.enable_cron = true
-  # config.good_job.cron = { example: { cron: '0 * * * *', class: 'ExampleJob'  } }
+  config.good_job.enable_cron = true
+  config.good_job.cron = { 
+    sitemap_generator: { 
+      cron: '0 2 * * *', # Daily at 2 AM
+      class: 'DelayedCommandJob',
+      args: -> { [SitemapGeneratorCommand, {}] },
+      description: 'Generate XML sitemap for SEO'
+    } 
+  }
 end
