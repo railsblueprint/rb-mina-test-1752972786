@@ -1,6 +1,6 @@
 ## Rails Blueprint. Plus edition.
 
-**Version:** 1.2.3 (see VERSION_PLUS file)
+**Version:** 1.3.0 (see VERSION_PLUS file)
 
 ### Rationale
 
@@ -48,6 +48,7 @@ Main features:
 - User avatar support with image upload
 - Google reCAPTCHA integration for forms
 - Admin impersonation (login as any user)
+- OAuth social login support (Google, GitHub, Facebook)
 - Environment-specific robots.txt management
   - Staging: Blocks all search engine crawlers
   - Production: Allows crawlers except for admin areas
@@ -291,5 +292,20 @@ You can also pass the app name as a parameter:
 ```bash
 bundle exec rails blueprint:init[my_app_name]
 ```
+
+### Additional Documentation
+
+Comprehensive documentation is available in the [docs/](docs/) directory:
+
+- **[Setup Guides](docs/setup/)** - OAuth configuration and more
+- **[Feature Documentation](docs/features/)** - Detailed guides for Plus edition features
+- **[Deployment Guide](docs/deployment/)** - Coming soon
+- **[API Reference](docs/api/)** - Coming soon
+
+Quick links:
+- [OAuth Setup](docs/setup/oauth.md) - Configure social login
+- [User Avatars](docs/features/user-avatars.md) - Avatar upload system
+- [reCAPTCHA Integration](docs/features/recaptcha.md) - Spam protection
+- [Admin Impersonation](docs/features/admin-impersonation.md) - Support features
 
 

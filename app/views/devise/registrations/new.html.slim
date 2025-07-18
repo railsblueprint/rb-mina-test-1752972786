@@ -17,4 +17,7 @@ h5.card-title.text-center.pb-3.fs-4
       = recaptcha f
   .actions
     = f.submit t('.sign_up'), class: "btn btn-primary w-100"
-  = render "devise/shared/links"
+.row.g-3.mt-3
+  = render "devise/shared/social_login"
+  .col-12.mt-3
+    = render "devise/shared/links"

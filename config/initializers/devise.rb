@@ -267,6 +267,35 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  
+  # OAuth providers configuration for Plus tier
+  config.omniauth :google_oauth2, 
+                  Rails.application.credentials.dig(:oauth, :google, :client_id),
+                  Rails.application.credentials.dig(:oauth, :google, :client_secret),
+                  scope: 'email,profile',
+                  access_type: 'offline',
+                  prompt: 'select_account'
+                  
+  config.omniauth :github,
+                  Rails.application.credentials.dig(:oauth, :github, :client_id),
+                  Rails.application.credentials.dig(:oauth, :github, :client_secret),
+                  scope: 'user:email'
+                  
+  config.omniauth :facebook,
+                  Rails.application.credentials.dig(:oauth, :facebook, :app_id),
+                  Rails.application.credentials.dig(:oauth, :facebook, :app_secret),
+                  scope: 'email,public_profile',
+                  info_fields: 'email,first_name,last_name'
+                  
+  config.omniauth :twitter,
+                  Rails.application.credentials.dig(:oauth, :twitter, :api_key),
+                  Rails.application.credentials.dig(:oauth, :twitter, :api_secret)
+                  
+  config.omniauth :linkedin,
+                  Rails.application.credentials.dig(:oauth, :linkedin, :client_id),
+                  Rails.application.credentials.dig(:oauth, :linkedin, :client_secret),
+                  scope: 'r_liteprofile r_emailaddress',
+                  fields: ['id', 'email-address', 'first-name', 'last-name', 'picture-url']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
