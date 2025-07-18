@@ -26,6 +26,11 @@ aside#sidebar.sidebar
           i.bi.bi-question-circle
           span
             = t('nav.faq')
+      li.nav-item
+        = active_link_to feature_flags_demo_path, class: "nav-link nav-link-main" do
+          i.bi.bi-toggles
+          span
+            = t('nav.feature_flags_demo')
       - Page.sidebar.each do |page|
         li.nav-item
           = active_link_to "/#{page.url}", class: "nav-link nav-link-main" do

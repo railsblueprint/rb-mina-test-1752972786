@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include DevisePatches
   include Pagy::Backend
   include TurboMethods
+  include FeatureFlags
 
   before_action :enable_rollbar_link
 

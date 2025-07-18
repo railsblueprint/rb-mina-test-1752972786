@@ -146,6 +146,9 @@ gem "pundit", "~> 2.3"
 gem "sweet_notifications", github: "elik-ru/sweet_notifications", branch: "rails-7.1-compatibility"
 
 # Rails Blueprint Pro
+gem "flipper"
+gem "flipper-active_record"
+gem "flipper-ui"
 gem "stripe-rails"
 
 group :development, :test do

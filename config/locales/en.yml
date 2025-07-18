@@ -195,6 +195,7 @@ en:
         tabs: Tabs
         toasts: Toasts
         tooltips: Tooltips
+      feature_flags: Feature Flags
       global_search: Global search
       good_job: Good Job
       home: Home
@@ -268,6 +269,7 @@ en:
       new:
         login_to_your_account: Login to your account
   errors:
+    feature_not_enabled: This feature is not currently available for your account
     messages:
       restrict_dependent_destroy:
         has_many: Cannot delete record because dependent %{record} exist
@@ -326,6 +328,7 @@ en:
     blog: Blog
     contacts: Contacts
     faq: F.A.Q
+    feature_flags_demo: Feature Flags Demo
     home: Home
     subscription_plans: Subscription plans
   pages:

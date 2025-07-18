@@ -54,7 +54,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_140127) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "billing_subscription_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "billing_subscription_types", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
     t.string "reference"
@@ -66,7 +66,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_140127) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "billing_subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "billing_subscriptions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "subscription_type_id", null: false
     t.date "start_date", null: false
@@ -82,6 +82,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_140127) do
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
+  create_table "flipper_features", force: :cascade do |t|
+    t.string "key", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_flipper_features_on_key", unique: true
+  end
+
+  create_table "flipper_gates", force: :cascade do |t|
+    t.string "feature_key", null: false
+    t.string "key", null: false
+    t.text "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
+  end
   create_table "good_job_batches", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -251,7 +266,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_140127) do
     t.index ["user_id", "provider"], name: "index_user_identities_on_user_id_and_provider", unique: true
     t.index ["user_id"], name: "index_user_identities_on_user_id"
   end
-
   create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

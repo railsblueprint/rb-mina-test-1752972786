@@ -80,6 +80,11 @@ aside#sidebar.sidebar
                 i.bi.bi-circle
                 span
                   = t('admin.nav.good_job')
+            li
+              = nav_link '/admin/flipper' do
+                i.bi.bi-circle
+                span
+                  = t('admin.nav.feature_flags')
       - unless AppConfig.hide_demo_elements
         li.nav-heading
           = t('admin.nav.design_system.design_system')

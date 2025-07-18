@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :posts, path: :blog
   resources :users, only: [:show]
+  
+  get "/feature-flags-demo", to: "feature_flags_demo#index", as: :feature_flags_demo
 
   get "/profile", to: "users#show", as: :profile
   get "/profile/edit", to: "users#edit", as: :edit_profile

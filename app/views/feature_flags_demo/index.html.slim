@@ -1,0 +1,159 @@
+.container.mt-5
+  .row
+    .col-lg-8.mx-auto
+      h1.mb-4 Feature Flags Demo
+      
+      p.lead This page demonstrates the feature flags system in Rails Blueprint Pro.
+      
+      .card.mb-4
+        .card-header
+          h3 Basic Feature Toggle
+        .card-body
+          - if feature_enabled?(:demo_feature)
+            .alert.alert-success
+              i.bi.bi-check-circle-fill.me-2
+              strong Feature Enabled! 
+              | This content is only visible when the 'demo_feature' flag is enabled.
+          - else
+            .alert.alert-warning
+              i.bi.bi-exclamation-triangle-fill.me-2
+              strong Feature Disabled 
+              | This content is shown when the 'demo_feature' flag is disabled.
+      
+      .card.mb-4
+        .card-header
+          h3 User-Specific Features
+        .card-body
+          - if current_user
+            - if feature_enabled?(:premium_content)
+              .alert.alert-info
+                i.bi.bi-star-fill.me-2
+                strong Premium Content Available! 
+                | This feature is enabled specifically for your account.
+            - else
+              .alert.alert-secondary
+                i.bi.bi-lock-fill.me-2
+                | Premium content is not available for your account.
+          - else
+            .alert.alert-info
+              | Please #{link_to "sign in", new_user_session_path} to see user-specific features.
+      
+      .card.mb-4
+        .card-header
+          h3 Beta Features
+        .card-body
+          - if feature_enabled?(:beta_ui)
+            .p-3.bg-primary.text-white.rounded
+              h4 
+                i.bi.bi-rocket-takeoff-fill.me-2
+                | New Beta UI
+              p This is a beta feature being tested with a subset of users.
+              button.btn.btn-light Try Beta Feature
+          - else
+            .p-3.bg-light.rounded
+              h4 Standard UI
+              p The standard interface is shown when beta features are disabled.
+              button.btn.btn-secondary Standard Feature
+      
+      .card.mb-4
+        .card-header
+          h3 Role-Based Features
+        .card-body
+          - if current_user
+            - if feature_enabled?(:admin_tools)
+              .alert.alert-danger
+                i.bi.bi-shield-fill-check.me-2
+                strong Admin Tools 
+                | Advanced administrative features are enabled for your role.
+            
+            - if feature_enabled?(:moderator_tools)
+              .alert.alert-primary
+                i.bi.bi-person-badge-fill.me-2
+                strong Moderator Tools 
+                | Moderation features are available for your account.
+          - else
+            p.text-muted Role-based features require authentication.
+      
+      .card.mb-4
+        .card-header
+          h3 Feature Status Information
+        .card-body
+          h5 Current Feature States:
+          ul.list-group
+            li.list-group-item.d-flex.justify-content-between.align-items-center
+              | demo_feature
+              - if Flipper.enabled?(:demo_feature)
+                span.badge.bg-success Enabled
+              - else
+                span.badge.bg-secondary Disabled
+            
+            li.list-group-item.d-flex.justify-content-between.align-items-center
+              | beta_ui
+              - if Flipper.enabled?(:beta_ui)
+                span.badge.bg-success Enabled
+              - else
+                span.badge.bg-secondary Disabled
+            
+            - if current_user
+              li.list-group-item.d-flex.justify-content-between.align-items-center
+                | premium_content (for you)
+                - if feature_enabled?(:premium_content)
+                  span.badge.bg-success Enabled
+                - else
+                  span.badge.bg-secondary Disabled
+      
+      - if current_user&.has_role?(:superadmin)
+        .card.mb-4.border-warning
+          .card-header.bg-warning.text-dark
+            h3 
+              i.bi.bi-gear-fill.me-2
+              | Admin Controls
+          .card-body
+            p.mb-3 As a superadmin, you can manage feature flags:
+            = link_to "Manage Feature Flags", "/admin/flipper", class: "btn btn-warning"
+      
+      .card
+        .card-header
+          h3 Implementation Examples
+        .card-body
+          h5 In Views:
+          pre.bg-light.p-3.rounded
+            code
+              | - with_feature(:feature_name) do
+              br
+              |   .content
+              br
+              |     | This content only shows when feature is enabled
+              br
+              | 
+              br
+              | - without_feature(:feature_name) do
+              br
+              |   .fallback
+              br
+              |     | This shows when feature is disabled
+          
+          h5.mt-4 In Controllers:
+          pre.bg-light.p-3.rounded
+            code
+              | class MyController &lt; ApplicationController
+              br
+              |   before_action -&gt; { require_feature!(:premium_access) }
+              br
+              |   
+              br
+              |   def show
+              br
+              |     if feature_enabled?(:new_algorithm)
+              br
+              |       # Use new implementation
+              br
+              |     else
+              br
+              |       # Use old implementation
+              br
+              |     end
+              br
+              |   end
+              br
+              | end

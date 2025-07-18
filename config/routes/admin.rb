@@ -7,6 +7,7 @@ namespace :admin do
   authenticate :user, ->(user) { user.has_role?('superadmin') } do
     mount GoodJob::Engine, at: 'good_job'
     mount PgHero::Engine, at: 'pg_hero'
+    mount Flipper::UI.app(Flipper), at: 'flipper'
   end
 
   resources :posts
