@@ -1,5 +1,19 @@
 # Rails Blueprint Pro Edition - Change History
 
+## Version 1.2.3 (2025-07-18)
+
+### New Pro Features
+- **Feature Flags System**: Complete feature flag management with Flipper
+  - Implemented using Flipper gem with ActiveRecord adapter
+  - Admin UI at `/admin/flipper` for superadmins only
+  - Role-based feature groups (admins, moderators, premium_users, beta_testers)
+  - Percentage-based rollouts for gradual feature deployment
+  - Controller concern and view helpers for easy integration
+  - Request-level memoization for optimal performance
+  - Comprehensive test coverage with shared examples
+  - Demo page at `/feature-flags-demo` showing usage patterns
+  - Modern Rails approach - removed redundant caching layer
+
 ## Version 1.2.2 (2025-07-18)
 
 ### New Pro Features
