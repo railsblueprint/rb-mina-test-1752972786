@@ -10,4 +10,4 @@ Disallow: /admin
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://yourdomain.com/sitemap.xml.gz
+Sitemap: https://yourdomain.com/sitemaps/sitemap.xml.gz
