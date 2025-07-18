@@ -21,13 +21,6 @@ end
 Flipper.configure do |config|
   # Use ActiveRecord adapter for persistence
   config.adapter { Flipper::Adapters::ActiveRecord.new }
-
-  # Add caching layer in production for performance
-  if Rails.env.production?
-    config.use Flipper::Adapters::ActiveSupportCacheStore,
-               Rails.cache,
-               expires_in: 5.minutes
-  end
 end
 
 # Register groups that can be used for enabling features
