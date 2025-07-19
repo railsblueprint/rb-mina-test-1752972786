@@ -19,5 +19,31 @@ FactoryBot.define do
     trait :superadmin do
       roles { [Role.superadmin] }
     end
+
+    trait :with_google_oauth do
+      after(:create) do |user|
+        create(:user_identity, :google, user: user)
+      end
+    end
+
+    trait :with_github_oauth do
+      after(:create) do |user|
+        create(:user_identity, :github, user: user)
+      end
+    end
+
+    trait :with_facebook_oauth do
+      after(:create) do |user|
+        create(:user_identity, :facebook, user: user)
+      end
+    end
+
+    trait :with_all_oauth do
+      after(:create) do |user|
+        create(:user_identity, :google, user: user)
+        create(:user_identity, :github, user: user)
+        create(:user_identity, :facebook, user: user)
+      end
+    end
   end
 end

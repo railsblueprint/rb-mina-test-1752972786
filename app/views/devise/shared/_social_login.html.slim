@@ -1,0 +1,57 @@
+- if devise_mapping.omniauthable?
+  .col-12.mt-3
+    .d-flex.align-items-center.mb-3
+      hr.flex-grow-1
+      span.px-3.text-muted = t('.or_sign_in_with')
+      hr.flex-grow-1
+    
+    .row.g-2
+      - show_google = AppConfig.respond_to?(:oauth) ? AppConfig.oauth&.google&.enabled : true
+      - if show_google
+        .col-md-6.col-lg-4.col-xl.col-12.mb-2
+          = button_to omniauth_authorize_path(resource_name, :google_oauth2), 
+                      method: :post,
+                      class: "btn btn-outline-danger w-100 d-flex align-items-center justify-content-center",
+                      data: { turbo: false } do
+            i.bi.bi-google.me-2
+            | Google
+      
+      - show_github = AppConfig.respond_to?(:oauth) ? AppConfig.oauth&.github&.enabled : true
+      - if show_github
+        .col-md-6.col-lg-4.col-xl.col-12.mb-2
+          = button_to omniauth_authorize_path(resource_name, :github),
+                      method: :post,
+                      class: "btn btn-outline-dark w-100 d-flex align-items-center justify-content-center",
+                      data: { turbo: false } do
+            i.bi.bi-github.me-2
+            | GitHub
+      
+      - show_facebook = AppConfig.respond_to?(:oauth) ? AppConfig.oauth&.facebook&.enabled : true
+      - if show_facebook
+        .col-md-6.col-lg-4.col-xl.col-12.mb-2
+          = button_to omniauth_authorize_path(resource_name, :facebook),
+                      method: :post,
+                      class: "btn btn-outline-primary w-100 d-flex align-items-center justify-content-center",
+                      data: { turbo: false } do
+            i.bi.bi-facebook.me-2
+            | Facebook
+      
+      - show_twitter = AppConfig.respond_to?(:oauth) ? AppConfig.oauth&.twitter&.enabled : false
+      - if show_twitter
+        .col-md-6.col-lg-6.col-xl.col-12.mb-2
+          = button_to omniauth_authorize_path(resource_name, :twitter),
+                      method: :post,
+                      class: "btn btn-outline-info w-100 d-flex align-items-center justify-content-center",
+                      data: { turbo: false } do
+            i.bi.bi-twitter.me-2
+            | Twitter
+      
+      - show_linkedin = AppConfig.respond_to?(:oauth) ? AppConfig.oauth&.linkedin&.enabled : false
+      - if show_linkedin
+        .col-md-12.col-lg-6.col-xl.col-12
+          = button_to omniauth_authorize_path(resource_name, :linkedin),
+                      method: :post,
+                      class: "btn btn-outline-primary w-100 d-flex align-items-center justify-content-center",
+                      data: { turbo: false } do
+            i.bi.bi-linkedin.me-2
+            | LinkedIn

@@ -142,7 +142,6 @@ To change these settings:
    ```
 
 The changes take effect immediately - the login buttons will appear/disappear based on these settings.
-
 ## Customization
 
 ### Styling Social Login Buttons

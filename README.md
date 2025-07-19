@@ -300,3 +300,4 @@ bundle exec rails blueprint:init[my_app_name]
 ```
 
 
+

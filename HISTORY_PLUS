@@ -1,5 +1,33 @@
 # Rails Blueprint Plus Edition - Change History
 
+## Version 1.3.0 (2025-07-18)
+
+### New Features
+- **OAuth Social Login**: Added complete OAuth authentication support
+  - Integrated Google OAuth2, GitHub, and Facebook authentication providers
+  - Added omniauth gems and Rails CSRF protection
+  - Created migration for OAuth fields (provider, uid, oauth_token, etc.)
+  - Implemented `User.from_omniauth` method for seamless user creation/login
+  - Added social login buttons with Bootstrap styling
+  - Created comprehensive OAuth setup documentation (OAUTH_SETUP.md)
+  - Updated credentials templates with OAuth configuration structure
+  - Added translations for social login UI elements
+
+### Technical Implementation
+- Added `omniauthable` module to Devise configuration
+- Created `Users::OmniauthCallbacksController` to handle OAuth callbacks
+- Updated routes to include OAuth callback paths
+- Added database indexes for provider/uid lookup performance
+- Implemented token expiration checking with `oauth_expires?` method
+- Added social login partial for consistent UI across login/signup pages
+- Configured OAuth providers in Devise initializer with proper scopes
+
+### Documentation
+- Created detailed OAUTH_SETUP.md with provider setup instructions
+- Updated README.md to list OAuth as a Plus tier feature
+- Added OAuth credentials structure to all environment templates
+- Documented troubleshooting and security considerations
+
 ## Version 1.2.3 (2025-07-17)
 
 ### New Features

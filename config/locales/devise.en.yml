@@ -134,6 +134,11 @@ en:
       minimum_password_length:
         one: "(%{count} character minimum)"
         other: "(%{count} characters minimum)"
+      social_login:
+        or_sign_in_with: Or sign in with
+        sign_in_with_facebook: Sign in with Facebook
+        sign_in_with_github: Sign in with GitHub
+        sign_in_with_google: Sign in with Google
     unlocks:
       new:
         resend_unlock_instructions: Resend unlock instructions

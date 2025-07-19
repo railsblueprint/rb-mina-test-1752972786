@@ -55,6 +55,16 @@ gem "apexcharts", "~> 0.2.0"
 gem "awesome_print", "~> 1.9"
 gem "devise", "~> 4.8"
 gem "devise-i18n"
+
+# OAuth authentication gems for Plus tier
+gem "omniauth", "~> 2.1"
+gem "omniauth-facebook", "~> 9.0"
+gem "omniauth-github", "~> 2.0"
+gem "omniauth-google-oauth2", "~> 1.1"
+gem "omniauth-linkedin-oauth2", "~> 1.0"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "omniauth-twitter", "~> 1.4"
+
 gem "dotenv-rails", "~> 2.7"
 gem "font_awesome5_rails", "~> 1.5"
 gem "font-awesome-rails", "~> 4.7"
