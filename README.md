@@ -58,6 +58,17 @@ configuration process. And next you can extend it with your own features.
 
 Just check out the demo: https://plus.railsblueprint.com before proceeding.
 
+## Documentation
+
+📚 **[Complete Documentation](docs/index.md)** - Comprehensive guides covering all features
+
+- **[Setup Guide](docs/setup/index.md)** - Installation and configuration
+- **[Features](docs/features/index.md)** - All basic tier features
+- **[Deployment](docs/deployment/index.md)** - Server setup and deployment
+- **[API Reference](docs/api/index.md)** - Technical documentation
+- **[Troubleshooting](docs/troubleshooting.md)** - Common issues and solutions
+- **[FAQ](docs/faq.md)** - Frequently asked questions
+
 ### Obtaining the code
 Depneding on your intetions you can go in 2 paths:
 
