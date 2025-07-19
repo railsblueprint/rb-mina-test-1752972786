@@ -1,5 +1,16 @@
 # Rails Blueprint Basic Edition - Change History
 
+## Version 1.2.4 (2025-07-19)
+
+### Deployment Configuration
+- **Added user variable**: Added configurable `user` variable (default: 'deploy') to deployment configuration
+- **Updated deployment paths**: Changed hardcoded `/home/deploy` paths to use `"/home/#{fetch(:user)}"` in:
+  - config/deploy.rb.template
+  - config/deploy/staging.rb.template
+  - config/deploy/production.rb.template
+  - docs/deployment/mina.md
+- **Updated mina gems**: Updated mina-puma-nginx and mina-puma-systemd to version 1.1.0
+
 ## Version 1.2.3 (2025-07-19)
 
 ### Documentation

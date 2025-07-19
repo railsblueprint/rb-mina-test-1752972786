@@ -26,7 +26,7 @@ require 'mina_extensions/helpers'
 # Basic settings
 set :application_name, 'myapp'
 set :domain, 'your-server.com'
-set :deploy_to, '/home/deploy/apps/myapp'
+set :deploy_to, "/home/#{fetch(:user)}/apps/myapp"
 set :repository, 'git@github.com:yourusername/myapp.git'
 set :branch, 'main'
 set :user, 'deploy'
@@ -95,7 +95,7 @@ end
 require_relative '../deploy'
 
 set :domain, 'staging.example.com'
-set :deploy_to, '/home/deploy/apps/myapp_staging'
+set :deploy_to, "/home/#{fetch(:user)}/apps/myapp_staging"
 set :branch, 'develop'
 set :rails_env, 'staging'
 
@@ -114,7 +114,7 @@ set :shared_files, fetch(:shared_files, []).push(
 require_relative '../deploy'
 
 set :domain, 'example.com'
-set :deploy_to, '/home/deploy/apps/myapp'
+set :deploy_to, "/home/#{fetch(:user)}/apps/myapp"
 set :branch, 'main'
 set :rails_env, 'production'
 

@@ -25,6 +25,7 @@ require 'mina/whenever'
 set :application_name, AppConfig.app_prefix
 set :repository, '<%= git_repo_url %>'
 
+set :user, 'deploy'
 set :domain, fetch(:hostname)
 set :identity_file, DEPLOY_SETTINGS["ssh_key"]
 
