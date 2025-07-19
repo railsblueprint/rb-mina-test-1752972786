@@ -504,6 +504,26 @@ bundle exec mina staging deploy --simulate
    bundle exec mina staging deploy
    ```
 
+4. **Encoding Issues with Non-Latin Characters**
+   ```
+   Error: invalid byte sequence in US-ASCII (ArgumentError)
+   ```
+   
+   This happens when the server outputs non-ASCII characters. Rails Blueprint includes fixes:
+   - UTF-8 encoding is set in deploy.rb
+   - Locale environment variables are configured
+   - SSH options include locale forwarding
+   
+   If you still encounter issues:
+   ```bash
+   # Set locale on your local machine
+   export LANG=en_US.UTF-8
+   export LC_ALL=en_US.UTF-8
+   
+   # Or run deployment with locale
+   LC_ALL=en_US.UTF-8 bundle exec mina staging deploy
+   ```
+
 ## Best Practices
 
 ### 1. Test Deployments

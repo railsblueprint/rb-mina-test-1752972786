@@ -1,3 +1,7 @@
+# Fix for Mina encoding issues with non-latin characters
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
 require 'active_support'
 require 'active_support/core_ext/object/blank'
 require_relative "app_config"
@@ -31,6 +35,17 @@ set :puma_service_name, -> { "puma_#{fetch(:application)}_#{fetch(:rails_env)}" 
 set :user, 'deploy'
 set :domain, fetch(:hostname)
 set :identity_file, DEPLOY_SETTINGS["ssh_key"]
+
+# Set UTF-8 locale for SSH to prevent encoding issues
+set :ssh_options, -> { 
+  options = {}
+  options[:keys] = [fetch(:identity_file)] if fetch(:identity_file)
+  options[:forward_agent] = true
+  options[:user_known_hosts_file] = '/dev/null'
+  options[:verify_host_key] = :never
+  options[:send_env] = %w[LANG LC_CTYPE LC_ALL]
+  options
+}
 
 set :branch, ENV["BRANCH"] || DEPLOY_SETTINGS["default_branch"] || "master"
 set :version_scheme, :datetime
@@ -72,6 +87,11 @@ set :whenever_name , -> { "#{fetch(:application)}_#{fetch(:rails_env)}" }
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
 task :remote_environment do
+  # Set UTF-8 locale to prevent encoding issues
+  command %{export LANG=en_US.UTF-8}
+  command %{export LC_ALL=en_US.UTF-8}
+  command %{export LC_CTYPE=en_US.UTF-8}
+  
   # If you're using rbenv, use this to load the rbenv environment.
   # Be sure to commit your .ruby-version or .rbenv-version to your repository.
   invoke :'rbenv:load'
