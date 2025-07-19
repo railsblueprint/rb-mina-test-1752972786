@@ -27,7 +27,7 @@ require 'mina/secrets'
 require 'mina/whenever'
 
 set :application, "blueprint_final_test"
-set :repository, '/Users/elik/Documents/work/railsblueprint/temp-repos/blueprint-final-test.git'
+set :repository, 'https://github.com/railsblueprint/basic.git'
 
 # Fix for mina-puma-systemd gem which uses application_name for service name
 set :puma_service_name, -> { "puma_#{fetch(:application)}_#{fetch(:rails_env)}" }
@@ -39,7 +39,7 @@ set :identity_file, DEPLOY_SETTINGS["ssh_key"]
 # Set SSH options
 set :forward_agent, true
 
-set :branch, ENV["BRANCH"] || DEPLOY_SETTINGS["default_branch"] || "master"
+set :branch, ENV["BRANCH"] || DEPLOY_SETTINGS["default_branch"] || "test-deployment-1752962896"
 set :version_scheme, :datetime
 
 set :ruby_version, File.open(".ruby-version").read
