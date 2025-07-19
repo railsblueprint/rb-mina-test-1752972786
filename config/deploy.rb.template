@@ -27,6 +27,7 @@ require 'mina/secrets'
 require 'mina/whenever'
 
 set :application, "<%= app_prefix %>"
+set :application_name, "<%= app_prefix %>"  # Required for mina-puma-nginx gem
 set :repository, '<%= git_repo_url %>'
 
 # Fix for mina-puma-systemd gem which uses application_name for service name

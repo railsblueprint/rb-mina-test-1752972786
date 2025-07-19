@@ -1,5 +1,10 @@
 # Rails Blueprint Basic Edition - Change History
 
+## Version 1.2.11 (2025-07-19)
+
+### Bug Fixes
+- **Fixed nginx config filename generation**: Added back `application_name` variable required by mina-puma-nginx gem v1.1.0
+
 ## Version 1.2.10 (2025-07-19)
 
 ### Bug Fixes
