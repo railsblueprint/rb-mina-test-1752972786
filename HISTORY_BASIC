@@ -1,5 +1,10 @@
 # Rails Blueprint Basic Edition - Change History
 
+## Version 1.2.8 (2025-07-19)
+
+### Bug Fixes
+- **Fixed deploy:initial task structure**: Moved setup step outside deploy block to prevent deployment errors
+
 ## Version 1.2.7 (2025-07-19)
 
 ### Bug Fixes

@@ -130,8 +130,9 @@ end
 
 desc "Initial deployment with complete setup (setup, puma, nginx, ssl)."
 task :'deploy:initial' do
+  invoke :'setup'
+  
   deploy do
-    invoke :'setup'
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:config'
