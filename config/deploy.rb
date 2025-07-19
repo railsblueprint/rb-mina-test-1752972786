@@ -27,7 +27,7 @@ require 'mina/secrets'
 require 'mina/whenever'
 
 set :application, "blueprint_final_test"
-set :repository, 'https://github.com/railsblueprint/basic.git'
+set :repository, '/Users/elik/Documents/work/railsblueprint/temp-repos/blueprint-final-test.git'
 
 # Fix for mina-puma-systemd gem which uses application_name for service name
 set :puma_service_name, -> { "puma_#{fetch(:application)}_#{fetch(:rails_env)}" }
