@@ -26,7 +26,7 @@ require 'mina/rollbar'
 require 'mina/secrets'
 require 'mina/whenever'
 
-set :application, AppConfig.app_prefix
+set :application, "<%= app_prefix %>"
 set :repository, '<%= git_repo_url %>'
 
 # Fix for mina-puma-systemd gem which uses application_name for service name
@@ -37,7 +37,7 @@ set :domain, fetch(:hostname)
 set :identity_file, DEPLOY_SETTINGS["ssh_key"]
 
 # Set UTF-8 locale for SSH to prevent encoding issues
-set :ssh_options, -> { 
+set :ssh_options, lambda {
   options = {}
   options[:keys] = [fetch(:identity_file)] if fetch(:identity_file)
   options[:forward_agent] = true
@@ -128,10 +128,8 @@ task :'deploy:log' do
 end
 
 
-desc "Initial deployment with complete setup (setup, puma, nginx, ssl)."
+desc "Initial deployment (puma, nginx, ssl). Run 'mina staging setup' first."
 task :'deploy:initial' do
-  invoke :'setup'
-  
   deploy do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'

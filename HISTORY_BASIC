@@ -1,5 +1,16 @@
 # Rails Blueprint Basic Edition - Change History
 
+## Version 1.2.10 (2025-07-19)
+
+### Bug Fixes
+- **Fixed SSH options syntax error**: Changed `-> {` to `lambda {` to prevent `{forward_agent::` bash error
+- **Removed setup from deploy:initial**: Setup must now be run as separate step: `mina staging setup` then `mina staging deploy:initial`
+
+## Version 1.2.9 (2025-07-19)
+
+### Bug Fixes
+- **Fixed application name in deployment**: Changed from `AppConfig.app_prefix` to template variable `<%= app_prefix %>` to ensure proper filename generation for nginx and systemd services
+
 ## Version 1.2.8 (2025-07-19)
 
 ### Bug Fixes
