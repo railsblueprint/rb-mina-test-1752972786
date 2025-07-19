@@ -48,7 +48,7 @@ set :ssh_options, lambda {
   options
 }
 
-set :branch, ENV["BRANCH"] || DEPLOY_SETTINGS["default_branch"] || "master"
+set :branch, ENV["BRANCH"] || DEPLOY_SETTINGS["default_branch"] || "rb-full-test-1752964293"
 set :version_scheme, :datetime
 
 set :ruby_version, File.open(".ruby-version").read
