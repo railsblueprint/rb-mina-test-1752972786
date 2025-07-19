@@ -48,6 +48,7 @@ Main features:
 - User avatar support with image upload
 - Google reCAPTCHA integration for forms
 - Admin impersonation (login as any user)
+- OAuth social login support (Google, GitHub, Facebook, Twitter, LinkedIn)
 - Environment-specific robots.txt management
   - Staging: Blocks all search engine crawlers
   - Production: Allows crawlers except for admin areas
@@ -250,13 +251,8 @@ Rails Blueprint includes a health endpoint at `/health` that provides applicatio
 {
   "status": "ok",
   "version": {
-<<<<<<< HEAD
-    "basic": "1.2.0",
-    "plus": "1.2.0"
-=======
-    "app": "2.0.0",
-    "basic": "1.2.0"
->>>>>>> basic/blueprint-basic-master
+    "basic": "1.2.3",
+    "plus": "1.2.3"
   },
   "git_revision": "c011f46f988ea5421454b3897e4b29c14a09861b",
   "timestamp": "2025-07-16T10:27:04Z"

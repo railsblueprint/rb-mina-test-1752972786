@@ -41,7 +41,23 @@ Rails Blueprint is a comprehensive Rails application template that provides a so
   - [Helpers](api/helpers.md)
 
 <!-- TIER_SPECIFIC_SECTIONS_START -->
-<!-- Plus tier documentation will be inserted here -->
+
+### Plus Tier Features
+
+Rails Blueprint Plus Edition includes additional features beyond the basic tier:
+
+- **[OAuth Social Login](setup/oauth.md)** - Complete OAuth integration guide
+  - Google, GitHub, Facebook, Twitter, LinkedIn support
+  - Multi-provider account linking
+  - Automatic social profile population
+  - Database-driven provider configuration
+
+- **Enhanced Features**
+  - User avatar support with image upload
+  - Google reCAPTCHA integration for forms
+  - Admin impersonation (login as any user)
+  - Environment-specific robots.txt management
+
 <!-- Pro tier documentation will be inserted here -->
 <!-- TIER_SPECIFIC_SECTIONS_END -->
 
