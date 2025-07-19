@@ -108,6 +108,31 @@ task :'deploy:log' do
 end
 
 
+desc "Initial deployment with complete setup (setup, puma, nginx, ssl)."
+task :'deploy:initial' do
+  deploy do
+    invoke :'setup'
+    invoke :'git:clone'
+    invoke :'deploy:link_shared_paths'
+    invoke :'bundle:config'
+    invoke :'bundle:install'
+    invoke :'rails:db_create'
+    invoke :'rails:db_data_migrate'
+    invoke :'yarn:install'
+    invoke :'rails:assets_precompile'
+    invoke :'puma:setup'
+    invoke :'puma:start'
+    invoke :'nginx:setup'
+    invoke :'nginx:reload'
+    invoke :'nginx:certbot'
+
+    on :launch do
+      invoke :'whenever:update'
+      invoke :'deploy:log'
+    end
+  end
+end
+
 desc "Deploys the current version to the server."
 task :deploy do
   run(:local) do

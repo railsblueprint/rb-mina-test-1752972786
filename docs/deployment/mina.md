@@ -147,12 +147,32 @@ BRANCH=feature-xyz bundle exec mina staging deploy
 
 ### Initial Setup
 
+For a complete first-time deployment with all services configured:
+
 ```bash
-# First-time setup
+# Complete initial deployment (recommended for new servers)
+bundle exec mina staging deploy:initial
+```
+
+This single command will:
+- Run initial server setup
+- Deploy the application 
+- Configure and start Puma service
+- Setup and configure Nginx
+- Setup SSL certificates via Certbot
+- Configure cron jobs
+
+For manual step-by-step setup:
+
+```bash
+# Manual setup (if you prefer granular control)
 bundle exec mina staging setup
 
 # Verify setup
 bundle exec mina staging setup:check
+
+# Then deploy normally
+bundle exec mina staging deploy
 ```
 
 ### Service Management
@@ -240,6 +260,42 @@ end
 ```
 
 ## Custom Tasks
+
+### Initial Deployment Task
+
+Rails Blueprint includes a complete initial deployment task that handles all first-time setup:
+
+```ruby
+desc "Initial deployment with complete setup (setup, puma, nginx, ssl)."
+task :'deploy:initial' do
+  deploy do
+    invoke :'setup'
+    invoke :'git:clone'
+    invoke :'deploy:link_shared_paths'
+    invoke :'bundle:config'
+    invoke :'bundle:install'
+    invoke :'rails:db_create'
+    invoke :'rails:db_data_migrate'
+    invoke :'yarn:install'
+    invoke :'rails:assets_precompile'
+    invoke :'puma:setup'
+    invoke :'puma:start'
+    invoke :'nginx:setup'
+    invoke :'nginx:reload'
+    invoke :'nginx:certbot'
+
+    on :launch do
+      invoke :'whenever:update'
+      invoke :'deploy:log'
+    end
+  end
+end
+```
+
+This task is perfect for:
+- Setting up new servers from scratch
+- First deployment to staging/production
+- Complete environment initialization
 
 ### Backup Task
 

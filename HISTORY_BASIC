@@ -1,5 +1,17 @@
 # Rails Blueprint Basic Edition - Change History
 
+## Version 1.2.6 (2025-07-19)
+
+### Deployment Enhancements
+- **Added deploy:initial task**: Complete first-time deployment task that handles:
+  - Initial server setup
+  - Application deployment
+  - Puma service configuration and startup
+  - Nginx setup and configuration
+  - SSL certificate setup via Certbot
+  - Cron job configuration
+- **Updated documentation**: Enhanced mina deployment guide with initial setup instructions
+
 ## Version 1.2.5 (2025-07-19)
 
 ### Deployment Configuration Improvements
