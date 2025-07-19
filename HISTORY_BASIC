@@ -1,5 +1,12 @@
 # Rails Blueprint Basic Edition - Change History
 
+## Version 1.2.5 (2025-07-19)
+
+### Deployment Configuration Improvements
+- **Simplified variable naming**: Renamed `application_name` to `application` for consistency with mina-puma-systemd gem
+- **Added explicit service name**: Added `puma_service_name` setting to ensure proper systemd service naming
+- **Enhanced mina-puma-systemd compatibility**: Fixed application name display in systemd Description and SyslogIdentifier
+
 ## Version 1.2.4 (2025-07-19)
 
 ### Deployment Configuration

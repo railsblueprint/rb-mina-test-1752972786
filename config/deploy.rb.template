@@ -22,8 +22,11 @@ require 'mina/rollbar'
 require 'mina/secrets'
 require 'mina/whenever'
 
-set :application_name, AppConfig.app_prefix
+set :application, AppConfig.app_prefix
 set :repository, '<%= git_repo_url %>'
+
+# Fix for mina-puma-systemd gem which uses application_name for service name
+set :puma_service_name, -> { "puma_#{fetch(:application)}_#{fetch(:rails_env)}" }
 
 set :user, 'deploy'
 set :domain, fetch(:hostname)
@@ -64,7 +67,7 @@ set :shared_files, fetch(:shared_files, []).push("config/credentials/#{fetch(:ra
 
 set :nginx_sites_enabled_path,   -> { "#{fetch(:nginx_path)}/conf.d" }
 
-set :whenever_name , -> { "#{fetch(:application_name)}_#{fetch(:rails_env)}" }
+set :whenever_name , -> { "#{fetch(:application)}_#{fetch(:rails_env)}" }
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
